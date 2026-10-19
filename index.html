@@ -923,7 +923,7 @@
   //   "날짜 | 원문링크(없으면 비움) | 표지주소(비우면 첫 사진) | PHOTO | 멤버 | 제목 | album=폴더 | photos=주소1;주소2;주소3"
   //   예) "2026-10-19 |  |  | PHOTO | 리즈 | COSMOPOLITAN 화보 | album=COSMOPOLITAN | photos=https://.../a.jpg;https://.../b.jpg",
   const MANUAL_ITEMS = [
-    "2026-10-19 | https://www.mnetplus.world/contents/ko/shows/6a434dd9e41135211d9127f0/videos |  | MAGAZINE | 리즈 | FANS' CHOICE FACE | album=FANS' CHOICE FACE | cols=2 | photos=https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg13iXNXPHV8IA8pRSHZZnzUdj9kPK_x5FbmZe6_b7taSchtk8Mv96sYN6bDzCLF0vB-EN4uRHINhKv9XZwQzrv8qo_noW5IeHh3SzBRdAAFc9_F9zgoJAl0dNKzuSOP0PLLu7vI54dFfw-N4ZZokEt_m9YJz6FtdgfyZ1G1KNJy6IgMiMwaEwZ9ZnKwyI/s1248/01_MnetPlus_origin.webp;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjVXgg1Dw0MFI2E9VMYbJWYP0et9DmLzB08wzKu8YGWX8dDqZLfAN3IfjhO4pFzWR6-RdLofk_flxaXIRVFD-TJf7jSuNU6hhKrcSlLvmfiDJFztON9V5aBeLR4RSKdVPjZIoa-RPMy8KEGygZzPrzcJo9IEsSei7clBU9EhnYtoZrhgjljVx3mpEq1kz4/s1248/03_MnetPlus_origin.webp;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjrkZ9uuVrqrJxGei6ZBW-EGnFUr_LsM-E9YN5FTx5e8AIUfD42HMtS6MbByQFxWsX-DxoNdxqyHe230P9DmVxztWhR1-H3Gv-taPOsMFVAPad_N7WmOLIjntlq5Vx8f_sA0_wPebUGuFJDg6zTzqCcesSpftMSb4Vcq4jFda_yRIZWkwujuAmFq3rjuR8/s1248/04_MnetPlus_origin.webp",
+    "2026-10-19 | https://www.mnetplus.world/contents/ko/shows/6a434dd9e41135211d9127f0/videos |  | MAGAZINE | 리즈 | FANS' CHOICE FACE | album=FANS' CHOICE FACE | cols=2 | bare=1 | photos=https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg13iXNXPHV8IA8pRSHZZnzUdj9kPK_x5FbmZe6_b7taSchtk8Mv96sYN6bDzCLF0vB-EN4uRHINhKv9XZwQzrv8qo_noW5IeHh3SzBRdAAFc9_F9zgoJAl0dNKzuSOP0PLLu7vI54dFfw-N4ZZokEt_m9YJz6FtdgfyZ1G1KNJy6IgMiMwaEwZ9ZnKwyI/s1248/01_MnetPlus_origin.webp;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjVXgg1Dw0MFI2E9VMYbJWYP0et9DmLzB08wzKu8YGWX8dDqZLfAN3IfjhO4pFzWR6-RdLofk_flxaXIRVFD-TJf7jSuNU6hhKrcSlLvmfiDJFztON9V5aBeLR4RSKdVPjZIoa-RPMy8KEGygZzPrzcJo9IEsSei7clBU9EhnYtoZrhgjljVx3mpEq1kz4/s1248/03_MnetPlus_origin.webp;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjrkZ9uuVrqrJxGei6ZBW-EGnFUr_LsM-E9YN5FTx5e8AIUfD42HMtS6MbByQFxWsX-DxoNdxqyHe230P9DmVxztWhR1-H3Gv-taPOsMFVAPad_N7WmOLIjntlq5Vx8f_sA0_wPebUGuFJDg6zTzqCcesSpftMSb4Vcq4jFda_yRIZWkwujuAmFq3rjuR8/s1248/04_MnetPlus_origin.webp",
     "2026-10-16 | http://xhslink.com/o/9mhbWbX6YJI |  | AD | 리즈 | H&M CHINA | album=H&M CHINA",
     // ---- 2026.10 추가분 (YCH HANNAM / H&M CHINA) ----
     "2026-10-14 | https://www.instagram.com/reel/Ded1fDLhynI/ |  | POP-UP | 리즈 | YCH HANNAM | album=YCH",
@@ -1332,7 +1332,6 @@
   //   freeEmbed      true면 임베드를 박스 크기 제한 없이 원래 크기 그대로 보여줌
   const HOME_SECTIONS = [
     { title: "직캠", cats: ["세로 직캠", "가로 직캠"], tabs: ["세로 직캠", "가로 직캠"], hideMembers: true },
-    { title: "TEASER", cats: ["TEASER"], sort: "date" },
     { title: "COVER", excludeMembers: ["아이브"], cats: ["COVER"], tabs: ["SOLO", "OST", "COVER", "Lyrics", "etc.(가사)"], openTab: "COVER" },
     { title: "MEDIA", cats: ["TV", "WEB", "RADIO"], tabs: ["TV", "WEB", "RADIO"], sort: "date" },
     { title: "LIVE", cats: ["LIVE", "L(IVE)"], sort: "date" },
@@ -1342,13 +1341,14 @@
     { title: "VLOG", cats: ["NYANG LOG"], tabs: ["NYANG LOG", "IVE LOG"], sort: "date", hideMembers: true },
     { title: "ASMR", cats: ["ASMR"], sort: "date", hideMembers: true },
     { title: "SNS", cats: ["Instagram", "Twitter"], tabs: ["Instagram", "Twitter"], sort: "date", hideViews: true },
+    { title: "TEASER", cats: ["TEASER"], sort: "date" },
     { title: "PHOTO", cats: ["PHOTO"], sort: "date", hideViews: true, noPin: true }, // noPin: 상단 탭(4+5줄)에는 넣지 않음
     // 메인에서 숨김 처리된 카테고리(SOLO, OST 등)는 "전체 영상 보기"에서만 보입니다
   ];
 
   // "전체 영상 보기"에서 볼 수 있는 모든 탭
-  const TAB_ORDER = ["전체", "세로 직캠", "가로 직캠", "COVER", "TEASER", "TV", "WEB", "RADIO", "NYANG LOG", "IVE LOG", "ASMR", "LIVE", "L(IVE)",
-    "SOLO", "OST", "Lyrics", "etc.(가사)", "Shorts", "VOCAL", "DANCE", "IVE", "MAGAZINE", "POP-UP", "AD", "MC", "etc.(일정)", "Berriz", "DAUM CAFE", "Instagram", "Twitter", "PHOTO"];
+  const TAB_ORDER = ["전체", "세로 직캠", "가로 직캠", "COVER", "TV", "WEB", "RADIO", "NYANG LOG", "IVE LOG", "ASMR", "LIVE", "L(IVE)",
+    "SOLO", "OST", "Lyrics", "etc.(가사)", "Shorts", "VOCAL", "DANCE", "IVE", "MAGAZINE", "POP-UP", "AD", "MC", "etc.(일정)", "Berriz", "DAUM CAFE", "Instagram", "Twitter", "TEASER", "PHOTO"];
   // =====================================================================
 
   const FANCAM_TABS = ["세로 직캠", "가로 직캠"]; // 직캠 탭에서는 멤버 필터/태그(리즈)를 숨김
@@ -1370,6 +1370,7 @@
       cats: catsStr ? catsStr.split(",").map((s) => s.trim()).filter(Boolean) : [],
       members: membersStr ? membersStr.split(",").map((s) => s.trim()).filter(Boolean) : [],
       platform: extra.platform || null, album: extra.album || null,
+      bare: extra.bare === "1", // bare=1 → 사진 모아보기에서 '원문 보기'와 '끝' 문구 숨김
       cols: extra.cols ? +extra.cols : null, // cols=2 → 사진 모아보기에서 한 줄에 2장씩
       photos: extra.photos || null, // PHOTO: photos=주소1;주소2;주소3 (한 게시물에 여러 장)
       ratio: extra.ratio || null, // ratio=16:9 를 붙이면 인스타그램도 유튜브와 같은 16:9 칸으로 표시
@@ -1585,6 +1586,7 @@
           <button class="arrow l" data-d="-1">◀</button><button class="arrow r" data-d="1">▶</button></div>
       </div>`;
     }).join("") + '<div style="text-align:center"><button class="more" data-all>전체 영상 보기 →</button></div>';
+    HOME_SECTIONS.forEach((_, si) => { const b = document.querySelector('.pin[data-jump="' + si + '"]'); if (b) b.hidden = !document.getElementById("sec-" + si); }); // 영상이 없는 섹션은 상단 버튼도 숨김
     processEmbeds();
   }
 
@@ -1643,7 +1645,7 @@
         : (v.members || []).some((m) => memberFilter.includes(m)))) &&
       v.title.toLowerCase().includes(query.toLowerCase()));
     items.sort((a, b) => sort === "views" ? (b.views || 0) - (a.views || 0) : sort === "oldest" ? new Date(a.date) - new Date(b.date) : new Date(b.date) - new Date(a.date));
-    items = pinnedFirst(pinFirst(items));
+    items = pinnedFirst(sort === "oldest" ? items : pinFirst(items)); // 날짜순일 때는 폴더 맨앞 지정(PIN_FIRST)만 풀고, 귤 도장 고정은 계속 유지
 
     if (albumScope) {
       const albumItems = items.filter((v) => v.album === albumScope);
@@ -1744,8 +1746,8 @@
     }
     const mem = (v.members || []).join(", ");
     pvEl.innerHTML = `<div class="pv-bar"><button class="pv-x" aria-label="닫기">×</button>
-      <div class="pv-h"><div class="pv-t">${esc(v.title)}</div><div class="pv-m">${fmtDate(v.date)}${mem ? " · " + esc(mem) : ""} · ${v.photos.length}장${v.url ? ` <a href="${esc(v.url)}" target="_blank" rel="noopener">원문 보기</a>` : ""}</div></div></div>
-      <div class="pv-body${v.cols === 2 ? " pv2" : ""}">${v.photos.map((u) => `<img src="${esc(u)}" alt="" loading="lazy" decoding="async" />`).join("")}<div class="pv-end">· 끝 ·</div></div>`;
+      <div class="pv-h"><div class="pv-t">${esc(v.title)}</div><div class="pv-m">${fmtDate(v.date)}${mem ? " · " + esc(mem) : ""} · ${v.photos.length}장${v.url && !v.bare ? ` <a href="${esc(v.url)}" target="_blank" rel="noopener">원문 보기</a>` : ""}</div></div></div>
+      <div class="pv-body${v.cols === 2 ? " pv2" : ""}">${v.photos.map((u) => `<img src="${esc(u)}" alt="" loading="lazy" decoding="async" />`).join("")}${v.bare ? "" : '<div class="pv-end">· 끝 ·</div>'}</div>`;
     pvEl.scrollTop = 0; pvEl.hidden = false; document.body.style.overflow = "hidden";
   }
   function closePv() { pvEl.hidden = true; document.body.style.overflow = ""; }
@@ -1787,7 +1789,7 @@
         videos.push({
           id: "manual" + i, url: m.url, title: m.title, date: m.date, thumb: m.thumb || (photos ? photos[0] : ""), photos,
           views: null, sec: 0, isShort: false, cats: m.cats || [], platform: m.platform || guessPlatform(m.url),
-          members: m.members || [], lyricsType: "", album: m.album || null, ratio: m.ratio, cols: m.cols,
+          members: m.members || [], lyricsType: "", album: m.album || null, ratio: m.ratio, cols: m.cols, bare: m.bare,
           embed: isPhoto ? null : /twitter\.com|x\.com/.test(m.url || "") ? "twitter" : /instagram\.com/.test(m.url || "") ? "instagram" : null,
         });
       });
@@ -1802,11 +1804,6 @@
         if (MC_MEMBERS_BY_DATE[kst]) v.members = [...MC_MEMBERS_BY_DATE[kst]];
       });
       videos.forEach((v) => { if (v.cats.includes("LIVE") || v.cats.includes("L(IVE)")) v.platform = v.platform || PLATFORM_OF[v.id] || "YouTube"; });
-      // Platform 카테고리: 플랫폼 딱지에 따라 자동 분류 (기존 카테고리에서도 그대로 보임)
-      videos.forEach((v) => {
-        if (v.platform === "Berriz" && !v.cats.includes("Berriz")) v.cats.push("Berriz");
-        if (v.platform === "Daum Cafe" && !v.cats.includes("DAUM CAFE")) v.cats.push("DAUM CAFE");
-      });
       $("status").remove();
       renderHome(); route();
     } catch (err) {
