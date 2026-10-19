@@ -1,0 +1,1729 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>영상 아카이브</title>
+<style>
+  :root{
+    --bg:#fffaf1; --panel:#fbeed8; --line:#f0dcbc;
+    --text:#4b3521; --muted:#a58d72; --red:#f08a2c; --gold:#e08a00;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);
+    font-family:-apple-system,"Pretendard","Apple SD Gothic Neo","Malgun Gothic",sans-serif}
+  button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+  .wrap{max-width:960px;margin:0 auto;padding:0 16px 48px}
+  .logo{padding:36px 0 20px;font-size:28px;font-weight:800;letter-spacing:.02em}
+  .logo span{color:var(--red)}
+  [hidden]{display:none!important}
+  #status{color:var(--muted);font-size:14px;padding:12px 0;white-space:pre-line}
+
+  .pinbar{display:grid;grid-template-columns:repeat(20,minmax(0,1fr));gap:6px;padding:0 0 18px}
+  .pinbar::-webkit-scrollbar{display:none}
+  .pin{grid-column:span 4;padding:6px 2px;border-radius:999px;border:1.5px solid var(--line);text-align:center;
+    background:var(--panel);color:var(--text);font-weight:800;font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:clip}
+  .pin:nth-child(-n+4){grid-column:span 5}
+
+  .sec{margin-bottom:28px}
+  .sec-head{display:flex;justify-content:space-between;align-items:center;margin:8px 0 12px}
+  .sec-head h2{margin:0;font-size:18px}
+  .more{color:var(--gold);font-size:14px;font-weight:600}
+  .slider-box{position:relative}
+  .slider{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
+  .slider::-webkit-scrollbar{display:none}
+  .slide{flex:0 0 84%;max-width:420px;scroll-snap-align:start;position:relative}
+  .arrow{position:absolute;top:35%;width:34px;height:34px;border-radius:50%;
+    background:rgba(255,255,255,.92);color:#111;box-shadow:0 1px 6px rgba(0,0,0,.4);font-size:16px;display:none}
+  .arrow.l{left:4px}.arrow.r{right:4px}
+  @media(hover:hover){.arrow{display:block}}
+
+  .back{color:var(--muted);font-size:14px;margin-bottom:8px}
+  .tabs{display:flex;gap:22px;overflow-x:auto;border-bottom:1px solid var(--line);scrollbar-width:none}
+  .tabs::-webkit-scrollbar{display:none}
+  .tab{padding:12px 2px;color:var(--muted);font-size:16px;white-space:nowrap;
+    border-bottom:3px solid transparent;margin-bottom:-1px}
+  .tab.on{color:var(--text);font-weight:700;border-color:var(--red)}
+  .search{width:100%;margin:16px 0 10px;padding:14px 16px;border-radius:12px;
+    border:1px solid var(--line);background:var(--panel);color:var(--text);font-size:15px;outline:none}
+  .search:focus{border-color:#f2b36b}
+
+  .memf{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:12px}
+  .mchip{padding:3px 9px;border-radius:999px;font-size:11px;font-weight:700;
+    background:var(--panel);color:var(--muted);border:1px solid var(--line)}
+  .mchip.on{background:var(--c);color:#3a2a1a;border-color:transparent}
+
+  .meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;
+    color:var(--muted);font-size:14px}
+  .sort{display:flex;background:var(--panel);border-radius:999px;padding:3px}
+  .sort button{padding:4px 10px;border-radius:999px;color:var(--muted);font-size:12px}
+  .sort button.on{background:#f7b955;color:#4b3521;font-weight:700;box-shadow:0 1px 3px rgba(0,0,0,.2)}
+  .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 12px}
+  @media(min-width:700px){.grid{grid-template-columns:repeat(auto-fill,minmax(210px,1fr))}}
+  .album-head{grid-column:1/-1;font-weight:700;font-size:15px;margin:6px 0 -4px;color:var(--gold)}
+
+  .card{display:block;color:inherit;text-decoration:none;min-width:0}
+  .thumb{position:relative;aspect-ratio:16/9;border-radius:14px;overflow:hidden;background:#000}
+  .thumb img{width:100%;height:100%;object-fit:cover;display:block}
+  /* X / Instagram: 원본 임베드 크기로 표시 (잘라내지 않음) */
+  .embedfree{width:100%;overflow:visible}
+  .embedfree blockquote,.embedfree iframe{width:100% !important;max-width:550px !important;margin:0 !important}
+  .embedfree .twitter-tweet-rendered{max-width:550px !important}
+  .embedfree .instagram-media-rendered{max-width:540px !important}
+  /* 목록에서 소셜 게시물은 한 줄에 하나 */
+  .grid.social-list{grid-template-columns:1fr}
+  .grid.social-list .card{width:100%;max-width:550px}
+  /* 메인 MEMBERS X 슬라이드는 임베드 원본 폭을 우선 */
+  .slide.social-slide{flex:0 0 min(550px,100%);max-width:550px}
+  /* 인스타그램: 다른 영상 카드와 같은 16:9 칸 안에 비율 유지하며 맞춰 넣음 */
+  .thumb.embedbox{background:none;overflow:hidden}
+  .thumb.igthumb{aspect-ratio:4/5} /* 인스타그램 카드는 4:5 */
+  .thumb.twthumb{aspect-ratio:auto;border-radius:14px} /* X(트위터) 카드는 아래쪽(좋아요/답글)을 잘라낸 높이 */
+  .twthumb .igwrap{position:relative;inset:auto;width:100%;min-height:120px}
+  .thumb.ph{background:linear-gradient(135deg,#f8ead3,#f2dcb9);display:flex;align-items:center;justify-content:center}
+  .phtxt{font-weight:800;font-size:18px;letter-spacing:.5px;opacity:.85}
+  .igwrap{position:absolute;inset:0;overflow:hidden}
+  .iginner{position:absolute;top:0;left:0;transform-origin:0 0;width:326px;visibility:hidden}
+  .iginner.ready{visibility:visible}
+  .embedfree .igwrap{position:relative;inset:auto;width:100%}
+  .igwrap .twitter-tweet,.igwrap .twitter-tweet-rendered{margin:0!important;max-width:none!important;width:100%!important}
+  .igwrap .instagram-media,.igwrap iframe{min-width:0!important;max-width:none!important;width:100%!important;margin:0!important}
+  .igwrap blockquote.instagram-media:not(.instagram-media-rendered){opacity:0;background:none!important;border:0!important;box-shadow:none!important}
+  /* 귤 도장: 눌러서 영상을 목록 맨 위에 고정 */
+  :root{--tg:#ff8a1f;--tg-d:#e06f08}
+  .pinbtn{position:absolute;right:0;top:50%;transform:translateY(-50%);z-index:2;width:26px;height:26px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;cursor:pointer;-webkit-tap-highlight-color:transparent;
+    background:#fff;border:1.2px solid #d9dbe4;color:#a3a8b8;
+    transition:background .15s,border-color .15s,color .15s}
+  .pinbtn svg{width:16px;height:16px;display:block}
+  .pinbtn.on{background:var(--tg);border-color:transparent;color:#fff;box-shadow:0 1px 5px rgba(224,111,8,.5);animation:pinpop .32s ease}
+  @keyframes pinpop{0%{transform:translateY(-50%) scale(.6) rotate(-20deg)}60%{transform:translateY(-50%) scale(1.18) rotate(6deg)}100%{transform:translateY(-50%) scale(1) rotate(0)}}
+  .card .info.pinrow{position:relative;padding-right:32px}
+  .card.pinned .thumb{outline:3px solid #ffc98a;outline-offset:-3px}
+  .toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%);background:#283048;color:#fff;font-size:13.5px;
+    padding:11px 18px;border-radius:14px;z-index:99;box-shadow:0 6px 24px rgba(0,0,0,.25);opacity:0;pointer-events:none;transition:opacity .2s}
+  .toast.show{opacity:1}
+  .dur{position:absolute;right:8px;bottom:8px;background:rgba(0,0,0,.72);color:#fff;
+    font-size:12px;padding:2px 7px;border-radius:6px}
+  .title{margin:10px 0 6px;font-size:14.5px;line-height:1.45;
+    display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .info{color:var(--muted);font-size:13px;line-height:1.5}
+  .plat{position:absolute;right:6px;top:6px;color:#fff;font-size:9px;font-weight:700;padding:2px 7px;border-radius:999px;line-height:1.3}
+  .mem{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
+  .mem span{color:#3a2a1a;font-size:11px;font-weight:700;padding:2px 8px;border-radius:999px}
+</style>
+<link rel="preconnect" href="https://www.instagram.com" />
+<link rel="preconnect" href="https://static.cdninstagram.com" crossorigin />
+<link rel="preload" as="script" href="https://www.instagram.com/embed.js" />
+<link rel="preconnect" href="https://platform.twitter.com" />
+</head>
+<body>
+<div class="wrap">
+  <div class="logo" id="logo"></div>
+  <div id="status">불러오는 중...</div>
+
+  <div class="pinbar" id="pinbar" hidden></div>
+  <section id="home" hidden></section>
+
+  <section id="list" hidden>
+    <button class="back" id="back">← 홈으로</button>
+    <div class="tabs" id="tabs"></div>
+    <input class="search" id="search" placeholder="영상 제목으로 검색" />
+    <div class="memf" id="memf"></div>
+    <div class="meta">
+      <span id="count"></span>
+      <div class="sort">
+        <button data-s="date" class="on">최신순</button>
+        <button data-s="views">인기순</button>
+        <button data-s="oldest">날짜순</button>
+      </div>
+    </div>
+    <div class="grid" id="grid"></div>
+  </section>
+</div>
+
+<script>
+  // =====================================================================
+  // 여기부터 수정하는 곳입니다
+  // -----------------------------------------------------------------
+  // 빠른 사용법 (자주 하는 작업)
+  //  1) 기존 카테고리에 영상 추가        → 아래 CATEGORIES에서 해당 칸의 ids 배열에 링크 한 줄 추가
+  //  2) 멤버 태그를 같이 달기            → 링크 뒤에 " | 멤버,멤버" 추가
+  //  3) 플랫폼/앨범/가사 딱지 달기        → 링크 뒤에 " | platform=Berriz" 나 " | album=이름" 나 " | lyrics=단독" 추가
+  //  4) 새 카테고리 신설                 → CATEGORIES에 "이름": { ids: [...] } 한 줄 추가 후, 보여줄 곳의
+  //                                       HOME_SECTIONS(cats/tabs)나 TAB_ORDER에도 이름을 넣어야 화면에 나타남
+  //  5) 유튜브가 아닌 사진/트위터/Berriz 글 → MANUAL_ITEMS에 한 줄 추가
+  // (참고) 멤버 필터 버튼은 여러 명 동시에 선택 가능 / 유튜브 썸네일은 가장 고화질(maxres)을 우선 사용
+  // -----------------------------------------------------------------
+  const SITE_TITLE = "TANGERINE BOX";
+  const API_KEY = "여기에_본인_YOUTUBE_API_키";
+
+  // ---- 카테고리별 영상 ----
+  // 링크(또는 ID) 뒤에 " | " 로 구분해서 아래 항목들을 원하는 만큼 이어 붙일 수 있습니다. 순서는 상관없어요.
+  //   - 멤버: 그냥 이름들을 쉼표로 (예: 안유진,가을)
+  //   - 플랫폼: platform=Berriz / platform=bubble / platform=VLIVE
+  //   - 앨범(SCHEDULES용 소제목): album=TONYMOLY
+  //   - Lyrics 딱지: lyrics=공동 또는 lyrics=단독
+  // 예: "https://youtube.com/shorts/abc12345678?si=... | 안유진,가을 | platform=Berriz | album=TONYMOLY"
+  // keyword: 제목에 이 글자가 들어간 영상도 자동으로 이 카테고리에 포함됩니다
+  const CATEGORIES = {
+    "세로 직캠": { ids: [
+      "https://youtu.be/CZBdLMNSdO0",
+      "https://youtu.be/xzWtTxIgkyQ",
+      "M59NYdZCyWE",
+      "https://youtu.be/iSl4GjQy92w",
+      "https://youtu.be/wtsLJBNTQTE",
+      "https://youtu.be/ZX3kxla5EU0",
+      "https://youtu.be/NECgLW7hTqM",
+      "https://youtu.be/Tg-aYuIY1ww",
+      "https://youtu.be/lwr-UrnnSVY",
+      "https://youtu.be/loSn6CvwZZM",
+      "https://youtu.be/0fYR_VR2EF8",
+      "https://youtu.be/JG5mnmFPji8",
+      "https://youtu.be/eWYYQ3_kzWA",
+      "https://youtu.be/p6u5V8FTIcI",
+    
+      "https://youtu.be/JmmRKoIQczo",
+      "https://youtu.be/Z7gDL1plNxY",
+      "https://youtu.be/PopaWUh-xpw",
+      "https://youtu.be/kW08S99ECWQ",
+      "https://youtu.be/dcsXnFvXFXc",
+      "https://youtu.be/i82LSXiVgU4",
+      "https://youtu.be/qGgvHgiLWRQ",
+      "https://youtu.be/FCSzMa4gLKo",
+      "https://youtu.be/jzl9IP6zscQ",
+      "https://youtu.be/xNmHbiu4S80",
+      "https://youtu.be/LnOZ-y6biaA",
+      "https://youtu.be/CvCrTpojlN0",
+      "https://youtu.be/swDKzaodFHM",
+      "https://youtu.be/d_tR0TAdsKM",
+      "https://youtu.be/QMgS13USkVM",
+      "https://youtu.be/8yPEhEQv-4c",
+      "https://youtu.be/Ji3C_ZbvZKY",
+      "https://youtu.be/Si0KBGN4Gn4",
+      "https://youtu.be/PqCS5489Qro",
+      "https://youtu.be/y63t1JGhBbk",
+      "https://youtu.be/sz_XVny09HY",
+      "https://youtu.be/7UrmRL-2Wxg",
+      "https://youtu.be/wER5A_vR69I",
+      "https://youtu.be/hRVnR082pQ0",
+      "https://youtu.be/hawdl5Afu2U",
+      "https://youtu.be/SzFVqBNTR38",
+      "https://youtu.be/mX3qIf-krtE",
+      "https://youtu.be/ce32qOWgC04",
+      "https://youtu.be/l-MPUO8rWZI",
+      "https://youtu.be/pNM_WWdr4oA",
+      "https://youtu.be/OxdqiVH3bC0",
+      "https://youtu.be/TfivwrtJkew",
+      "https://youtu.be/m8svz3EhnBU",
+      "https://youtu.be/nF0x00bONIQ",
+      "https://youtu.be/J_ZVYztLpkk",
+      "https://youtu.be/PwsYIikfEyw",
+      "https://youtu.be/uwZbV7vMBVY",
+      "https://youtu.be/bEuRtD2mH-8",
+      "https://youtu.be/RxCRvc3LxvQ",
+      "https://youtu.be/bx1YMJ8whEU",
+      "https://youtu.be/8NHe6qE78QA",
+      "https://youtu.be/SnvejHnJyn0",
+      "https://youtu.be/q5NHuwj4Li4",
+      "https://youtu.be/CJst0fju87g",
+      "https://youtu.be/pag_-HDDa2Y",
+      "https://youtu.be/muqnneSbEaQ",
+      "https://youtu.be/K7P0O1z56zo",
+      "https://youtu.be/JChItXaOVI4",
+      "https://youtu.be/Rz-9q8-rP2E",
+      "https://youtu.be/svWlmZqJNxs",
+      "https://youtu.be/YplwSmW2fnk",
+      "https://youtu.be/SZEe4FkJBZI",
+      "https://youtu.be/gf7KlYPGH8w",
+      "https://youtu.be/XgUExdRDKT0",
+      "https://youtu.be/kyYF-NvQOVs",
+      "https://youtu.be/w_AIkqZF3NI",
+      "https://youtu.be/PfJbRY-GPM8",
+      "https://youtu.be/hCdr85x72jc",
+      "https://youtu.be/7PX8qFA32Uk",
+      "https://youtu.be/W4DMbDAeOUU",
+      "https://youtu.be/Whsq-NxScdc",
+      "https://youtu.be/Z-CjQdbHcMo",
+      "https://youtu.be/_7Lh3oMqdD4",
+      "https://youtu.be/yglwAIYeZnI",
+      "https://youtu.be/OaniX6kwMe4",
+      "https://youtu.be/etvIfapO-4c",
+      "https://youtu.be/BD4Ihmk2I2E",
+      "https://youtu.be/LOAhIwZcLgw",
+      "https://youtu.be/PC0g2XTDZGc",
+      "https://youtu.be/1EnVhVTxd1s",
+      "https://youtu.be/MKtuxYrkw1s",
+      "https://youtu.be/wfT58k6xwsk",
+      "https://youtu.be/1dK_03z3JCQ",
+      "https://youtu.be/sbC0leqytIM",
+      "https://youtu.be/KQMWwNws8gM",
+      "https://youtu.be/7nfgXXscwXw",
+      "https://youtu.be/9OWkO_IdIQ0",
+      "https://youtu.be/FnbWLv5_1_E",
+      "https://youtu.be/hsejBXGE75c",
+      "https://youtu.be/nujGh_aad2s",
+      "https://youtu.be/gqxmRdQPNQw",
+      "https://youtu.be/MMwkyLU5q-0",
+      "https://youtu.be/OE8sff9i-Fs",
+      "https://youtu.be/03gahWgUiew",
+      "https://youtu.be/G8rp0cczt9Y",
+      "https://youtu.be/_-ufvR6lT7Y",
+      "https://youtu.be/nWPNgcOyNEs",
+      "https://youtu.be/AMxz9skmLTc",
+      "https://youtu.be/21ovL-Gqsuk",
+      "https://youtu.be/dnGDf7zKCk0",
+      "https://youtu.be/7iG2O2TaS8U",
+      "https://youtu.be/WFWwnloa_Dg",
+      "https://youtu.be/G6texkdzPdQ",
+      "https://youtu.be/YEniv1F9zM0",
+      "https://youtu.be/MBPZpKGghdM",
+      "https://youtu.be/IJa4tncZT0U",
+      "https://youtu.be/8ycqey0_D48",
+      "https://youtu.be/R3_GB1uQ2q8",
+      "https://youtu.be/qDdNtUxavWI",
+      "https://youtu.be/6J9EpL_ojTQ",
+      "https://youtu.be/hCATVMD4Gy4",
+    ] },
+    "가로 직캠": { ids: [
+      "8pe54RfEyME",
+      "https://youtu.be/6pJQgsDPgVE",
+      "https://youtu.be/psZ2B_fLr5E",
+      "https://youtu.be/EwT2yAqgzHI",
+      "https://youtu.be/8Tn0cP_sjUk",
+      "https://youtu.be/_Y5f5I8-vN8",
+      "https://youtu.be/nuV3_XNv-_o",
+      "https://youtu.be/MOhd0s-FvfY",
+    
+      "https://youtu.be/22-ev5iBebo",
+      "https://youtu.be/PcLKL-nuqGw",
+      "https://youtu.be/PHUWkjYKRbI",
+      "https://youtu.be/jTuBhOfIiaM",
+      "https://youtu.be/3ivYUkOmmKY",
+      "https://youtu.be/i7TkDhVZbGI",
+      "https://youtu.be/NV1vkOCTNJk",
+      "https://youtu.be/QryOI59-4bE",
+      "https://youtu.be/z_gj0PWMy_Y",
+      "https://youtu.be/0mfS1A60dSg",
+      "https://youtu.be/YTxiO0mH-zI",
+      "https://youtu.be/Qzt5DGygEeU",
+      "https://youtu.be/h7OmJZS7sxY",
+      "https://youtu.be/XoRAhMekk8w",
+      "https://youtu.be/1fuBfSsAv8Q",
+      "https://youtu.be/joJTxxzel4c",
+      "https://youtu.be/QLdW_shS26c",
+      "https://youtu.be/KlBh73Hu1zA",
+      "https://youtu.be/xkajYbK46f8",
+      "https://youtu.be/CnDb76F19Z8",
+      "https://youtu.be/cpDYvCgdBkg",
+      "https://youtu.be/LzbRpw1fGoY",
+      "https://youtu.be/OkZDwDSK_z0",
+      "https://youtu.be/OXh4KoWDaoc",
+      "https://youtu.be/9QalcNyF50c",
+      "https://youtu.be/Hj8NjoTCpAM",
+      "https://youtu.be/AqfR7lN6LMg",
+      "https://youtu.be/KjWRFTsf0bc",
+      "https://youtu.be/2n6eAHysdQU",
+      "https://youtu.be/TMQ4TyzThjw",
+      "https://youtu.be/jNsCAmy385k",
+      "https://youtu.be/YgGPaTbUZCU",
+      "https://youtu.be/PocAtgQohrY",
+      "https://youtu.be/glQUMl0WMT4",
+      "https://youtu.be/fcyKRH6d7OE",
+      "https://youtu.be/BCqD-AZJJsE",
+      "https://youtu.be/b6MTorh8ALQ",
+      "https://youtu.be/409KJP4JAdo",
+      "https://youtu.be/YrxJ1MzHjsk",
+      "https://youtu.be/mpNEPmG0_ws",
+    ] },
+    "COVER": { ids: [
+      "RRX87Tc4WJo",
+      "aq08y9ebFQs",
+      "https://youtu.be/FkmdvsEqW9k",
+      "https://youtu.be/ZCk_305Zvso",
+      "https://youtu.be/ro6CnJxCVUc",
+      "https://youtu.be/PdvTyBNRwa8",
+      "https://youtu.be/0Pg_weELKxo",
+      "https://youtu.be/4of3JOCE_3k",
+      "https://youtu.be/lVTQXL32AXU",
+      "https://youtu.be/xK-cEaHQX4I",
+      "https://youtu.be/XFxxhYEIGEU",
+      "https://youtu.be/GILRn4KDyVw",
+      "https://youtu.be/r1fKvNw83GI | 리즈,이서",
+      "https://youtu.be/6KpuBjPsUNg | 리즈,이서",
+      "https://youtu.be/cCE5AITm1vY | 리즈,이서",
+      "https://youtu.be/qhXniOnvgIc | 레이,리즈",
+      "https://youtu.be/kK5ROyw7bww",
+      "https://youtu.be/8MDxmOB7A1o",
+      "https://youtu.be/DdvV1AIEXSw",
+      "https://youtu.be/x_7yP2Ew_-4",
+      "https://youtu.be/_6FhQdfTnfM",
+      "https://youtu.be/Nmayvr7wzdc",
+      "https://youtu.be/JwglnXHS7jc",
+      "https://youtu.be/Ftj5sFXv1bQ",
+      "https://youtu.be/jiitSJIf1NY",
+      "https://youtu.be/occjvSuXgy0 | 아이브",
+      "https://youtu.be/puQ9jG6ek_g",
+      "https://youtu.be/7UrmRL-2Wxg",
+      "https://youtu.be/8WIDb1LqGfU",
+      "https://youtu.be/fndkyhCZDmI",
+      "https://youtu.be/m8svz3EhnBU",
+      "https://youtu.be/-inX6yH8NXU",
+      "https://youtu.be/nxsGuuWzfYg",
+      "https://youtu.be/SfV2oWBLq6c",
+      "https://youtu.be/eawFSTO-k0Y",
+      "https://youtu.be/ujU2DFxLAw0 | 레이,리즈",
+      "https://youtu.be/knN18rZK7pk | 레이,리즈",
+      "https://youtu.be/gcpKU7WBDZw | 가을,리즈",
+      "https://youtu.be/2X5cjZpnQck | 레이,리즈,이서",
+      "https://youtu.be/ZqG1990iruc",
+      "https://youtu.be/N3bFWpRAiME",
+      "https://youtu.be/K0qGgx-wxRM",
+      "https://youtu.be/o9Kt684xvqU",
+      "https://youtu.be/uXldlOVrAIo | 아이브",
+      "https://youtu.be/sbC0leqytIM | 아이브",
+      "https://youtu.be/M_tytuISAJs | 아이브",
+      "https://youtu.be/yz5zd4o_2YI",
+      "https://youtu.be/dSky8Z-Fj0U",
+      "https://youtu.be/J6H1pGZrkMg | 레이,리즈",
+      "https://youtu.be/RJpDWf4DWu8 | 레이,리즈",
+      "https://youtu.be/OlCx3qTqG7Y",
+      "https://youtu.be/3YZreO_lzbc | 안유진,가을,장원영,리즈,이서",
+      "https://youtu.be/lmfJQ__eaTw",
+      "https://youtu.be/k5wWCuzJSZY | 안유진,가을,레이,장원영,리즈",
+      "https://youtu.be/vIH6Eebalh8 | 아이브",
+      "https://youtu.be/wizTiXatuHs | 아이브",
+      "https://youtu.be/Wp8XTYBT1AY | 아이브",
+      "https://youtu.be/r_dVIEF1Sq4 | 아이브",
+    ], keyword: "COVER", exclude: ["PcLKL-nuqGw","JmmRKoIQczo","PHUWkjYKRbI","jTuBhOfIiaM","kW08S99ECWQ","pPrTT4ULynA"] },
+    "TV": { ids: ["https://youtu.be/xQY6iSryMMA | 레이,리즈,이서", "https://youtu.be/zPKm4uLl27A | 안유진,리즈", "https://youtu.be/WAoCw2mnmqw | 안유진,리즈"] },
+    "WEB": { ids: [
+      "https://youtube.com/shorts/IqVT2rnDb4c | 가을,리즈,이서",
+      "aq08y9ebFQs",
+      "https://youtu.be/xTZgJPe0tSc | 리즈",
+      "https://youtu.be/XFxxhYEIGEU",
+      "https://youtu.be/RO8QnJaXFiU | 리즈",
+      "https://youtu.be/cCE5AITm1vY",
+      "https://youtu.be/qhXniOnvgIc",
+      "https://youtu.be/JwBYeJ0-us4",
+      "https://youtu.be/WI-u752bpzY | 레이,리즈",
+      "https://youtu.be/Ragg7fcm8h0 | 레이,리즈",
+      "https://youtu.be/f_GA7Z7FFu8 | 리즈",
+      "https://youtu.be/kK5ROyw7bww",
+      "https://youtu.be/EWcx9_QltgM | 가을,리즈",
+      "https://youtu.be/a6L3uQf1LGU | 리즈",
+      "https://youtu.be/RezrNQJKnl4 | 리즈",
+      "https://youtu.be/7zySR2k5xYM | 리즈",
+      "https://youtu.be/yD3qRoTuHzQ | 안유진,레이,장원영,리즈",
+      "https://youtu.be/K-tFak-4fYE | 가을,리즈,이서",
+      "https://youtu.be/ujU2DFxLAw0",
+      "https://youtu.be/XuwOTxjJqNA | 레이,리즈",
+      "https://youtu.be/IEDDy-MenJE | 레이,리즈",
+      "https://youtu.be/K6Pfi0yLav8 | 리즈",
+      "https://youtu.be/RJpDWf4DWu8",
+      "https://youtu.be/OlCx3qTqG7Y",
+      "https://youtu.be/lmfJQ__eaTw",
+      "https://youtu.be/oSdv4oU9eNw | 레이,리즈",
+      "https://youtube.com/shorts/AMiKaiqfPkM | 레이,리즈",
+      "https://youtu.be/L8SPDeEqS2o | 레이,리즈",
+      "https://youtu.be/KZ3XCccO80w | 레이,리즈",
+      "https://youtu.be/fAizNJMhjYg | 레이,리즈",
+      "https://youtu.be/DI_-Ct5gcLo | 레이,리즈",
+      "https://youtu.be/wWIiZPOHKlo | 레이,리즈",
+      "https://youtu.be/-witWVzDmso | 안유진,레이,리즈",
+      "https://youtube.com/shorts/zrD7Z0Y63lY | 리즈",
+      "https://youtu.be/V_1Se4RIlaE | 리즈",
+      "https://youtu.be/JwBYeJ0-us4 | 레이,리즈",
+    ] },
+    "IVE LOG": { ids: [
+      "rkwsNso1Lkw",
+      "2z7n4aRiwkQ",
+      "https://youtu.be/jtZnBCpjlSc",
+      "https://youtu.be/6ztiULeEphI",
+      "https://youtu.be/ePTDzF7pgvE",
+      "https://youtu.be/TSSTSeV1tKM",
+      "https://youtu.be/7Z5YLYgifKY",
+      "https://youtu.be/V_FUOC7Pp5E",
+      "https://youtu.be/8vmRwEvUGh8",
+      "https://youtu.be/6r_2DFSR8Cg",
+      "https://youtu.be/AYNYnVefn6A",
+      "https://youtu.be/PE18kAt1TwY",
+      "https://youtu.be/jHo9oubEUD8",
+      "https://youtu.be/BPNbgte8-PI",
+      "https://youtu.be/9jTtTgcdMgs",
+      "https://youtu.be/1XUwjfbBAJM",
+    ] },
+    "NYANG LOG": { ids: ["8giDiVm2ieo", "nucHfd4LYh0", "6NbG1KraFi0", "8991BvZAxB4", "Fv7L91UqtEY", "lj9l77EUKQc", "My_B1RyDkCI", "5eSsw4UJx4M", "B07JvhzzZQE", "https://youtu.be/4vzQRpBY6lI"] },
+    "ASMR": { ids: ["DP3DpXTXkIs", "LrvmL-CwT-4", "Xm0z10LfoC0", "Mq89ZadPLck", "XuwOTxjJqNA | 레이,리즈", "IEDDy-MenJE | 레이,리즈", "9jTtTgcdMgs"] },
+    "LIVE": { ids: [
+      "https://www.youtube.com/live/-VRi29z-WsI",
+      "https://www.youtube.com/live/MvfgEQAusoc | platform=YouTube",
+      "https://www.youtube.com/live/IAIDLjdQ9-A | platform=YouTube",
+      "https://www.youtube.com/live/27fABL2hsBE | platform=YouTube",
+      "https://www.youtube.com/live/nCKGsskEXJw | platform=YouTube",
+      "https://www.youtube.com/live/cPzEbO866mE | platform=YouTube",
+    ] },
+    "L(IVE)": { ids: [
+      "https://www.youtube.com/live/G35elTbpeYw | 안유진,가을,레이,리즈",
+      "https://www.youtube.com/live/YNbhMkyPNco | 레이,리즈 | platform=YouTube",
+      "https://www.youtube.com/live/KA1WvC1HQ-4 | 아이브",
+      "https://www.youtube.com/live/msNq5a5yPcE | 안유진,레이,리즈,이서",
+      "https://www.youtube.com/live/Yv7z-dTEnLo | 안유진,가을,레이,리즈",
+      "https://www.youtube.com/live/wUSX1QwznSo | 레이,리즈",
+      "https://www.youtube.com/live/_m2Vln_a0rE | 가을,리즈,이서",
+      "https://www.youtube.com/live/lBXKK8W5Mzc | 가을,리즈",
+      "https://www.youtube.com/live/y9d5-GdIFuo | 레이,리즈",
+      "https://www.youtube.com/live/KXKRUyoZRH4 | 아이브",
+      "https://www.youtube.com/live/vgb4lOPrsXQ | 아이브",
+      "https://www.youtube.com/live/oIEMmb8Hruo | 아이브",
+      "https://www.youtube.com/live/CW6gf4fT_u4 | 레이,리즈",
+      "https://www.youtube.com/live/kMytSdq1TxI | 아이브",
+      "https://www.youtube.com/live/HldGlrxuoFs | 레이,리즈",
+      "https://www.youtube.com/live/6hzUKabMxnc | 아이브",
+      "https://www.youtube.com/live/TGqlMSRZPiw | 가을,리즈",
+      "https://www.youtube.com/live/HfHTa22UxSI | 리즈,이서",
+      "https://www.youtube.com/live/ZGklAj7y7jU | 아이브",
+      "https://www.youtube.com/live/LTi4C4d0Boo | 레이,리즈",
+      "https://www.youtube.com/live/Prl6x1Z3voQ | 가을,리즈,이서",
+    ] },
+    "SOLO": { ids: ["QXR8HGSJ6lI", "Xe7admnJYK8", "https://youtu.be/FkmdvsEqW9k", "https://youtu.be/ZCk_305Zvso"] },
+    "OST": { ids: [
+      "8QuIlXWdRos | 리즈",
+      "aIvQeLzn-bs | 리즈",
+      "UOd7er2Fgb4 | 리즈",
+      "https://youtu.be/GFxY43fllpo | 리즈",
+      "https://youtu.be/ScFeylQa_Ds | 리즈",
+      "https://youtu.be/e6cI8Laho28 | 리즈",
+      "https://youtu.be/gFiGKFpk5Rs | 리즈",
+      "https://youtu.be/AuRiWgdAHF8 | 리즈",
+      "https://youtu.be/9FzqV5xmu8I | 리즈",
+      "https://youtu.be/4wHfJCjYjFM | 리즈",
+      "https://youtu.be/vlA8kf6c6Jw | 리즈",
+      "https://youtu.be/sPAhxL9HvdY | 리즈",
+      "https://youtu.be/7bdAAfLIroU | 리즈",
+      "https://youtu.be/c2Xxh8KEHSE | 리즈",
+      "https://youtu.be/Gc4w3WKif_c | 리즈",
+      "https://youtu.be/oyqr8hYwalw | 리즈",
+    ] },
+    "Lyrics": { ids: [
+      "7G6ouYSy3gc | lyrics=",   // 공동 또는 단독을 = 뒤에 적어주세요
+      "C10tc9qJs2s | lyrics=",
+      "jJt7qpdPRzY | lyrics=",
+    ] },
+    "etc.(가사)": { ids: ["YBNGZWGUGCs | 레이,리즈", "N68rwFjyinI | 리즈", "sAvUqJzft-U | 리즈", "Zat62PEPGtc | 리즈"] }, // 화면엔 "etc."로 표시
+    "Shorts": { ids: [
+      "https://youtube.com/shorts/zC4Ku_B5UG8 | 레이,리즈",
+      "https://youtube.com/shorts/Zspn6Z1PpJg | 안유진,가을,레이,리즈",
+      "https://youtube.com/shorts/RD8WomNWxLw | 리즈",
+      "https://youtu.be/2sHhumace-E | 레이,리즈",
+      "https://youtu.be/sOSsvD3Ygcw | 레이,리즈",
+      "https://youtu.be/74pI5i1zg5U | 리즈",
+      "https://youtu.be/Mh8Swpkj9Hk | 리즈",
+      "https://youtu.be/xkPbWyvc7vY | 장원영,리즈",
+      "https://youtu.be/AtkPNTec6V8 | 레이,리즈",
+      "https://youtu.be/yuOxvHM-2G8 | 리즈",
+      "https://youtu.be/ny3rhBdPZ10 | 리즈,이서",
+      "https://youtu.be/_F2ca-4f5uY | 레이,리즈",
+      "https://youtu.be/_W2sALKv1dw | 레이,리즈",
+      "https://youtu.be/4Kt7q3FTEkU | 리즈",
+      "https://youtu.be/oM3Je6Zsi-I | 리즈",
+      "https://youtu.be/hzTf6HcpwsI | 리즈,이서",
+      "https://youtu.be/YzoqUStzow0 | 리즈",
+      "https://youtu.be/BRRr_rn9xxw | 리즈",
+      "https://youtube.com/shorts/LhrBrmKf1dw | 리즈",
+      "https://youtube.com/shorts/i_U_Y6GhrAg | 리즈",
+      "https://youtube.com/shorts/pZZ5d1FZq24 | 리즈",
+      "https://youtube.com/shorts/qZ4qKsuqTQo | 리즈",
+      "https://youtube.com/shorts/Y-1iWfh_ur8 | 아이브",
+      "https://youtube.com/shorts/tL7JA_gxkzY | 아이브",
+      "https://youtube.com/shorts/Epg3JKjjA9E | 아이브",
+      "https://youtube.com/shorts/PwnqTaAS-2w | 아이브",
+      "https://youtube.com/shorts/fHzCZR0Jj9U | 레이,리즈",
+      "https://youtube.com/shorts/vg8sOkf4S6o | 리즈",
+      "https://youtube.com/shorts/jPt4KthT-sg | 리즈,이서",
+      "https://youtube.com/shorts/e0x9ff0yA9E | 아이브",
+      "https://youtube.com/shorts/lN_61WZlML4 | 레이,리즈",
+      "https://youtube.com/shorts/FLIyZJhdjN4 | 아이브",
+      "https://youtube.com/shorts/whsRMxrZ-yw | 가을,리즈,이서",
+      "https://youtube.com/shorts/Z6PhJR0jytI | 리즈",
+      "https://youtube.com/shorts/pDif9Wrs2lE | 리즈",
+      "https://youtube.com/shorts/sctkhmN4E_Q | 리즈",
+      "https://youtube.com/shorts/nHwXes9P5J0 | 레이,장원영,리즈",
+      "https://youtube.com/shorts/nSH48Pu_UUE | 가을,장원영,리즈",
+      "https://youtube.com/shorts/6Wynnk8_6x0 | 리즈",
+      "https://youtube.com/shorts/YSfCPLRzQTI | 리즈",
+      "https://youtube.com/shorts/k3nrT6jG3a8 | 리즈",
+      "https://youtube.com/shorts/8BHvokQyq6c | 레이,리즈",
+      "https://youtube.com/shorts/xDeZTb3c_1Q | 레이,리즈",
+      "https://youtube.com/shorts/qTssYMYgDD8 | 리즈",
+      "https://youtube.com/shorts/V9aF5wB4a1M | 리즈",
+      "https://youtube.com/shorts/FlSN-5UoeII | 리즈",
+      "https://youtube.com/shorts/TqQ9AWQZuqM | 리즈",
+      "https://youtube.com/shorts/kOdCsUBGylA | 리즈",
+      "https://youtube.com/shorts/Dr22yttjqlw | 아이브",
+      "https://youtube.com/shorts/9nOA6O9tVUQ | 아이브",
+      "https://youtube.com/shorts/uJ8whZmUQm4 | 아이브",
+      "https://youtube.com/shorts/xLh5BfTMXpU | 리즈",
+      "https://youtube.com/shorts/83_oV3ZNXdI | 리즈",
+      "https://youtube.com/shorts/w31SvH3-DpI | 리즈",
+      "https://youtube.com/shorts/pLFtqyNyg-A | 리즈",
+      "https://youtube.com/shorts/Fru7czC_HW4 | 리즈",
+      "https://youtube.com/shorts/z4uL3smBu40 | 리즈",
+      "https://youtube.com/shorts/dfLUJgQg140 | 장원영,리즈,이서",
+      "https://youtube.com/shorts/f6gEXjdMMR4 | 아이브",
+      "https://youtube.com/shorts/JuTYyJy9RiU | 리즈",
+      "https://youtube.com/shorts/zrE-o89eXMY | 장원영,리즈",
+      "https://youtube.com/shorts/X-Ga4k57-i8 | 아이브",
+      "https://youtube.com/shorts/IY6dCuJvnmQ | 아이브",
+      "https://youtube.com/shorts/_TAy4ManFqA | 레이,장원영,리즈",
+      "https://youtube.com/shorts/gC7A6qlapME | 리즈,이서",
+      "https://youtube.com/shorts/SgDrkkpEZ1w | 장원영,리즈,이서",
+      "https://youtube.com/shorts/_Mm5oeT2o3A | 아이브",
+      "https://youtube.com/shorts/EdWFJCAdDKM | 리즈",
+      "https://youtube.com/shorts/SGckngqYVrI | 리즈,이서",
+      "https://youtube.com/shorts/o6uUQNB9Y78 | 리즈",
+      "https://youtube.com/shorts/NhgFvRiQqRQ | 리즈",
+      "https://youtube.com/shorts/L90Ttt9k2eY | 리즈",
+      "https://youtube.com/shorts/KqHybFt4RPg | 리즈",
+      "https://youtube.com/shorts/cZ-kpJ_Q0Fo | 리즈",
+      "https://youtube.com/shorts/4rHjKHHiIRg | 리즈",
+      "https://youtube.com/shorts/AVclqfbVzg8 | 리즈",
+      "https://youtube.com/shorts/BzPL78iT8xQ | 리즈",
+      "https://youtube.com/shorts/XdRM_nq_elM | 리즈",
+      "https://youtube.com/shorts/SLpOMZpESog | 리즈",
+      "https://youtube.com/shorts/2VxsvxL-m8o | 가을,리즈",
+      "https://youtube.com/shorts/jE49719r910 | 가을,레이,리즈",
+      "https://youtube.com/shorts/3KNosKu6750 | 리즈",
+      "https://youtube.com/shorts/eYr2lvfL3nM | 레이,리즈",
+      "https://youtube.com/shorts/qmjJU2omPDs | 안유진,레이,리즈",
+      "https://youtube.com/shorts/AIBUl0hSN4M | 아이브",
+      "https://youtube.com/shorts/51aKuhB8j8g | 아이브",
+      "https://youtube.com/shorts/-eOMDj9klkM | 아이브",
+      "https://youtube.com/shorts/aEIDIFmnzuo | 아이브",
+      "https://youtube.com/shorts/wxY3LmAU-H0 | 리즈",
+      "https://youtube.com/shorts/F8j6iE2_bvI | 아이브",
+      "https://youtube.com/shorts/6ZzJvZsVVv8 | 가을,리즈,이서",
+      "https://youtube.com/shorts/r2tU_P9xD5o | 레이,리즈,이서",
+      "https://youtube.com/shorts/sGzzQh232b0 | 아이브",
+      "https://youtube.com/shorts/V5RzaY-bg-U | 리즈",
+      "https://youtube.com/shorts/__gCkerTRJY | 아이브",
+      "https://youtube.com/shorts/vl8Maq6Tf4g | 아이브",
+      "https://youtube.com/shorts/iFh15lC-R0E | 안유진,레이,리즈,이서",
+      "https://youtube.com/shorts/nVp0h5RnOSE | 리즈",
+      "https://youtube.com/shorts/GE7O0TjtUCE | 레이,리즈",
+      "https://youtube.com/shorts/bnr8n-oSKWc | 가을,리즈",
+      "https://youtube.com/shorts/vHsQosef0Mw | 레이,리즈",
+      "https://youtube.com/shorts/r9bA89RYplo | 아이브",
+      "https://youtube.com/shorts/hZXHG1tFOig | 아이브",
+      "https://youtube.com/shorts/2RC-o2Qhiuo | 아이브",
+      "https://youtube.com/shorts/wpW9SmnDtQg | 아이브",
+      "https://youtube.com/shorts/00qgz6ZtCqo | 아이브",
+      "https://youtube.com/shorts/LTllHup_HSw | 아이브",
+      "https://youtube.com/shorts/Ewpp5p2TRWA | 아이브",
+      "https://youtube.com/shorts/DnXdZRCQi1U | 안유진,레이,리즈",
+      "https://youtube.com/shorts/khgOm6pmHxA | 리즈",
+      "https://youtube.com/shorts/u7NLG0aO5hg | 아이브",
+      "https://youtube.com/shorts/nwvy1CgQp0U | 아이브",
+      "https://youtube.com/shorts/3Iq2qYDSpxM | 아이브",
+      "https://youtube.com/shorts/YqPiOulY7b0 | 아이브",
+      "https://youtube.com/shorts/FVZ67j1Nyoc | 아이브",
+      "https://youtube.com/shorts/S2EZiSYEc0o | 레이,리즈",
+      "https://youtube.com/shorts/A8fohjuz0ls | 레이,리즈",
+      "https://youtube.com/shorts/5JyMwqUDnsA | 레이,리즈",
+      "https://youtube.com/shorts/6IUpAOZ7G8A | 아이브",
+      "https://youtube.com/shorts/NYH4Hx3_Spk | 리즈",
+      "https://youtube.com/shorts/wroqgbtsREM | 아이브",
+      "https://youtube.com/shorts/nZVrrFfsuzw | 리즈,이서",
+      "https://youtube.com/shorts/rZcaqUf89gc | 리즈",
+      "https://youtube.com/shorts/1L8zJ3_ZTfc | 안유진,레이,리즈",
+      "https://youtube.com/shorts/yRzYpVFrKhU | 레이,리즈,이서",
+      "https://youtube.com/shorts/6e4EMnW-Gac | 가을,안유진,리즈",
+      "https://youtube.com/shorts/nHKZ4W6woUo | 가을,리즈",
+      "https://youtube.com/shorts/7OUMzHF_6J8 | 리즈",
+      "https://youtube.com/shorts/UYqIufs-KPI | 리즈",
+      "https://youtube.com/shorts/1un2pAM784o | 리즈",
+      "https://youtube.com/shorts/0RZk6Oxocuw | 아이브",
+      "https://youtube.com/shorts/6ccJSjiBp2o | 안유진,리즈",
+      "https://youtube.com/shorts/3rEvFrYJNZY | 레이,리즈",
+      "https://youtube.com/shorts/yDZxEPkXqo4 | 아이브",
+      "https://youtube.com/shorts/nwdT_DcWyAM | 리즈",
+      "https://youtube.com/shorts/sZ_uV7hH4_I | 리즈",
+      "https://youtube.com/shorts/K-DZSbpf8GI | 리즈",
+      "https://youtube.com/shorts/jDntDrTPldA | 리즈",
+      "https://youtube.com/shorts/VWiv2_QEvNA | 아이브",
+      "https://youtube.com/shorts/dxZazwBnAIE | 리즈",
+    ] },
+    "VOCAL": { ids: [
+      "https://youtube.com/shorts/LtfCAH7mC5I | 리즈",
+      "https://youtu.be/CDOPLnsFhhU | 리즈",
+      "https://youtu.be/_pjvU_xx6UU | 리즈",
+      "https://youtu.be/m4Q3iFYj6pA | 리즈",
+      "https://youtu.be/6KCkRbmGGlw | 리즈",
+    ] },
+    "DANCE": { ids: [
+      "https://youtube.com/shorts/YkCsMM7_4rg | 리즈",
+      "https://youtu.be/NTBUDlbIhq4 | 리즈",
+      "https://youtu.be/_SI2h4qH5PM | 리즈",
+      "https://youtu.be/YNpifyIy7BM | 리즈",
+      "https://youtu.be/VsluIoEryfg | 리즈",
+      "https://youtu.be/3Jt4beqPp60 | 리즈",
+      "https://youtu.be/W_qGuEqgyDQ | 리즈",
+      "https://youtu.be/VapUNK8NXPk | 레이,리즈",
+      "https://youtu.be/FLYZH2ZyVmE | 레이,리즈",
+    ] },
+    "IVE": { ids: [
+      "https://youtube.com/shorts/a6zxBqyBrrA | 리즈",
+      "https://youtube.com/shorts/YcvPZlQbkGs | 장원영,리즈",
+      "https://youtube.com/shorts/RdmFPDq3mO4 | 아이브",
+      "https://youtube.com/shorts/PEGPcdfmPmU | 아이브",
+      "https://youtube.com/shorts/VefrK3qaqdU | 아이브",
+      "https://youtube.com/shorts/lbSH6243uCM | 리즈",
+      "https://youtube.com/shorts/mEoquSqVgus | 안유진,리즈,이서",
+      "https://youtube.com/shorts/RHtHgOONGQI | 레이,리즈",
+      "https://youtube.com/shorts/PmnKPyYrBIk | 장원영,리즈",
+      "https://youtube.com/shorts/QDjG94luzyE | 아이브",
+      "https://youtube.com/shorts/TutLK574DZ0 | 리즈",
+      "https://youtube.com/shorts/E6Gz-Yubndc | 아이브",
+      "https://youtube.com/shorts/m5X4OCkf-MY | 장원영,리즈,이서",
+      "https://youtube.com/shorts/OFOewnu06_4 | 아이브",
+      "https://youtube.com/shorts/cocwKnwHzdc | 안유진,가을,리즈",
+      "https://youtube.com/shorts/G6AGUO_2r4o | 아이브",
+      "https://youtube.com/shorts/OUntz4CUdIg | 아이브",
+      "https://youtube.com/shorts/rdwrSGdTJVo | 아이브",
+      "https://youtube.com/shorts/Gxc2mpRJQ7w | 리즈",
+      "https://youtube.com/shorts/4RcFehKLd1w | 가을,레이,리즈",
+      "https://youtube.com/shorts/x0AEajDxgsA | 아이브",
+      "https://youtube.com/shorts/n5tl_mGcv1c | 아이브",
+      "https://youtube.com/shorts/YsGMQ2IL_6I | 안유진,장원영,리즈",
+      "https://youtube.com/shorts/QUPgEx_nazc | 아이브",
+      "https://youtube.com/shorts/e8k1WUfBB-g | 아이브",
+      "https://youtube.com/shorts/AhpB8f94j5U | 리즈",
+      "https://youtube.com/shorts/KIjWBermA6w | 아이브",
+      "https://youtube.com/shorts/DzVKyiGLNrw | 리즈",
+      "https://youtube.com/shorts/Q_WFBhbCPcQ | 리즈",
+      "https://youtube.com/shorts/jN104kieDsY | 리즈",
+      "https://youtube.com/shorts/EXwb469dCb4 | 리즈,이서",
+      "https://youtube.com/shorts/iQOY1F0DtPk | 아이브",
+      "https://youtube.com/shorts/n99ikyqdt20 | 아이브",
+      "https://youtube.com/shorts/PH52oxOtz-s | 아이브",
+      "https://youtu.be/sv94HNxmzqY | 리즈",
+      "https://youtube.com/shorts/mjFaSijCr7Y | 안유진,가을,리즈",
+      "https://youtube.com/shorts/1sqT3irwQnc | 레이,리즈",
+      "https://youtube.com/shorts/i2XiCbjJE3M | 아이브",
+      "https://youtube.com/shorts/44t7-wdbSn0 | 안유진,리즈,이서",
+      "https://youtube.com/shorts/2o8BXWYYKtA | 아이브",
+      "https://youtube.com/shorts/gLT0zCrZFEA | 리즈",
+      "https://youtube.com/shorts/aNs0sPXkOcE | 리즈",
+      "https://youtube.com/shorts/M4cCCPIFnRw | 레이,리즈",
+      "https://youtube.com/shorts/Sa6v8ZyIPSY | 리즈",
+      "https://youtube.com/shorts/qqxJZe_XVIk | 아이브",
+      "https://youtube.com/shorts/epmX5pJ9cC0 | 레이,리즈",
+      "https://youtube.com/shorts/G8ZlZEPjNHc | 안유진,레이,리즈",
+      "https://youtube.com/shorts/Sx6y4IYsDBQ | 아이브",
+      "https://youtube.com/shorts/KY1S9sH6cHE | 아이브",
+      "https://youtube.com/shorts/mxQMDA1izFQ | 리즈,이서",
+      "https://youtube.com/shorts/FHSOJmBPhBo | 리즈",
+      "https://youtube.com/shorts/aajLXjXkqVU | 아이브",
+      "https://youtube.com/shorts/ppC-ZaD2ZR4 | 안유진,리즈",
+      "https://youtube.com/shorts/hVnlIxcCo8s | 장원영,리즈,이서",
+      "https://youtube.com/shorts/ou3ID4O5U4E | 가을,리즈",
+      "https://youtube.com/shorts/lv6G_hG2YkI | 아이브",
+      "https://youtube.com/shorts/RzpZlosZXCY | 아이브",
+      "https://youtube.com/shorts/d8URwGVgRQs | 아이브",
+      "https://youtube.com/shorts/7ajuk_f1c90 | 아이브",
+      "https://youtube.com/shorts/beDN-ujHL4U | 장원영,리즈",
+      "https://youtube.com/shorts/2r5GK9Oer60 | 아이브",
+      "https://youtube.com/shorts/a8M4CJiM42c | 아이브",
+      "https://youtube.com/shorts/Pywfd0FmaPc | 리즈",
+      "https://youtube.com/shorts/3johgI1U7WU | 안유진,장원영,리즈",
+      "https://youtube.com/shorts/i4zmu9zjRZo | 아이브",
+      "https://youtube.com/shorts/yNPB5xAlPhc | 안유진,리즈",
+      "https://youtube.com/shorts/3gegqsxbKmg | 아이브",
+      "https://youtube.com/shorts/Dj2nNhZVrOw | 아이브",
+      "https://youtube.com/shorts/mtdc534P7No | 리즈",
+      "https://youtube.com/shorts/0tEh3NoYSD0 | 리즈,이서",
+      "https://youtube.com/shorts/fUSUTSRVSGY | 아이브",
+      "https://youtube.com/shorts/ncvG4i3HW3M | 리즈",
+      "https://youtube.com/shorts/B0liskgil5Q | 아이브",
+      "https://youtube.com/shorts/MiWHG8LOGx0 | 장원영,리즈,이서",
+      "https://youtube.com/shorts/JPKiAdO8lg0 | 아이브",
+      "https://youtube.com/shorts/8YDDlEs8xX4 | 가을,장원영,리즈",
+      "https://youtube.com/shorts/LEBA17aktBk | 가을,리즈",
+      "https://youtube.com/shorts/MyxWEuKlMac | 리즈",
+      "https://youtube.com/shorts/OQza1Tb_fdc | 가을,장원영,리즈",
+      "https://youtube.com/shorts/FKS_92dUYOg | 리즈",
+      "https://youtube.com/shorts/eCZ9dSiulbw | 안유진,레이,리즈",
+      "https://youtube.com/shorts/bircEHNNlGA | 아이브",
+      "https://youtube.com/shorts/bieWcbh5nqY | 아이브",
+      "https://youtube.com/shorts/nN5HLlqkUgo | 리즈,이서",
+      "https://youtube.com/shorts/rvjTpvFgMXk | 리즈",
+      "https://youtube.com/shorts/23ey2jS6BEI | 아이브",
+      "https://youtube.com/shorts/2xinwEdnTe4 | 아이브",
+      "https://youtube.com/shorts/7omSMhcr-CQ | 리즈,이서",
+      "https://youtube.com/shorts/QEoHIKWSDyM | 리즈,이서",
+      "https://youtube.com/shorts/SSoZ8BfpvPk | 안유진,가을,리즈",
+      "https://youtube.com/shorts/uTPcTpuVr0A | 안유진,리즈",
+      "https://youtube.com/shorts/4Wcz2w0aYRo | 아이브",
+      "https://youtube.com/shorts/dmWDHianKgU | 아이브",
+      "https://youtube.com/shorts/82Yj5fM9GVQ | 아이브",
+      "https://youtube.com/shorts/qmNMlb-_g08 | 리즈",
+      "https://youtube.com/shorts/6ceJTaIoOg0 | 가을,장원영,리즈",
+      "https://youtube.com/shorts/H9bagZ_LYG4 | 리즈",
+      "https://youtube.com/shorts/Z0qhcNir6jI | 아이브",
+      "https://youtube.com/shorts/Yemu5XJx0Ew | 아이브",
+      "https://youtube.com/shorts/JZQTjPZFJ64 | 아이브",
+      "https://youtube.com/shorts/hs8Jwrro9Ao | 안유진,리즈,이서",
+      "https://youtube.com/shorts/VMDo-3N9Ksc | 장원영,리즈",
+      "https://youtube.com/shorts/84c1-RT6qek | 가을,리즈,이서",
+      "https://youtube.com/shorts/xu2EGH71vPs | 안유진,레이,리즈",
+      "https://youtube.com/shorts/b5lD6BDdIRo | 리즈",
+      "https://youtube.com/shorts/YEPxvaJKu7I | 안유진,가을,리즈",
+      "https://youtube.com/shorts/YN893zoJ_wA | 아이브",
+      "https://youtube.com/shorts/kKwT2ket7g4 | 리즈,이서",
+      "https://youtube.com/shorts/p2ixEfj3wp0 | 리즈",
+      "https://youtube.com/shorts/37oaRQp8bNc | 아이브",
+      "https://youtube.com/shorts/4JoLmwwE_28 | 리즈",
+      "https://youtube.com/shorts/voORo0OCccw | 아이브",
+      "https://youtube.com/shorts/Ulf4JZ9jV6s | 아이브",
+      "https://youtube.com/shorts/JxOAo5NtHWc | 리즈",
+      "https://youtube.com/shorts/y_cXmOJhJhw | 아이브",
+      "https://youtube.com/shorts/m4nbQSdt8rs | 리즈,이서",
+      "https://youtube.com/shorts/YbH2SuTkpvo | 아이브",
+      "https://youtube.com/shorts/-ve44EHFhHw | 아이브",
+      "https://youtube.com/shorts/4seOuCaMi1Q | 안유진,리즈",
+      "https://youtube.com/shorts/09C5rF4ZlPY | 안유진,리즈",
+      "https://youtube.com/shorts/C5KqXqk40T8 | 레이,리즈",
+      "https://youtube.com/shorts/TWG81p679sc | 아이브",
+      "https://youtube.com/shorts/WXUxYH5T8Lo | 아이브",
+      "https://youtube.com/shorts/iUk2OiGLw_8 | 아이브",
+      "https://youtube.com/shorts/OLL7flcsHLw | 레이,리즈",
+      "https://youtube.com/shorts/cLIqKjcbpNY | 레이,장원영,리즈",
+      "https://youtube.com/shorts/mMeqrLFzJRI | 아이브",
+      "https://youtube.com/shorts/zELzvObFpiM | 가을,장원영,리즈",
+      "https://youtube.com/shorts/SgGPjAwIilk | 아이브",
+      "https://youtube.com/shorts/g0KShRKFFOQ | 안유진,레이,리즈,이서",
+      "https://youtube.com/shorts/aEMpuNITySc | 아이브",
+      "https://youtube.com/shorts/ZZawzVz77nw | 리즈",
+      "https://youtube.com/shorts/PirKlOBT6DM | 리즈",
+      "https://youtube.com/shorts/DMGZXs4PIx8 | 리즈",
+      "https://youtube.com/shorts/2J7cz-_3oNA | 아이브",
+      "https://youtube.com/shorts/sp5mlN1yzEg | 아이브",
+      "https://youtube.com/shorts/2x07GsCUh1k | 레이,리즈",
+      "https://youtube.com/shorts/y-xExPHrM-4 | 아이브",
+      "https://youtube.com/shorts/2GzwnVXuCLA | 아이브",
+      "https://youtube.com/shorts/XcGNgxZyCpA | 아이브",
+      "https://youtube.com/shorts/S7KDaHQfi08 | 장원영,리즈",
+      "https://youtube.com/shorts/oz_L9hL1iU8 | 아이브",
+      "https://youtube.com/shorts/GPplX5Wo1IU | 아이브",
+      "https://youtube.com/shorts/t7kw527RbZs | 아이브",
+      "https://youtube.com/shorts/pzYR-ahvo_s | 아이브",
+      "https://youtube.com/shorts/l8cg29ri05w | 아이브",
+      "https://youtube.com/shorts/sny8W5rKlcg | 아이브",
+      "https://youtube.com/shorts/R2R0gJRnPIE | 아이브",
+      "https://youtube.com/shorts/u_ycT9K6Cik | 아이브",
+      "https://youtube.com/shorts/vg6jt_DO_oc | 아이브",
+      "https://youtube.com/shorts/m2GzxR6iRXo | 아이브",
+      "https://youtube.com/shorts/NoSZuXumTQ8 | 아이브",
+      "https://youtube.com/shorts/jhcMdQq9o-Y | 아이브",
+      "https://youtube.com/shorts/A_ShpMFfONA | 아이브",
+      "https://youtube.com/shorts/vbLF82Dj6tk | 리즈",
+      "https://youtube.com/shorts/WvWdCQCVba4 | 아이브",
+    ] },
+    "MAGAZINE": { ids: ["https://youtu.be/QXXzTpWvRxs | album=COSMOPOLITAN", "https://youtu.be/2GScPIxnT1Y | album=Harper's BAZAAR", "https://youtu.be/Ju1MElrngXs | 가을,레이,리즈,이서 | album=L'OFFICIEL", "https://youtu.be/NTKP27WZEjA | album=Singles", "https://youtu.be/DtmzZftCBHs | 레이,리즈 | album=SPUR", "https://youtu.be/TLw0Bsvhc_g | album=Harper's BAZAAR", "https://youtu.be/thSuJfR2INw | album=Singles", "https://youtu.be/BXf3XvHK1M8 | 가을,레이,리즈 | album=W Korea"] },
+    "POP-UP": { ids: [] },
+    "AD": { ids: [
+      "https://youtube.com/shorts/xnMJOSE2g7M | album=TONYMOLY",
+      "https://youtube.com/shorts/xgGdxZwlR18 | album=TONYMOLY",
+      "https://youtube.com/shorts/meAhWwzzEUM | album=TONYMOLY",
+      "https://youtube.com/shorts/kD9kyTIh_0A | album=TONYMOLY",
+      "https://youtube.com/shorts/mcl9O9HabeM | album=TONYMOLY",
+      "https://youtube.com/shorts/ZSN6q1CtaiE | album=TONYMOLY",
+      "https://youtube.com/shorts/-oZJPfWhuKQ | album=TONYMOLY",
+      "https://youtu.be/YM2KrSl7Ky8 | album=TONYMOLY",
+      "https://youtu.be/a3IsJV9hkg0 | album=TONYMOLY",
+      "https://youtube.com/shorts/3sPclCvf5EU | 리즈 | album=S.NATURE",
+      "https://youtu.be/0BLUb6T6Xl0 | 리즈 | album=S.NATURE",
+      "https://youtu.be/716dWbU9CEY | 리즈 | album=S.NATURE",
+      "https://youtu.be/BMkohqaDcPU | 리즈 | album=S.NATURE",
+      "https://youtu.be/l1PmdYuPkow | 리즈 | album=S.NATURE",
+      "https://youtube.com/shorts/ha3kiWmZrCI | 리즈 | album=8seconds",
+      "https://youtube.com/shorts/fiumZZzUo4M | 리즈 | album=8seconds",
+      "https://youtube.com/shorts/0mhOIGxDqwA | 리즈 | album=8seconds",
+      "https://youtube.com/shorts/WXgNpJnbRl4 | 리즈 | album=8seconds",
+      "https://youtube.com/shorts/0hDQykSzSW0 | 리즈 | album=8seconds",
+      "https://youtu.be/lKk24NtkJwE | 리즈 | album=8seconds",
+      "https://youtu.be/dcwIhx_9wdw | 레이,리즈 | album=Valentino",
+      "https://youtu.be/JTMiVUW1tQo | album=Matin Kim",
+      "https://youtu.be/8oQ0MLm0ofA | album=TONYMOLY",
+      "https://youtu.be/TSHCiMpTz6A | album=ZIGZAG",
+      "https://youtu.be/ei26HLubP64 | album=LIVE YOUR COLOR! PLAY VEGAN",
+    ] },
+    "MC": { ids: ["J_vU6FR5aNI", "2o_pHbv7Jjw", "https://youtube.com/shorts/RjRYfz4ULC4"] },
+    "etc.(일정)": { ids: ["https://youtu.be/Bcew5Zz02Xc | 리즈", "https://youtu.be/WaHEihU4Yzw | 리즈"] }, // 화면엔 "etc."로 표시
+    "MEMBERS X": { ids: [] }, // 유튜브 영상 없이 MANUAL_ITEMS로만 채우는 카테고리
+  };
+  // 어떤 카테고리에도 안 넣고 "전체 영상 보기"에만 보이게 할 영상
+  const OTHER_IDS = [];
+
+  // 화면에 다른 이름으로 보이게 할 카테고리 (내부 키는 위 CATEGORIES와 맞춰야 함)
+  const TAB_LABELS = { "etc.(가사)": "etc.", "etc.(일정)": "etc." };
+
+  // ---- 멤버 표시 (파스텔 배경) ----
+  const MEMBER_COLORS = { 가을: "#e3c9b3", 안유진: "#aed6f1", 레이: "#a9e5cf", 장원영: "#f3a9a9", 이서: "#d3b8ea", 리즈: "#f7cb95", 아이브: "#f6b9d2" };
+  const MEMBER_LIST = ["안유진", "가을", "레이", "장원영", "리즈", "이서", "아이브"]; // 검색창 아래 필터 버튼 순서
+  const PLATFORM_COLORS = { Berriz: "#f06fa8", bubble: "#f08a2c", YouTube: "#e5322d", VLIVE: "#2f80ed", Wavve: "#1a6bff", 샤오홍슈: "#ff2442", WeChat: "#07c160", Weibo: "#e6162d", TVING: "#ff153c", SBS: "#2a68c9", "Daum Cafe": "#3d7fe0" };
+  const guessPlatform = (u) => /xhslink\.com|xiaohongshu\.com/.test(u || "") ? "샤오홍슈" : /weixin\.qq\.com/.test(u || "") ? "WeChat" : /weibo\.(com|cn)/.test(u || "") ? "Weibo" : /wavve\.com/.test(u || "") ? "Wavve" : /tving\.com/.test(u || "") ? "TVING" : /sbs\.co\.kr/.test(u || "") ? "SBS" : /cafe\.daum\.net/.test(u || "") ? "Daum Cafe" : undefined;
+
+  // ---- (참고용) 보조 지정 ----
+  // CATEGORIES에 " | 멤버 / platform=... / lyrics=... / album=..." 형식으로 이미 적었다면
+  // 아래 네 개는 전부 비워둬도 됩니다. 여기 적으면 CATEGORIES에 못 적은 영상에만 보조로 적용돼요.
+  const MEMBERS_OF = { /* "영상ID": ["멤버", ...], */ };
+  const PLATFORM_OF = { /* "영상ID": "Berriz", */ }; // Berriz(분홍) / bubble(귤색) / YouTube(빨강) / VLIVE(파랑)
+  const LYRICS_TYPE_OF = { /* "영상ID": "단독", */ };
+  const ALBUM_OF = { /* "영상ID": "앨범 이름", */ };
+
+  // ---- 유튜브가 아닌 게시물(사진, 트위터, Berriz 등) 직접 입력 ----
+  // 한 줄에 " | "로 구분해서: 날짜 | 링크 | 사진주소 | 카테고리 | 멤버 | 제목
+  //   - 날짜는 YYYY-MM-DD
+  //   - 사진주소가 없으면 비워두면 됩니다 (그 자리에 그냥 공백만 두고 | | 로)
+  //   - 카테고리·멤버가 여러 개면 쉼표로 구분
+  //   - 맨 끝에 " | platform=Berriz" 를 추가로 붙이면 플랫폼 딱지도 붙습니다
+  const MANUAL_ITEMS = [
+    "2026-10-16 | http://xhslink.com/o/9mhbWbX6YJI |  | AD | 리즈 | H&M CHINA | album=H&M CHINA",
+    // ---- 2026.10 추가분 (YCH HANNAM / H&M CHINA) ----
+    "2026-10-14 | https://www.instagram.com/reel/Ded1fDLhynI/ |  | POP-UP | 리즈 | YCH HANNAM | album=YCH",
+    "2026-10-14 | https://www.instagram.com/reel/Ded0r3TvxpQ/ |  | POP-UP | 리즈 | YCH HANNAM | album=YCH",
+    "2026-10-14 | https://www.instagram.com/reel/Ded1AG3S0Kn/ |  | POP-UP | 리즈 | YCH HANNAM | album=YCH",
+    "2026-10-14 | https://www.instagram.com/reel/Ded0m2uzR3h/ |  | POP-UP | 리즈 | YCH HANNAM | album=YCH",
+    "2026-10-14 | https://www.instagram.com/reel/Ded15z3qVUC/ |  | POP-UP | 리즈 | YCH HANNAM | album=YCH",
+    "2026-10-14 | https://www.instagram.com/reel/Ded1_ObhlZb/ |  | POP-UP | 리즈 | YCH HANNAM | album=YCH",
+    "2026-10-14 | https://www.instagram.com/reel/Ded2JVjBP3C/ |  | POP-UP | 리즈 | YCH HANNAM | album=YCH",
+    "2026-10-14 | https://www.instagram.com/reel/Ded2tltTCZl/ |  | POP-UP | 리즈 | YCH HANNAM | album=YCH",
+    "2026-10-14 | https://www.instagram.com/reel/Ded3Qcrz3qp/ |  | POP-UP | 리즈 | YCH HANNAM | album=YCH",
+    "2026-10-14 | https://www.instagram.com/reel/Ded3KqXyz4o/ |  | POP-UP | 리즈 | YCH HANNAM | album=YCH",
+    "2026-10-14 | https://www.instagram.com/reel/Ded3hhTo1P-/ |  | POP-UP | 리즈 | YCH HANNAM | album=YCH",
+    "2026-10-14 | https://www.instagram.com/reel/Ded2en_CYRW/ |  | POP-UP | 리즈 | YCH HANNAM | album=YCH",
+    "2026-10-14 | https://www.instagram.com/reel/Ded4yw7x6V8/ |  | POP-UP | 리즈 | YCH HANNAM | album=YCH",
+    "2026-10-14 | https://www.instagram.com/reel/Ded5NU7svDf/ |  | POP-UP | 리즈 | YCH HANNAM | album=YCH",
+    "2026-10-14 | https://www.instagram.com/reel/Ded6YAlCF_f/ |  | POP-UP | 리즈 | YCH HANNAM | album=YCH",
+    "2026-10-14 | https://www.instagram.com/reel/Ded6rQoT3Zx/ |  | POP-UP | 리즈 | YCH HANNAM | album=YCH",
+    "2026-10-14 | https://www.instagram.com/p/Ded-hqgAf4s/ |  | POP-UP | 리즈 | YCH HANNAM | album=YCH",
+    "2026-10-14 | https://www.instagram.com/reel/DeeCk3iM0D9/ |  | POP-UP | 리즈 | YCH HANNAM | album=YCH",
+    "2026-10-14 | https://www.instagram.com/reel/DeeDQSep-my/ |  | POP-UP | 리즈 | YCH HANNAM | album=YCH",
+    "2026-10-14 | https://www.instagram.com/p/DeeFI--gUOR/ |  | POP-UP | 리즈 | YCH HANNAM | album=YCH",
+    "2026-10-14 | https://www.instagram.com/p/DeeFamtk_2N/ |  | POP-UP | 리즈 | YCH HANNAM | album=YCH",
+    "2026-10-14 | https://www.instagram.com/reel/DeeFf6Kz-P4/ |  | POP-UP | 리즈 | YCH HANNAM | album=YCH",
+    "2026-10-14 | https://www.instagram.com/reel/DeeGn19z_z_/ |  | POP-UP | 리즈 | YCH HANNAM | album=YCH",
+    "2026-10-14 | https://www.instagram.com/p/DeeHxrDn_WW/ |  | POP-UP | 리즈 | YCH HANNAM | album=YCH",
+    "2026-10-14 | https://www.instagram.com/reel/DeeaDREhoNw/ |  | POP-UP | 리즈 | YCH HANNAM | album=YCH",
+    "2026-10-14 | https://t.co/81WilFLxbb |  | AD | 리즈 | H&M CHINA | album=H&M CHINA",
+    "2026-10-15 | https://mp.weixin.qq.com/s/ZRHb6ehV9DX1jNQkulVHyw |  | AD | 리즈 | H&M CHINA | album=H&M CHINA",
+    // ---- 인스타그램 추가분 (Shorts / IVE / etc.) ----
+    "2025-11-21 | https://www.instagram.com/reel/DRSFzUij1Fs/ |  | Shorts | 아이브 | OUR LIZ DAY 💖🐱",
+    "2024-03-20 | https://www.instagram.com/reel/C4uhrI3rCJv/ |  | Shorts | 안유진,가을,레이,리즈 | 국제 행복의 날이니까 DIVE의 날 🩵",
+    "2024-03-18 | https://www.instagram.com/reel/C4pU8wQvce3/ |  | Shorts | 리즈 | • ﻌ •. 🌈✨",
+    "2024-02-10 | https://www.instagram.com/reel/C3J6iZQP775/ |  | Shorts | 리즈 | 2024, 복복복! 🫳💙",
+    "2024-02-06 | https://www.instagram.com/reel/C2_zLtzvU2o/ |  | IVE | 리즈 | With you I feel clarity 🪞",
+    "2023-11-20 | https://www.instagram.com/reel/Cz2oJaGxZIM/ |  | etc.(가사) | 리즈 | SOYEON of (G)I-DLE X WINTER of aespa X #LIZ of #IVE 'NOBODY' 2030 부산월드엑스포 성공적인 유치를 기원합니다 💚",
+    "2023-09-20 | https://www.instagram.com/reel/CxaRMjJvKvx/ |  | Shorts | 리즈 | 한다 깜냥이의 챌린지 😎",
+    "2023-07-10 | https://www.instagram.com/reel/CugxlpyrA66/ |  | IVE | 리즈,이서 | 댄서 언냐들 수고해떠여 🩵🤍🩵🤍",
+    "2023-06-24 | https://www.instagram.com/reel/Ct4CP2NueUT/ |  | IVE | 안유진,레이,리즈 | 오늘은 나오리 경호 🐥🕶 선생님",
+    "2023-04-14 | https://www.instagram.com/reel/CrC1cl6PJoJ/ |  | Shorts | 아이브 | 저요🖤 <I AM ___> 🙌 #03",
+    "2023-04-13 | https://www.instagram.com/reel/CrAQpF2vVBC/ |  | Shorts | 아이브 | 저요🖤 <I AM ___> 🙌 #02",
+    "2023-04-12 | https://www.instagram.com/reel/Cq9rwR4vVz9/ |  | Shorts | 아이브 | 저요🖤 <I AM ___> 🙌 #01",
+    "2023-04-10 | https://www.instagram.com/reel/Cq4eMrCAgPV/ |  | Shorts | 아이브 | <YOU ARE ___?> #02",
+    "2023-04-11 | https://www.instagram.com/reel/Cq7G_xLvG6V/ |  | Shorts | 아이브 | <YOU ARE ___?> #03",
+    "2023-04-10 | https://www.instagram.com/reel/Cq2tnZuMIIB/ |  | Shorts | 아이브 | <YOU ARE ___?> #01",
+    "2023-01-21 | https://www.instagram.com/reel/CntH668s8WW/ |  | Shorts | 아이브 | 까치 까치 설날은 어저께고요〰️ 우리 우리 설날은 오늘이래요〰️🎵🎶 DIVE 새해 복 많이 받으세요 💕",
+    "2022-10-27 | https://www.instagram.com/reel/CkPtQ9ruX9b/ |  | IVE | 아이브 | DIVE 만나러 가는 길 💨💙",
+    "2022-07-20 | https://www.instagram.com/reel/CgOy5rqFrkw/ |  | IVE | 리즈 | 러브 냥리즈 챌린지 🐱🐾",
+    "2022-07-04 | https://www.instagram.com/reel/CflB7FyFyP5/ |  | IVE | 리즈 | 리즈가 보내는 Peace and Love 💘",
+    "2022-05-08 | https://www.instagram.com/reel/CdSl4DVF3-C/ |  | IVE | 안유진,레이,리즈 | ELEVEN ✨🤭🫢",
+    "2024-05-03 | https://www.instagram.com/reel/C6f0U5rS6Bl/ |  | IVE | 리즈 | 😮 ❓ 😍 ❗️ 😬",
+    "2023-12-01 | https://www.instagram.com/reel/C0TSMtnvKWS/ |  | Shorts | 아이브 | HAPPY IVE DAY",
+    "2024-01-06 | https://www.instagram.com/reel/C1yT3VzRSQc/ |  | Shorts | 아이브 | 네가 날 좋아한다고 들었는데~🖤",
+    // ---- L(IVE) 추가분 (Berriz) ----
+    "2025-12-01 | https://link.berriz.in/ko/web/main/ive/live/replay/019ad95b-4138-91ec-ec99-78bcf8cfcfb6 | https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgF7r0ZFBZ3yc6xi6WsVOsPyMUdt0V7nUUygV3EVk4jAcZw69MJTz46ltGkenjXHmg5QrOI69V3La_rC-1Kpo6E2hZZMgSBQX4tDoATvTyD9XqbJH4E_GKRfEV_i4zNBKqGX3FeyG6L2W7VYJEvS-ChdoUSnPpyg11k3c-S_oFT6sp56ycyM1uuuRAmQqM/s5760/1791814808833.jpg | L(IVE) | 아이브 | 🤍 𝙸𝚅𝙴 𝙳𝙴𝙱𝚄𝚃 𝟒𝐓𝐇 𝙰𝙽𝙽𝙸𝚅𝙴𝚁𝚂𝙰𝚁𝚈 🤍 | platform=Berriz",
+    "2025-08-25 | https://link.berriz.in/ko/web/main/ive/live/replay/0198e03e-576e-9d7b-cb87-bee58b04a99d | https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgCU-RbpPKx0cw7AaWQDDoPDAt6weBFZaT673ngvNVhUXdxSrAb5-3w-jVdDX2CebHPqmXt30Duq5hyLIYyUbXxYHzBqxLjo8CKUuFd4jT5OAab3TsoHpBKx5m6bR6aLtqo-6IC5Vh4ZmqZ_7fWXWUIlsPaZ7y2ISerBBJJfZfsW3qoT-RNTRpN4BvEPTs/s5760/1791814814891.jpg | L(IVE) | 아이브 | IVE SECRET LIVE | platform=Berriz",
+    "2026-08-24 | https://link.berriz.in/ko/web/main/ive/live/replay/01a0329b-c089-83b0-3c06-e19f3a60d48a | https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi0EzAink1_tqr01PQDw4cGcTn4n3154wNjEi9uWOnxPFe9Qp6KH6Itd9jT4efqCHXR_g8Y4IGrLLHyg94lXPLvih9Q7wPil8kx-tfAf7roMb9A89yO6MwB2-RyCsiRBzAcz3obkMF-phhnEKhAC8LY6LX4ArVOA4iYnvnLjem5xoZNB93hyx57_I_BUsw/s6949/1791814769315.jpeg | LIVE |  | 뭐하고왔게😎🤓 | platform=Berriz",
+    "2026-08-19 | https://link.berriz.in/ko/web/main/ive/live/replay/01a019ca-6e0d-a15d-ba27-973ef2345ddd | https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhW_KDfrDnNrO5_9sqv7xZKbH21yZ5bImkUMiX3KlOQaRcUtX0Cm6imJYSAzJZFE406oN_7g_l-nDkTxDpKuM6tUlNsgRgXuT1bdH2wQL5hgTcTiXOtjiR6zchpT5orLV7azimubNeBZwi8v7zpa75_1eiL6BH_hHUIH7_gVDatAztlHtkDY3l3jL0xyyQ/s3312/1791814778828.jpeg | LIVE |  | 놀쟈 | platform=Berriz",
+    "2026-07-01 | https://link.berriz.in/ko/web/main/ive/live/replay/019f1ca9-f788-5427-8c4b-8d66cb25f2ca | https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiT6o6Hmu-06rJNm8WJQFuwIR9m5jW_BXuGRAyRL8HdZNXtb6rr4MBQ6z3Q_OKBnrwUUAhJQxsDQHCADRTtLgsUvyDqpgf8Yey5ilCKHkgst8G5dEqS8Y1vj_4PeMo8u-kab0CuhbHr9XUNVJxFnPXcov0hBfc5NyWqvsVYvLlKdhhDLnoWa6iEZNjBTNk/s4096/1791814782827.jpeg | LIVE |  | 냥 !!🐱 | platform=Berriz",
+    "2026-09-26 | https://x.com/IVE_twt/status/2102960947094790235 |  | MEMBERS X |  | 여기에 설명을 입력하세요 (트위터 사진)",
+    "2026-09-30 | https://x.com/IVE_twt/status/2094686328336355409 |  | MEMBERS X |  | 여기에 설명을 입력하세요 (트위터 사진)",
+    // ---- AD · Valentino (최신순 / 모두 레이,리즈 / album=Valentino) ----
+    // Valentino Antibiblioteca
+    "2026-10-04 | https://x.com/MaisonValentino/status/2107762053846794654 |  | AD | 레이,리즈 | Valentino Antibiblioteca | album=Valentino",
+    "2026-10-04 | https://www.instagram.com/p/DeM69q6CC0h/ |  | AD | 레이,리즈 | Valentino Antibiblioteca | album=Valentino",
+    "2026-10-04 | https://www.instagram.com/reel/DeEypgGpb3p/ |  | AD | 레이,리즈 | Valentino Antibiblioteca | album=Valentino",
+    "2026-10-04 | https://www.instagram.com/reel/DeEyy7Bha6n/ |  | AD | 레이,리즈 | Valentino Antibiblioteca | album=Valentino",
+    "2026-10-04 | https://www.instagram.com/reel/DeEy3CDiOa5/ |  | AD | 레이,리즈 | Valentino Antibiblioteca | album=Valentino",
+    "2026-10-04 | https://www.instagram.com/reel/DeEzBOmhZvB/ |  | AD | 레이,리즈 | Valentino Antibiblioteca | album=Valentino",
+    "2026-10-04 | https://www.instagram.com/reel/DeEy2boIlw9/ |  | AD | 레이,리즈 | Valentino Antibiblioteca | album=Valentino",
+    "2026-10-04 | https://www.instagram.com/reel/DeEzTscBwXK/ |  | AD | 레이,리즈 | Valentino Antibiblioteca | album=Valentino",
+    "2026-10-04 | https://www.instagram.com/reel/DeEz26yAWG_/ |  | AD | 레이,리즈 | Valentino Antibiblioteca | album=Valentino",
+    "2026-10-04 | https://www.instagram.com/reel/DeEy-f3OhXx/ |  | AD | 레이,리즈 | Valentino Antibiblioteca | album=Valentino",
+    "2026-10-04 | https://www.instagram.com/reel/DeE0JDRNw6q/ |  | AD | 레이,리즈 | Valentino Antibiblioteca | album=Valentino",
+    "2026-10-04 | https://www.instagram.com/reel/DeE0exphDVt/ |  | AD | 레이,리즈 | Valentino Antibiblioteca | album=Valentino",
+    "2026-10-04 | https://www.instagram.com/reel/DeE0qhkE18z/ |  | AD | 레이,리즈 | Valentino Antibiblioteca | album=Valentino",
+    "2026-10-04 | https://www.instagram.com/reel/DeEzHM-uvkg/ |  | AD | 레이,리즈 | Valentino Antibiblioteca | album=Valentino",
+    "2026-10-04 | https://www.instagram.com/reel/DeE5xVlBCUT/ |  | AD | 레이,리즈 | Valentino Antibiblioteca | album=Valentino",
+    "2026-10-04 | https://www.instagram.com/reel/DeE4ODIIMjy/ |  | AD | 레이,리즈 | Valentino Antibiblioteca | album=Valentino",
+    "2026-10-04 | https://www.instagram.com/reel/DeE6R1rxhdp/ |  | AD | 레이,리즈 | Valentino Antibiblioteca | album=Valentino",
+    "2026-10-04 | https://www.instagram.com/reel/DeE4XV_gSLa/ |  | AD | 레이,리즈 | Valentino Antibiblioteca | album=Valentino",
+    "2026-10-04 | https://www.instagram.com/reel/DeE4VntAE09/ |  | AD | 레이,리즈 | Valentino Antibiblioteca | album=Valentino",
+    "2026-10-04 | https://www.instagram.com/p/DeE7-cFD8es/ |  | AD | 레이,리즈 | Valentino Antibiblioteca | album=Valentino",
+    "2026-10-04 | https://www.instagram.com/p/DeE8RE-gdEO/ |  | AD | 레이,리즈 | Valentino Antibiblioteca | album=Valentino",
+    "2026-10-04 | https://www.instagram.com/reel/DeE8SvGPCOb/ |  | AD | 레이,리즈 | Valentino Antibiblioteca | album=Valentino",
+    "2026-10-04 | https://www.instagram.com/reel/DeE7t1DTYP9/ |  | AD | 레이,리즈 | Valentino Antibiblioteca | album=Valentino",
+    "2026-10-04 | https://www.instagram.com/reel/DeE6ypNCD2_/ |  | AD | 레이,리즈 | Valentino Antibiblioteca | album=Valentino",
+    "2026-10-04 | https://www.instagram.com/reel/DeE2kqszgqM/ |  | AD | 레이,리즈 | Valentino Antibiblioteca | album=Valentino",
+    "2026-10-04 | https://www.instagram.com/reel/DeE82qKuV_g/ |  | AD | 레이,리즈 | Valentino Antibiblioteca | album=Valentino",
+    "2026-10-04 | https://www.instagram.com/p/DeE8_-TCeQO/ |  | AD | 레이,리즈 | Valentino Antibiblioteca | album=Valentino",
+    "2026-10-04 | https://www.instagram.com/reel/DeE-BVxIz3m/ |  | AD | 레이,리즈 | Valentino Antibiblioteca | album=Valentino",
+    "2026-10-04 | https://www.instagram.com/reel/DeE919aA7h1/ |  | AD | 레이,리즈 | Valentino Antibiblioteca | album=Valentino",
+    "2026-10-04 | https://www.instagram.com/reel/DeE-1HSy8vb/ |  | AD | 레이,리즈 | Valentino Antibiblioteca | album=Valentino",
+    "2026-10-04 | https://www.instagram.com/p/DeE_isekuOu/ |  | AD | 레이,리즈 | Valentino Antibiblioteca | album=Valentino",
+    "2026-10-04 | https://www.instagram.com/reel/DeGf-n2oUS5/ |  | AD | 레이,리즈 | Valentino Antibiblioteca | album=Valentino",
+    "2026-10-04 | https://www.instagram.com/reel/DeGPbTLMoLI/ |  | AD | 레이,리즈 | Valentino Antibiblioteca | album=Valentino",
+    "2026-10-04 | https://www.instagram.com/reel/DeFM0m7SXCn/ |  | AD | 레이,리즈 | Valentino Antibiblioteca | album=Valentino",
+    "2026-10-04 | https://www.instagram.com/reel/DeFE-BTyuyt/ |  | AD | 레이,리즈 | Valentino Antibiblioteca | album=Valentino",
+    "2026-10-04 | https://x.com/lessencestudios/status/2106764287846834653 |  | AD | 레이,리즈 | Valentino Antibiblioteca | album=Valentino",
+    // Valentino Rockstud Salon
+    "2026-08-29 | https://www.instagram.com/reel/DcnoTNTuzLJ/ |  | AD | 레이,리즈 | Valentino Rockstud Salon | album=Valentino",
+    "2026-08-29 | https://www.instagram.com/reel/DcnsUzwylNc/ |  | AD | 레이,리즈 | Valentino Rockstud Salon | album=Valentino",
+    "2026-08-29 | https://www.instagram.com/reel/DcnveZCRNU_/ |  | AD | 레이,리즈 | Valentino Rockstud Salon | album=Valentino",
+    "2026-08-29 | https://www.instagram.com/reel/Dcnu8C9zoAT/ |  | AD | 레이,리즈 | Valentino Rockstud Salon | album=Valentino",
+    "2026-08-29 | https://www.instagram.com/reel/Dcny9JYSBtt/ |  | AD | 레이,리즈 | Valentino Rockstud Salon | album=Valentino",
+    "2026-08-29 | https://www.instagram.com/reel/DcnzYCZJ87Z/ |  | AD | 레이,리즈 | Valentino Rockstud Salon | album=Valentino",
+    "2026-08-29 | https://www.instagram.com/reel/Dcn4OANRqpL/ |  | AD | 레이,리즈 | Valentino Rockstud Salon | album=Valentino",
+    "2026-08-29 | https://www.instagram.com/reel/Dcn09LEymah/ |  | AD | 레이,리즈 | Valentino Rockstud Salon | album=Valentino",
+    "2026-08-29 | https://www.instagram.com/reel/DcoBhYHOWUX/ |  | AD | 레이,리즈 | Valentino Rockstud Salon | album=Valentino",
+    "2026-08-29 | https://www.instagram.com/reel/DcpWyBhTH-2/ |  | AD | 레이,리즈 | Valentino Rockstud Salon | album=Valentino",
+    // Valentino Fireflies
+    "2026-03-20 | https://www.instagram.com/reel/DWGNa9WkwfS/ |  | AD | 레이,리즈 | Valentino Fireflies | album=Valentino",
+    "2026-03-20 | https://www.instagram.com/reel/DWGMoBOkdbl/ |  | AD | 레이,리즈 | Valentino Fireflies | album=Valentino",
+    "2026-03-20 | https://www.instagram.com/reel/DWGIaimALI3/ |  | AD | 레이,리즈 | Valentino Fireflies | album=Valentino",
+    "2026-03-20 | https://www.instagram.com/reel/DWGI5f6AjYw/ |  | AD | 레이,리즈 | Valentino Fireflies | album=Valentino",
+    "2026-03-20 | https://www.instagram.com/reel/DWGIvg5k7L1/ |  | AD | 레이,리즈 | Valentino Fireflies | album=Valentino",
+    "2026-03-20 | https://www.instagram.com/reel/DWGIMpciY4U/ |  | AD | 레이,리즈 | Valentino Fireflies | album=Valentino",
+    "2026-03-20 | https://www.instagram.com/reel/DWGJLN0AD1K/ |  | AD | 레이,리즈 | Valentino Fireflies | album=Valentino",
+    "2026-03-20 | https://www.instagram.com/reel/DWGJH19k7pz/ |  | AD | 레이,리즈 | Valentino Fireflies | album=Valentino",
+    "2026-03-20 | https://www.instagram.com/reel/DWGJVm_vE_t/ |  | AD | 레이,리즈 | Valentino Fireflies | album=Valentino",
+    "2026-03-20 | https://www.instagram.com/reel/DWGJdJhk7F7/ |  | AD | 레이,리즈 | Valentino Fireflies | album=Valentino",
+    "2026-03-20 | https://www.instagram.com/reel/DWGJkqrE3gk/ |  | AD | 레이,리즈 | Valentino Fireflies | album=Valentino",
+    "2026-03-20 | https://www.instagram.com/reel/DWGJe88k6Qz/ |  | AD | 레이,리즈 | Valentino Fireflies | album=Valentino",
+    "2026-03-20 | https://www.instagram.com/reel/DWGJzwZE90V/ |  | AD | 레이,리즈 | Valentino Fireflies | album=Valentino",
+    "2026-03-20 | https://www.instagram.com/reel/DWGJ34QE3jD/ |  | AD | 레이,리즈 | Valentino Fireflies | album=Valentino",
+    "2026-03-20 | https://www.instagram.com/reel/DWGK2I1PjCo/ |  | AD | 레이,리즈 | Valentino Fireflies | album=Valentino",
+    "2026-03-20 | https://www.instagram.com/reel/DWGK4XPgeIl/ |  | AD | 레이,리즈 | Valentino Fireflies | album=Valentino",
+    "2026-03-20 | https://www.instagram.com/reel/DWGKzRCAdvx/ |  | AD | 레이,리즈 | Valentino Fireflies | album=Valentino",
+    "2026-03-20 | https://www.instagram.com/reel/DWGLZhNjwNy/ |  | AD | 레이,리즈 | Valentino Fireflies | album=Valentino",
+    "2026-03-20 | https://www.instagram.com/reel/DWGLPxFgeKS/ |  | AD | 레이,리즈 | Valentino Fireflies | album=Valentino",
+    "2026-03-20 | https://www.instagram.com/reel/DWGLx8vkp4F/ |  | AD | 레이,리즈 | Valentino Fireflies | album=Valentino",
+    "2026-03-20 | https://www.instagram.com/reel/DWGL9XUCVlt/ |  | AD | 레이,리즈 | Valentino Fireflies | album=Valentino",
+    "2026-03-20 | https://www.instagram.com/p/DWGL8tViRyR/ |  | AD | 레이,리즈 | Valentino Fireflies | album=Valentino",
+    "2026-03-20 | https://www.instagram.com/reel/DWGMBVakb4k/ |  | AD | 레이,리즈 | Valentino Fireflies | album=Valentino",
+    "2026-03-20 | https://www.instagram.com/p/DWGMD50Cf77/ |  | AD | 레이,리즈 | Valentino Fireflies | album=Valentino",
+    "2026-03-20 | https://www.instagram.com/reel/DWGL3tKk2bE/ |  | AD | 레이,리즈 | Valentino Fireflies | album=Valentino",
+    "2026-03-20 | https://www.instagram.com/reel/DWGJcO3CFaU/ |  | AD | 레이,리즈 | Valentino Fireflies | album=Valentino",
+    "2026-03-20 | https://www.instagram.com/reel/DWGMziXkY6_/ |  | AD | 레이,리즈 | Valentino Fireflies | album=Valentino",
+    "2026-03-20 | https://www.instagram.com/reel/DWGOP_SkUtV/ |  | AD | 레이,리즈 | Valentino Fireflies | album=Valentino",
+    "2026-03-20 | https://www.instagram.com/reel/DWGOOa0kroy/ |  | AD | 레이,리즈 | Valentino Fireflies | album=Valentino",
+    "2026-03-20 | https://www.instagram.com/reel/DWGOx1DEqDO/ |  | AD | 레이,리즈 | Valentino Fireflies | album=Valentino",
+    "2026-03-20 | https://www.instagram.com/reel/DWGPY0OkgNI/ |  | AD | 레이,리즈 | Valentino Fireflies | album=Valentino",
+    "2026-03-20 | https://www.instagram.com/reel/DWGPQ9wgWjR/ |  | AD | 레이,리즈 | Valentino Fireflies | album=Valentino",
+    "2026-03-20 | https://www.instagram.com/reel/DWGQFThAeHa/ |  | AD | 레이,리즈 | Valentino Fireflies | album=Valentino",
+    "2026-03-20 | https://www.instagram.com/reel/DWGQ1-ugbga/ |  | AD | 레이,리즈 | Valentino Fireflies | album=Valentino",
+    "2026-03-20 | https://www.instagram.com/reel/DWGSl4JAUui/ |  | AD | 레이,리즈 | Valentino Fireflies | album=Valentino",
+    "2026-03-20 | https://www.instagram.com/reel/DWGRAiLgDZ3/ |  | AD | 레이,리즈 | Valentino Fireflies | album=Valentino",
+    "2026-03-20 | https://www.instagram.com/reel/DWGSY99EpOO/ |  | AD | 레이,리즈 | Valentino Fireflies | album=Valentino",
+    "2026-03-20 | https://www.instagram.com/reel/DWGT1Z4Dpod/ |  | AD | 레이,리즈 | Valentino Fireflies | album=Valentino",
+    "2026-03-20 | https://www.instagram.com/reel/DWGZFbOBaQ2/ |  | AD | 레이,리즈 | Valentino Fireflies | album=Valentino",
+    // Valentino Specula Mundi
+    "2026-01-28 | https://www.instagram.com/p/DUDmSkID-HE/ |  | AD | 레이,리즈 | Valentino Specula Mundi | album=Valentino",
+    "2026-01-28 | https://www.instagram.com/p/DUGPXA3jSXT/ |  | AD | 레이,리즈 | Valentino Specula Mundi | album=Valentino",
+    "2026-01-28 | https://www.instagram.com/p/DUGa6b2Dddp/ |  | AD | 레이,리즈 | Valentino Specula Mundi | album=Valentino",
+    "2026-01-28 | https://www.instagram.com/p/DUDpKXIgVzG/ |  | AD | 레이,리즈 | Valentino Specula Mundi | album=Valentino",
+    "2026-01-28 | https://www.instagram.com/p/DUDoX6sDOIw/ |  | AD | 레이,리즈 | Valentino Specula Mundi | album=Valentino",
+    "2026-01-28 | https://www.instagram.com/p/DUDoLzuAacm/ |  | AD | 레이,리즈 | Valentino Specula Mundi | album=Valentino",
+    "2026-01-28 | https://www.instagram.com/p/DUDppwJDSXY/ |  | AD | 레이,리즈 | Valentino Specula Mundi | album=Valentino",
+    "2026-01-28 | https://www.instagram.com/p/DUDrCqwj_KZ/ |  | AD | 레이,리즈 | Valentino Specula Mundi | album=Valentino",
+    "2026-01-28 | https://www.instagram.com/p/DUDrZrVk9nk/ |  | AD | 레이,리즈 | Valentino Specula Mundi | album=Valentino",
+    "2026-01-28 | https://www.instagram.com/p/DUDsIgckcEt/ |  | AD | 레이,리즈 | Valentino Specula Mundi | album=Valentino",
+    "2026-01-28 | https://www.instagram.com/p/DUDt0g-Em8O/ |  | AD | 레이,리즈 | Valentino Specula Mundi | album=Valentino",
+    "2026-01-28 | https://www.instagram.com/p/DUDtrgAEowD/ |  | AD | 레이,리즈 | Valentino Specula Mundi | album=Valentino",
+    "2026-01-28 | https://www.instagram.com/p/DUDo8mDkjz0/ |  | AD | 레이,리즈 | Valentino Specula Mundi | album=Valentino",
+    "2026-01-28 | https://www.instagram.com/p/DUD5WiSDKus/ |  | AD | 레이,리즈 | Valentino Specula Mundi | album=Valentino",
+    "2026-01-28 | https://www.instagram.com/p/DUD9ro8DTBU/ |  | AD | 레이,리즈 | Valentino Specula Mundi | album=Valentino",
+    "2026-01-28 | https://www.instagram.com/p/DUFcmBTEtnu/ |  | AD | 레이,리즈 | Valentino Specula Mundi | album=Valentino",
+    "2026-01-28 | https://x.com/i/status/2016554725358158281 |  | AD | 레이,리즈 | Valentino Specula Mundi | album=Valentino",
+    "2026-01-28 | https://www.instagram.com/p/DUK9AcxCJLO/ |  | AD | 레이,리즈 | Valentino Specula Mundi | album=Valentino",
+    // Valentino Cruise
+    "2025-10-05 | https://www.instagram.com/p/DQwEjM_koLy/ |  | AD | 레이,리즈 | Valentino Cruise | album=Valentino | ratio=16:9",
+    "2025-10-05 | https://www.instagram.com/p/DQwEkE1kv7P/ |  | AD | 레이,리즈 | Valentino Cruise | album=Valentino | ratio=16:9",
+    // Valentino's 2025 Fall Collection Pop-up Store
+    "2025-06-20 | https://www.instagram.com/p/DLHiKN_JNoi/ |  | AD | 레이,리즈 | Valentino's 2025 Fall Collection Pop-up Store | album=Valentino",
+    "2025-06-20 | https://www.instagram.com/p/DLHiH17yD1C/ |  | AD | 레이,리즈 | Valentino's 2025 Fall Collection Pop-up Store | album=Valentino",
+    "2025-06-20 | https://www.instagram.com/p/DLHn4qWJsKE/ |  | AD | 레이,리즈 | Valentino's 2025 Fall Collection Pop-up Store | album=Valentino",
+    "2025-06-20 | https://www.instagram.com/p/DLHiUwEulSz/ |  | AD | 레이,리즈 | Valentino's 2025 Fall Collection Pop-up Store | album=Valentino",
+    "2025-06-20 | https://www.instagram.com/p/DLHj_zQzJJO/ |  | AD | 레이,리즈 | Valentino's 2025 Fall Collection Pop-up Store | album=Valentino",
+    "2025-06-20 | https://www.instagram.com/p/DLHqQBfJU8X/ |  | AD | 레이,리즈 | Valentino's 2025 Fall Collection Pop-up Store | album=Valentino",
+    "2025-06-20 | https://www.instagram.com/p/DLHpu9VvxLx/ |  | AD | 레이,리즈 | Valentino's 2025 Fall Collection Pop-up Store | album=Valentino",
+    "2025-06-20 | https://www.instagram.com/p/DLHoK5qx6-m/ |  | AD | 레이,리즈 | Valentino's 2025 Fall Collection Pop-up Store | album=Valentino",
+    "2025-06-20 | https://www.instagram.com/p/DLHq0BpTl-C/ |  | AD | 레이,리즈 | Valentino's 2025 Fall Collection Pop-up Store | album=Valentino",
+    "2025-06-20 | https://www.instagram.com/p/DLHvpQDJHId/ |  | AD | 레이,리즈 | Valentino's 2025 Fall Collection Pop-up Store | album=Valentino",
+    "2025-06-20 | https://www.instagram.com/p/DLHy8w3BKLv/ |  | AD | 레이,리즈 | Valentino's 2025 Fall Collection Pop-up Store | album=Valentino",
+    "2025-06-20 | https://www.instagram.com/p/DLH2PDLTb1V/ |  | AD | 레이,리즈 | Valentino's 2025 Fall Collection Pop-up Store | album=Valentino",
+    "2025-06-20 | https://pf.kakao.com/_jxcmWxb/109810997 |  | AD | 레이,리즈 | Valentino's 2025 Fall Collection Pop-up Store | album=Valentino",
+    // ---- AD · TONYMOLY (최신순) ----
+    "2026-10-02 | https://www.instagram.com/reel/Dd_FgdjAlJJ/ |  | AD | 리즈 | 가을 햇살처럼 사르르 녹아드는 리즈의 화보 촬영장 비하인드 털이 | album=TONYMOLY",
+    "2026-09-15 | https://x.com/i/status/2099786624263438503 |  | AD | 리즈 | 리즈 얼굴이 너무 달콤해서 버터 틴트 바르기도 전에 녹아내리는 중..🫠 | album=TONYMOLY",
+    "2026-09-11 | https://www.instagram.com/p/DdJCkqXE6Il/ |  | AD | 리즈 | 리즈 마음에 쏙 든 토니모리 버터 쿠키 에디션 컬러는? | album=TONYMOLY",
+    "2026-09-09 | https://x.com/i/status/2097542513074512267 |  | AD | 리즈 | 담당자 갤러리 꽉 찰 때까지 찍게 만든 현장 비하인드 컷 📸 | album=TONYMOLY",
+    "2026-09-01 | https://x.com/i/status/2094689131066765721 |  | AD | 리즈 | 9월을 리즈로 시작하는 삶? 진짜 축복 그 자체잖아...♡ | album=TONYMOLY",
+    "2026-08-28 | https://x.com/i/status/2093239156998885431 |  | AD | 리즈 | 로판 황녀st 화이트 리즈 기다리신 분 | album=TONYMOLY",
+    "2026-07-28 | https://x.com/i/status/2081958790216527975 |  | AD | 리즈 | 블랙냥 아 아니 팀장님..🐈‍⬛️ | album=TONYMOLY",
+    "2026-07-22 | https://x.com/i/status/2079808499769594207 |  | AD | 리즈 | 언커먼 팩토리 in 성수에 천사 강림🪽 | album=TONYMOLY",
+    "2026-06-15 | https://x.com/i/status/2066384419770999179 |  | AD | 리즈 | 토니모리랑 너무 잘 어울리는 이 여짜 | album=TONYMOLY",
+    "2026-06-01 | https://x.com/i/status/2061266482668224797 |  | AD | 리즈 | 리즈 얼빡 너무 아름다워서 숨참음🫣 | album=TONYMOLY",
+    "2026-05-29 | https://x.com/i/status/2060186868822544786 |  | AD | 리즈 | 여름인데? 더운데? 화사해야죠🏵️ 알로하 선셋 에디션 예쁜거 다들 알았으면 조켄네 | album=TONYMOLY",
+    "2026-05-29 | https://www.instagram.com/p/DY6sPhDGqt1/ |  | AD | 리즈 | 🌴𝑨𝑳𝑶𝑯𝑨 𝑺𝑼𝑵𝑺𝑬𝑻 𝑬𝑫𝑰𝑻𝑰𝑶𝑵🍹 | album=TONYMOLY",
+    "2026-04-15 | https://www.instagram.com/reel/DXJYbFMAQSo/ |  | AD | 리즈 | 시크한 고양이상 비주얼 뒤에 숨겨진 리즈의 장난기 가득한 셀카 모먼트 | album=TONYMOLY",
+    "2026-04-03 | https://x.com/i/status/2039976163360305278 |  | AD | 리즈 | 리즈의 순간들.. 풀어버림! 촬영 내내 심쿵만 했어요ㅠ.ㅠ 토니모리즈 최고야°• ♥︎ •° | album=TONYMOLY",
+    "2026-03-30 | https://www.instagram.com/reel/DWgMJ62Ach9/ |  | AD | 리즈 | 리즈의 맑고 깨끗한 피부 표현 촉촉하게 차오르는 수분감으로 맑고 투명한 피부를 완성해주는 #모찌토너 | album=TONYMOLY",
+    "2026-03-19 | https://x.com/i/status/2034535781793239123 |  | AD | 리즈 | 토니모리X리즈 미공개 화보컷 | album=TONYMOLY",
+    "2026-03-17 | https://www.instagram.com/reel/DV-s4CJgTJo/ |  | AD | 리즈 | 토니모리의 새로운 뮤즈, 리즈가 전하는 첫 번째 메시지 💌 | album=TONYMOLY",
+    "2026-03-10 | https://www.instagram.com/reel/DVsrX-agWNy/ |  | AD | 리즈 | 리즈의 시선이 머무는 곳마다 투명하게 차오르는 맑립광✨️ | album=TONYMOLY",
+    "2026-02-26 | https://www.instagram.com/reel/DVNB89Ogdw3/ |  | AD | 리즈 | 토니모리의 새로운 얼굴, 리즈. | album=TONYMOLY",
+    "2026-02-25 | https://www.instagram.com/reel/DVLNB9sAX6r/ |  | AD | 리즈 | 단순한 뮤즈가 아닌 새로운 애티튜드, 새로운 방향. 다음 20년의 시작. Uncommon한 새로운 뮤즈 | album=TONYMOLY",
+    "2026-02-24 | https://x.com/i/status/2026222251994181842 |  | AD | 리즈 | 토니모리와 함께할 NEW 모델…🐈 02.26 COMING SOON | album=TONYMOLY",
+    // ---- AD · 8seconds (최신순) ----
+    "2025-11-12 | https://www.instagram.com/p/DQ7-ovck-1v/ |  | AD | 리즈 | Frozen Grace with LIZ | album=8seconds",
+    "2025-11-12 | https://www.instagram.com/p/DQ7-yTOE46z/ |  | AD | 리즈 | Frozen Grace with LIZ | album=8seconds",
+    "2025-11-12 | https://www.instagram.com/p/DQ7-3YrEw3Y/ |  | AD | 리즈 | Frozen Grace with LIZ | album=8seconds",
+    "2025-11-12 | https://www.instagram.com/p/DQ7--Akk30B/ |  | AD | 리즈 | Frozen Grace with LIZ | album=8seconds",
+    "2025-11-12 | https://www.instagram.com/p/DQ7_C-lE_M6/ |  | AD | 리즈 | Frozen Grace with LIZ | album=8seconds",
+    "2025-11-12 | https://www.instagram.com/p/DQ7_KONkxAX/ |  | AD | 리즈 | Frozen Grace with LIZ | album=8seconds",
+    "2025-10-14 | https://www.instagram.com/p/DPxTmrDE3nM/ |  | AD | 리즈 | Beyond The Rebels with LIZ | album=8seconds",
+    "2025-10-14 | https://www.instagram.com/p/DPxTtYHE6c_/ |  | AD | 리즈 | Beyond The Rebels with LIZ | album=8seconds",
+    "2025-10-14 | https://www.instagram.com/p/DPxTyOLk5tx/ |  | AD | 리즈 | Beyond The Rebels with LIZ | album=8seconds",
+    "2025-10-14 | https://www.instagram.com/p/DPxT362k4So/ |  | AD | 리즈 | Beyond The Rebels with LIZ | album=8seconds",
+    "2025-09-17 | https://www.instagram.com/p/DOryMDKk6gN/ |  | AD | 리즈 | 8seconds X MINJUKIM with LIZ | album=8seconds",
+    "2025-09-17 | https://www.instagram.com/p/DOryZhVE84S/ |  | AD | 리즈 | 8seconds X MINJUKIM with LIZ | album=8seconds",
+    "2025-09-17 | https://www.instagram.com/p/DOry5ZmEwvJ/ |  | AD | 리즈 | 8seconds X MINJUKIM with LIZ | album=8seconds",
+    "2025-09-17 | https://www.instagram.com/p/DOrzNZfE4B_/ |  | AD | 리즈 | 8seconds X MINJUKIM with LIZ | album=8seconds",
+    // ---- AD · S.NATURE ----
+    "2025-10-09 | https://www.instagram.com/p/DPlfTUCiQNa/ |  | AD | 리즈 | 에스네이처의 NEW MUSE, 아이브 리즈 | album=S.NATURE",
+    // ---- MAGAZINE · TV · AD(TONYMOLY) 추가분 ----
+    "2026-07-26 | https://www.instagram.com/reel/DbPKbTrB7gG/ |  | AD | 리즈 | 20주년 팝업에 나타난 깜짝 손님 토니모리의 뮤즈, 리즈 | album=TONYMOLY",
+    "2022-04-25 | https://www.wkorea.com/2022/04/25/%EB%8D%94-%EB%B9%A0%EC%A0%B8-%EA%B9%8A%EC%9D%B4-%EC%95%84%EC%9D%B4%EB%B8%8C/ |  | MAGAZINE | 가을,레이,리즈 | 더 빠져 깊이, 아이브 | album=W Korea",
+    "2025-12-14 | https://www.lofficielsingapore.com/jewellery/cover-story-ive-s-liz-talks-world-tour-song-writing-and-what-s-next |  | MAGAZINE | 리즈 | IVE's LIZ Talks WORLD TOUR, Song Writing, and What's Next | album=L'OFFICIEL",
+    "2025-12-16 | https://www.instagram.com/p/DSUt1QFk_a3/ |  | MAGAZINE | 리즈 | L'OFFICIEL SINGAPORE Dec/Jan cover star, IVE's LIZ | album=L'OFFICIEL",
+    "2025-12-13 | https://www.instagram.com/p/DSM-9XfE85D/ |  | MAGAZINE | 리즈 | L'OFFICIEL SINGAPORE Dec/Jan cover star, IVE's LIZ | album=L'OFFICIEL",
+    "2025-12-11 | https://www.instagram.com/p/DSH1WbKEzq1/ |  | MAGAZINE | 리즈 | L'OFFICIEL SINGAPORE Dec/Jan cover star, IVE's LIZ | album=L'OFFICIEL",
+    "2025-10-24 | https://www.instagram.com/reel/DQLRarfE1jp/ |  | MAGAZINE | 리즈 | 붉은 실로 이어진 인연이 궁금한 아이브 리즈. 얀시 화이트, 마일리 그레이, 마고 메리제인 레드 등 많은 비바이아 슈즈 중에서 리즈는 어떤 신발을 선택할까요? 아이브 리즈와 비바이아의 <COSMOPOLITAN> 11월 디지털 커버와 화보, 무빙 커버는 오늘 밤 공개됩니다!💘 | album=COSMOPOLITAN",
+    "2025-10-24 | https://www.instagram.com/p/DQMBdVPE6PY/ |  | MAGAZINE | 리즈 | 꿈과 현실의 경계에서, 누군가를 기다리는 아이브 리즈. 비바이아의 마고 메리제인 레드와 함께한 리즈는 기다리던 사람을 만날 수 있을까요? 코스모폴리탄 11월호 디지털 커버, 무빙 커버, 화보를 이어 곧 공개될 패션필름과 유튜브도 기대해 주세요! | album=COSMOPOLITAN",
+    "2025-10-24 | https://www.instagram.com/p/DQMATRyE0BL/ |  | MAGAZINE | 리즈 | 발끝까지 스타일리시한 아이브 리즈와 비바이아가 함께한 <코스모폴리탄> 디커버를 공개합니다. 지구를 생각 하는 친환경 슈즈 브랜드 비바이아, 완벽한 스타일을 소회하는 리즈. 이보다 더 리즈너블 할 수 있을까요? | album=COSMOPOLITAN",
+    "2025-10-24 | https://www.instagram.com/p/DQMA2AAE8OH/ |  | MAGAZINE | 리즈 | 발끝까지 스타일리시한 아이브 리즈와 비바이아가 함께한 <코스모폴리탄> 디커버를 공개합니다. 지구를 생각 하는 친환경 슈즈 브랜드 비바이아, 완벽한 스타일을 소회하는 리즈. 이보다 더 리즈너블 할 수 있을까요? | album=COSMOPOLITAN",
+    "2025-10-24 | https://www.instagram.com/p/DQMBeoPk9Je/ |  | MAGAZINE | 리즈 | 발끝까지 스타일리시한 아이브 리즈와 비바이아가 함께한 <코스모폴리탄> 디커버를 공개합니다. 지구를 생각 하는 친환경 슈즈 브랜드 비바이아, 완벽한 스타일을 소회하는 리즈. 이보다 더 리즈너블 할 수 있을까요? | album=COSMOPOLITAN",
+    "2025-10-25 | https://x.com/vivaia_official/status/1981743836859666686 |  | MAGAZINE | 리즈 | VIVAIA partners with IVE's Liz, who shines as our \"Dream Girl\" on the cover of Cosmopolitan Korea's November digital issue. | album=COSMOPOLITAN",
+    "2025-10-25 | https://x.com/vivaia_official/status/1981745133868454180 |  | MAGAZINE | 리즈 | The dreamy narrative continues. In another set of visuals for Cosmopolitan Korea's November digital issue, Liz showcases more possibilities from the VIVAIA autumn collection. | album=COSMOPOLITAN",
+    "2025-10-29 | https://www.instagram.com/p/DQYJUnSD7Mu/ |  | MAGAZINE | 리즈 | 비바이아의 마고 메리제인 레드를 신고 잠에 든 아이브 리즈. 마일리 그레이, 루시아나 브라운, 얀시 화이트 그리고 테리 부츠까지👟 꿈 속에서 누군가를 기다리는 동안, 리즈는 비바이아 슈즈와 함께 시간을 보냈습니다. 기다리던 사람이 온 순간, 알람이 울리며 꿈에서 깬 리즈. 이 모든 게 정말 꿈이었을까요?..❤️ | album=COSMOPOLITAN",
+    "2026-02-25 | https://www.cosmopolitan.co.kr/article/1897748 |  | MAGAZINE | 리즈 | 아이브 리즈 \"초심을 잃지 않으려 해요\" 진심을 담은 고백 | album=COSMOPOLITAN",
+    "2025-02-03 | https://deep.wavve.com/content/J3801_J38000000014?contentType=vod&audiomode=n | https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgJTTgoMpq7yN9KOD2uBhBo3CutTdCg0B6Z9f0ZHexAl5pol2QSUL61Wb-uHY47Ubd51_9mXnWQuhz-dhBueBG7jdlLY4ndmni8gzNp_3NhNlMd-rQH0uwUA4RR_N_AkaxR37CXChGhX3_bflVyh-S_8SgipS68COkhuHcZwxFRXQi43tOxGNRQufiCAkg/s1920/최강야구.jpg | TV | 안유진,리즈 | 최강야구 117회",
+    "2024-03-28 | https://www.lofficielkorea.com/people/i-am-who-i-am-rijeu-gaeul |  | MAGAZINE | 가을,리즈 | DREAMS COME TRUE (Gaeul & Liz) | album=L'OFFICIEL",
+    "2023-06-26 | https://www.harpersbazaar.co.kr/article/78619 |  | MAGAZINE | 리즈 | 스무 살, 리즈 | album=Harper's BAZAAR",
+    "2022-12-09 | https://m.singleskorea.com/star/2022/12/715143 |  | MAGAZINE | 리즈 | 아이브 리즈의 기분 좋은 꿈 | album=Singles",
+    "2022-02-14 | https://www.elle.co.kr/article/63807 |  | MAGAZINE | 리즈 | 올리브영 비건뷰티 캠페인 뮤즈 #민혁 #주헌 #리즈 와의 만남! | album=ELLE",
+    // ---- AD · Matin Kim (최신순) ----
+    "2026-05-07 | https://www.instagram.com/reel/DYCBmwszhDB |  | AD |  | Shh...ASMR with LIZ | album=Matin Kim",
+    "2026-04-28 | https://www.instagram.com/reel/DXqGYVVztkm/ |  | AD |  | ✌🏻M.A.T.I.N.K.I.M✌🏻 Initial Game with LIZ | album=Matin Kim",
+    "2026-04-03 | https://www.instagram.com/p/DWqehJxTLOU/ |  | AD |  | Q&A with LIZ | album=Matin Kim",
+    "2026-03-25 | https://www.instagram.com/p/DWSjUVNEkoB/ |  | AD |  | Matin Kim 26 Summer Collection 1st Drop with @liz.yeyo | album=Matin Kim",
+    "2026-03-25 | https://m.matinkim.com/collection-view.html?product_no=9065&cate_no=68&display_group=1 |  | AD |  | Matin Kim 26 Summer 'HOUSE, HAUS!' | album=Matin Kim",
+    "2026-03-03 | https://www.instagram.com/reel/DVZ56FxE9nj/ |  | AD |  | 좋아하면 눈 뜨기👀🤍 | album=Matin Kim",
+    "2026-02-26 | https://www.instagram.com/p/DVNx-HUktPv/ |  | AD |  | Matin Kim 26 Spring Collection with LIZ ‘My Bucket List’ | album=Matin Kim",
+    "2026-02-25 | https://www.instagram.com/p/DVKIgRokktR/ |  | AD |  | Matin Kim X LIZ | album=Matin Kim",
+    "2026-02-25 | https://m.matinkim.com/collection-view.html?product_no=8993 |  | AD |  | Matin Kim x LIZ 'BUCKET LIST' | album=Matin Kim",
+    "2026-07-19 | https://www.instagram.com/reel/Da9I2uDPk3S/ |  | AD |  | TONYMOLY UNCOMMON FACTORY | album=TONYMOLY",
+    "2026-07-19 | https://www.instagram.com/reel/Da9MEBUh9U6/ |  | AD |  | TONYMOLY UNCOMMON FACTORY | album=TONYMOLY",
+    "2026-07-19 | https://www.instagram.com/reel/Da9KwS3vzFp/ |  | AD |  | TONYMOLY UNCOMMON FACTORY | album=TONYMOLY",
+    "2026-07-19 | https://www.instagram.com/reel/Da9MX0mKqhB/ |  | AD |  | TONYMOLY UNCOMMON FACTORY | album=TONYMOLY",
+    "2026-07-19 | https://www.instagram.com/reel/Da9MdFCznAL/ |  | AD |  | TONYMOLY UNCOMMON FACTORY | album=TONYMOLY",
+    "2026-07-19 | https://www.instagram.com/reel/Da9OTklpWWU/ |  | AD |  | TONYMOLY UNCOMMON FACTORY | album=TONYMOLY",
+    "2026-07-19 | https://www.instagram.com/reel/Da9OlqDzEqt/ |  | AD |  | TONYMOLY UNCOMMON FACTORY | album=TONYMOLY",
+    "2026-07-19 | https://www.instagram.com/reel/Da9O1TaTI3T/ |  | AD |  | TONYMOLY UNCOMMON FACTORY | album=TONYMOLY",
+    "2026-07-19 | https://www.instagram.com/reel/Da9PnIIB2hW/ |  | AD |  | TONYMOLY UNCOMMON FACTORY | album=TONYMOLY",
+    "2026-07-19 | https://www.instagram.com/reel/Da9PcaaTzve/ |  | AD |  | TONYMOLY UNCOMMON FACTORY | album=TONYMOLY",
+    "2026-07-19 | https://www.instagram.com/reel/Da9TAychia-/ |  | AD |  | TONYMOLY UNCOMMON FACTORY | album=TONYMOLY",
+    "2026-07-19 | https://www.instagram.com/reel/Da9U-7DhV5x/ |  | AD |  | TONYMOLY UNCOMMON FACTORY | album=TONYMOLY",
+    "2026-07-19 | https://www.instagram.com/reel/Da9XYGTh-et/ |  | AD |  | TONYMOLY UNCOMMON FACTORY | album=TONYMOLY",
+    "2026-07-19 | https://www.instagram.com/reel/Da9cjW3RSt2/ |  | AD |  | TONYMOLY UNCOMMON FACTORY | album=TONYMOLY",
+    "2026-07-19 | https://www.instagram.com/reel/Da9eyxFJpV8/ |  | AD |  | TONYMOLY UNCOMMON FACTORY | album=TONYMOLY",
+    "2026-07-19 | https://www.instagram.com/reel/Da9fZZ1z4he/ |  | AD |  | TONYMOLY UNCOMMON FACTORY | album=TONYMOLY",
+    "2026-07-19 | https://www.instagram.com/reel/Da9ovbFhHVH/ |  | AD |  | TONYMOLY UNCOMMON FACTORY | album=TONYMOLY",
+    "2026-07-19 | https://www.instagram.com/reel/Da9qKhPBoLT/ |  | AD |  | TONYMOLY UNCOMMON FACTORY | album=TONYMOLY",
+    "2026-05-07 | https://www.instagram.com/reel/DYBoLVlSQ28/ |  | POP-UP |  | The House of Court | album=K-SWISS",
+    "2026-05-07 | https://www.instagram.com/reel/DYBsKjFzg7Z/ |  | POP-UP |  | The House of Court | album=K-SWISS",
+    "2026-05-07 | https://www.instagram.com/reel/DYBsMuVJ1dm/ |  | POP-UP |  | The House of Court | album=K-SWISS",
+    "2026-05-07 | https://www.instagram.com/reel/DYBtxUgzBrf/ |  | POP-UP |  | The House of Court | album=K-SWISS",
+    "2026-05-07 | https://www.instagram.com/reel/DYBv-YxRL4P/ |  | POP-UP |  | The House of Court | album=K-SWISS",
+    "2026-05-07 | https://www.instagram.com/reel/DYB2mf-zzGe/ |  | POP-UP |  | The House of Court | album=K-SWISS",
+    "2026-05-07 | https://www.instagram.com/reel/DYED_s4zRu_/ |  | POP-UP |  | The House of Court | album=K-SWISS",
+    "2026-05-07 | https://www.instagram.com/reel/DYEK35rSmDH/ |  | POP-UP |  | The House of Court | album=K-SWISS",
+    "2026-05-07 | https://www.instagram.com/reel/DYD9eIlIHuH/ |  | POP-UP |  | The House of Court | album=K-SWISS",
+    "2026-05-07 | https://www.instagram.com/reel/DYD7_Reh6qf/ |  | POP-UP |  | The House of Court | album=K-SWISS",
+    "2026-05-07 | https://www.instagram.com/reel/DYHR-JfJ3Mv/ |  | POP-UP |  | The House of Court | album=K-SWISS",
+    "2025-12-04 | https://www.instagram.com/p/DR1mVESkwR_/ |  | POP-UP |  | THE PIONEERING JOURNEY | album=CANADA GOOSE",
+    "2025-12-04 | https://www.instagram.com/p/DR3jC8qEtGH/ |  | POP-UP |  | THE PIONEERING JOURNEY | album=CANADA GOOSE",
+    "2025-12-04 | https://www.instagram.com/p/DR3mZq_kpPZ/ |  | POP-UP |  | THE PIONEERING JOURNEY | album=CANADA GOOSE",
+    "2025-12-04 | https://www.instagram.com/p/DR1oSCNE4zK/ |  | POP-UP |  | THE PIONEERING JOURNEY | album=CANADA GOOSE",
+    "2025-12-04 | https://www.instagram.com/p/DR1lSNVCerg/ |  | POP-UP |  | THE PIONEERING JOURNEY | album=CANADA GOOSE",
+    "2025-12-04 | https://www.instagram.com/p/DR1ivwoE7Cv/ |  | POP-UP |  | THE PIONEERING JOURNEY | album=CANADA GOOSE",
+    "2025-12-04 | https://www.instagram.com/p/DR1qA7vk7Sm/ |  | POP-UP |  | THE PIONEERING JOURNEY | album=CANADA GOOSE",
+    "2025-12-04 | https://www.instagram.com/p/DR1zjikExIU/ |  | POP-UP |  | THE PIONEERING JOURNEY | album=CANADA GOOSE",
+    "2025-12-04 | https://www.instagram.com/p/DR1tWeSEych/ |  | POP-UP |  | THE PIONEERING JOURNEY | album=CANADA GOOSE",
+    "2025-12-04 | https://www.instagram.com/p/DR1tUNYkpGl/ |  | POP-UP |  | THE PIONEERING JOURNEY | album=CANADA GOOSE",
+    "2025-12-04 | https://www.instagram.com/p/DR1r5Ayk8Nk/ |  | POP-UP |  | THE PIONEERING JOURNEY | album=CANADA GOOSE",
+    "2025-12-04 | https://www.instagram.com/p/DR1qe27El5n/ |  | POP-UP |  | THE PIONEERING JOURNEY | album=CANADA GOOSE",
+    "2025-12-04 | https://www.instagram.com/p/DR1nrpZiQi_/ |  | POP-UP |  | THE PIONEERING JOURNEY | album=CANADA GOOSE",
+    "2025-12-04 | https://www.instagram.com/p/DR1nEfLka1t/ |  | POP-UP |  | THE PIONEERING JOURNEY | album=CANADA GOOSE",
+    "2025-02-21 | https://www.instagram.com/p/DGURhT3yu_z/ |  | POP-UP | 리즈,이서 | Coach Spring Tabby Shop | album=COACH",
+    "2025-02-21 | https://www.instagram.com/p/DGUQubFTkvU/ |  | POP-UP | 리즈,이서 | Coach Spring Tabby Shop | album=COACH",
+    "2025-02-21 | https://www.instagram.com/p/DGUPprDTCAk/ |  | POP-UP | 리즈,이서 | Coach Spring Tabby Shop | album=COACH",
+    "2025-02-21 | https://www.instagram.com/p/DGUZrbsS0e5/ |  | POP-UP | 리즈,이서 | Coach Spring Tabby Shop | album=COACH",
+    "2025-02-21 | https://www.instagram.com/p/DGUWrPkSGHv/ |  | POP-UP | 리즈,이서 | Coach Spring Tabby Shop | album=COACH",
+    "2025-02-21 | https://www.instagram.com/p/DGVGTohhvCk/ |  | POP-UP | 리즈,이서 | Coach Spring Tabby Shop | album=COACH",
+    "2025-02-21 | https://www.instagram.com/p/DGVQZFaTmub/ |  | POP-UP | 리즈,이서 | Coach Spring Tabby Shop | album=COACH",
+    "2025-02-21 | https://www.instagram.com/p/DGVLDTHyUVo/ |  | POP-UP | 리즈,이서 | Coach Spring Tabby Shop | album=COACH",
+    "2025-02-21 | https://www.instagram.com/p/DGU1336yJeZ/ |  | POP-UP | 리즈,이서 | Coach Spring Tabby Shop | album=COACH",
+    "2025-02-20 | https://www.instagram.com/p/DGR44ISvBoj/ |  | POP-UP | 레이,리즈 | Longines Boutique Reopening Photocall | album=LONGINES",
+    "2025-02-20 | https://www.instagram.com/p/DGR2-3Bpj32/ |  | POP-UP | 레이,리즈 | Longines Boutique Reopening Photocall | album=LONGINES",
+    "2025-02-20 | https://www.instagram.com/p/DGRzhhmyAPR/ |  | POP-UP | 레이,리즈 | Longines Boutique Reopening Photocall | album=LONGINES",
+    "2025-02-20 | https://www.instagram.com/p/DGRzRvITBVC/ |  | POP-UP | 레이,리즈 | Longines Boutique Reopening Photocall | album=LONGINES",
+    "2025-02-20 | https://www.instagram.com/p/DGR9WoeJqA-/ |  | POP-UP | 레이,리즈 | Longines Boutique Reopening Photocall | album=LONGINES",
+    "2025-02-20 | https://x.com/marieclairekr/status/1892441694853091604 |  | POP-UP | 레이,리즈 | Longines Boutique Reopening Photocall | album=LONGINES",
+    "2024-11-02 | https://www.instagram.com/p/DB0CRjESE5b/ |  | POP-UP |  | MLB Flagship Store | album=MLB Korea",
+    "2024-11-02 | https://www.instagram.com/p/DB1GH61Suw1/ |  | POP-UP |  | MLB Flagship Store | album=MLB Korea",
+    "2024-11-02 | https://www.instagram.com/p/DB8aoS4pybA/ |  | POP-UP |  | MLB Flagship Store | album=MLB Korea",
+    "2024-08-14 | https://www.instagram.com/p/C-obWAaBeb3/ |  | POP-UP | 레이,리즈 | Longines Conquest 70th Anniversary Pop-up Store | album=LONGINES",
+    "2024-08-14 | https://www.instagram.com/p/C-oZ1aIgC0X/ |  | POP-UP | 레이,리즈 | Longines Conquest 70th Anniversary Pop-up Store | album=LONGINES",
+    "2024-08-14 | https://www.instagram.com/p/C-olmL6yjUn/ |  | POP-UP | 레이,리즈 | Longines Conquest 70th Anniversary Pop-up Store | album=LONGINES",
+    "2024-08-14 | https://www.instagram.com/p/C_AaiddyiOM/ |  | POP-UP | 레이,리즈 | Longines Conquest 70th Anniversary Pop-up Store | album=LONGINES",
+    "2024-09-26 | https://www.instagram.com/p/DAYJ7ROvYFk/ |  | POP-UP | 가을,리즈 | ENERGY BY LONGCHAMP | album=LONGCHAMP",
+    "2024-09-26 | https://www.instagram.com/p/DAYcUQAywrZ/ |  | POP-UP | 가을,리즈 | ENERGY BY LONGCHAMP | album=LONGCHAMP",
+    "2024-09-26 | https://www.instagram.com/p/DAYZAAchAe1/ |  | POP-UP | 가을,리즈 | ENERGY BY LONGCHAMP | album=LONGCHAMP",
+    "2024-09-26 | https://www.instagram.com/p/DAYGgn9Ppc_/ |  | POP-UP | 가을,리즈 | ENERGY BY LONGCHAMP | album=LONGCHAMP",
+    "2024-09-26 | https://www.instagram.com/p/DAYaETOy_2x/ |  | POP-UP | 가을,리즈 | ENERGY BY LONGCHAMP | album=LONGCHAMP",
+    "2024-09-26 | https://www.instagram.com/p/DAYc_lfSvc-/ |  | POP-UP | 가을,리즈 | ENERGY BY LONGCHAMP | album=LONGCHAMP",
+    "2024-09-26 | https://www.instagram.com/p/DAYgLcoPSn1/ |  | POP-UP | 가을,리즈 | ENERGY BY LONGCHAMP | album=LONGCHAMP",
+    "2024-09-26 | https://www.instagram.com/p/DAYcG7sy532/ |  | POP-UP | 가을,리즈 | ENERGY BY LONGCHAMP | album=LONGCHAMP",
+    "2024-09-26 | https://www.instagram.com/p/DAacIQLhOSh/ |  | POP-UP | 가을,리즈 | ENERGY BY LONGCHAMP | album=LONGCHAMP",
+    "2024-09-26 | https://www.instagram.com/p/DAaLa1BSO1q/ |  | POP-UP | 가을,리즈 | ENERGY BY LONGCHAMP | album=LONGCHAMP",
+    "2024-09-26 | https://www.instagram.com/p/DAaOPl8pjJT/ |  | POP-UP | 가을,리즈 | ENERGY BY LONGCHAMP | album=LONGCHAMP",
+    "2024-09-26 | https://www.instagram.com/p/DAah9tQp3O1/ |  | POP-UP | 가을,리즈 | ENERGY BY LONGCHAMP | album=LONGCHAMP",
+    "2024-09-26 | https://www.instagram.com/p/DAna6lDP_pB/ |  | POP-UP | 가을,리즈 | ENERGY BY LONGCHAMP | album=LONGCHAMP",
+    "2024-09-26 | https://www.instagram.com/p/DAnMDSWyhlS/ |  | POP-UP | 가을,리즈 | ENERGY BY LONGCHAMP | album=LONGCHAMP",
+    "2024-09-24 | https://www.instagram.com/p/DAUv961iXdM/ |  | POP-UP |  | LUV yourself | album=LUV·MITCH",
+    "2024-09-24 | https://www.instagram.com/p/DAUvdOxSSZr/ |  | POP-UP |  | LUV yourself | album=LUV·MITCH",
+    "2024-09-24 | https://www.instagram.com/p/DAVQQNlvDWK/ |  | POP-UP |  | LUV yourself | album=LUV·MITCH",
+    "2024-09-24 | https://www.instagram.com/p/DASgFEepdWZ/ |  | POP-UP |  | LUV yourself | album=LUV·MITCH",
+    "2024-09-24 | https://www.instagram.com/p/DAXSmhzzpPT/ |  | POP-UP |  | LUV yourself | album=LUV·MITCH",
+    "2024-04-05 | https://www.instagram.com/reel/C5X4sNNPw7X/ |  | POP-UP |  | FIND YOUR COURAGE | album=COACH",
+    "2024-04-05 | https://www.instagram.com/reel/C5ZcC3SSJH9/ |  | POP-UP |  | FIND YOUR COURAGE | album=COACH",
+    "2024-04-05 | https://www.instagram.com/reel/C5X4vwcSkHJ/ |  | POP-UP |  | FIND YOUR COURAGE | album=COACH",
+    "2024-04-05 | https://www.instagram.com/reel/C5YL68_sqr3/ |  | POP-UP |  | FIND YOUR COURAGE | album=COACH",
+    "2024-04-05 | https://www.instagram.com/reel/C5Z4fYPBRsR/ |  | POP-UP |  | FIND YOUR COURAGE | album=COACH",
+    "2023-12-24 | https://x.com/IVE_twt/status/1738801680576393724 |  | COVER |  | 미리 크리스마스 선물  🎁💝",
+    "2023-09-29 | https://m.cafe.daum.net/IVEstarship/Y1rb/30?svc=cafeapp |  | COVER |  | 후라이는 반숙이지 😉",
+    "2023-07-07 | https://m.cafe.daum.net/IVEstarship/Y1rb/24?svc=cafeapp |  | COVER |  | 백예린 - 물고기🐟 (Covered by IVE LIZ)",
+    "2026-03-01 | https://www.wavve.com/player/stream/vod?contentid=K02_PS-2026030738-01-000.1 | https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiBDXKuWddwAlcxmEC5Qe8BiErzJiSZW4-sPOIdZo7SSUbBymP1GE5M6NSbAsPM7wd0UmShQJWp235AXvFkOTpky6mkqXfoICh3MKyg7sVpdWzVmiVSvB80ZbmR26fCLxSU5h5k-JzxmmUF9wDsDTdXBJdDMZRC2ONUkrJZxdbP3nNV-m8czcspkJ6qaec/s1920/사당귀2.jpg | TV | 리즈 | 사장님 귀는 당나귀 귀 346회",
+    "2026-02-22 | https://www.wavve.com/player/stream/vod?contentid=K02_PS-2026021035-01-000.1 | https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg9gsHVPbNOqPQ5dQHsiDVx3M8rJ127-iulEUzx0Aylggvppb1R_b0ozAJSsU-KrH10ux8zu5pwrYmBHK28SA8PJU1FmoM3CeDdelHzgM0hP1eMeamFaNMuUVOBA8hcM6hh-kyogEDULgzv3RSMOLp3ouwHD1S1UONKqV6zF3owZry1Qr5C7rXWENukwn8/s1920/사당귀1.jpg | TV | 리즈 | 사장님 귀는 당나귀 귀 345회",
+    "2025-07-26 | https://www.wavve.com/player/stream/vod?contentid=M_EP202507172352.1 | https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg79-9uK3lh43KtyYhddWzWO77SxumiO5g4uyUvvy45CgoYEU5Id0PNA7tnylmLI6075H8aiMIJ8Vj9nJUGGv36WEn2peiqSWbNyYOocTBhypuVSqC7m5q01OXKTzfrPuPV6VUkyu04QhtosqHRILynsiVxwtU6YD21lAMCtB80vlqUmyvEu-BbffADX-o/s1920/놀면뭐하니1.jpg | TV | 리즈 | 놀면 뭐하니? 290회",
+    "2025-08-23 | https://www.wavve.com/player/stream/vod?contentid=M_EP202508142639.1 | https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgpfzyeZS9jfPQqgW95M80Ca8JXPJOHveEOf3d8e-_uIfCuOvWFTzMxuFWCV-hCm___T1ER8_PUSb9eXD5CPVl_a6teg2fFAAArgQKtkpKWiSPElvvPc9IF_aalAmThk-qVxYo2eWVHMZMVGkJqAVgHTEoD-bROXJZqhXfWfKiEmR_FacGVnzFNmyVBIro/s1920/놀면뭐하니2.jpg | TV | 리즈 | 놀면 뭐하니? 294회",
+    "2025-08-30 | https://www.wavve.com/player/stream/vod?contentid=M_EP202508212712.1 | https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgiEXfJotHSVjqPpZj6Jeald6rJw2S6N0yaJcVeipmnmP_PFhmRSJIWdVz8MaDdFJQoDDA0QYcrme8BnxobvbPDMAbbh_eUnD01BxCWbsrQdYVFl0vsrAsiqVvS3XdaMSQTrVy_zp8AWv-CDRlqbRmmhZFFf4cVa5Ln3L8Q_i_8pLtJ0WuVxsiMOxLUF_Y/s1920/놀면뭐하니3.jpg | TV | 리즈 | 놀면 뭐하니? 295회",
+    "2025-09-13 | https://www.wavve.com/player/stream/vod?contentid=M_EP202509042837.1 | https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj5VaMqSi0U0aOFJviJvn9GlKPyfZI1lV1qYjMSaHsJECZQABtGfzrpbdtgVmOaL_pUCxGFrcqziuzYF7Qiwlygrx9f9Pe_Lc30UeAg5RpQ8cfpKy5Nj-QO7R7zKYOSVWtQ32ZEy3KF9-7NzOE3C3_0mHKXal6o9Cvyd4lhtHyQRwwfVn16Rg8Ih2E3WLY/s1920/놀면뭐하니4.jpg | TV | 리즈 | 놀면 뭐하니? 297회",
+    "2025-09-20 | https://www.wavve.com/player/stream/vod?contentid=M_EP202509112898.1 | https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhWGeRjimhT9wjtbRQ0Q42eDFfMgvGXc_l8h5GcZhf0vnQPrbPmkWds58ymlvr0ScFm3Raw_pl_jQITyLwue-bUAQMP8HMOjO4Sdn5lYS03ckpB1WeFJloJN51Q9HmTfkjCLW34hVTo4W7yz7ApYLTgB_aZ2Ui7ciHP8Kx-S3eiEmt3nkYldrVu55BHI8E/s1920/놀면뭐하니5.jpg | TV | 리즈 | 놀면 뭐하니? 298회",
+    "2025-09-27 | https://www.wavve.com/player/stream/vod?contentid=M_EP202509192961.1 | https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEispoXMh_0kl7x4RFtq6_vJOKx_2EJnBJBhBMjG0VLfHxRFM1OuJ_WXbqvykPQQ435jiJF9nlYYFBs_6_fy8kNUCu3vOV69ZMBObMvkkr3OrEzGUg6PHUR0YNDEtPgwqjrSzTEH_c_CTp3rCX7nbLV4V6Cp8dd8GVdEhgobeFySyi1rC5EEQi2pXcTlO0s/s1920/놀면뭐하니6.jpg | TV | 리즈 | 놀면 뭐하니? 299회",
+    "2025-10-04 | https://www.wavve.com/player/stream/vod?contentid=M_EP202509263012.1 | https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEil8qyUl5XKabhiMPBO9qP7smjMwAFlc9jvDjYOnvF_xS41qCyABmoS_F9nDSzlNDTBMvRFD8xscDcNy99b5phMnhKSlYMUD0WKAt87uSCAPDX4Zb6VAHQwUGlPdqh_owmTBLAJ5xdJU4W8_X7WKUbRy3EvVppc2EJrDzvw9ASXAulgRb0fVqyJ3BhBXyM/s1920/놀면뭐하니7.jpg | TV | 리즈 | 놀면 뭐하니? 300회",
+    "2025-10-11 | https://www.wavve.com/player/stream/vod?contentid=M_EP202510023069.1 | https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi2hYRq7DRbwI4FK4m6b-qsTgZE4RqIkAFSTnaDSMs7Kea5WXlEqtr1YsKDp2h_hcyBjdQz9KkqgRt-VWSKQSZ6la9YX9rP-D7ROkGF5MPjJ07_bcNsdbou4o2A5ELi0DfTkOeZ609xs1kZttXP2pRhbbHHRIyL2mhwX7VkqxTU2X8_wjbdZ4CeUw0Vz8M/s1920/놀면뭐하니8.jpg | TV | 리즈 | 놀면 뭐하니? 301회",
+    "2026-08-21 | https://link.berriz.in/ko/web/main/ive/live/replay/01a02465-e9c3-08bb-f4e7-ff75409a6f7a | https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj_Dfqt2VMFqJD6bq8hk4upfd2mMxsFCGxb8jRgACTx7WpkpQQf_BGvpE_Ply7rkEdIWUNhV0BpIvEJd3bs2TUnLb_h3IQfEcfsQzOv7NuadPd4IMLzdstiYtKFST0ECcID27StzOOzv8dt1VFqFKGuqEH-hjK37A0rgiJbRV6S6jxPz3l6_YRviEoWrXM/s4096/1791814774441.jpeg | L(IVE) | 리즈,이서 | 대구막창 | platform=Berriz",
+    "2025-12-31 | https://link.berriz.in/app/main/ive/live/replay/019b7383-76e0-034e-14a4-411682f0fb40 | https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiO-gRu2wji1Pz3p6PaT4hq_zktujKkcySLtvYUqtfBN5KexaxzSZIPaGwMVqpZgY7k6S0M2yr52RjARlCCAr77YDjcSk-BLI_0Lvoj9_toImVJKdt7yvXZ59bmgXhoDFRjIGBqB1e49WlHlJqP0tp8_Jnz6uHXXLXxTsZcIzF-I24bN4Lf-J6SUHnJZck/s2070/1791814786746.jpg | LIVE |  | 2025 안녕👋 | platform=Berriz",
+    "2025-12-04 | https://link.berriz.in/app/main/ive/live/replay/019ae8d2-4461-2211-ebea-9ad4463f3518 | https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgY_xDpfO-3jihhWbDgQB4LYmn0vLt8gj-0EUuAjxMO2NubJvavTb3CCkvgRBQJGwXQWwynKlmNvglS-gzX84VegFqzwGPKy5dhl_9eu5_2vNJ4H5m9_QzG_nOqriavZNjmrskM1WSsK43FocrANttfC9mFiIp3JndKaAP4Nr2H4COmXiPWXcxnMpLbwhk/s6949/1791814807072.jpg | LIVE |  | 눈온다 !! ☃️❄️ | platform=Berriz",
+    "2025-10-01 | https://link.berriz.in/app/main/ive/live/replay/01999f59-65d0-7ed3-0756-3208281b1abb | https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEizdOUoGIEir4ZDCUJp0f6rjeQCV8TPYkOSLJXjbCYnSooc3EOwu_Ll_iG5p7P3rztCb-0flh2kA7OQjJxlbVtgyuJCZahHHdmVUbM3K2s5i8Yg7EpEL3r7CotLu5DaoJmQy_cPgd-lDxUQMlkz5FyAFAsa4iQZmT0Ssy2ahAnHcdMhKcHjlWqaVYeAwso/s3629/1791814810435.jpg | LIVE |  | 10월이다냥 🖤 | platform=Berriz",
+    "2025-09-10 | https://link.berriz.in/app/main/ive/live/replay/019933d2-eafc-575d-2f58-91b6f6eb9979 | https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEim04DbCouXaFO_7G4xwPTUIAfR8mOBKAPX-bLd6nQnC53NQ83HfLjG2M-vumNtvXo1m-ulBJ-ZEawc_TISD4HbSOYuzbWDHRuoWZDS1PZq00gjc3ulcQ6ubYYYIji4rDZwAWPJZqnpxZEqw01yJDnpkp_xe7UR6x_764r-Bnom7Uwq1GxFRAICafLbdHU/s5146/1791814813154.jpg | LIVE |  | 저나하쟈🐈‍⬛ | platform=Berriz",
+    "2025-08-12 | https://link.berriz.in/app/main/ive/live/replay/01989c94-3e1a-7ce0-02f7-be4f39c575ef | https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEil9_Nz3e1VnOM7bJ3qZXRagwZQruFGdLTTqKo4Zp8BlAKxJm_91hMjoIOp5sKdmbEwneW2nALEco1bP0ztrVJiz-AePngK2Vpi4lHkbJwe4LHpTFfSrdqV1K2sAtmqBkFhD67Gc-3UMyVvXOWvZ04T_ezM6GGLZpxPDpwYG2UTDj-uO0-EIo2dCLV_IC0/s4170/1791814816759.jpg | LIVE |  | 복숭복숭복숭아🍑 | platform=Berriz",
+    "2025-08-08 | https://link.berriz.in/app/main/ive/live/replay/01988930-0585-95ed-ce61-14c1ba28e2b7 | https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgBeVo8yXRjWyXaQlHzDKA88WFqKRPolA47L4PsaOwtL92WPb5VsYHtZyLEz3zE-PCw2nEL_W5v3PtAz_mf4VasX_CgamX91BEuKeim2UOf48cLJsdMnORskPCW5O0KYVazfvXN0Lwk3tydaPc8P8fF1ljOPno4v3L3VXlGyQmySq59__ADv6ykYmlmwL0/s4170/1791814818638.jpg | LIVE |  | 안녕하세요 고양이입니다🐈‍⬛ | platform=Berriz",
+    "2025-07-28 | https://link.berriz.in/app/main/ive/live/replay/01985007-4ddf-86bc-16b7-03efa7141cf6 | https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiCf5jqDMToxmmugtLqhTb2J8mg7DRE1lyIAmW9kPVyLXLnWwSXKZp3FoPkpScdW88Ej-uYqh8Hb9B-wWCiF_w9wb-LzCfCDRoDPUus00BUQ9Ba1YHTzU3fGk8VMccaCGuhsqQCMEp0DNM-3YNj5cpW8uiDCVrhzPRdlrqoSDhM2WNYarGuhhO-1YJudTg/s5866/1791814820482.jpg | LIVE |  | 염색해따 | platform=Berriz",
+    "2025-07-04 | https://link.berriz.in/app/main/ive/live/replay/0197d515-4134-cc1c-9c26-68c2710ed737 | https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjJcHcBPivgDQmNU-F1wa0jG-1XKXdjcAKdHq2QScrYymmu0jZBZHizyH0zmFngSCr-HfHuPxydT5a1INNhQ_45HZyuh4OkalmZn3K0cIjcL4MYHFJn2SCkbQVeTyHHu85cIxnlONyVHW-J90mdxu2oKAQhvRfXnIAHEr273tl8hYl6bOkmSIgZlzI0zMY/s4170/1791814822289.jpg | LIVE |  | 일본도챡 !! | platform=Berriz",
+    "2025-06-29 | https://berriz.in/applink/app/ive/live-replay?mediaId=0197bb1a-745b-1fb4-981b-de8a90d58078 | https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhSqpg6xi0YSVGVrYs3VyuXxW9b4x7jVo_iZ1aA_jujxef48o6T_X_wHC5pELtZafrwmJH1rWP0dWMBmc8MzGZVU1dZyqLnSUq0Pk_nuapioaRZhU57awI-F2Yv0XZSF-VDq8KqCGvZbcAn0my4ZLJtC8xMwqt-AxBiirkyaHCBceuwnf7opzslwyitKNU/s4170/1791814824012.jpg | LIVE |  | 냥 ! | platform=Berriz",
+    "2025-06-16 | https://berriz.in/applink/app/ive/live-replay?mediaId=019776b2-4022-b178-bd32-9fab718eb48c | https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj9IUvtO3nnTO8D-PlxChkawIKl71UPmQWdoLL0OJI8IGlh3kL__5fDlYuiuhO2D1I0PCHFbZYpUBUESvSdJggdj4-1tPf2fSbjXFywbOsIB2BwqwgK-0KN7bQU-DTTnd6uoZRN2x9jmcdD6dxygtsq7SBdUTjoIe0SQX7fHQ1rp24not9IRjiB1BP4vwY/s4115/1791814825732.jpg | L(IVE) | 아이브 | 연습실 라이브 💃💃💃💃💃💃 | platform=Berriz",
+    "2025-03-17 | https://www.wavve.com/player/stream/vod?contentid=M_EP202503130920.1 | https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj88_3NmNwRQr-A8nIcyPCE-kQx0g5X-HjyIVwPnqbK_exg5mA_TYY4dlOHAuMyjf5kWrudBgRRGrYX0zSFOV6FUsIXNIVQ_Hp3xk9OCkA9MtaWrN4tSTg1veulKWyPDveRxUvJer9hL3Kg3FjfF1FezMk8YiHU4n8HMR8sYR6IsWIf-Erz40f9svD3ons/s1920/푹다행1.jpg | TV | 리즈 | 푹 쉬면 다행이야 40회",
+    "2025-03-24 | https://www.wavve.com/player/stream/vod?contentid=M_EP202503201100.1 | https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjoDLHD_RrcdxyfE-952Lt_vPWTpgnvmNLeLT4Jpus7VpNcwp5zOdn05d0TI-nhVj1viIE-qmX9zGQFWbKne5xp2nDJxNuF7kzsBPyfBQ28kdVBcfg0DR4Y0TDaaLapfzhPDdVlBMmIxXsdQjRw9f_f5a1zPRt1y9YEpjqneU3ZXiaSqHirHfTjzaAEC6g/s1920/푹다행2.jpg | TV | 리즈 | 푹 쉬면 다행이야 41회",
+    "2025-02-08 | https://www.tving.com/player/E004315144 | https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgLat1qhNzJHqSIg_vuO78i_GVpO7QMxp6FEr6h-Au_I2gC4GWMfoIZchoyU_H5oVAYERUheQdsngxCWRWZgPYW86CfUaEtveSOfmW9HD4Z_w54YK7byF47oZF1FZcQlrlAhn_yiwl6wBX4a-DJvNVwjX4IYhfSTf_3r1Huopvc46FWwSxlLSbIsoPALE8/s1920/놀토.jpg | TV | 안유진,레이,리즈 | 놀라운 토요일 352회",
+    "2024-05-12 | https://www.wavve.com/player/stream/vod?contentid=M_EP202405026072.1 | https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiXYbq6PrG6LtUO_O9I75pWebnXAa4tU3Cwq9EPt4xxZU95dVHhpMGUtbYqgBdMRQ_M6UqwpvSpI4D-pNoZBBvXnC9KMjVQyXvi-n1virkX1YS1whmU5aHUhrdq4GdPUTSGKxgtMTnjMDb50J_X_nuXKvjmIukhIhOWVHQsty4T4XUkKo7d0ACAEhbAjUw/s584/복면가왕1.jpg | TV | 리즈 | 복면가왕 450회",
+    "2024-05-19 | https://www.wavve.com/player/stream/vod?contentid=M_EP202405096138.1 | https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj1DSRAxbOyzbAWZTZvO25GF3XZYP0C4lbh7i3TqDivx6ArJY24vhP5Tl3F5x-TZPTJ4XKKkLNMR6TD_Mk1ugbHVLuyKSTtpQJMeaO7SC5PqaIXzVimOstTm7cfdPl8xgGUnE1MK8fA26yDxVuLBzXBaTVwfvIQhKOSHZZMGVVt9_W6XJR_IJg_IU9ndBI/s584/복면가왕2.jpg | TV | 리즈 | 복면가왕 451회",
+    "2023-12-23 | https://www.tving.com/player/E004108060 | https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgALusps3NGgwoCo5owIfwZ3nNHBDe16n5syt8peld3-JTfU5Fw9qqDUUxKjdck3Nl24rTX-nGhIlXZf29skekQIsYWjl7iaaHlhcVZb6d8p2v8Y-Er4CeYsxK92ZG0NdnDUqFj5AcAIM0306_SzhhemKTI-00XLLT3neSWPkLCHSAG1OtNRE4z3Zo1oio/s1920/아형.jpg | TV | 레이,리즈,이서 | 아는형님 414회",
+    "2023-09-22 | https://www.wavve.com/player/stream/vod?contentid=K02_PS-2023171528-01-000.1 | https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhlDiIUqFV8Hxt-W-eFrgwFuP5A_Sp8FoSO_JsfFCaEdPdGQn8zcQwKNOL9Pv6G-gAsKC8ySrWhDma7hOTgOfd9tbXhQNQMkwgZy7yH5RqCzyuxi9W41wzrckBcuhpDc29OZgn1lm21SSgJ6j5IOXtEigq3PobbuyiGlTCaD7Kw728w0wC_-wYKXkxhzg8/s1920/편스토랑1.jpg | TV | 리즈 | 신상 출시 편스토랑 194회",
+    "2023-09-29 | https://www.wavve.com/player/stream/vod?contentid=K02_PS-2023175135-01-000.1 | https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh-CD8Iro3MltvFMInAHfa9yi0D5uCdRpUdu9MyGBDFp23o3KIf-BPdfmHA3bzbdIFDpCj0mUg1pyxtfuhM32EnZZc0zXMRlOcCbEDuoxGBxNVbc_nv4DEOr-Xv5z6JzS4oZbsPRc3FuPwjR0yNi1fddwDCVWEFbtr26r4ae44jAhYYnQG8o6orh9UqpVI/s1920/편스토랑2.jpg | TV | 리즈 | 신상 출시 편스토랑 195회",
+    "2023-10-13 | https://www.wavve.com/player/stream/vod?contentid=K02_PS-2023179299-01-000.1 | https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgj9-BgBEY6SLLB3WQYq1mA0fJxaF47ONLD4bu2XaMLBzvmnyLpKgFB-2_UGO-yeuFwJy4HuSEVaGs4M9TAAzy5EfNPvlSegG9I1BIIfMsT-ejxXSzX08-6IVDUroFwvssvdCTdgehKOYiEayyVi74FuH5Mnia4ojA0IEou0Agc7PMDUhcVKrdUPNyJ9kU/s1920/편스토랑3.jpg | TV | 리즈 | 신상 출시 편스토랑 196회",
+    "2022-04-13 | https://www.wavve.com/player/stream/vod?contentid=M_EP202204074670.1 | https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjq9KCYCQbhhs1_YMZbU1zEtkqHW-6G0aXiVX_TeC7olHAn1Qw8KhY5BhTAkZp2vg2QcrSihi4NSZ0KqAEhvP98UZTRgT2NKxEYm7bUh5rkgVwYIrXGovi1QZ9eAs2SgWIyxuyy9Esw0AqNGY917tSekmEPzSja75S83bn-BnLuI5zBdLjorWyOkio6jYc/s584/서프라이즈.jpg | TV | 리즈 | 서프라이즈 : 비밀의 방 10회",
+    "2021-12-15 | https://programs.sbs.co.kr/enter/street/vod/64781/22000434712 | https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgiGGHaK9kkJOD_A4YmfE7JWGl8HoIQT5C2MjF5L1dZsS4V7-wqN2kcSMwShqaCRq770WVHfkK8-DGk0uotr_lQR205v5SnAuJgsniOrK9jITmr3XHgnj_SCCwaBOvsOHriME1JgXSXFma9ABBEmQGkH5wJ_wXMUtZXlvWXeE0CGCMh0M7Lev3EYK590WM/s1280/골목식당.jpg | TV | 안유진,장원영,리즈 | 백종원의 골목식당 198회",
+  ];
+
+  // ---- 메인 화면 섹션 ----
+  // 각 섹션에서 쓸 수 있는 설정값:
+  //   title          섹션 제목 (이모지 포함 텍스트)
+  //   cats           메인 슬라이드에 보여줄 영상의 카테고리 목록
+  //   tabs           "더보기" 눌렀을 때 열리는 탭 목록 (생략하면 cats를 그대로 씀)
+  //   sort           "date"면 최신순, 생략하면 조회수순
+  //   openTab        "더보기" 클릭 시 "전체" 대신 바로 선택해둘 탭 이름
+  //   hideMembers    true면 더보기 화면에서 멤버 필터 줄을 숨김
+  //   noEmbedOnHome  true면 트위터/인스타 임베드는 메인 슬라이드에서 제외 (더보기에는 그대로 나옴)
+  //   freeEmbed      true면 임베드를 박스 크기 제한 없이 원래 크기 그대로 보여줌
+  const HOME_SECTIONS = [
+    { title: "직캠", cats: ["세로 직캠", "가로 직캠"], tabs: ["세로 직캠", "가로 직캠"], hideMembers: true },
+    { title: "COVER", excludeMembers: ["아이브"], cats: ["COVER"], tabs: ["SOLO", "OST", "COVER", "Lyrics", "etc.(가사)"], openTab: "COVER" },
+    { title: "TV / WEB", cats: ["TV", "WEB"], tabs: ["TV", "WEB"], sort: "date" },
+    { title: "LIVE", cats: ["LIVE", "L(IVE)"], sort: "date" },
+    { title: "Shorts", cats: ["Shorts", "VOCAL", "DANCE", "IVE"], tabs: ["Shorts", "VOCAL", "DANCE", "IVE"], sort: "date" },
+    { title: "SCHEDULES", cats: ["MAGAZINE", "POP-UP", "AD", "MC", "etc.(일정)"], tabs: ["MAGAZINE", "POP-UP", "AD", "MC", "etc.(일정)"], sort: "date", noEmbedOnHome: true, hideViews: true },
+    { title: "VLOG", cats: ["NYANG LOG"], tabs: ["NYANG LOG", "IVE LOG"], sort: "date", hideMembers: true },
+    { title: "ASMR", cats: ["ASMR"], sort: "date", hideMembers: true },
+    { title: "MEMBERS X", cats: ["MEMBERS X"], sort: "date", hideViews: true },
+    // 메인에서 숨김 처리된 카테고리(SOLO, OST 등)는 "전체 영상 보기"에서만 보입니다
+  ];
+
+  // "전체 영상 보기"에서 볼 수 있는 모든 탭
+  const TAB_ORDER = ["전체", "세로 직캠", "가로 직캠", "COVER", "TV", "WEB", "NYANG LOG", "IVE LOG", "ASMR", "LIVE", "L(IVE)",
+    "SOLO", "OST", "Lyrics", "etc.(가사)", "Shorts", "VOCAL", "DANCE", "IVE", "MAGAZINE", "POP-UP", "AD", "MC", "etc.(일정)", "MEMBERS X"];
+  // =====================================================================
+
+  const FANCAM_TABS = ["세로 직캠", "가로 직캠"]; // 직캠 탭에서는 멤버 필터/태그(리즈)를 숨김
+  let videos = [], tab = 0, sort = "date", query = "", scope = null, memberFilter = [], albumScope = null;
+  const sTabs = (s) => s.tabs || s.cats;
+  const tabList = () => scope ? (sTabs(scope).length > 1 ? ["전체", ...sTabs(scope)] : sTabs(scope)) : TAB_ORDER;
+  const $ = (id) => document.getElementById(id);
+  $("logo").innerHTML = SITE_TITLE.replace(/^(\S+)/, "<span>$1</span>");
+  renderPinBar();
+
+  const extractId = (s) => { s = (s || "").trim(); const m = s.match(/(?:youtu\.be\/|\/shorts\/|\/live\/|[?&]v=)([\w-]{11})/); return m ? m[1] : s; };
+  const parseManual = (raw) => {
+    const parts = raw.split("|").map((s) => s.trim());
+    const [date, url, thumb, catsStr, membersStr, title] = parts;
+    const extra = {};
+    parts.slice(6).forEach((p) => { const eq = p.indexOf("="); if (eq > -1) extra[p.slice(0, eq).trim()] = p.slice(eq + 1).trim(); });
+    return {
+      date, url, thumb, title: title || "",
+      cats: catsStr ? catsStr.split(",").map((s) => s.trim()).filter(Boolean) : [],
+      members: membersStr ? membersStr.split(",").map((s) => s.trim()).filter(Boolean) : [],
+      platform: extra.platform || null, album: extra.album || null,
+      ratio: extra.ratio || null, // ratio=16:9 를 붙이면 인스타그램도 유튜브와 같은 16:9 칸으로 표시
+    };
+  };
+  const parseEntry = (raw) => {
+    const parts = raw.split("|").map((x) => x.trim());
+    const id = extractId(parts[0]);
+    const out = { id, members: null, platform: null, album: null, lyricsType: null };
+    parts.slice(1).forEach((p) => {
+      if (!p) return;
+      const eq = p.indexOf("=");
+      if (eq === -1) { out.members = p.split(",").map((x) => x.trim()).filter(Boolean); return; }
+      const key = p.slice(0, eq).trim().toLowerCase(), val = p.slice(eq + 1).trim();
+      if (key === "platform") out.platform = val || null;
+      else if (key === "album") out.album = val || null;
+      else if (key === "lyrics" || key === "lyricstype") out.lyricsType = val || null;
+    });
+    return out;
+  };
+  Object.values(CATEGORIES).forEach((c) => { c.parsed = c.ids.map(parseEntry); });
+  const INLINE_MEMBERS = {}, INLINE_PLATFORM = {}, INLINE_ALBUM = {}, INLINE_LYRICS = {};
+  Object.values(CATEGORIES).forEach((c) => c.parsed.forEach((p) => {
+    if (p.members) INLINE_MEMBERS[p.id] = p.members;
+    if (p.platform) INLINE_PLATFORM[p.id] = p.platform;
+    if (p.album) INLINE_ALBUM[p.id] = p.album;
+    if (p.lyricsType) INLINE_LYRICS[p.id] = p.lyricsType;
+  }));
+
+  const esc = (s) => s.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const fmtViews = (n) => "조회수 " + (n >= 10000 ? (n / 10000).toFixed(1).replace(/\.0$/, "") + "만회" : n.toLocaleString() + "회");
+  const fmtDate = (iso) => { const d = new Date(iso); return `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, "0")}.${String(d.getDate()).padStart(2, "0")}.`; };
+  const fmtDur = (s) => {
+    const h = Math.floor(s / 3600), m = Math.floor((s % 3600) / 60), sec = s % 60;
+    return h ? `${h}:${String(m).padStart(2, "0")}:${String(sec).padStart(2, "0")}` : `${m}:${String(sec).padStart(2, "0")}`;
+  };
+  const toSec = (iso) => {
+    const m = iso.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
+    return (+m[1] || 0) * 3600 + (+m[2] || 0) * 60 + (+m[3] || 0);
+  };
+
+  const SCHEDULE_CATS = ["MAGAZINE", "POP-UP", "AD", "MC", "etc.(일정)"];
+  const hideViews = (v) => v.cats.some((c) => SCHEDULE_CATS.includes(c));
+
+  const hideTags = () => location.hash === "#list" && (tabList()[tab] === "SOLO" || FANCAM_TABS.includes(tabList()[tab]) || !!(scope && scope.cats && scope.cats.some((c) => FANCAM_TABS.includes(c)))); // 직캠 화면에서만 멤버 태그 숨김 (COVER 등에서는 그대로 표시)
+  const shownMem = (v) => (hideTags() || (v.cats || []).includes("ASMR") ? [] : (v.members || []));
+  // ---- 귤 도장(고정) : 이 브라우저(localStorage)에 저장 ----
+  const PIN_KEY = "pinnedVideos";
+  const pinnedSet = new Set();
+  try { JSON.parse(localStorage.getItem(PIN_KEY) || "[]").forEach((k) => pinnedSet.add(k)); } catch (e) {}
+  const savePins = () => { try { localStorage.setItem(PIN_KEY, JSON.stringify([...pinnedSet])); } catch (e) {} };
+  const pinKey = (v) => (String(v.id).startsWith("manual") ? v.url : v.id);
+  const isPinned = (v) => pinnedSet.has(pinKey(v));
+  const pinnedFirst = (arr) => [...arr.filter(isPinned), ...arr.filter((v) => !isPinned(v))];
+  const TANGERINE_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="14" r="7.6"/><path d="M12 6.4c.2-1.3.9-2.1 1.8-2.5" /><path d="M12.2 6.2c1.2-1.9 3.4-2.4 5-1.7-.6 1.9-2.6 3.1-5 1.7z" fill="currentColor" stroke="none"/><path d="M8.6 12.2c.5-1 1.2-1.6 2.1-1.9" opacity=".7"/></svg>';
+  let toastTimer;
+  function showToast(msg) {
+    let t = document.getElementById("toast");
+    if (!t) { t = document.createElement("div"); t.id = "toast"; t.className = "toast"; document.body.appendChild(t); }
+    t.textContent = msg; t.classList.add("show");
+    clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove("show"), 1600);
+  }
+  function card(v, free) {
+    const embedHtml = v.embed === "twitter"
+      ? (free
+        ? `<blockquote class="twitter-tweet" data-dnt="true"><a href="${v.url}"></a></blockquote>`
+        : `<div class="igwrap" data-lazy="twitter" data-url="${v.url}"><div class="iginner"></div></div>`)
+      : v.embed === "instagram"
+      ? `<div class="igwrap" data-lazy="instagram" data-url="${v.url}"><div class="iginner"></div></div>`
+      : null;
+
+    // 소셜 임베드는 free 모드에서 원본 비율/높이를 유지하고 잘라내지 않습니다.
+    if (embedHtml && free) {
+      return `<a class="card" href="${v.url}" target="_blank" rel="noopener">
+        <div class="embedfree">${embedHtml}</div>
+        <div class="title">${esc(v.title)}</div>
+        <div class="info">${fmtDate(v.date)}</div>
+        ${shownMem(v).length ? `<div class="mem">${shownMem(v).map((m) => `<span style="background:${MEMBER_COLORS[m] || "#ddd"}">${m}</span>`).join("")}</div>` : ""}
+      </a>`;
+    }
+
+    const isLive = (v.cats || []).some((c) => c === "LIVE" || c === "L(IVE)");
+    return `<a class="card${isPinned(v) ? " pinned" : ""}" href="${v.url || "https://youtu.be/" + v.id}" target="_blank" rel="noopener">
+      <div class="thumb${embedHtml ? " embedbox" + (v.ratio === "16:9" ? "" : v.embed === "twitter" ? " twthumb" : " igthumb") : (!v.thumb && !isLive ? " ph" : "")}">
+        ${embedHtml || (v.thumb ? `<img src="${v.thumb}" alt="" loading="lazy" decoding="async" />` : isLive ? "" : `<span class="phtxt" style="color:${PLATFORM_COLORS[v.platform] || "#b9945f"}">${v.platform || ""}</span>`)}
+        ${!embedHtml && v.platform && (v.thumb || isLive) ? `<span class="plat" style="background:${PLATFORM_COLORS[v.platform] || "#888"}">${v.platform}</span>` : ""}
+        ${!embedHtml && v.lyricsType ? `<span class="plat" style="background:${v.lyricsType === "단독" ? "var(--red)" : "#c9c2b8"}">${v.lyricsType}</span>` : ""}
+        ${!embedHtml && v.sec ? `<span class="dur">${fmtDur(v.sec)}</span>` : ""}
+      </div>
+      <div class="title">${esc(v.title)}</div>
+      <div class="info pinrow">${v.views !== null && !hideViews(v) ? fmtViews(v.views) + "<br>" : ""}${fmtDate(v.date)}<span class="pinbtn${isPinned(v) ? " on" : ""}" role="button" aria-label="상단에 고정" title="상단에 고정" data-pin="${esc(pinKey(v))}">${TANGERINE_SVG}</span></div>
+      ${shownMem(v).length ? `<div class="mem">${shownMem(v).map((m) => `<span style="background:${MEMBER_COLORS[m] || "#ddd"}">${m}</span>`).join("")}</div>` : ""}
+    </a>`;
+  }
+
+  // 인스타그램 임베드 크기 배율 (1 = 16:9 칸에 딱 맞춤, 0.8 = 80%). 웹/모바일 따로 조절하세요.
+  const IG_FIT = { web: 1, mobile: 1 };
+  // 인스타그램 4:5 카드: 임베드를 가로로 꽉 채운 뒤 위쪽 프로필 줄(header)만큼 잘라내서 영상 화면 위주로 보이게 함.
+  // header = 임베드 상단 프로필 줄 높이(px, 326px 폭 기준) / shiftY = 영상 구도를 아래로 더 내릴 값(px)
+  const IG_CROP = { header: 60, shiftY: 0 };
+  // X(트위터) 카드: 계정 줄이 보이도록 위쪽은 그대로 두고, 아래 좋아요·답글하기 줄부터 잘라냄
+  const TW_CROP = { top: 0, bottom: 0 }; // bottom: 아래쪽 좋아요·답글하기 줄을 잘라낼 높이(px)
+  function fitIg() {
+    const mobile = window.matchMedia("(max-width:700px)").matches;
+    const fit = mobile ? IG_FIT.mobile : IG_FIT.web;
+    document.querySelectorAll(".igwrap").forEach((w) => {
+      const i = w.firstElementChild;
+      const free = !!w.closest(".embedfree");
+      const cw = w.clientWidth;
+      if (!cw) return;
+      if (!i._ro) {
+        i._ro = true;
+        if (window.ResizeObserver) { const ro = new ResizeObserver(fitIg); ro.observe(i); ro.observe(w); }
+        if (window.MutationObserver) {
+          new MutationObserver((recs) => { if (recs.some((r) => !(r.type === "attributes" && r.target === i))) fitIg(); })
+            .observe(i, { childList: true, subtree: true, attributes: true, attributeFilter: ["height", "style", "class"] });
+        }
+      }
+      const base = free ? Math.max(326, Math.min(cw, 540)) : 326;
+      i.style.width = base + "px";
+      const ih = i.offsetHeight;
+      if (!ih) return;
+      const bw = Math.max(base, i.scrollWidth);
+      if (free) {
+        const sc = Math.min(1, cw / bw);
+        i.style.transform = `scale(${sc})`;
+        i.style.left = Math.max(0, (cw - bw * sc) / 2) + "px";
+        w.style.height = (ih * sc) + "px";
+      } else if (w.closest(".twthumb")) {
+        const sc = cw / bw;
+        i.style.transform = `scale(${sc})`;
+        i.style.left = "0px";
+        i.style.top = -TW_CROP.top * sc + "px";
+        w.style.height = Math.max(120, (ih - TW_CROP.top - TW_CROP.bottom) * sc) + "px";
+      } else if (w.closest(".igthumb")) {
+        const sc = cw / bw;
+        i.style.transform = `scale(${sc})`;
+        i.style.left = "0px";
+        i.style.top = -(IG_CROP.header + IG_CROP.shiftY) * sc + "px";
+      } else {
+        const ch = w.clientHeight;
+        const sc = Math.min(cw / bw, ch / ih) * fit;
+        i.style.transform = `scale(${sc})`;
+        i.style.left = Math.max(0, (cw - bw * sc) / 2) + "px";
+        i.style.top = Math.max(0, (ch - ih * sc) / 2) + "px";
+      }
+      i.classList.add("ready");
+    });
+  }
+  window.addEventListener("resize", fitIg);
+  // 화면에 가까워진 임베드만 그때그때 불러와서 로딩을 빠르게 함
+  // 임베드는 한꺼번에 불러오면 느려지므로 IG_MAX개씩 순서대로 불러옴 (하나가 그려지면 다음 차례)
+  const IG_MAX = 3, igQueue = [];
+  let igActive = 0;
+  function loadEmbed(w) { igQueue.push(w); pumpEmbeds(); }
+  function pumpEmbeds() {
+    while (igActive < IG_MAX && igQueue.length) {
+      const w = igQueue.shift();
+      igActive++;
+      let done = false;
+      const fin = () => { if (done) return; done = true; igActive--; pumpEmbeds(); };
+      startEmbed(w);
+      const i = w.firstElementChild;
+      const mo = new MutationObserver(() => { if (i.querySelector("iframe")) { mo.disconnect(); setTimeout(fin, 150); } });
+      mo.observe(i, { childList: true, subtree: true });
+      setTimeout(() => { mo.disconnect(); fin(); }, 3000);
+    }
+  }
+  function startEmbed(w) {
+    const kind = w.dataset.lazy, url = w.dataset.url;
+    w.dataset.kind = kind; // 로딩 후에도 인스타/트위터 구분 유지
+    delete w.dataset.lazy;
+    const i = w.firstElementChild;
+    i.innerHTML = kind === "twitter"
+      ? `<blockquote class="twitter-tweet" data-dnt="true" data-width="326"><a href="${url}"></a></blockquote>`
+      : `<blockquote class="instagram-media" data-instgrm-permalink="${url}" style="margin:0;width:100%"></blockquote>`;
+    if (kind === "twitter") { if (window.twttr && window.twttr.widgets) window.twttr.widgets.load(i); }
+    else if (window.instgrm) window.instgrm.Embeds.process();
+  }
+  const igIO = window.IntersectionObserver
+    ? new IntersectionObserver((ents) => ents.forEach((e) => { if (e.isIntersecting) { igIO.unobserve(e.target); loadEmbed(e.target); } }), { rootMargin: "250px 150px" })
+    : null;
+  function processEmbeds() {
+    document.querySelectorAll(".igwrap[data-lazy]").forEach((w) => { if (igIO) { if (!w._obs) { w._obs = 1; igIO.observe(w); } } else loadEmbed(w); });
+    if (window.twttr && window.twttr.widgets) window.twttr.widgets.load();
+    if (window.instgrm) window.instgrm.Embeds.process();
+    fitIg();
+    requestAnimationFrame(fitIg);
+    [600, 1500, 3000, 6000].forEach((t) => setTimeout(fitIg, t));
+  }
+
+  function renderPinBar() {
+    const pins = HOME_SECTIONS.map((s, si) => `<button class="pin" data-jump="${si}">${s.title}</button>`).reverse();
+    const sch = HOME_SECTIONS.findIndex((s) => s.title === "SCHEDULES");
+    if (sch >= 0) pins.unshift(...pins.splice(pins.findIndex((p) => p.includes(`data-jump="${sch}"`)), 1)); // SCHEDULES를 맨 앞으로
+    $("pinbar").innerHTML = pins.join("");
+  }
+
+  function renderHome() {
+    $("home").innerHTML = HOME_SECTIONS.map((s, si) => {
+      const items = videos.filter((v) => s.cats.some((c) => v.cats.includes(c)) && (!s.noEmbedOnHome || !v.embed) && !(s.excludeMembers || []).some((m) => v.members.includes(m)))
+        .sort((a, b) => s.sort === "date" ? new Date(b.date) - new Date(a.date) : (b.views || 0) - (a.views || 0));
+      const top = pinnedFirst(items).slice(0, 5);
+      if (!items.length) return "";
+      const slides = top.map((v) => `<div class="slide${s.freeEmbed && v.embed ? " social-slide" : ""}">${card(v, s.freeEmbed)}</div>`).join("");
+      return `<div class="sec" id="sec-${si}">
+        <div class="sec-head"><h2>${s.title}</h2><button class="more" data-sec="${si}">더보기 →</button></div>
+        <div class="slider-box"><div class="slider">${slides}</div>
+          <button class="arrow l" data-d="-1">◀</button><button class="arrow r" data-d="1">▶</button></div>
+      </div>`;
+    }).join("") + '<div style="text-align:center"><button class="more" data-all>전체 영상 보기 →</button></div>';
+    processEmbeds();
+  }
+
+  function renderMemberFilter() {
+    $("memf").innerHTML = MEMBER_LIST.map((m) =>
+      `<button class="mchip ${memberFilter.includes(m) ? "on" : ""}" data-m="${m}" style="--c:${MEMBER_COLORS[m]}">${m}</button>`).join("");
+  }
+
+  function renderAlbumSections(items) {
+    const groups = {};
+    items.forEach((v) => { if (v.album) { groups[v.album] = groups[v.album] || []; groups[v.album].push(v); } });
+    return Object.keys(groups).map((name) => {
+      const slides = groups[name].slice(0, 10).map((v) => `<div class="slide">${card(v)}</div>`).join("");
+      return `<div class="sec">
+        <div class="sec-head"><h2>📁 ${esc(name)}</h2><button class="more" data-album="${esc(name)}">더보기 →</button></div>
+        <div class="slider-box"><div class="slider">${slides}</div>
+          <button class="arrow l" data-d="-1">◀</button><button class="arrow r" data-d="1">▶</button></div>
+      </div>`;
+    }).join("");
+  }
+
+  // 폴더(album) 안에서 맨 앞에 놓을 게시물 (링크 속 코드, 아래 순서대로 맨 위에 표시 / 고정 아님)
+  const PIN_FIRST = ["DYBsKjFzg7Z", "DGVGTohhvCk", "DB8aoS4pybA", "DAYc_lfSvc-", "DeEy3CDiOa5", "DeE82qKuV_g", "DeGf-n2oUS5"];
+  function pinFirst(items) {
+    const rank = (v) => PIN_FIRST.findIndex((c) => (v.url || "").includes(c));
+    const slots = {};
+    items.forEach((v, i) => { const k = v.album || ""; (slots[k] = slots[k] || []).push(i); });
+    const out = items.slice();
+    Object.values(slots).forEach((idx) => {
+      const grp = idx.map((i) => items[i]);
+      const pinned = grp.filter((v) => rank(v) >= 0).sort((a, b) => rank(a) - rank(b));
+      const rest = grp.filter((v) => rank(v) < 0);
+      [...pinned, ...rest].forEach((v, j) => { out[idx[j]] = v; });
+    });
+    return out;
+  }
+
+  function renderList() {
+    const name = tabList()[tab];
+    const label = TAB_LABELS[name] || name;
+    const hideMem = !!(scope && scope.hideMembers) || name === "SOLO" || name === "ASMR" || FANCAM_TABS.includes(name);
+    $("memf").hidden = hideMem;
+    if (hideMem) memberFilter = []; else renderMemberFilter();
+    const noViews = !!(scope && scope.hideViews) || SCHEDULE_CATS.includes(name);
+    const viewsBtn = document.querySelector('.sort [data-s="views"]');
+    document.querySelector(".sort").hidden = noViews;
+    if (noViews && sort !== "date") {
+      sort = "date";
+      document.querySelectorAll(".sort button").forEach((b) => b.classList.toggle("on", b.dataset.s === "date"));
+    }
+    let items = videos.filter((v) =>
+      (name === "전체" ? (scope ? sTabs(scope).some((c) => v.cats.includes(c)) : !v.embed && !v.cats.includes("Lyrics")) : v.cats.includes(name)) &&
+      (!memberFilter.length || (memberFilter.length === 1 && memberFilter[0] === "리즈"
+        ? (v.members || []).length === 1 && v.members[0] === "리즈"
+        : (v.members || []).some((m) => memberFilter.includes(m)))) &&
+      v.title.toLowerCase().includes(query.toLowerCase()));
+    items.sort((a, b) => sort === "views" ? (b.views || 0) - (a.views || 0) : sort === "oldest" ? new Date(a.date) - new Date(b.date) : new Date(b.date) - new Date(a.date));
+    items = pinnedFirst(pinFirst(items));
+
+    if (albumScope) {
+      const albumItems = items.filter((v) => v.album === albumScope);
+      $("count").textContent = `${albumScope} · ${albumItems.length}개`;
+      $("grid").classList.remove("social-list");
+      const albumCard = (v) => card(v);
+      $("grid").innerHTML = `<button class="back" id="albumBack" style="grid-column:1/-1">← ${label} 전체로</button>` + albumItems.map(albumCard).join("");
+      $("albumBack").onclick = () => { albumScope = null; renderList(); };
+      processEmbeds();
+      return;
+    }
+
+    $("count").textContent = `${label} · ${items.length}개`;
+    $("grid").classList.remove("social-list");
+    const cardForList = (v) => card(v);
+    if (name === "전체") {
+      // 그룹 전체 탭에서는 폴더로 묶지 않고 전부 풀어서 정렬된 채로 보여줌
+      $("grid").innerHTML = items.map(cardForList).join("");
+    } else {
+      const withoutAlbum = items.filter((v) => !v.album);
+      $("grid").innerHTML = `<div style="grid-column:1/-1">${renderAlbumSections(items)}</div>` + withoutAlbum.map(cardForList).join("");
+    }
+    processEmbeds();
+  }
+
+  function renderTabs() {
+    $("tabs").innerHTML = tabList().map((t, i) => `<button class="tab ${i === tab ? "on" : ""}" data-i="${i}">${TAB_LABELS[t] || t}</button>`).join("");
+  }
+
+  function route() {
+    const isList = location.hash === "#list";
+    $("home").hidden = isList; $("list").hidden = !isList; $("pinbar").hidden = isList;
+    if (isList) {
+      renderTabs();
+      const showMem = !(scope && scope.hideMembers);
+      $("memf").hidden = !showMem;
+      if (showMem) renderMemberFilter(); else memberFilter = [];
+      renderList();
+    }
+    window.scrollTo(0, 0);
+  }
+
+  $("back").onclick = () => { albumScope = null; location.hash = ""; };
+  window.onhashchange = route;
+  $("tabs").onclick = (e) => { if (e.target.dataset.i) { tab = +e.target.dataset.i; albumScope = null; renderTabs(); renderList(); } };
+  $("search").oninput = (e) => { query = e.target.value; renderList(); };
+  $("memf").onclick = (e) => {
+    if (!e.target.dataset.m) return;
+    const m = e.target.dataset.m;
+    memberFilter = memberFilter.includes(m) ? memberFilter.filter((x) => x !== m) : [...memberFilter, m];
+    renderMemberFilter(); renderList();
+  };
+  document.querySelector(".sort").onclick = (e) => {
+    if (!e.target.dataset.s) return;
+    sort = e.target.dataset.s;
+    document.querySelectorAll(".sort button").forEach((b) => b.classList.toggle("on", b === e.target));
+    renderList();
+  };
+  document.addEventListener("click", (e) => {
+    const pb = e.target.closest && e.target.closest(".pinbtn");
+    if (!pb) return;
+    e.preventDefault(); e.stopPropagation();
+    const k = pb.dataset.pin;
+    if (pinnedSet.has(k)) { pinnedSet.delete(k); showToast("고정을 풀었어요"); } else { pinnedSet.add(k); showToast("🍊 목록 맨 위에 고정했어요"); }
+    savePins();
+    const y = window.scrollY;
+    if (location.hash === "#list") renderList(); else renderHome();
+    window.scrollTo(0, y);
+  }, true);
+  document.addEventListener("click", (e) => {
+    const arrowBtn = e.target.closest("[data-d]");
+    if (arrowBtn) arrowBtn.parentElement.querySelector(".slider").scrollBy({ left: +arrowBtn.dataset.d * 300, behavior: "smooth" });
+    const jumpBtn = e.target.closest("[data-jump]");
+    if (jumpBtn) { const el = document.getElementById("sec-" + jumpBtn.dataset.jump); if (el) el.scrollIntoView({ behavior: "smooth", block: "start" }); }
+    const albumBtn = e.target.closest("[data-album]");
+    if (albumBtn) { albumScope = albumBtn.dataset.album; renderList(); window.scrollTo(0, 0); }
+    const secBtn = e.target.closest("[data-sec], [data-all]");
+    if (secBtn) {
+      albumScope = null;
+      scope = secBtn.dataset.sec !== undefined ? HOME_SECTIONS[+secBtn.dataset.sec] : null;
+      tab = 0; query = ""; memberFilter = []; $("search").value = "";
+      if (scope && scope.openTab) { const idx = tabList().indexOf(scope.openTab); if (idx > -1) tab = idx; }
+      location.hash = "list";
+    }
+  });
+
+  async function load() {
+    const ALL_IDS = [...new Set([...OTHER_IDS.map(extractId), ...Object.values(CATEGORIES).flatMap((c) => c.parsed.map((p) => p.id))])];
+    if (!ALL_IDS.length) { $("status").textContent = "영상 ID를 추가해주세요."; return; }
+    try {
+      const chunks = [];
+      for (let i = 0; i < ALL_IDS.length; i += 50) chunks.push(ALL_IDS.slice(i, i + 50).join(","));
+      const results = await Promise.all(chunks.map((ids) =>
+        fetch(`https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics,contentDetails&id=${ids}&key=${API_KEY}`).then((r) => r.json())));
+      for (const data of results) {
+        if (data.error) { $("status").textContent = "오류: " + data.error.message; return; }
+        data.items.forEach((v) => {
+          const sec = toSec(v.contentDetails.duration);
+          const title = v.snippet.title;
+          videos.push({
+            id: v.id, title, date: v.snippet.publishedAt,
+            thumb: (v.snippet.thumbnails.maxres || v.snippet.thumbnails.standard || v.snippet.thumbnails.high || v.snippet.thumbnails.medium).url,
+            views: +v.statistics.viewCount || 0, sec, isShort: sec <= 60,
+            members: INLINE_MEMBERS[v.id] || MEMBERS_OF[v.id] || [],
+            lyricsType: INLINE_LYRICS[v.id] || LYRICS_TYPE_OF[v.id] || "",
+            album: INLINE_ALBUM[v.id] || ALBUM_OF[v.id] || null,
+            platform: INLINE_PLATFORM[v.id] || null,
+            cats: Object.keys(CATEGORIES).filter((k) => !((CATEGORIES[k].exclude || []).includes(v.id)) && (CATEGORIES[k].parsed.some((p) => p.id === v.id) ||
+              (CATEGORIES[k].keyword && title.toUpperCase().includes(CATEGORIES[k].keyword.toUpperCase())))),
+          });
+        });
+      }
+      MANUAL_ITEMS.map(parseManual).forEach((m, i) => videos.push({
+        id: "manual" + i, url: m.url, title: m.title, date: m.date, thumb: m.thumb,
+        views: null, sec: 0, isShort: false, cats: m.cats || [], platform: m.platform || guessPlatform(m.url),
+        members: m.members || [], lyricsType: "", album: m.album || null, ratio: m.ratio,
+        embed: /twitter\.com|x\.com/.test(m.url || "") ? "twitter" : /instagram\.com/.test(m.url || "") ? "instagram" : null,
+      }));
+      videos.forEach((v) => {
+        if (v.cats.some((c) => ["COVER", "LIVE", "L(IVE)", ...SCHEDULE_CATS].includes(c)) && !v.members.includes("아이브") && !v.members.includes("리즈")) v.members = [...v.members, "리즈"];
+      });
+      // MC: 특정 업로드일 영상의 멤버 지정 (한국 시간 기준 날짜)
+      const MC_MEMBERS_BY_DATE = { "2024-05-14": ["레이", "리즈"], "2025-03-16": ["가을", "리즈"] };
+      videos.forEach((v) => {
+        if (!v.cats.includes("MC") || !v.date) return;
+        const kst = new Date(new Date(v.date).getTime() + 9 * 3600 * 1000).toISOString().slice(0, 10);
+        if (MC_MEMBERS_BY_DATE[kst]) v.members = [...MC_MEMBERS_BY_DATE[kst]];
+      });
+      videos.forEach((v) => { if (v.cats.includes("LIVE") || v.cats.includes("L(IVE)")) v.platform = v.platform || PLATFORM_OF[v.id] || "YouTube"; });
+      $("status").remove();
+      renderHome(); route();
+    } catch (err) {
+      $("status").textContent = "네트워크 오류: " + err.message;
+    }
+  }
+  load();
+</script>
+<!-- 트위터/인스타그램 게시물을 실제 임베드로 보여주기 위한 공식 위젯 스크립트 -->
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://www.instagram.com/embed.js"></script>
+</body>
+</html>
