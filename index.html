@@ -402,8 +402,20 @@
         position: relative;
         inset: auto;
       }
+      .ttwrap::before {
+        content: "TikTok";
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #888;
+        font-size: 13px;
+        font-weight: 700;
+      }
       .ttwrap iframe {
         position: absolute;
+        z-index: 1;
         top: 0;
         left: 0;
         width: 325px;
@@ -851,6 +863,7 @@
             "https://youtu.be/gyXUPVfTtgU",
             "https://youtu.be/17YD7Gk5Sco",
             "https://youtu.be/bRiKIPufdZk",
+            "https://youtu.be/MX36821mI5o",
           ],
         },
         "가로 직캠": {
@@ -1190,6 +1203,7 @@
           ids: [
             "https://www.youtube.com/live/-VRi29z-WsI",
             "https://www.youtube.com/live/MvfgEQAusoc | platform=YouTube",
+            "https://youtu.be/OI55_QEjQKM | 리즈 | platform=bubble | date=2024-10-08",
             "https://www.youtube.com/live/IAIDLjdQ9-A | platform=YouTube",
             "https://www.youtube.com/live/27fABL2hsBE | platform=YouTube",
             "https://www.youtube.com/live/nCKGsskEXJw | platform=YouTube",
@@ -1251,9 +1265,9 @@
         },
         Lyrics: {
           ids: [
-            "7G6ouYSy3gc | lyrics=", // 공동 또는 단독을 = 뒤에 적어주세요
-            "C10tc9qJs2s | lyrics=",
-            "jJt7qpdPRzY | lyrics=",
+            "7G6ouYSy3gc | lyrics=공동", // 공동 또는 단독을 = 뒤에 적어주세요
+            "C10tc9qJs2s | lyrics=공동",
+            "jJt7qpdPRzY | lyrics=단독",
           ],
         },
         "etc.(가사)": {
@@ -2333,6 +2347,7 @@
       ];
       // =====================================================================
 
+      const FLAT_ALBUM_TABS = ["RADIO"]; // 폴더를 슬라이더로 펼치지 않는 탭
       const FANCAM_TABS = ["세로 직캠", "가로 직캠"]; // 직캠 탭에서는 멤버 필터/태그(리즈)를 숨김
       let videos = [],
         tab = 0,
@@ -2776,14 +2791,47 @@
           )
         : null;
       // ---- 틱톡 임베드: 화면에 가까워지면 iframe을 만들고, 칸 폭에 맞춰 축소 ----
+      // 틱톡 임베드(325x739)에서 아래 글/계정 영역(약 161px)을 잘라내고 영상(9:16)만 보이게 함
+      const TT_W = 325,
+        TT_H = 739;
       function fitTt() {
         document.querySelectorAll(".ttwrap iframe").forEach((f) => {
-          const w = f.parentElement,
-            cw = w.clientWidth;
-          if (cw) f.style.transform = `scale(${cw / 325})`;
+          const cw = f.parentElement.clientWidth;
+          if (cw) f.style.transform = `scale(${cw / TT_W})`;
         });
       }
       window.addEventListener("resize", fitTt);
+      const ttRO = window.ResizeObserver ? new ResizeObserver(fitTt) : null;
+      // 한꺼번에 많이 불러오면 틱톡이 막거나 느려지므로 TT_MAX개씩 순서대로 불러옴
+      const TT_MAX = 4,
+        ttQueue = [];
+      let ttActive = 0;
+      function pumpTt() {
+        while (ttActive < TT_MAX && ttQueue.length) {
+          const w = ttQueue.shift();
+          ttActive++;
+          let done = false;
+          const fin = () => {
+            if (done) return;
+            done = true;
+            ttActive--;
+            pumpTt();
+          };
+          const f = document.createElement("iframe");
+          f.src = "https://www.tiktok.com/embed/v2/" + w._ttid;
+          f.width = TT_W;
+          f.height = TT_H;
+          f.allowFullscreen = true;
+          f.allow = "fullscreen; encrypted-media; autoplay";
+          f.setAttribute("scrolling", "no");
+          f.setAttribute("frameborder", "0");
+          f.onload = () => setTimeout(fin, 100);
+          w.appendChild(f);
+          if (ttRO) ttRO.observe(w);
+          fitTt();
+          setTimeout(fin, 4000);
+        }
+      }
       const ttIO = window.IntersectionObserver
         ? new IntersectionObserver(
             (ents) =>
@@ -2800,14 +2848,9 @@
         const id = w.dataset.tt;
         delete w.dataset.tt;
         if (!id) return;
-        const f = document.createElement("iframe");
-        f.src = "https://www.tiktok.com/embed/v2/" + id;
-        f.loading = "lazy";
-        f.allowFullscreen = true;
-        f.allow = "fullscreen; encrypted-media";
-        f.setAttribute("scrolling", "no");
-        w.appendChild(f);
-        fitTt();
+        w._ttid = id;
+        ttQueue.push(w);
+        pumpTt();
       }
       function processEmbeds() {
         document.querySelectorAll(".ttwrap[data-tt]").forEach((w) => {
@@ -3026,6 +3069,27 @@
           $("grid").innerHTML = items.map(cardForList).join("");
         } else {
           const withoutAlbum = items.filter((v) => !v.album);
+          if (FLAT_ALBUM_TABS.includes(name)) {
+            // 폴더를 슬라이더로 펼치지 않고, 일반 영상 카드 그대로 폴더별 4개만 보여주고 "더보기"만 추가
+            const groups = {};
+            items.forEach((v) => {
+              if (v.album) (groups[v.album] = groups[v.album] || []).push(v);
+            });
+            $("grid").innerHTML =
+              Object.keys(groups)
+                .map(
+                  (a) =>
+                    `<div class="sec-head" style="grid-column:1/-1"><h2>📁 ${esc(
+                      a
+                    )}</h2><button class="more" data-album="${esc(
+                      a
+                    )}">더보기 →</button></div>` +
+                    groups[a].slice(0, 4).map(cardForList).join("")
+                )
+                .join("") + withoutAlbum.map(cardForList).join("");
+            processEmbeds();
+            return;
+          }
           $("grid").innerHTML =
             `<div style="grid-column:1/-1">${renderAlbumSections(
               items
