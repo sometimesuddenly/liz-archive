@@ -243,6 +243,10 @@
         color: var(--text);
         font-size: 15px;
         outline: none;
+        padding-left: 44px;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2.4' stroke-linecap='round'%3E%3Ccircle cx='10.5' cy='10.5' r='6.5'/%3E%3Cpath d='M20 20l-4.8-4.8'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: 15px center;
       }
       .search:focus {
         border-color: #f2b36b;
@@ -304,6 +308,23 @@
         .grid {
           grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
         }
+      }
+      .folder-card {
+        cursor: pointer;
+        display: block;
+      }
+      .folder-card .fthumb {
+        position: relative;
+        aspect-ratio: 16/9;
+        border-radius: 14px;
+        overflow: hidden;
+        background: #000;
+      }
+      .folder-card .fthumb img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
       }
       .album-head {
         grid-column: 1/-1;
@@ -602,6 +623,12 @@
       .pv-body.pv2 .pv-end {
         grid-column: 1/-1;
       }
+      .pv-col {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        min-width: 0;
+      }
       .pv-body img {
         width: 100%;
         height: auto;
@@ -703,7 +730,7 @@
       <section id="list" hidden>
         <button class="back" id="back">← 홈으로</button>
         <div class="tabs" id="tabs"></div>
-        <input class="search" id="search" placeholder="영상 제목으로 검색" />
+        <input class="search" id="search" placeholder="" aria-label="검색" />
         <div class="memf" id="memf"></div>
         <div class="meta">
           <span id="count"></span>
@@ -1002,6 +1029,7 @@
             "https://youtu.be/zPKm4uLl27A | 안유진,리즈",
             "https://youtu.be/WAoCw2mnmqw | 안유진,리즈",
             "https://youtu.be/07rCrmUjEPg | 안유진,장원영,리즈",
+            "https://youtu.be/FbzJl28qQbs | 가을,리즈 | date=2026-10-23 | title=전현무계획 4 17회",
           ],
         },
         WEB: {
@@ -1065,6 +1093,15 @@
             "https://youtu.be/GRY7juzjqyA | 아이브",
             "https://youtu.be/zsybPfJQjQE | 아이브",
             "https://youtu.be/yonK__Bsymw | 아이브",
+            "https://youtu.be/W-ng10iieao | 아이브",
+            "https://youtu.be/EeoWQHusKUs | 아이브",
+            "https://youtu.be/eUTxFZFRnZE | 아이브",
+            "https://youtu.be/TaOar2dWQGM | 아이브",
+            "https://youtu.be/Uz1s3RfIj8E | 아이브",
+            "https://youtu.be/BsU5-GK1AbU | 아이브",
+            "https://youtu.be/l4Sc_E0GqcA | 아이브",
+            "https://youtu.be/g7suWUkaOdM | 아이브",
+            "https://youtu.be/TvglmVKXEPo | 아이브",
           ],
         },
         RADIO: {
@@ -1204,6 +1241,11 @@
             "https://www.youtube.com/live/-VRi29z-WsI",
             "https://www.youtube.com/live/MvfgEQAusoc | platform=YouTube",
             "https://youtu.be/OI55_QEjQKM | 리즈 | platform=bubble | date=2024-10-08",
+            "https://youtu.be/pdBUSrSg7rU | 리즈 | platform=bubble | date=2024-10-11",
+            "https://youtu.be/T954IrIjC1Q | 리즈 | platform=VLIVE | date=2022-01-28",
+            "https://youtu.be/lUz4DTVouTI | 리즈 | platform=VLIVE | date=2022-11-21",
+            "https://youtu.be/js8UPikeps8 | 리즈 | platform=VLIVE | date=2022-12-28",
+            "https://youtu.be/AQuNYgcSpQU | 리즈 | platform=YouTube | date=2023-04-05",
             "https://www.youtube.com/live/IAIDLjdQ9-A | platform=YouTube",
             "https://www.youtube.com/live/27fABL2hsBE | platform=YouTube",
             "https://www.youtube.com/live/nCKGsskEXJw | platform=YouTube",
@@ -1213,6 +1255,17 @@
         "L(IVE)": {
           ids: [
             "https://www.youtube.com/live/G35elTbpeYw | 안유진,가을,레이,리즈",
+            "https://youtu.be/VlZT7Rix4xM | 가을,리즈 | platform=VLIVE | date=2022-02-07",
+            "https://youtu.be/87W8a9-AAcA | 아이브 | platform=VLIVE | date=2022-06-24",
+            "https://youtu.be/QQ3JUOSpURo | 안유진,레이,리즈 | platform=VLIVE | date=2022-07-13",
+            "https://youtu.be/JXF231oLfDI | 리즈,이서 | platform=VLIVE | date=2022-07-15",
+            "https://youtu.be/aj4f5krXErU | 레이,리즈,이서 | platform=VLIVE | date=2022-08-09",
+            "https://youtu.be/oOVaQmgj-eE | 레이,리즈,이서 | platform=VLIVE | date=2022-08-09",
+            "https://youtu.be/cafRL22Hx0A | 리즈,이서 | platform=VLIVE | date=2022-10-29",
+            "https://youtu.be/K4JiNsS8zJc | 아이브 | platform=VLIVE | date=2022-12-01",
+            "https://youtu.be/UTu_guBpukA | 레이,장원영,리즈 | platform=VLIVE | date=2022-12-20",
+            "https://youtu.be/7Vyin8kcruY | 아이브 | platform=YouTube | date=2023-02-10",
+            "https://youtu.be/jxiyunsJIIw | 아이브 | platform=YouTube | date=2023-03-28",
             "https://www.youtube.com/live/YNbhMkyPNco | 레이,리즈 | platform=YouTube",
             "https://www.youtube.com/live/KA1WvC1HQ-4 | 아이브",
             "https://www.youtube.com/live/msNq5a5yPcE | 안유진,레이,리즈,이서",
@@ -1429,6 +1482,8 @@
             "https://youtube.com/shorts/VP35gB33s18 | 아이브",
             "https://youtube.com/shorts/J69Ak2gL_dQ | 리즈",
             "https://youtube.com/shorts/iIC9_hv_6Rs | 가을,리즈",
+            "https://youtube.com/shorts/m8Xr18LENlM | 리즈",
+            "https://youtube.com/shorts/OItpg4Ohbvk | 장원영,리즈",
           ],
         },
         VOCAL: {
@@ -1845,9 +1900,8 @@
         "2022-02-14 | https://www.instagram.com/reel/CZ1Tedflb0W/ |  | MAGAZINE | 리즈 | ELLE 올리브영 비건뷰티 캠페인 | album=ELLE",
         "2026-10-19 | https://www.instagram.com/reel/Deq1kTfgf0y/ |  | AD | 리즈 | 𝑳-𝑶-𝑽-𝑬 🐱💌 | album=TONYMOLY",
         "2026-10-23 | https://deep.wavve.com/content/K02_T2022-1011?contentType=vod&audiomode=n |  | TV | 리즈 | 더 시즌즈 - 성시경의 고막남친 28회",
-        "2026-10-23 | https://www.tving.com/contents/E004658409 |  | TV | 가을,리즈 | 전현무계획 4 17회",
         "2026-10-24 | https://www.instagram.com/reel/DeyvvGURG_6/ |  | POP-UP | 리즈 | YCH HANNAM | album=YCH",
-        "2026-10-19 | https://www.mnetplus.world/contents/ko/shows/6a434dd9e41135211d9127f0/videos |  | MAGAZINE | 리즈 | FANS' CHOICE FACE | album=FANS' CHOICE FACE | cols=2 | bare=1 | photos=https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg13iXNXPHV8IA8pRSHZZnzUdj9kPK_x5FbmZe6_b7taSchtk8Mv96sYN6bDzCLF0vB-EN4uRHINhKv9XZwQzrv8qo_noW5IeHh3SzBRdAAFc9_F9zgoJAl0dNKzuSOP0PLLu7vI54dFfw-N4ZZokEt_m9YJz6FtdgfyZ1G1KNJy6IgMiMwaEwZ9ZnKwyI/s1248/01_MnetPlus_origin.webp;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjVXgg1Dw0MFI2E9VMYbJWYP0et9DmLzB08wzKu8YGWX8dDqZLfAN3IfjhO4pFzWR6-RdLofk_flxaXIRVFD-TJf7jSuNU6hhKrcSlLvmfiDJFztON9V5aBeLR4RSKdVPjZIoa-RPMy8KEGygZzPrzcJo9IEsSei7clBU9EhnYtoZrhgjljVx3mpEq1kz4/s1248/03_MnetPlus_origin.webp;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjrkZ9uuVrqrJxGei6ZBW-EGnFUr_LsM-E9YN5FTx5e8AIUfD42HMtS6MbByQFxWsX-DxoNdxqyHe230P9DmVxztWhR1-H3Gv-taPOsMFVAPad_N7WmOLIjntlq5Vx8f_sA0_wPebUGuFJDg6zTzqCcesSpftMSb4Vcq4jFda_yRIZWkwujuAmFq3rjuR8/s1248/04_MnetPlus_origin.webp",
+        "2026-07-27 | https://www.mnetplus.world/contents/ko/shows/6a434dd9e41135211d9127f0/videos | https://lh3.googleusercontent.com/d/1NHsnYUSweZxB2DS0XpVsbEQgl3AqKU4n | MAGAZINE | 리즈 | FANS' CHOICE FACE | album=FANS' CHOICE FACE | cols=2 | bare=1 | photos=https://lh3.googleusercontent.com/d/1QXT9kX2kCTzDakGMLGvnk6PZaEhAk6Cv;https://lh3.googleusercontent.com/d/1eUQGSrnzwrXKP0luPS6moWOKaR1PCn2F;https://lh3.googleusercontent.com/d/1wX30fcve6WylGw5PRQ54Pm6XzKEv4nEI;https://lh3.googleusercontent.com/d/1Cm4e1lOQXFNBLUgJaJ4Z6jhdexsDl-p5;https://lh3.googleusercontent.com/d/1OKHgwKjCjQyqemJ6jjhndwj31-Xua7Yd;https://lh3.googleusercontent.com/d/1nzihgwrdXY3qYZPgCH55iKw81ts-dA1J;https://lh3.googleusercontent.com/d/1NHsnYUSweZxB2DS0XpVsbEQgl3AqKU4n;https://lh3.googleusercontent.com/d/1q3XfbnayFi9UOf3d8xJDgH2vrXB4LVF8;https://lh3.googleusercontent.com/d/1QyHfyRedNismJd69fnc_oVaZdLlYjSVX;https://lh3.googleusercontent.com/d/1erXTalWVmHsDnXlJCGmulCC6KeodoEQI;https://lh3.googleusercontent.com/d/1CPKo8ddKp4ArcspbfOqX-fTom9OPP_Ph;https://lh3.googleusercontent.com/d/1sIBnNedpZKY1S7oSj5MaC7-ZBsLWFnL1;https://lh3.googleusercontent.com/d/1u-615zFvChyDtvEb8A5deotB6zQbybvx;https://lh3.googleusercontent.com/d/1u08pNPsnpz0w3hyLtpGcd7woRkkSJUSP;https://lh3.googleusercontent.com/d/1aDnS7PTmMLLz3WMVPZlxFWfErBOfD9ZS;https://lh3.googleusercontent.com/d/1yORk38l9UeRj3o0HyiIz7dJfyBnI5RZ6;https://lh3.googleusercontent.com/d/1pJ3MRJW3CPXSP4iQ7e-uwEpw36b_3f--;https://lh3.googleusercontent.com/d/17ycdKJiCia7383f7NnfZnM1L4aqRBtNk;https://lh3.googleusercontent.com/d/1F22egkpFVHlevHfw-2uZYmuTqgbULSYJ;https://lh3.googleusercontent.com/d/1lqkve7slR8MZ6s7ISvuMWacaYaMdIhip;https://lh3.googleusercontent.com/d/1EVqvY6-vTZT-kfu-YAbQt4jeO2btkaPG;https://lh3.googleusercontent.com/d/1lHhKF-ImPXwxnfZUkMEjt5WluJz551wz;https://lh3.googleusercontent.com/d/1-YYT3-46OGQFrEZDAN51_tv8kV5pROg-;https://lh3.googleusercontent.com/d/1Ie1xZ5DwNqf8Ie2ugUJkjS27gkMFJYLM;https://lh3.googleusercontent.com/d/1UdKKaha4rV-kEivDCJjymuLzCEgAMW4w;https://lh3.googleusercontent.com/d/11pYARveenWxuyjpN-WfBw4mZIvVkihSS;https://lh3.googleusercontent.com/d/1U6-maAAZgtGE28qhCUzHnWdYLU-dBc79;https://lh3.googleusercontent.com/d/1RsoVNhXvmYn8C2JPQV_tXQ649o_5Ifo0;https://lh3.googleusercontent.com/d/1KDLDVNH0sGfyvG3uYl-cJ0wXO_T4fZSS;https://lh3.googleusercontent.com/d/13MTBAy35OPG9mmgZe-qUGIk3PLlmcYJp;https://lh3.googleusercontent.com/d/1uoCUzfUrfH4o4iyZk3gONpZSP7vodvE0;https://lh3.googleusercontent.com/d/1Tc2i6LEnHowf61ugJ9dzhBczDuCwhh4G",
         "2026-10-16 | http://xhslink.com/o/9mhbWbX6YJI |  | AD | 리즈 | H&M CHINA | album=H&M CHINA",
         // ---- 2026.10 추가분 (YCH HANNAM / H&M CHINA) ----
         "2026-10-14 | https://www.instagram.com/reel/Ded1fDLhynI/ |  | POP-UP | 리즈 | YCH HANNAM | album=YCH",
@@ -2435,6 +2489,7 @@
           else if (key === "album") out.album = val || null;
           else if (key === "lyrics" || key === "lyricstype")
             out.lyricsType = val || null;
+          else if (key === "title") out.title = val || null; // 영상 제목 직접 지정
           else if (key === "date") out.date = val || null; // 업로드일 대신 표시할 날짜 (YYYY-MM-DD)
         });
         return out;
@@ -2446,7 +2501,8 @@
         INLINE_PLATFORM = {},
         INLINE_ALBUM = {},
         INLINE_LYRICS = {},
-        INLINE_DATE = {};
+        INLINE_DATE = {},
+        INLINE_TITLE = {};
       Object.values(CATEGORIES).forEach((c) =>
         c.parsed.forEach((p) => {
           if (p.members) INLINE_MEMBERS[p.id] = p.members;
@@ -2454,6 +2510,7 @@
           if (p.album) INLINE_ALBUM[p.id] = p.album;
           if (p.lyricsType) INLINE_LYRICS[p.id] = p.lyricsType;
           if (p.date) INLINE_DATE[p.id] = p.date;
+          if (p.title) INLINE_TITLE[p.id] = p.title;
         })
       );
 
@@ -2606,7 +2663,7 @@
         ${
           embedHtml ||
           (v.thumb
-            ? `<img src="${v.thumb}" alt="" loading="lazy" decoding="async" />`
+            ? `<img src="${v.thumb}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" />`
             : isLive
             ? ""
             : `<span class="phtxt" style="color:${
@@ -3070,23 +3127,23 @@
         } else {
           const withoutAlbum = items.filter((v) => !v.album);
           if (FLAT_ALBUM_TABS.includes(name)) {
-            // 폴더를 슬라이더로 펼치지 않고, 일반 영상 카드 그대로 폴더별 4개만 보여주고 "더보기"만 추가
+            // 폴더를 슬라이더로 펼치지 않고, 폴더당 커버 카드 1개만 보여주고 누르면 폴더가 열림
             const groups = {};
             items.forEach((v) => {
               if (v.album) (groups[v.album] = groups[v.album] || []).push(v);
             });
+            const folderCard = (a) => {
+              const g = groups[a].slice().sort((x, y) => new Date(y.date) - new Date(x.date));
+              const cover = g[0];
+              return `<div class="folder-card" data-album="${esc(a)}" role="button">
+                <div class="fthumb"><img src="${cover.thumb || ""}" alt="" loading="lazy" referrerpolicy="no-referrer" /></div>
+                <div class="title">${esc(a)}</div>
+                <div class="info">${g.length}개 • ${fmtDate(g[g.length - 1].date)} ~ ${fmtDate(cover.date)}</div>
+              </div>`;
+            };
             $("grid").innerHTML =
-              Object.keys(groups)
-                .map(
-                  (a) =>
-                    `<div class="sec-head" style="grid-column:1/-1"><h2>📁 ${esc(
-                      a
-                    )}</h2><button class="more" data-album="${esc(
-                      a
-                    )}">더보기 →</button></div>` +
-                    groups[a].slice(0, 4).map(cardForList).join("")
-                )
-                .join("") + withoutAlbum.map(cardForList).join("");
+              Object.keys(groups).map(folderCard).join("") +
+              withoutAlbum.map(cardForList).join("");
             processEmbeds();
             return;
           }
@@ -3275,12 +3332,49 @@
               )}" target="_blank" rel="noopener">원문 보기</a>`
             : ""
         }</div></div></div>
-      <div class="pv-body${v.cols === 2 ? " pv2" : ""}">${v.photos
-          .map(
+      <div class="pv-body${v.cols === 2 ? " pv2" : ""}">${
+          v.cols === 2
+            ? '<div class="pv-col"></div><div class="pv-col"></div>'
+            : v.photos
+                .map(
+                  (u) =>
+                    `<img src="${esc(
+                      u
+                    )}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" />`
+                )
+                .join("")
+        }${v.bare ? "" : '<div class="pv-end">· 끝 ·</div>'}</div>`;
+        // 2열 보기: 사진 세로 길이에 맞춰 더 짧은 열에 차례로 쌓기 (빈틈 없이 정렬)
+        if (v.cols === 2) {
+          const token = (pvEl._tok = (pvEl._tok || 0) + 1);
+          const cols = pvEl.querySelectorAll(".pv-col");
+          const heights = [0, 0];
+          const ratios = v.photos.map(
             (u) =>
-              `<img src="${esc(u)}" alt="" loading="lazy" decoding="async" />`
-          )
-          .join("")}${v.bare ? "" : '<div class="pv-end">· 끝 ·</div>'}</div>`;
+              new Promise((res) => {
+                const im = new Image();
+                im.referrerPolicy = "no-referrer";
+                im.onload = () =>
+                  res(im.naturalHeight / (im.naturalWidth || 1) || 1.5);
+                im.onerror = () => res(1.5);
+                im.src = u;
+              })
+          );
+          Promise.all(ratios).then((rs) => {
+            if (pvEl._tok !== token) return;
+            v.photos.forEach((u, k) => {
+              const c = heights[0] <= heights[1] ? 0 : 1;
+              heights[c] += rs[k];
+              const img = document.createElement("img");
+              img.alt = "";
+              img.decoding = "async";
+              img.referrerPolicy = "no-referrer";
+              img.style.aspectRatio = "1 / " + rs[k];
+              img.src = u;
+              cols[c].appendChild(img);
+            });
+          });
+        }
         pvEl.scrollTop = 0;
         pvEl.hidden = false;
         document.body.style.overflow = "hidden";
@@ -3327,7 +3421,7 @@
             }
             data.items.forEach((v) => {
               const sec = toSec(v.contentDetails.duration);
-              const title = v.snippet.title;
+              const title = INLINE_TITLE[v.id] || v.snippet.title;
               videos.push({
                 id: v.id,
                 title,
