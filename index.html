@@ -54,7 +54,6 @@
         padding: 12px 0;
         white-space: pre-line;
       }
-
       /* 카테고리 버튼: 한 줄에 4개 + 각 버튼 아래로 세부 카테고리 드롭다운 */
       .pinbar {
         position: relative;
@@ -143,7 +142,6 @@
       .subitem:active {
         color: var(--tg);
       }
-
       .sec {
         margin-bottom: 28px;
       }
@@ -204,7 +202,6 @@
           display: block;
         }
       }
-
       .back {
         color: var(--muted);
         font-size: 14px;
@@ -251,7 +248,6 @@
       .search:focus {
         border-color: #f2b36b;
       }
-
       .memf {
         display: flex;
         flex-wrap: wrap;
@@ -272,7 +268,6 @@
         color: #3a2a1a;
         border-color: transparent;
       }
-
       .meta {
         display: flex;
         justify-content: space-between;
@@ -333,7 +328,6 @@
         margin: 6px 0 -4px;
         color: var(--gold);
       }
-
       .card {
         display: block;
         color: inherit;
@@ -723,10 +717,8 @@
     <div class="wrap">
       <div class="logo" id="logo"></div>
       <div id="status">불러오는 중...</div>
-
       <div class="pinbar" id="pinbar" hidden></div>
       <section id="home" hidden></section>
-
       <section id="list" hidden>
         <button class="back" id="back">← 홈으로</button>
         <div class="tabs" id="tabs"></div>
@@ -743,7 +735,6 @@
         <div class="grid" id="grid"></div>
       </section>
     </div>
-
     <script>
       // =====================================================================
       // 여기부터 수정하는 곳입니다
@@ -759,7 +750,6 @@
       // -----------------------------------------------------------------
       const SITE_TITLE = "TANGERINE BOX";
       const API_KEY = "AIzaSyCKVVU_-Cl2AQAhawDr4nRVEcQCHvxoek4";
-
       // ---- 카테고리별 영상 ----
       // 링크(또는 ID) 뒤에 " | " 로 구분해서 아래 항목들을 원하는 만큼 이어 붙일 수 있습니다. 순서는 상관없어요.
       //   - 멤버: 그냥 이름들을 쉼표로 (예: 안유진,가을)
@@ -786,7 +776,6 @@
             "https://youtu.be/JG5mnmFPji8",
             "https://youtu.be/eWYYQ3_kzWA",
             "https://youtu.be/p6u5V8FTIcI",
-
             "https://youtu.be/JmmRKoIQczo",
             "https://youtu.be/Z7gDL1plNxY",
             "https://youtu.be/PopaWUh-xpw",
@@ -904,7 +893,6 @@
             "https://youtu.be/_Y5f5I8-vN8",
             "https://youtu.be/nuV3_XNv-_o",
             "https://youtu.be/MOhd0s-FvfY",
-
             "https://youtu.be/22-ev5iBebo",
             "https://youtu.be/PcLKL-nuqGw",
             "https://youtu.be/PHUWkjYKRbI",
@@ -1517,8 +1505,7 @@
         },
         IVE: {
           ids: [
-            "https://youtu.be/MK-hRnbImpU | 아이브 | album=COSMOPOLITAN 2026년 3월호",
-            "https://youtube.com/shorts/aGYLkmzd-Wg | 리즈",
+                        "https://youtube.com/shorts/aGYLkmzd-Wg | 리즈",
             "https://youtube.com/shorts/fpj9w4ney7g | 아이브",
             "https://youtube.com/shorts/a6zxBqyBrrA | 리즈",
             "https://youtube.com/shorts/YcvPZlQbkGs | 장원영,리즈",
@@ -1743,7 +1730,6 @@
       };
       // 어떤 카테고리에도 안 넣고 "전체 영상 보기"에만 보이게 할 영상
       const OTHER_IDS = [];
-
       // 화면에 다른 이름으로 보이게 할 카테고리 (내부 키는 위 CATEGORIES와 맞춰야 함)
       const TAB_LABELS = {
         "etc.(가사)": "etc.",
@@ -1760,7 +1746,6 @@
         VLOG: ["NYANG LOG", "IVE LOG"],
         Shorts: ["Shorts", "VOCAL", "DANCE", "IVE"],
       };
-
       // ---- 멤버 표시 (파스텔 배경) ----
       const MEMBER_COLORS = {
         가을: "#e3c9b3",
@@ -1812,7 +1797,6 @@
           : /tiktok\.com/.test(u || "")
           ? "TikTok"
           : undefined;
-
       // ---- (참고용) 보조 지정 ----
       // CATEGORIES에 " | 멤버 / platform=... / lyrics=... / album=..." 형식으로 이미 적었다면
       // 아래 네 개는 전부 비워둬도 됩니다. 여기 적으면 CATEGORIES에 못 적은 영상에만 보조로 적용돼요.
@@ -1828,7 +1812,6 @@
       const ALBUM_OF = {
         /* "영상ID": "앨범 이름", */
       };
-
       // ---- 유튜브가 아닌 게시물(사진, 트위터, Berriz 등) 직접 입력 ----
       // 한 줄에 " | "로 구분해서: 날짜 | 링크 | 사진주소 | 카테고리 | 멤버 | 제목
       //   - 날짜는 YYYY-MM-DD
@@ -2307,9 +2290,7 @@
         "2026-03-01 | https://www.instagram.com/reels/DUsAdYkj3GC/ |  | MAGAZINE | 아이브 | COSMOPOLITAN 2026년 3월호 | album=COSMOPOLITAN 2026년 3월호",
         "2026-03-01 | https://www.instagram.com/reels/DVIu-tiiPMd/ |  | MAGAZINE | 아이브 | COSMOPOLITAN 2026년 3월호 | album=COSMOPOLITAN 2026년 3월호",
         "2026-03-01 | https://www.cosmopolitan.co.kr/article/1897748 | https://blog.kakaocdn.net/dn/GJaau/dJMcad4JY72/EmJML4iFQkO7tgxOPHaie0/AAAAAAAAAAAAAAAAAAAAAEdsDM6go-lny5bITqrmuwIkBBpUZUlQ3VcBrkFr8igv/img.jpg | MAGAZINE | 아이브 | COSMOPOLITAN 2026년 3월호 | album=COSMOPOLITAN 2026년 3월호 | cols=2 | bare=1 | original=1 | photos=https://blog.kakaocdn.net/dn/GJaau/dJMcad4JY72/EmJML4iFQkO7tgxOPHaie0/AAAAAAAAAAAAAAAAAAAAAEdsDM6go-lny5bITqrmuwIkBBpUZUlQ3VcBrkFr8igv/img.jpg;https://blog.kakaocdn.net/dn/chlReV/dJMcaa8dJEb/lJSKbPWQ7aTog83NkyKQyK/AAAAAAAAAAAAAAAAAAAAAK44Rq_DasVH1Mn2bKizwsrWA3I-x-OyQpWTAy866JDx/img.jpg;https://blog.kakaocdn.net/dn/ytjj0/dJMcadcxjLc/nPxKhxB2XN0uNygt5G24D1/AAAAAAAAAAAAAAAAAAAAADgqBL9Snj7wx5ISmCutK7AQTlqggIgawTncRyUGX_er/img.jpg;https://blog.kakaocdn.net/dn/GCcAx/dJMcabFPbs5/8pEXWyOqAWfDfKqAME41I1/AAAAAAAAAAAAAAAAAAAAAAc5RRdE8yrVlrCUwYTz5RsJ-pVy_IKiF8xoqjAnHkCi/img.jpg;https://blog.kakaocdn.net/dn/cRaDs6/dJMcaiLJcWU/SkC9cqO7l9XHKSae0kHwVk/AAAAAAAAAAAAAAAAAAAAAFB6LvkBZujnu4I9wmsidaeKlGnzMX6pPK_xQpIp6a_s/img.jpg;https://blog.kakaocdn.net/dn/wFNcN/dJMcajqgYub/zzyFh8B3b9KU4m9evk3fHK/AAAAAAAAAAAAAAAAAAAAAL_8-Iwgn8oZuBNnJYQ3f8mr-Y930vLdKkvncHP0iaQC/img.jpg;https://blog.kakaocdn.net/dn/ElL9D/dJMcad4JY79/5hJ70tr4ebgQQ8qIPacGCk/AAAAAAAAAAAAAAAAAAAAAObekXlOBY7WxFmQG_AE3WJMRm8KV4G-Dp3aD8YUCGYt/img.jpg",
-
       ];
-
       // ---- 메인 화면 섹션 ----
       // 각 섹션에서 쓸 수 있는 설정값:
       //   title          섹션 제목 (이모지 포함 텍스트)
@@ -2373,7 +2354,6 @@
         },
         // 메뉴에 없는 카테고리(SOLO, TEASER, PHOTO 등)는 "전체 영상 보기"에서만 보입니다
       ];
-
       // "전체 영상 보기"에서 볼 수 있는 모든 탭
       const TAB_ORDER = [
         "전체",
@@ -2411,7 +2391,6 @@
         "PHOTO",
       ];
       // =====================================================================
-
       const FLAT_ALBUM_TABS = ["RADIO"]; // 폴더를 슬라이더로 펼치지 않는 탭
       const FANCAM_TABS = ["세로 직캠", "가로 직캠"]; // 직캠 탭에서는 멤버 필터/태그(리즈)를 숨김
       let videos = [],
@@ -2432,7 +2411,6 @@
       const tabCats = (name) => (scope && TAB_GROUPS[name]) || [name];
       const inTab = (v, name) => tabCats(name).some((c) => v.cats.includes(c));
       $("logo").innerHTML = SITE_TITLE.replace(/^(\S+)/, "<span>$1</span>");
-
       const extractId = (s) => {
         s = (s || "").trim();
         const m = s.match(
@@ -2525,7 +2503,6 @@
           if (p.title) INLINE_TITLE[p.id] = p.title;
         })
       );
-
       const esc = (s) =>
         s.replace(
           /[&<>"]/g,
@@ -2555,10 +2532,8 @@
         const m = iso.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
         return (+m[1] || 0) * 3600 + (+m[2] || 0) * 60 + (+m[3] || 0);
       };
-
       const SCHEDULE_CATS = ["MAGAZINE", "POP-UP", "AD", "MC", "etc.(일정)"];
       const hideViews = (v) => v.cats.some((c) => SCHEDULE_CATS.includes(c));
-
       const hideTags = () =>
         location.hash === "#list" &&
         (tabList()[tab] === "SOLO" ||
@@ -2623,7 +2598,6 @@
             : v.embed === "instagram"
             ? `<div class="igwrap" data-lazy="instagram" data-url="${v.url}"><div class="iginner"></div></div>`
             : null;
-
         // 소셜 임베드는 free 모드에서 원본 비율/높이를 유지하고 잘라내지 않습니다.
         if (embedHtml && free) {
           return `<a class="card" href="${
@@ -2646,7 +2620,6 @@
         }
       </a>`;
         }
-
         const isLive = (v.cats || []).some(
           (c) => c === "LIVE" || c === "L(IVE)"
         );
@@ -2727,7 +2700,6 @@
       }
     </a>`;
       }
-
       // 인스타그램 임베드 크기 배율 (1 = 16:9 칸에 딱 맞춤, 0.8 = 80%). 웹/모바일 따로 조절하세요.
       const IG_FIT = { web: 1, mobile: 1 };
       // 인스타그램 4:5 카드: 임베드를 가로로 꽉 채운 뒤 위쪽 프로필 줄(header)만큼 잘라내서 영상 화면 위주로 보이게 함.
@@ -2945,7 +2917,6 @@
         requestAnimationFrame(fitIg);
         [600, 1500, 3000, 6000].forEach((t) => setTimeout(fitIg, t));
       }
-
       function renderPinBar() {
         $("pinbar").innerHTML = HOME_SECTIONS.map((s, si) => {
           const items = sTabs(s)
@@ -2961,7 +2932,6 @@
           )}</button><div class="pinmenu">${items}</div></div>`;
         }).join("");
       }
-
       function renderHome() {
         $("home").innerHTML =
           HOME_SECTIONS.map((s, si) => {
@@ -2996,7 +2966,6 @@
           '<div style="text-align:center"><button class="more" data-all>전체 영상 보기 →</button></div>';
         processEmbeds();
       }
-
       function renderMemberFilter() {
         $("memf").innerHTML = MEMBER_LIST.map(
           (m) =>
@@ -3005,7 +2974,6 @@
             }" data-m="${m}" style="--c:${MEMBER_COLORS[m]}">${m}</button>`
         ).join("");
       }
-
       function renderAlbumSections(items) {
         const groups = {};
         items.forEach((v) => {
@@ -3032,7 +3000,6 @@
           })
           .join("");
       }
-
       // 폴더(album) 안에서 맨 앞에 놓을 게시물 (링크 속 코드, 아래 순서대로 맨 위에 표시 / 고정 아님)
       const PIN_FIRST = [
         "DYBsKjFzg7Z",
@@ -3064,7 +3031,6 @@
         });
         return out;
       }
-
       function renderList() {
         const name = tabList()[tab];
         const label = TAB_LABELS[name] || name;
@@ -3113,7 +3079,6 @@
             : new Date(b.date) - new Date(a.date)
         );
         items = pinnedFirst(sort === "oldest" ? items : pinFirst(items)); // 날짜순일 때는 폴더 맨앞 지정(PIN_FIRST)만 풀고, 귤 도장 고정은 계속 유지
-
         if (albumScope) {
           const albumItems = items.filter((v) => v.album === albumScope);
           $("count").textContent = `${albumScope} · ${albumItems.length}개`;
@@ -3129,7 +3094,6 @@
           processEmbeds();
           return;
         }
-
         $("count").textContent = `${label} · ${items.length}개`;
         $("grid").classList.remove("social-list");
         const cardForList = (v) => card(v);
@@ -3166,7 +3130,6 @@
         }
         processEmbeds();
       }
-
       function renderTabs() {
         $("tabs").innerHTML = tabList()
           .map(
@@ -3177,7 +3140,6 @@
           )
           .join("");
       }
-
       function route() {
         const isList = location.hash === "#list";
         $("home").hidden = isList;
@@ -3193,7 +3155,6 @@
         }
         window.scrollTo(0, 0);
       }
-
       $("back").onclick = () => {
         albumScope = null;
         location.hash = "";
@@ -3313,7 +3274,6 @@
           location.hash = "list";
         }
       });
-
       // ---- 사진 모아보기 (게시물 카드를 누르면 사진이 세로로 쭉 보임) ----
       let pvEl;
       function openPv(key) {
@@ -3401,7 +3361,6 @@
         e.preventDefault();
         openPv(c.dataset.pk);
       });
-
       async function load() {
         const ALL_IDS = [
           ...new Set([
