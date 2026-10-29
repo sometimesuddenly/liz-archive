@@ -321,6 +321,21 @@
         object-fit: cover;
         display: block;
       }
+      /* MAGAZINE 폴더: 사진 원본 크기(비율) 그대로 */
+      .folder-card.auto .fthumb {
+        aspect-ratio: auto;
+        background: none;
+      }
+      .folder-card.auto .fthumb img {
+        height: auto;
+        object-fit: contain;
+      }
+      .folder-card.auto .fthumb.ph {
+        aspect-ratio: 4/5;
+      }
+      .folder-card .fthumb .plat {
+        background: rgba(40, 30, 20, 0.72);
+      }
       .album-head {
         grid-column: 1/-1;
         font-weight: 700;
@@ -1023,6 +1038,7 @@
         },
         WEB: {
           ids: [
+            "https://youtu.be/gMXtrfR9gsY | 리즈",
             "https://youtube.com/shorts/IqVT2rnDb4c | 가을,리즈,이서",
             "aq08y9ebFQs",
             "https://youtu.be/xTZgJPe0tSc | 리즈",
@@ -1323,6 +1339,9 @@
         }, // 화면엔 "etc."로 표시
         Shorts: {
           ids: [
+            "https://youtube.com/shorts/MkhHRuJTZIc | 아이브",
+            "https://youtube.com/shorts/xwFvMzFlLyI | 리즈,이서",
+            "https://youtube.com/shorts/OR3GoUzdxBU | 아이브",
             "https://youtube.com/shorts/7IE9U2VcGsI | 안유진,레이,리즈,이서",
             "https://youtube.com/shorts/D2dUR-VBcBA | 아이브",
             "https://youtube.com/shorts/vBHWUYjCBCE | 리즈",
@@ -1952,8 +1971,14 @@
         "2026-08-19 | https://link.berriz.in/ko/web/main/ive/live/replay/01a019ca-6e0d-a15d-ba27-973ef2345ddd | https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhW_KDfrDnNrO5_9sqv7xZKbH21yZ5bImkUMiX3KlOQaRcUtX0Cm6imJYSAzJZFE406oN_7g_l-nDkTxDpKuM6tUlNsgRgXuT1bdH2wQL5hgTcTiXOtjiR6zchpT5orLV7azimubNeBZwi8v7zpa75_1eiL6BH_hHUIH7_gVDatAztlHtkDY3l3jL0xyyQ/s3312/1791814778828.jpeg | LIVE |  | 놀쟈 | platform=Berriz",
         "2026-07-01 | https://link.berriz.in/ko/web/main/ive/live/replay/019f1ca9-f788-5427-8c4b-8d66cb25f2ca | https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiT6o6Hmu-06rJNm8WJQFuwIR9m5jW_BXuGRAyRL8HdZNXtb6rr4MBQ6z3Q_OKBnrwUUAhJQxsDQHCADRTtLgsUvyDqpgf8Yey5ilCKHkgst8G5dEqS8Y1vj_4PeMo8u-kab0CuhbHr9XUNVJxFnPXcov0hBfc5NyWqvsVYvLlKdhhDLnoWa6iEZNjBTNk/s4096/1791814782827.jpeg | LIVE |  | 냥 !!🐱 | platform=Berriz",
         "2026-10-19 | https://link.berriz.in/ko/web/main/ive/board/01971b76-d2df-cd5d-85cc-0a1e213a6f37/post/019e487d-ed4d-e64b-87b9-2607e215b63d/ |  | Berriz |  | 여기에 제목을 입력하세요 (Berriz 게시물) | platform=Berriz",
-        "2026-09-26 | https://x.com/IVE_twt/status/2102960947094790235 |  | Twitter |  | 여기에 설명을 입력하세요 (트위터 사진)",
-        "2026-09-30 | https://x.com/IVE_twt/status/2094686328336355409 |  | Twitter |  | 여기에 설명을 입력하세요 (트위터 사진)",
+        "2026-05-10 | https://x.com/IVE_twt/status/2053357862290890771 |  | Twitter | 레이,리즈 | 또 가고 싶따…!!",
+        "2026-08-08 | https://x.com/i/status/2085983952574247383 |  | Twitter | 리즈 | 🐈‍⬛🐈인간 고양이🐈🐈‍⬛",
+        "2026-09-24 | https://x.com/IVE_twt/status/2102960947094790235 |  | Twitter | 가을,리즈 | 가을언니 생일축하행🙈💗 오늘 하루 제일 행복하게 보내 💋",
+        "2026-09-01 | https://x.com/IVE_twt/status/2094686328336355409 |  | Twitter | 안유진,리즈 | 유디니언니 생일축하해🎂🎂 앞으로도 맛있는 거 많이 먹고 행복하자💋♥️ 뾱🐣",
+        "2026-05-09 | https://x.com/IVE_twt/status/2053108924241547345 |  | Twitter | 아이브 | 아이브 훠궈 회식 인증샷 🤳",
+        "2026-07-18 | https://x.com/IVEstarship_JP/status/2078355662715924845 |  | Twitter | 리즈 | 昨日、多くのアーティストの皆さんとMステで一緒に過ごせて光栄でした ☺️ 今日も幸せな一日をお過ごしください💕💕",
+        "2026-04-07 | https://x.com/IVE_twt/status/2041415286990180505 |  | Twitter | 리즈 | 복숭아 찌르지 마세요오🍑🍑",
+        "2026-03-06 | https://x.com/IVE_twt/status/2029900526650093671 |  | Twitter | 아이브 | 기요미들🖤 뱅뱅 1위했당 다이브 고마워🖤🖤",
         // ---- AD · Valentino (최신순 / 모두 레이,리즈 / album=Valentino) ----
         // Valentino Antibiblioteca
         "2026-10-04 | https://x.com/MaisonValentino/status/2107762053846794654 |  | AD | 레이,리즈 | Valentino Antibiblioteca | album=Valentino",
@@ -2391,7 +2416,7 @@
         "PHOTO",
       ];
       // =====================================================================
-      const FLAT_ALBUM_TABS = ["RADIO"]; // 폴더를 슬라이더로 펼치지 않는 탭
+      const FLAT_ALBUM_TABS = ["RADIO", "MAGAZINE"]; // 폴더를 슬라이더로 펼치지 않는 탭
       const FANCAM_TABS = ["세로 직캠", "가로 직캠"]; // 직캠 탭에서는 멤버 필터/태그(리즈)를 숨김
       let videos = [],
         tab = 0,
@@ -3096,6 +3121,7 @@
         }
         $("count").textContent = `${label} · ${items.length}개`;
         $("grid").classList.remove("social-list");
+        $("grid").style.alignItems = "";
         const cardForList = (v) => card(v);
         if (name === "전체") {
           // 그룹 전체 탭에서는 폴더로 묶지 않고 전부 풀어서 정렬된 채로 보여줌
@@ -3108,17 +3134,41 @@
             items.forEach((v) => {
               if (v.album) (groups[v.album] = groups[v.album] || []).push(v);
             });
+            const isMag = name === "MAGAZINE";
+            const hasPhotos = (a) => groups[a].some((v) => v.photos && v.photos.length);
             const folderCard = (a) => {
               const g = groups[a].slice().sort((x, y) => new Date(y.date) - new Date(x.date));
-              const cover = g[0];
-              return `<div class="folder-card" data-album="${esc(a)}" role="button">
-                <div class="fthumb"><img src="${cover.thumb || ""}" alt="" loading="lazy" referrerpolicy="no-referrer" /></div>
+              // 사진 묶음 게시물이 있으면 그것을 표지로, 없으면 썸네일이 있는 최신 게시물
+              const cover =
+                g.find((v) => v.photos && v.photos.length) ||
+                g.find((v) => v.thumb) ||
+                g[0];
+              const nPhotos = g.reduce((n, v) => n + (v.photos ? v.photos.length : 0), 0);
+              const thumbHtml = cover.thumb
+                ? `<div class="fthumb"><img src="${cover.thumb}" alt="" loading="lazy" referrerpolicy="no-referrer" />${
+                    isMag && nPhotos
+                      ? `<span class="plat">📷 ${nPhotos}</span>`
+                      : ""
+                  }</div>`
+                : `<div class="fthumb ph"><span class="phtxt" style="color:#b9945f">${esc(a)}</span></div>`;
+              return `<div class="folder-card${isMag ? " auto" : ""}" data-album="${esc(a)}" role="button">
+                ${thumbHtml}
                 <div class="title">${esc(a)}</div>
-                <div class="info">${g.length}개 • ${fmtDate(g[g.length - 1].date)} ~ ${fmtDate(cover.date)}</div>
+                <div class="info">${g.length}개 • ${fmtDate(g[g.length - 1].date)} ~ ${fmtDate(g[0].date)}</div>
               </div>`;
             };
+            let albumKeys = Object.keys(groups);
+            if (isMag) {
+              // 사진 모음 앨범을 맨 앞으로 (그 안에서는 최신순)
+              const latest = (a) => Math.max(...groups[a].map((v) => +new Date(v.date) || 0));
+              albumKeys.sort(
+                (x, y) =>
+                  (hasPhotos(y) ? 1 : 0) - (hasPhotos(x) ? 1 : 0) || latest(y) - latest(x)
+              );
+            }
+            $("grid").style.alignItems = isMag ? "start" : "";
             $("grid").innerHTML =
-              Object.keys(groups).map(folderCard).join("") +
+              albumKeys.map(folderCard).join("") +
               withoutAlbum.map(cardForList).join("");
             processEmbeds();
             return;
