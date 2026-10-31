@@ -1039,6 +1039,8 @@
         },
         WEB: {
           ids: [
+            "https://youtu.be/xiIyXP1nDCk | 리즈",
+            "https://youtu.be/xmPkKHhcRqY | 아이브",
             "https://youtu.be/gMXtrfR9gsY | 리즈",
             "https://youtube.com/shorts/IqVT2rnDb4c | 가을,리즈,이서",
             "aq08y9ebFQs",
@@ -1233,6 +1235,7 @@
         },
         ASMR: {
           ids: [
+            "https://youtu.be/xiIyXP1nDCk | 리즈",
             "DP3DpXTXkIs",
             "LrvmL-CwT-4",
             "Xm0z10LfoC0",
@@ -1340,6 +1343,8 @@
         }, // 화면엔 "etc."로 표시
         Shorts: {
           ids: [
+            "https://youtube.com/shorts/c-AOvy_Rnqg | 리즈",
+            "https://youtube.com/shorts/LNaHFnB59WA | 아이브",
             "https://youtube.com/shorts/fLj_GnvZo8Y | 레이,리즈",
             "https://youtube.com/shorts/zMlftoYEq28 | 장원영,리즈",
             "https://youtube.com/shorts/MkhHRuJTZIc | 아이브",
@@ -2618,8 +2623,16 @@
             scope.cats &&
             scope.cats.some((c) => FANCAM_TABS.includes(c))
           )); // 직캠 화면에서만 멤버 태그 숨김 (COVER 등에서는 그대로 표시)
-      const shownMem = (v) =>
-        hideTags() || (v.cats || []).includes("ASMR") ? [] : v.members || [];
+      // ASMR 전용 영상은 어디서든 태그 숨김, ASMR+다른 카테고리(WEB 등) 영상은 ASMR 화면에서만 숨김
+      const inAsmrView = () =>
+        location.hash === "#list" &&
+        (tabList()[tab] === "ASMR" ||
+          !!(scope && scope.cats && scope.cats.includes("ASMR")));
+      const shownMem = (v) => {
+        const c = v.cats || [];
+        const asmrHide = c.includes("ASMR") && (c.length === 1 || inAsmrView());
+        return hideTags() || asmrHide ? [] : v.members || [];
+      };
       // ---- 귤 도장(고정) : 이 브라우저(localStorage)에 저장 ----
       const PIN_KEY = "pinnedVideos";
       const pinnedSet = new Set();
