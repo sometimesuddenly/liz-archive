@@ -69,8 +69,8 @@
       }
       .pin {
         width: 100%;
-        min-height: 40px;
-        padding: 6px 6px;
+        min-height: 34px;
+        padding: 4px 6px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -80,7 +80,7 @@
         background: var(--panel);
         color: var(--text);
         font-weight: 800;
-        font-size: clamp(10px, 2.7vw, 13px);
+        font-size: clamp(9px, 2.4vw, 11.5px);
         line-height: 1.15;
         text-align: center;
         word-break: keep-all;
@@ -332,6 +332,38 @@
       }
       .folder-card.auto .fthumb.ph {
         aspect-ratio: 4/5;
+      }
+      /* POP-UP 폴더: 표지에 인스타 임베드, 위에 투명 막을 씌워 누르면 폴더가 열림 */
+      .folder-card .fthumb.pu {
+        position: relative;
+        background: none;
+        aspect-ratio: auto;
+        overflow: hidden;
+      }
+      .folder-card .fthumb.pu .thumb {
+        width: 100%;
+      }
+      .pu-shield {
+        position: absolute;
+        inset: 0;
+        z-index: 3;
+        cursor: pointer;
+      }
+      .folder-more {
+        margin: 0 0 0 8px;
+        padding: 1px 9px;
+        vertical-align: baseline;
+        border: 1px solid var(--tg, #ff8a1f);
+        border-radius: 999px;
+        background: none;
+        color: var(--tg-d, #e06f08);
+        font-size: 11px;
+        font-weight: 700;
+        cursor: pointer;
+      }
+      .folder-more:hover {
+        background: var(--tg, #ff8a1f);
+        color: #fff;
       }
       .folder-card .fthumb .plat {
         background: rgba(40, 30, 20, 0.72);
@@ -1030,6 +1062,8 @@
         },
         TV: {
           ids: [
+            "https://youtu.be/9XQCPF6SPzQ | 아이브 | date=2025-02-07",
+            "https://youtu.be/9ZN6SvVP4Uk | 아이브",
             "https://youtu.be/xQY6iSryMMA | 레이,리즈,이서",
             "https://youtu.be/zPKm4uLl27A | 안유진,리즈",
             "https://youtu.be/WAoCw2mnmqw | 안유진,리즈",
@@ -1039,6 +1073,47 @@
         },
         WEB: {
           ids: [
+            "https://youtu.be/RLNP4CfhqAA | 아이브",
+            "https://youtu.be/H55d2wpmDN4 | 아이브",
+            "https://youtu.be/52GrwzjnSuA | 아이브",
+            "https://youtu.be/7en7lxM0tpI | 아이브",
+            "https://youtu.be/cjcE21FwL78 | 아이브",
+            "https://youtu.be/xOuXYe-3Y1I | 아이브",
+            "https://youtu.be/ygMpxlQcyDo | 아이브",
+            "https://youtu.be/O1GjobcHEoE | 아이브",
+            "https://youtu.be/eaiI4rL2pv4 | 아이브",
+            "https://youtu.be/z0DIxBjeFfM | 아이브",
+            "https://youtu.be/PQLCfzHbr48 | 아이브",
+            "https://youtu.be/XjCI6ovN9S0 | 아이브",
+            "https://youtu.be/EE3nNIghevg | 아이브",
+            "https://youtu.be/9xcjhgGaDrg | 아이브",
+            "https://youtu.be/gf2tQvOOJD8 | 아이브",
+            "https://youtu.be/eDRZJ7RfxLs | 아이브",
+            "https://youtu.be/cLaqRJmOpdk | 아이브",
+            "https://youtu.be/MGjnq1WUvsk | 아이브",
+            "https://youtu.be/OOO6IyRPJq0 | 아이브",
+            "https://youtu.be/mqbIVZgmW_s | 아이브",
+            "https://youtu.be/OgOdizjpZyQ | 아이브",
+            "https://youtu.be/wJT8YeyB0Yc | 아이브",
+            "https://youtu.be/eoPkud9ewO4 | 아이브",
+            "https://youtu.be/gUcGQobJg2I | 아이브",
+            "https://youtu.be/QWedY1cQrdA | 아이브",
+            "https://youtu.be/IAAXEXoICTE | 아이브",
+            "https://youtu.be/i5CsjuZ5LZ4 | 아이브",
+            "https://youtu.be/ZenVpLWrLZ8 | 아이브",
+            "https://youtu.be/gqQb0WWa5UU | 아이브",
+            "https://youtu.be/d0WwzlqglKo | 아이브",
+            "https://youtu.be/ig-Z6i7VYJ8 | 아이브",
+            "https://youtu.be/0YP4EnLlHaA | 아이브",
+            "https://youtu.be/jEQ6gJS_WS8 | 아이브",
+            "https://youtu.be/dPMZrxrhIbA | 아이브",
+            "https://youtu.be/6vd00t10oZQ | 아이브",
+            "https://youtu.be/9JqB98c_QA4 | 아이브",
+            "https://youtu.be/GPufpSovntY | 아이브",
+            "https://youtu.be/IUT9Q_RuOPI | 아이브",
+            "https://youtu.be/u3NBfsAWwvQ | 아이브",
+            "https://youtu.be/7CYcM4P9Dt0 | 아이브",
+            "https://youtu.be/J8hZtS0YoEs | 아이브",
             "https://youtu.be/xiIyXP1nDCk | 리즈",
             "https://youtu.be/xmPkKHhcRqY | 아이브",
             "https://youtu.be/gMXtrfR9gsY | 리즈",
@@ -1263,6 +1338,9 @@
         },
         "L(IVE)": {
           ids: [
+            "https://www.youtube.com/live/t7Lgn-gXnpo | 아이브",
+            "https://www.youtube.com/live/G_ToFENs6pQ | 아이브",
+            "https://www.youtube.com/live/Dnu3pDz9MX0 | 아이브",
             "https://www.youtube.com/live/G35elTbpeYw | 안유진,가을,레이,리즈",
             "https://youtu.be/VlZT7Rix4xM | 가을,리즈 | date=2022-02-07 | platform=none",
             "https://youtu.be/87W8a9-AAcA | 아이브 | date=2022-06-24 | platform=none",
@@ -1343,6 +1421,15 @@
         }, // 화면엔 "etc."로 표시
         Shorts: {
           ids: [
+            "https://youtube.com/shorts/MP5ZzhUMn94 | 아이브",
+            "https://youtube.com/shorts/CWgwK939WjY | 리즈",
+            "https://youtube.com/shorts/1fzjHJoahNA | 가을,장원영,리즈",
+            "https://youtube.com/shorts/FgcvFTuAefM | 레이,리즈,이서",
+            "https://youtube.com/shorts/IOJIQBpgYgI | 리즈",
+            "https://youtube.com/shorts/qTPzQKYzM8Y | 아이브",
+            "https://youtube.com/shorts/PY1_0sowVf8 | 리즈",
+            "https://youtube.com/shorts/OR3fj9tTu84 | 리즈",
+            "https://youtube.com/shorts/dZ0BBG9CWCg | 아이브",
             "https://youtube.com/shorts/c-AOvy_Rnqg | 리즈",
             "https://youtube.com/shorts/LNaHFnB59WA | 아이브",
             "https://youtube.com/shorts/fLj_GnvZo8Y | 레이,리즈",
@@ -1532,7 +1619,7 @@
         },
         IVE: {
           ids: [
-                        "https://youtube.com/shorts/aGYLkmzd-Wg | 리즈",
+            "https://youtube.com/shorts/aGYLkmzd-Wg | 리즈",
             "https://youtube.com/shorts/fpj9w4ney7g | 아이브",
             "https://youtube.com/shorts/a6zxBqyBrrA | 리즈",
             "https://youtube.com/shorts/YcvPZlQbkGs | 장원영,리즈",
@@ -1694,6 +1781,13 @@
         },
         MAGAZINE: {
           ids: [
+            "https://youtu.be/4D5znJwoKxw | 아이브 | album=ViVi 2023년 3월호",
+            "https://youtu.be/jTw-1XMuBm4 | 아이브 | album=ViVi 2023년 3월호",
+            "https://youtu.be/trNC5eW8Ke8 | 리즈 | album=FANS' CHOICE FACE",
+            "https://youtube.com/shorts/3yaFnIUBSi0 | 리즈 | album=FANS' CHOICE FACE",
+            "https://youtube.com/shorts/uWG_Rg3YX0g | 리즈 | album=FANS' CHOICE FACE",
+            "https://youtu.be/Q9Y-N51R6B4 | 리즈 | album=FANS' CHOICE FACE",
+            "https://youtu.be/Q4J5jXfmYlQ | 리즈 | album=FANS' CHOICE FACE",
             "https://youtu.be/Rjx3xVVkCPM | 아이브 | album=COSMOPOLITAN 2025년 2월호",
             "https://youtu.be/bBZHez6hu4M | 아이브 | album=COSMOPOLITAN 2025년 2월호",
             "https://youtu.be/SX62ADoqaE4 | 아이브 | album=DICON VOLUME N°20",
@@ -1706,12 +1800,12 @@
             "https://youtu.be/pmL44UKwMyM | 레이,리즈 | album=DICON VOLUME N°20",
             "https://www.youtube.com/live/tJt5nDPSgBg | 아이브 | album=DICON VOLUME N°20",
             "https://youtu.be/QXXzTpWvRxs | album=COSMOPOLITAN 2025년 11월호",
-            "https://youtu.be/2GScPIxnT1Y | album=Harper's BAZAAR",
+            "https://youtu.be/2GScPIxnT1Y | album=Harper's BAZAAR 2023년 7월호",
             "https://youtu.be/Ju1MElrngXs | 가을,레이,리즈,이서 | album=L'OFFICIEL 2024년 S/S",
-            "https://youtu.be/NTKP27WZEjA | album=Singles",
+            "https://youtu.be/NTKP27WZEjA | album=Singles 2022년 12월호",
             "https://youtu.be/DtmzZftCBHs | 레이,리즈 | album=SPUR",
-            "https://youtu.be/TLw0Bsvhc_g | album=Harper's BAZAAR",
-            "https://youtu.be/thSuJfR2INw | album=Singles",
+            "https://youtu.be/TLw0Bsvhc_g | album=Harper's BAZAAR 2023년 7월호",
+            "https://youtu.be/thSuJfR2INw | album=Singles 2022년 12월호",
             "https://youtu.be/BXf3XvHK1M8 | 가을,레이,리즈 | album=W Korea",
           ],
         },
@@ -1764,7 +1858,7 @@
         Berriz: { ids: [] }, // Platform 하위: platform=Berriz 인 게시물이 자동으로 들어옴
         "DAUM CAFE": { ids: [] }, // SNS 하위(화면 표시: Cafe): Daum Cafe 링크 게시물이 자동으로 들어옴
         "Naver Post": { ids: [] }, // SNS 하위: MANUAL_ITEMS로만 채우는 카테고리
-        "Special Collaboration": { ids: [] }, // MUSIC ACTIVITIES 하위: 영상 링크를 ids에 넣거나 MANUAL_ITEMS로 채움
+        "Special Collaboration": { ids: [] }, // MUSIC 하위: 영상 링크를 ids에 넣거나 MANUAL_ITEMS로 채움
       };
       // 어떤 카테고리에도 안 넣고 "전체 영상 보기"에만 보이게 할 영상
       const OTHER_IDS = [];
@@ -1783,6 +1877,7 @@
       const TAB_GROUPS = {
         VLOG: ["NYANG LOG", "IVE LOG"],
         Shorts: ["Shorts", "VOCAL", "DANCE", "IVE"],
+        "etc.": ["etc.(가사)", "etc.(일정)"],
       };
       // ---- 멤버 표시 (파스텔 배경) ----
       const MEMBER_COLORS = {
@@ -2224,8 +2319,8 @@
         "2025-10-29 | https://www.instagram.com/p/DQYJUnSD7Mu/ |  | MAGAZINE | 리즈 | 비바이아의 마고 메리제인 레드를 신고 잠에 든 아이브 리즈. 마일리 그레이, 루시아나 브라운, 얀시 화이트 그리고 테리 부츠까지👟 꿈 속에서 누군가를 기다리는 동안, 리즈는 비바이아 슈즈와 함께 시간을 보냈습니다. 기다리던 사람이 온 순간, 알람이 울리며 꿈에서 깬 리즈. 이 모든 게 정말 꿈이었을까요?..❤️ | album=COSMOPOLITAN 2025년 11월호",
         "2025-02-03 | https://deep.wavve.com/content/J3801_J38000000014?contentType=vod&audiomode=n | https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgJTTgoMpq7yN9KOD2uBhBo3CutTdCg0B6Z9f0ZHexAl5pol2QSUL61Wb-uHY47Ubd51_9mXnWQuhz-dhBueBG7jdlLY4ndmni8gzNp_3NhNlMd-rQH0uwUA4RR_N_AkaxR37CXChGhX3_bflVyh-S_8SgipS68COkhuHcZwxFRXQi43tOxGNRQufiCAkg/s1920/최강야구.jpg | TV | 안유진,리즈 | 최강야구 117회",
         "2024-03-28 | https://www.lofficielkorea.com/people/i-am-who-i-am-rijeu-gaeul |  | MAGAZINE | 가을,리즈 | DREAMS COME TRUE (Gaeul & Liz) | album=L'OFFICIEL 2024년 S/S",
-        "2023-06-26 | https://www.harpersbazaar.co.kr/article/78619 |  | MAGAZINE | 리즈 | 스무 살, 리즈 | album=Harper's BAZAAR",
-        "2022-12-09 | https://m.singleskorea.com/star/2022/12/715143 |  | MAGAZINE | 리즈 | 아이브 리즈의 기분 좋은 꿈 | album=Singles",
+        "2023-06-26 | https://www.harpersbazaar.co.kr/article/78619 |  | MAGAZINE | 리즈 | 스무 살, 리즈 | album=Harper's BAZAAR 2023년 7월호",
+        "2022-12-09 | https://m.singleskorea.com/star/2022/12/715143 |  | MAGAZINE | 리즈 | 아이브 리즈의 기분 좋은 꿈 | album=Singles 2022년 12월호",
         "2022-02-14 | https://www.elle.co.kr/article/63807 |  | MAGAZINE | 리즈 | 올리브영 비건뷰티 캠페인 뮤즈 #민혁 #주헌 #리즈 와의 만남! | album=ELLE",
         // ---- AD · Matin Kim (최신순) ----
         "2026-05-07 | https://www.instagram.com/reel/DYCBmwszhDB |  | AD |  | Shh...ASMR with LIZ | album=Matin Kim",
@@ -2360,7 +2455,8 @@
         "2023-09-29 | https://www.wavve.com/player/stream/vod?contentid=K02_PS-2023175135-01-000.1 | https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh-CD8Iro3MltvFMInAHfa9yi0D5uCdRpUdu9MyGBDFp23o3KIf-BPdfmHA3bzbdIFDpCj0mUg1pyxtfuhM32EnZZc0zXMRlOcCbEDuoxGBxNVbc_nv4DEOr-Xv5z6JzS4oZbsPRc3FuPwjR0yNi1fddwDCVWEFbtr26r4ae44jAhYYnQG8o6orh9UqpVI/s1920/편스토랑2.jpg | TV | 리즈 | 신상 출시 편스토랑 195회",
         "2023-10-13 | https://www.wavve.com/player/stream/vod?contentid=K02_PS-2023179299-01-000.1 | https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgj9-BgBEY6SLLB3WQYq1mA0fJxaF47ONLD4bu2XaMLBzvmnyLpKgFB-2_UGO-yeuFwJy4HuSEVaGs4M9TAAzy5EfNPvlSegG9I1BIIfMsT-ejxXSzX08-6IVDUroFwvssvdCTdgehKOYiEayyVi74FuH5Mnia4ojA0IEou0Agc7PMDUhcVKrdUPNyJ9kU/s1920/편스토랑3.jpg | TV | 리즈 | 신상 출시 편스토랑 196회",
         "2022-04-13 | https://www.wavve.com/player/stream/vod?contentid=M_EP202204074670.1 | https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjq9KCYCQbhhs1_YMZbU1zEtkqHW-6G0aXiVX_TeC7olHAn1Qw8KhY5BhTAkZp2vg2QcrSihi4NSZ0KqAEhvP98UZTRgT2NKxEYm7bUh5rkgVwYIrXGovi1QZ9eAs2SgWIyxuyy9Esw0AqNGY917tSekmEPzSja75S83bn-BnLuI5zBdLjorWyOkio6jYc/s584/서프라이즈.jpg | TV | 리즈 | 서프라이즈 : 비밀의 방 10회",
-        "2021-12-15 | https://programs.sbs.co.kr/enter/street/vod/64781/22000434712 | https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgiGGHaK9kkJOD_A4YmfE7JWGl8HoIQT5C2MjF5L1dZsS4V7-wqN2kcSMwShqaCRq770WVHfkK8-DGk0uotr_lQR205v5SnAuJgsniOrK9jITmr3XHgnj_SCCwaBOvsOHriME1JgXSXFma9ABBEmQGkH5wJ_wXMUtZXlvWXeE0CGCMh0M7Lev3EYK590WM/s1280/골목식당.jpg | TV | 안유진,장원영,리즈 | 백종원의 골목식당 198회",        "2026-03-01 | https://www.instagram.com/p/DVHwoihk3JY/ |  | MAGAZINE | 아이브 | COSMOPOLITAN 2026년 3월호 | album=COSMOPOLITAN 2026년 3월호",
+        "2021-12-15 | https://programs.sbs.co.kr/enter/street/vod/64781/22000434712 | https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgiGGHaK9kkJOD_A4YmfE7JWGl8HoIQT5C2MjF5L1dZsS4V7-wqN2kcSMwShqaCRq770WVHfkK8-DGk0uotr_lQR205v5SnAuJgsniOrK9jITmr3XHgnj_SCCwaBOvsOHriME1JgXSXFma9ABBEmQGkH5wJ_wXMUtZXlvWXeE0CGCMh0M7Lev3EYK590WM/s1280/골목식당.jpg | TV | 안유진,장원영,리즈 | 백종원의 골목식당 198회",
+        "2026-03-01 | https://www.instagram.com/p/DVHwoihk3JY/ |  | MAGAZINE | 아이브 | COSMOPOLITAN 2026년 3월호 | album=COSMOPOLITAN 2026년 3월호",
         "2026-03-01 | https://www.instagram.com/reels/DUsAdYkj3GC/ |  | MAGAZINE | 아이브 | COSMOPOLITAN 2026년 3월호 | album=COSMOPOLITAN 2026년 3월호",
         "2026-03-01 | https://www.instagram.com/reels/DVIu-tiiPMd/ |  | MAGAZINE | 아이브 | COSMOPOLITAN 2026년 3월호 | album=COSMOPOLITAN 2026년 3월호",
         "2026-03-01 | https://www.cosmopolitan.co.kr/article/1897748 | https://blog.kakaocdn.net/dn/GJaau/dJMcad4JY72/EmJML4iFQkO7tgxOPHaie0/AAAAAAAAAAAAAAAAAAAAAEdsDM6go-lny5bITqrmuwIkBBpUZUlQ3VcBrkFr8igv/img.jpg | MAGAZINE | 아이브 | COSMOPOLITAN 2026년 3월호 | album=COSMOPOLITAN 2026년 3월호 | cols=2 | bare=1 | original=1 | photos=https://blog.kakaocdn.net/dn/GJaau/dJMcad4JY72/EmJML4iFQkO7tgxOPHaie0/AAAAAAAAAAAAAAAAAAAAAEdsDM6go-lny5bITqrmuwIkBBpUZUlQ3VcBrkFr8igv/img.jpg;https://blog.kakaocdn.net/dn/chlReV/dJMcaa8dJEb/lJSKbPWQ7aTog83NkyKQyK/AAAAAAAAAAAAAAAAAAAAAK44Rq_DasVH1Mn2bKizwsrWA3I-x-OyQpWTAy866JDx/img.jpg;https://blog.kakaocdn.net/dn/ytjj0/dJMcadcxjLc/nPxKhxB2XN0uNygt5G24D1/AAAAAAAAAAAAAAAAAAAAADgqBL9Snj7wx5ISmCutK7AQTlqggIgawTncRyUGX_er/img.jpg;https://blog.kakaocdn.net/dn/GCcAx/dJMcabFPbs5/8pEXWyOqAWfDfKqAME41I1/AAAAAAAAAAAAAAAAAAAAAAc5RRdE8yrVlrCUwYTz5RsJ-pVy_IKiF8xoqjAnHkCi/img.jpg;https://blog.kakaocdn.net/dn/cRaDs6/dJMcaiLJcWU/SkC9cqO7l9XHKSae0kHwVk/AAAAAAAAAAAAAAAAAAAAAFB6LvkBZujnu4I9wmsidaeKlGnzMX6pPK_xQpIp6a_s/img.jpg;https://blog.kakaocdn.net/dn/wFNcN/dJMcajqgYub/zzyFh8B3b9KU4m9evk3fHK/AAAAAAAAAAAAAAAAAAAAAL_8-Iwgn8oZuBNnJYQ3f8mr-Y930vLdKkvncHP0iaQC/img.jpg;https://blog.kakaocdn.net/dn/ElL9D/dJMcad4JY79/5hJ70tr4ebgQQ8qIPacGCk/AAAAAAAAAAAAAAAAAAAAAObekXlOBY7WxFmQG_AE3WJMRm8KV4G-Dp3aD8YUCGYt/img.jpg",
@@ -2370,6 +2466,24 @@
         "2024-06-14 |  | https://blog.kakaocdn.net/dn/bZNJ2X/dJMcab61E0N/lkKC3WQCNtXdnWH8BxgTH1/AAAAAAAAAAAAAAAAAAAAAK9RH8ueQAIEkNz2qLisGyJv8E-w3BEtOy98F-TPFTuO/img.jpg | MAGAZINE | 아이브 | DICON VOLUME N°20 | album=DICON VOLUME N°20 | cols=2 | bare=1 | photos=https://blog.kakaocdn.net/dn/edqSdf/dJMb99OKwzb/iqVVqkXjmQkVk23dKmXxP1/AAAAAAAAAAAAAAAAAAAAAPCA9ZkV5wdHKjh_YFFbWpVMQEpwziz_i_8q1aWB4VfX/img.jpg;https://blog.kakaocdn.net/dn/bCcik9/dJMcaaG8RTM/cGnvYNMiTA3Urn2UcDcYSk/AAAAAAAAAAAAAAAAAAAAAFEmndoAtO63seJeOISCmQNhZpBH9YEwU7AFNXAuOO1p/img.jpg;https://blog.kakaocdn.net/dn/bBf9ys/dJMcagUNAnW/rgpxvkY9okeirvKta71bm0/AAAAAAAAAAAAAAAAAAAAABEbnag_gwGRjSdM3DjDxAXmc7L3SodEQDG255-ntiDM/img.jpg;https://blog.kakaocdn.net/dn/bX9gp4/dJMcagtHmZO/d28H0Bj17Qv4IRQ6Dm9EBK/AAAAAAAAAAAAAAAAAAAAAE9jsoL8Ze3FJBemG0bGZooxxJJpMYSnO8fhsmPRJeIR/img.jpg;https://blog.kakaocdn.net/dn/rzMdU/dJMcabFPFTD/fwZBJiAEBKZCFKQClhAlQK/AAAAAAAAAAAAAAAAAAAAABxCuhRf3zOt56SznOcfjGkQ1dPVIZp71X4vLe0bax1Y/img.jpg;https://blog.kakaocdn.net/dn/bTnNIr/dJMcag1pii6/p87HM2O1MKSSGpZvqFyFRK/AAAAAAAAAAAAAAAAAAAAACW_V8-jnVcrLj6TJ5Fw5xb-w688lEKaTjJv8zvauzuR/img.jpg;https://blog.kakaocdn.net/dn/lo5Ri/dJMcajxhje1/VbK8jkok3H1K6JjJBjviC0/AAAAAAAAAAAAAAAAAAAAACpRxsyEbjEFWUMXTrD4LYImVhD1SKzo4E63Ju8z1N9_/img.jpg;https://blog.kakaocdn.net/dn/cKkzZM/dJMcah7kYmS/cSgDnagcttA7NuGMre6Au0/AAAAAAAAAAAAAAAAAAAAAHWdUqD7qKxlP7cCHrEXIJqjwQwfNPE2HJQajpjI8X42/img.jpg;https://blog.kakaocdn.net/dn/CwMGn/dJMcabeHuxJ/BS3rF7yE9CA62vFdLF4v2K/AAAAAAAAAAAAAAAAAAAAAHXQGugXVS4BFgibNO0NrHMEwtgqddXD3D1rFdy9zi0c/img.jpg;https://blog.kakaocdn.net/dn/l55eV/dJMcabeHuxL/lE3arKT31zBcBnVtrkMkh1/AAAAAAAAAAAAAAAAAAAAAM5rje_C392SmDFIxqoXxzI3B-HhMJ36ctsHZOzcLqkl/img.jpg;https://blog.kakaocdn.net/dn/FywFL/dJMcai507Oe/38rYOjYmwdeOMSPj7JUxF0/AAAAAAAAAAAAAAAAAAAAANqHTdUyrDQMCmk0pco9LYGQM9JVFEMVsyv2Z55SeaXD/img.jpg;https://blog.kakaocdn.net/dn/bZNJ2X/dJMcab61E0N/lkKC3WQCNtXdnWH8BxgTH1/AAAAAAAAAAAAAAAAAAAAAK9RH8ueQAIEkNz2qLisGyJv8E-w3BEtOy98F-TPFTuO/img.jpg;https://blog.kakaocdn.net/dn/vO9Vf/dJMcahTwPn6/vTCXKD8VkQTbFQOILWvYZ0/AAAAAAAAAAAAAAAAAAAAAOrTFiAdCkmVSxMYkDfN5htzzpI41w1eW90365pT2mF9/img.jpg;https://blog.kakaocdn.net/dn/bf4wpr/dJMcacEZpCa/yJrA6UJESTnQM99fmzzNs0/AAAAAAAAAAAAAAAAAAAAAD_TfEHwJSR1sfobiyoqihE41N0J25dSsUHWgnQMDE0w/img.jpg;https://blog.kakaocdn.net/dn/mobTz/dJMcabeHuG5/j5nhJqSVDWkdZSqMJPb7jk/AAAAAAAAAAAAAAAAAAAAAM9Y_tfYMzlbx9ryeqWeOvuw3DLwe5xNUxSWDeMyOeeX/img.jpg;https://blog.kakaocdn.net/dn/daz1LQ/dJMcab0mjBD/wLzNMZbEtxti8JISGkYQS1/AAAAAAAAAAAAAAAAAAAAAO-6_EhSNn1leuuPA4Gn9U6asxlFSMFAaIfe-kcq35rZ/img.jpg;https://blog.kakaocdn.net/dn/bh88X4/dJMcagArXN5/B75PlaIkIBrGQNOinRmoS0/AAAAAAAAAAAAAAAAAAAAAE-lyD3cYEuRkE0HX7_-iJBBfW48We52jqFIGRlVlP8M/img.jpg;https://blog.kakaocdn.net/dn/vazzH/dJMcaa8edXg/FX52DieVB6ODyTyU1Yx7o0/AAAAAAAAAAAAAAAAAAAAABhqP4z7jCryD-0boO6Iqr2r-aeVUQJvnA1cY8C2gQjH/img.jpg;https://blog.kakaocdn.net/dn/bup3Jd/dJMcah7kYsu/zrjUeSiErUAkLNJAqDXgk0/AAAAAAAAAAAAAAAAAAAAAL6cwfkG81ofzeK4HCom89E5qAd7s6xzLd432L-5jUAA/img.jpg;https://blog.kakaocdn.net/dn/oXy4O/dJMcacx4in3/xeTR2BdA6PnbllMsF11Adk/AAAAAAAAAAAAAAAAAAAAACmNeUBRjUyoj6QDvuzgzK-gkHudb5wqh3BLUiV6Plqg/img.jpg;https://blog.kakaocdn.net/dn/U55JD/dJMcah0mnSZ/keGr3wdfeLBGmMqDEY4DX1/AAAAAAAAAAAAAAAAAAAAACGu9nvu2Qx-OuPGTR-UgLrSWkee8jIckqVhYEw7b6Lx/img.jpg;https://blog.kakaocdn.net/dn/dwo5Ri/dJMcabsnFc9/zK72QWkKK1KmdXlvOMzseK/AAAAAAAAAAAAAAAAAAAAAMfcVQFba2NTHKM22PPHkgUJeJpvEArdFxu-Dw0KvNZm/img.jpg;https://blog.kakaocdn.net/dn/bo4pOr/dJMcacx4iom/gl1l2MOOJUsdUrDRcBr3pk/AAAAAAAAAAAAAAAAAAAAAONpmLseEQotbhZY_81E0VIYQgPXU7C8DIaIC0-iSbxN/img.jpg;https://blog.kakaocdn.net/dn/pvPe1/dJMcajxhjrA/G56URmfS8PFHajyoImRN1K/AAAAAAAAAAAAAAAAAAAAABmmXTeAu6H3ibWiLSOh78yJ7W8wytMyMcuc_Nv9oCH_/img.jpg;https://blog.kakaocdn.net/dn/CJkHp/dJMcaiynPub/DZkbGD3Knzzn4mPMJLnYH1/AAAAAAAAAAAAAAAAAAAAAE6h8XNVNqLtpIZI7zv9_KHdAnnw90F1ZuPoP52wh1tO/img.jpg;https://blog.kakaocdn.net/dn/oPWX3/dJMcab61FcJ/DMb60NGYXxHsauU8pLkPY0/AAAAAAAAAAAAAAAAAAAAAO_icwhCwn_kT4XAd-_x0ingJjYdFqaHcsjwuW8i7P4P/img.jpg;https://blog.kakaocdn.net/dn/bgxdeG/dJMcagN8VeU/a61in3rdUMjl16OaIuqjVK/AAAAAAAAAAAAAAAAAAAAACsPmtLujFWmWHyWoVvnXtv9qdnVm2S6mZ4oWlT-2pzA/img.jpg;https://blog.kakaocdn.net/dn/pAUTU/dJMcahTwPtE/tBPeXSEG1oNmbftARmk0F0/AAAAAAAAAAAAAAAAAAAAAGM8DvJswF_EAeq9K5btOSEjKayLbR-v1VFnuKnjlhkD/img.jpg;https://blog.kakaocdn.net/dn/mWQI2/dJMcabMRpb6/xDPjJEzmYK81S1pjtW2Ko0/AAAAAAAAAAAAAAAAAAAAAOk4tB9p0wRNg1Tqh_Yt6qk2OB7ARSClZDDfIRQ8cbUV/img.jpg;https://blog.kakaocdn.net/dn/cy3pRZ/dJMcah0mnXV/MSc8dAmm7FBJP2IRLKNMT1/AAAAAAAAAAAAAAAAAAAAAPDqt8kxnjt3GIEH9wikiLugeLzfIbLSK_ogMo8e_dxA/img.jpg;https://blog.kakaocdn.net/dn/C1VQQ/dJMcabsnFiu/2Y3CaBrWzYxzlfvvJ8gl50/AAAAAAAAAAAAAAAAAAAAALHog2lrTKLx_Vw6GxCsQ58FjlMWLBLIEC0rbaILAZbp/img.jpg;https://blog.kakaocdn.net/dn/caREZa/dJMcajcQyCW/7U7HZG4DAKaWa3AqkOSCXK/AAAAAAAAAAAAAAAAAAAAALlpIHaC3yMPPnFkvTvT_Axjt4HsszW_RoS7liqkTF2Z/img.jpg;https://blog.kakaocdn.net/dn/bdKpm9/dJMcablI6tF/HX6KmpOyKyCYH2Kmgdibw0/AAAAAAAAAAAAAAAAAAAAAAldME_ykABaFGYl1PhubS1bv0jPydXoIJgbAVHKkkgN/img.jpg;https://blog.kakaocdn.net/dn/xR4Xx/dJMcagHm4bL/eIb5Z6nzKU3MeNLeYC617k/AAAAAAAAAAAAAAAAAAAAADRFUI3BUWJtEkvpiz1-JPCzkSZX_23wEAc2DbGZ-LOl/img.jpg;https://blog.kakaocdn.net/dn/b0Cmqt/dJMcagmSIRP/5nzeme1j08TxTHEAT4njDK/AAAAAAAAAAAAAAAAAAAAANNRM0lC-pk8uhQ5JVUtMczE01B7fvJm8vD8KrCMtpXi/img.jpg;https://blog.kakaocdn.net/dn/cIgnrJ/dJMcaaNSXHB/qdOlOZWj37iZdNvadRTpp0/AAAAAAAAAAAAAAAAAAAAAMAcOvkbbsauS1QhuxEWIfEfv0R4hEaD8K2ynaBKO8Wx/img.jpg;https://blog.kakaocdn.net/dn/STqYO/dJMcacrqtnq/2NRJAOSUeT7gg7xNok94mk/AAAAAAAAAAAAAAAAAAAAAL1F3P0OxQQ7N7N3BauQW3I9xitUFObLWSZtDpOywTVn/img.jpg;https://blog.kakaocdn.net/dn/ccHp18/dJMcadqbFEt/xTCDHT1lshSz1IuLYvTER0/AAAAAAAAAAAAAAAAAAAAANI9lj-lGiBO6rxAN0_uc2NQZaH6cGAtyKGqXNk5514O/img.jpg;https://blog.kakaocdn.net/dn/bWtkln/dJMcadqbFGJ/pFCxyr2tyts6ibqr6cdFl1/AAAAAAAAAAAAAAAAAAAAAIZVhuO48jzeS3K-gSqbjIZ42Mh26SWantpKoTZ1nmkb/img.jpg;https://blog.kakaocdn.net/dn/cHjd7n/dJMcaby5ZXw/sSfh0CetK64uSOX3lUUjt0/AAAAAAAAAAAAAAAAAAAAAP3DrG-21WlchSD5XQ-wgpLf1mFaOLbq9aGAJenngeeX/img.jpg;https://blog.kakaocdn.net/dn/Cg9Dz/dJMb992r4VH/nzE2vUEAYBdxla6vDKlgJ1/AAAAAAAAAAAAAAAAAAAAAOAeqsYoKwfUelPjZ4SgA3S732OK8eiAAMGNXpIW_XcC/img.jpg;https://blog.kakaocdn.net/dn/LAVBK/dJMcafPfBhC/oA8lKyzun7KoC9SeLUYLD1/AAAAAAAAAAAAAAAAAAAAAJ3mPUEtjeZxOrjz1AwIbvM1g-ipYiWF6gJ-Tijfz38D/img.jpg;https://blog.kakaocdn.net/dn/bebDk8/dJMcafn8sAc/KsQwZHVKOlHSbLKE1Cxk1K/AAAAAAAAAAAAAAAAAAAAAK7dObEGLB9w3FwOG-dRm9oIFVa6CJF_E6IaybCouyiG/img.jpg;https://blog.kakaocdn.net/dn/dfLlMA/dJMcaaG8SlW/rC2EQFMs9dAxcOpBIgWGnk/AAAAAAAAAAAAAAAAAAAAALH7VRlOLteLJz0q3ptm2MrzwszbHh8yF67IHO0EcA-L/img.jpg;https://blog.kakaocdn.net/dn/cUzoBd/dJMcaaAjT3S/i4gKsgHViXRcQQLTcKUIDk/AAAAAAAAAAAAAAAAAAAAACLrzNUpYJKfe7aoKnhBeAjSL6sf3VDNr6iAgcUJvb0L/img.jpg;https://blog.kakaocdn.net/dn/bqu2ek/dJMcajcQyIH/zAbp2Dab4YH55twIXGoBXK/AAAAAAAAAAAAAAAAAAAAAD_5ovOKXXUWod-ebMTdvw7Vn414s2bxEka_fX3Mvplx/img.jpg;https://blog.kakaocdn.net/dn/R4vT8/dJMcaa1iZkH/fB7RNVAUoKux4v4zrZ0jY0/AAAAAAAAAAAAAAAAAAAAACeGDv4_u0Oq7U9DjUat7hXH0CRYb2LTj7jPAywWxNTw/img.jpg;https://blog.kakaocdn.net/dn/bljU5x/dJMcabeHu8d/fjeqaUSrXIrR1uPpWjNqPk/AAAAAAAAAAAAAAAAAAAAAFEoo_J1H3Kx6u_uVn5ngpNNqvv1vI2jJg_ALMGlpB16/img.jpg;https://blog.kakaocdn.net/dn/bsgHr4/dJMcaaG8SsO/QyJuMKFYfn8AChdYRItj51/AAAAAAAAAAAAAAAAAAAAAGIHdHaJeaDLEVSVdk3Z4wxlD03zngGosngfurFiYN3-/img.jpg;https://blog.kakaocdn.net/dn/drII9U/dJMcagUNA6e/R8NQ0ZtrU3WfIK0pG5Uwc0/AAAAAAAAAAAAAAAAAAAAAPD-RBpSMu9ZcMfgzfCO0loQFU2ieHXCv9d5L7nAydV8/img.jpg;https://blog.kakaocdn.net/dn/WAhpS/dJMcahTwPLa/pp6VNQJUQfvjeAfg6BCnH0/AAAAAAAAAAAAAAAAAAAAAGkH6CzERcxJGOr7Jeehr_HNZBOvBcAdstbrPt4pQDG6/img.jpg;https://blog.kakaocdn.net/dn/KDVjl/dJMcaamz8se/Th0nm8Ciiomm4hKlKEk7WK/AAAAAAAAAAAAAAAAAAAAAAMEEUQyO5-7-6y3Ho4rFOJXACEumGk1mPg__7xD9N6N/img.jpg;https://blog.kakaocdn.net/dn/b3vqhN/dJMcag1piLt/aBpcrsqiC2orqHPkMlGGdk/AAAAAAAAAAAAAAAAAAAAAEMj68s__ggouPcRKmP2hInF34A4rYE9W-DLgGKB0p19/img.jpg;https://blog.kakaocdn.net/dn/bzZwob/dJMcagN8VDR/jN5VYip3cRoUkfCxOzCxvk/AAAAAAAAAAAAAAAAAAAAANfP2YO6eqsJRvjOW77GQYbDvHsrPVGIQdTpkcAdvXPc/img.jpg;https://blog.kakaocdn.net/dn/daBIDg/dJMcajqhsKQ/HtlaDNtonFuGKdUZg5b9ek/AAAAAAAAAAAAAAAAAAAAAFFEtEcaNzyiutjIpqistwO5wF8kplL4ziiid41DLbEn/img.jpg;https://blog.kakaocdn.net/dn/pItlM/dJMcadwN040/dlBjEsI0A8L8fZnkYBUzCk/AAAAAAAAAAAAAAAAAAAAAPmlHKUwuYIDnCIajDj-HHuectzEFGJPjzTSAmpnu2W9/img.jpg",
         "2024-03-28 |  | https://blog.kakaocdn.net/dn/ddljvV/dJMcadcxhEB/K8rgLAdpig6Rmmk4N0gIN1/AAAAAAAAAAAAAAAAAAAAAFmY8Xjsi64Gj7AqTVE9nYgerulztXkRJnPuqkJ2Rgrg/img.webp | MAGAZINE | 리즈 | L'OFFICIEL 2024년 S/S | album=L'OFFICIEL 2024년 S/S | cols=2 | bare=1 | photos=https://blog.kakaocdn.net/dn/ddljvV/dJMcadcxhEB/K8rgLAdpig6Rmmk4N0gIN1/AAAAAAAAAAAAAAAAAAAAAFmY8Xjsi64Gj7AqTVE9nYgerulztXkRJnPuqkJ2Rgrg/img.webp;https://blog.kakaocdn.net/dn/bdVOPo/dJMb9987fyk/7wxCqaRt6Enr7K1ByDIE31/AAAAAAAAAAAAAAAAAAAAANYlZSVXsDgAtZZb-kCOXffhtXNvlTx1426IrOMpE4mm/img.jpg;https://blog.kakaocdn.net/dn/bi0Bpo/dJMcabTq8fU/66qNqHeKLvfkbOhzUwKWW0/AAAAAAAAAAAAAAAAAAAAANj4ZI-cJEvbdzrcAKA9e8jQKRoAFHIbpJ2jXEL3Ciqv/img.webp;https://blog.kakaocdn.net/dn/LZWug/dJMcagN8phi/PfrefJ7K9gn4ZrKmEvXeMK/AAAAAAAAAAAAAAAAAAAAAG6pL9ZaaMPd3FaHCnKHvY016d8YS0jWMLu9U5jVhLt8/img.jpg",
         "2024-03-28 | https://www.instagram.com/reels/C5DOFomBFbJ/ |  | MAGAZINE | 리즈 | #SSissue #YKEditon 신비로운 눈빛으로 시선을 사로잡는 아이브 리즈가 출연한 몽환적인 분위기의 영상을 공개합니다. 화사한 플로럴 톱에 데님팬츠와 웨스턴 부츠를 매치해 시크한 모던 웨스턴 룩을 완성한 리즈의 스타일리시한 모먼트를 확인해 보세요. | album=L'OFFICIEL 2024년 S/S",
+        "2022-02-14 |  | https://lh3.googleusercontent.com/d/1oRDKtOe2aqYNLycknCewYvstGVUSVeHb | MAGAZINE | 리즈 | ELLE 올리브영 비건뷰티 캠페인 | album=ELLE | cols=2 | bare=1 | photos=https://lh3.googleusercontent.com/d/1oRDKtOe2aqYNLycknCewYvstGVUSVeHb;https://lh3.googleusercontent.com/d/19dh3Dx0sc_BeA0N6lCTtCAXtdFHQ_qJS;https://lh3.googleusercontent.com/d/1fGM_gBUA2riQnFrdOgW4RX9aTL36UYKn;https://lh3.googleusercontent.com/d/1WORXAoQkcrCab6Fj5aSM_KkDZOV5Kfm-;https://lh3.googleusercontent.com/d/1_lI3n5XotPz4bJmdj4wEuSj2--5jwgQT",
+        "2025-09-11 |  | https://lh3.googleusercontent.com/d/1N8-NrrIFCbb9ghj1Gvx5xws_cghkCSy3 | MAGAZINE | 리즈 | WAVES 2025년 10월호 | album=WAVES 2025년 10월호 | cols=2 | bare=1 | photos=https://lh3.googleusercontent.com/d/1N8-NrrIFCbb9ghj1Gvx5xws_cghkCSy3;https://lh3.googleusercontent.com/d/1xl1RLLvS28TIJWrRYToNBQA1GNfNpM8z;https://lh3.googleusercontent.com/d/1iUZWK8J4AW-NCNwCFCByi4hK4pNCNOqj;https://lh3.googleusercontent.com/d/1dqMSR-R7LvVhmi5_1fyKHMt9ebqlT4Or;https://lh3.googleusercontent.com/d/1qq4p-sW2lIJEfSCw-QeAeH0eTmSF4QyJ;https://lh3.googleusercontent.com/d/1ViQ1HyJYHaahGm0vlzU_gzBoQlUIYwir;https://lh3.googleusercontent.com/d/1k0Osj_Q6P0jxtxewHq2BThlry-7UvD9M;https://lh3.googleusercontent.com/d/1M4Iu5xzzWdPIt3M5IIrLJDlyN91jtbjp;https://lh3.googleusercontent.com/d/1_KpUOA2WRHTpds9xsVq-9xHNDWK1HZlR;https://lh3.googleusercontent.com/d/1Cs_sQBFqe68-n4CBCDB2Vim89md75Iyl;https://lh3.googleusercontent.com/d/1PdfaQ7YRuIFrJsRfodc4Z_o3EDxdbWvI;https://lh3.googleusercontent.com/d/1GfA2MumYmdDDPtImXNvIXwRJM30HFmHk;https://lh3.googleusercontent.com/d/1CWOb2UytMjF4E_ZqC90bg5vASp7SDjPf;https://lh3.googleusercontent.com/d/1RbKZpm-anACwqlETun9HZDGPxfrFtE8b;https://lh3.googleusercontent.com/d/1uIogclQIS_VhBE-HgkufZpf2EWOjmLis",
+        "2025-09-05 | https://youtube.com/shorts/7Ekj0EzIPtM | https://i.ytimg.com/vi/7Ekj0EzIPtM/maxresdefault.jpg | MAGAZINE | 리즈 | Tear - off | album=WAVES 2025년 10월호",
+        "2025-09-01 | https://youtu.be/-ZenvnKhe9s | https://i.ytimg.com/vi/-ZenvnKhe9s/maxresdefault.jpg | MAGAZINE | 리즈 | Teaser | album=WAVES 2025년 10월호",
+        "2025-09-17 | https://youtu.be/fba9BxfFsVE | https://i.ytimg.com/vi/fba9BxfFsVE/maxresdefault.jpg | MAGAZINE | 리즈 | WAVES | album=WAVES 2025년 10월호",
+        "2025-09-10 | https://youtu.be/O-ChY4Ydz_A | https://i.ytimg.com/vi/O-ChY4Ydz_A/maxresdefault.jpg | MAGAZINE | 리즈 | WAVES Q&A #1 | album=WAVES 2025년 10월호",
+        "2025-09-16 | https://youtu.be/Ba9JTEaxrtI | https://i.ytimg.com/vi/Ba9JTEaxrtI/maxresdefault.jpg | MAGAZINE | 리즈 | WAVES Q&A #2 | album=WAVES 2025년 10월호",
+        "2025-09-08 | https://youtu.be/viFcedJc2Zg | https://i.ytimg.com/vi/viFcedJc2Zg/maxresdefault.jpg | MAGAZINE | 리즈 | Messages | album=WAVES 2025년 10월호",
+        "2025-09-14 | https://youtu.be/2B9fapI6D6c | https://i.ytimg.com/vi/2B9fapI6D6c/maxresdefault.jpg | MAGAZINE | 리즈 | Vlog | album=WAVES 2025년 10월호",
+        "2025-06-09 |  | https://lh3.googleusercontent.com/d/1R8uHzqxfm3PvZDq5tv890v8TlbGEEzUK | MAGAZINE | 리즈 | PowerCircles | album=PowerCircles 2025년 6월호 | cols=2 | bare=1 | photos=https://lh3.googleusercontent.com/d/1R8uHzqxfm3PvZDq5tv890v8TlbGEEzUK;https://lh3.googleusercontent.com/d/1NACMaxWmeqpyPMJuJJG5nDdGuxOg_ivu;https://lh3.googleusercontent.com/d/1PDQUGZ74bnhVbkRlFL9d9-eiGJW1Q6Pc;https://lh3.googleusercontent.com/d/1PXYHv2YdZSbqenlsbTK8J9ZDKmh34Ow2;https://lh3.googleusercontent.com/d/1APCshigR8S7CLDiKLlRDVsMn8JbYSgYm;https://lh3.googleusercontent.com/d/10HEU10KjItZcUjhLEhsvtSpJ6qL6oa4D;https://lh3.googleusercontent.com/d/1uK1bvIWOcm7XEPaKgOYV2Wf-jVQ6wS-_;https://lh3.googleusercontent.com/d/1v-efHnW3WEJLHHc0ZX5-9SbyXoequ6nI;https://lh3.googleusercontent.com/d/1Bu5Du6SzGZTif8WaGkBTRmrP4xX1RPV0;https://lh3.googleusercontent.com/d/1kLzb1dwRvJtCv7MKeK58suUS4zj8UKkS;https://lh3.googleusercontent.com/d/1dxHgYy9SdINduikeiv4wcBmL2at_3Hya;https://lh3.googleusercontent.com/d/1D_MJtWswYX_nbUFjqKA37A_qWJ1ANg8Z",
+        "2023-07-01 | https://www.harpersbazaar.co.kr/article/78619 | https://blog.kakaocdn.net/dn/be1Rcb/dJMcahMPDi7/QSu2wtji85bCrJwdehRZBK/AAAAAAAAAAAAAAAAAAAAAMYtP1p9iCDKbb8DT4LqwRWjgXY3McrjjAPBUkLO9_4F/img.jpg | MAGAZINE | 리즈 | Harper's BAZAAR 2023년 7월호 | album=Harper's BAZAAR 2023년 7월호 | cols=2 | bare=1 | original=1 | photos=https://blog.kakaocdn.net/dn/be1Rcb/dJMcahMPDi7/QSu2wtji85bCrJwdehRZBK/AAAAAAAAAAAAAAAAAAAAAMYtP1p9iCDKbb8DT4LqwRWjgXY3McrjjAPBUkLO9_4F/img.jpg;https://blog.kakaocdn.net/dn/rL0UV/dJMcairr19D/0NsigbWnBDbKaQkza52dLk/AAAAAAAAAAAAAAAAAAAAACcE-N_75sn8L44za1M6lEPN4WxoabClSdX1xFw2hw4F/img.jpg;https://blog.kakaocdn.net/dn/me9mN/dJMcag1oMbd/HbRs7npW8Jbng1TcqnKCc0/AAAAAAAAAAAAAAAAAAAAAGkfn35vVP2fFnJrrvgtF5ZCYumVq-tht-hKksfzSoGO/img.jpg;https://blog.kakaocdn.net/dn/pGnBH/dJMcaby5tKt/Dm3sSGgyJPLCifScz4Tem0/AAAAAAAAAAAAAAAAAAAAAONP8xgvBCay0mLFvlBwydXu_-jH-8rbXM7JVLgRIAvf/img.jpg;https://blog.kakaocdn.net/dn/PpcFK/dJMcaiZcjMt/T6w9c2HAhPhbOYHaQvl3C1/AAAAAAAAAAAAAAAAAAAAAEokqDDzY6Ss8jYv9WfY30rUZ36VSHo46yVPafshH-Hx/img.jpg;https://blog.kakaocdn.net/dn/bAbNWv/dJMcaamzA38/nZEu48Grk5HSF5MQbp9871/AAAAAAAAAAAAAAAAAAAAAPsc07IB_UmDDyfUam3jwACr8K9ISjm_LuCwSZidwFI-/img.jpg;https://blog.kakaocdn.net/dn/lEC38/dJMcaby5tK2/ik1tiCk9GblA6W9GwxqAQK/AAAAAAAAAAAAAAAAAAAAAAIIuqQ38urHNxEnmhtse0DZkWtyo-snK0VR97XaA3g7/img.jpg;https://blog.kakaocdn.net/dn/bPgzfh/dJMcafn7WRn/OqzFWBHwvEcWa0g9AXpWp1/AAAAAAAAAAAAAAAAAAAAAA0-nRjfc_dCEe-iEoXDnlHEaHCydYGKtmh2hPWL-dc9/img.jpg",
+        "2022-12-01 | https://m.singleskorea.com/article/715143 | https://blog.kakaocdn.net/dn/eMm1NJ/dJMcaaNSpJR/VVaHKbLABaV1gcpuyiCBBK/AAAAAAAAAAAAAAAAAAAAAPiVkMX17zJNekiXxja6_dx2eX3Bg1aUbuBLhKY8tJRe/img.jpg | MAGAZINE | 리즈 | Singles 2022년 12월호 | album=Singles 2022년 12월호 | cols=2 | bare=1 | original=1 | photos=https://blog.kakaocdn.net/dn/eMm1NJ/dJMcaaNSpJR/VVaHKbLABaV1gcpuyiCBBK/AAAAAAAAAAAAAAAAAAAAAPiVkMX17zJNekiXxja6_dx2eX3Bg1aUbuBLhKY8tJRe/img.jpg;https://blog.kakaocdn.net/dn/cKs2lB/dJMcaa1iq0W/Xh9MPPvwwIAGjfl66O1zw0/AAAAAAAAAAAAAAAAAAAAACEI4yzfPE1Bl4hGx6LoBc_7Zu-Y1XDleze5a0VgcWqJ/img.jpg;https://blog.kakaocdn.net/dn/VqfxE/dJMcafPe3wQ/p6vlYUytAtU0KvE8kylnK0/AAAAAAAAAAAAAAAAAAAAAO7Vfg8AxzRTib0gIu1F-i9phRjd026aMIOjETfzFcM_/img.jpg;https://blog.kakaocdn.net/dn/5d0pg/dJMcafn7Vle/aIbMZOMgkFKzOaWB8AbqL0/AAAAAAAAAAAAAAAAAAAAAIx0YSVGqC8FMfcf505tBT8G7kDWkNARTXerGx1dD80q/img.jpg;https://blog.kakaocdn.net/dn/bB4N30/dJMcadwNrYg/KuuGy3e1Qx4oIsKkwjaPc0/AAAAAAAAAAAAAAAAAAAAAK46FCcUrz4ngSEmfLcGCYpivKS54AdVRTNpQtR1yKyH/img.jpg;https://blog.kakaocdn.net/dn/cKbbOv/dJMcacLJGwT/8U5m72XKpajStp3hWiY9QK/AAAAAAAAAAAAAAAAAAAAADIdnWebrtM93GBq3QjA3dd6zqrJCTvxT75wDkGDQzSF/img.jpg",
+        "2023-03-01 |  | https://blog.kakaocdn.net/dn/EoAUL/dJMcafn8rHu/4jq0l4SR9tnpH0ksRr3Zv1/AAAAAAAAAAAAAAAAAAAAAJiW87bsI1rAdS6QR6CexLmJq24IWZTzYdq0yNS6hXsZ/img.jpg | MAGAZINE | 아이브 | ViVi 2023년 3월호 | album=ViVi 2023년 3월호 | cols=2 | bare=1 | photos=https://blog.kakaocdn.net/dn/EoAUL/dJMcafn8rHu/4jq0l4SR9tnpH0ksRr3Zv1/AAAAAAAAAAAAAAAAAAAAAJiW87bsI1rAdS6QR6CexLmJq24IWZTzYdq0yNS6hXsZ/img.jpg;https://blog.kakaocdn.net/dn/2nCac/dJMcafVWVk5/j8m35b45Jyt6qgStmcSq4k/AAAAAAAAAAAAAAAAAAAAADf7Q_CRl3tKQveKv37X_iC3eLsR2pdpzmAVgMDP735n/img.jpg;https://blog.kakaocdn.net/dn/bGVu8c/dJMcadwkyHW/y4GPsaQmoxBdUDhEr1lpuk/AAAAAAAAAAAAAAAAAAAAAFPbqAdbRxEF8eigjvciF9WOS_WzjcrMhZpy1sLBoDdW/img.jpg",
+        "2023-01-18 | https://x.com/vivi_magazine/status/1615665634951720960 |  | MAGAZINE | 리즈 | ViVi 2023년 3월호 | album=ViVi 2023년 3월호",
+        "2022-07-01 |  | https://blog.kakaocdn.net/dn/u0fhq/dJMcaa8dF4I/3SCkW3D0Kxr7eQlkNuHXv1/AAAAAAAAAAAAAAAAAAAAAC3QVPdaZA0aZIqI4_1jiP5d3O-wLYPJSdX9-MBF71DO/img.jpg | MAGAZINE | 리즈 | UNIVERSE 2022년 Lovely Vacation | album=UNIVERSE 2022년 Lovely Vacation | cols=2 | bare=1 | photos=https://blog.kakaocdn.net/dn/u0fhq/dJMcaa8dF4I/3SCkW3D0Kxr7eQlkNuHXv1/AAAAAAAAAAAAAAAAAAAAAC3QVPdaZA0aZIqI4_1jiP5d3O-wLYPJSdX9-MBF71DO/img.jpg;https://blog.kakaocdn.net/dn/k3pPr/dJMcafPe3Uu/7VgIguSO4GCYhGMKwlqZS1/AAAAAAAAAAAAAAAAAAAAAG6r2LJ7dtB3uRbq0L_1LIKRQS9T4KSGKil7lPo31f_6/img.jpg;https://blog.kakaocdn.net/dn/6GuNk/dJMcacLJG73/rwLvKjWqP9IDqcTRm4dpqk/AAAAAAAAAAAAAAAAAAAAAKAMrIBX_sKn4Pe2HlrK1ZCuMLUhbfQoYHK8pqTo9mcG/img.jpg;https://blog.kakaocdn.net/dn/OtBSq/dJMcahTwieN/YSkAtRybG81sjJyV4mIdb0/AAAAAAAAAAAAAAAAAAAAAAbfupuMGtewdVBp1Hjc_8GDPST3y1AED5X30uf6U3Yv/img.jpg;https://blog.kakaocdn.net/dn/cQGTdK/dJMcahlXxIQ/Iyf5in6jVg5nqTgUHqxhQ1/AAAAAAAAAAAAAAAAAAAAAJhlsoeu7HFNDsHY608l7lwwRwGpYCba4fYQYzhfNY8A/img.jpg;https://blog.kakaocdn.net/dn/rJVPD/dJMcadqa6XP/xjomk6syiPnd0NTKShiOsk/AAAAAAAAAAAAAAAAAAAAAEMh0OUwqVbr_Wa22KaMjsqkFdGJcg5lTLxS-iAoMkH-/img.jpg;https://blog.kakaocdn.net/dn/dpHFnK/dJMcabTq6Do/9rKHKhQer9DKPk0Bj7nrBK/AAAAAAAAAAAAAAAAAAAAAI1qieK06A2I-EixNeoAx7yt9I8h9_1-McPeFyDmAPr/img.jpg;https://blog.kakaocdn.net/dn/en7236/dJMcafBy8F2/Sp6dcfGzZetyBXD39OZ6E1/AAAAAAAAAAAAAAAAAAAAAP5nEVWwnqYjCUTn1KHiVmD4wFAjCqsTWllyEddTiPEk/img.jpg;https://blog.kakaocdn.net/dn/bubcSV/dJMcaby5sLq/D2yiKWNQC2NdyNRk8KM3u0/AAAAAAAAAAAAAAAAAAAAANkz04HGLFF4Syf9UUtBOwtCo5CmlzKBUVW3N-KJCQc9/img.jpg",
+        "2023-07-01 |  | https://blog.kakaocdn.net/dn/dDXdw1/dJMcadwNsBA/zWYQjs3ov4gpp0icKqGKT1/AAAAAAAAAAAAAAAAAAAAAATAp1RH2QtfzQbyQY6fhR_Cm0wSezkOBhSw-MHNaxCV/img.jpg | MAGAZINE | 리즈 | UNIVERSE 2023년 Greenary Fairy | album=UNIVERSE 2023년 Greenary Fairy | cols=2 | bare=1 | photos=https://blog.kakaocdn.net/dn/dDXdw1/dJMcadwNsBA/zWYQjs3ov4gpp0icKqGKT1/AAAAAAAAAAAAAAAAAAAAAATAp1RH2QtfzQbyQY6fhR_Cm0wSezkOBhSw-MHNaxCV/img.jpg;https://blog.kakaocdn.net/dn/cffAip/dJMcafVWoG2/gamDE0vG9qhVKq47ulfl40/AAAAAAAAAAAAAAAAAAAAAG0fj_5hvLUj1RWMA5i-jYgPYNFceQlahm5PWiox4C8W/img.jpg;https://blog.kakaocdn.net/dn/TLDKq/dJMcacktW0K/FT4TFg2vEbgtVFKGBp6xsk/AAAAAAAAAAAAAAAAAAAAADxVz5SfDAf-x7aBjoWo1a9EZdgaM8PCZQMscK2Xg6ed/img.jpg;https://blog.kakaocdn.net/dn/yjiuq/dJMcacrpVbq/MKHkMvwFoPzT0waPVsuJT1/AAAAAAAAAAAAAAAAAAAAAF_VxrHp3g4t1PMnJ9NPP7ceR9U18Gn7v1-83q5bS9ZE/img.jpg;https://blog.kakaocdn.net/dn/bU4Xia/dJMcah0lPFQ/U8LIa2ooWiBT2VsPl9fJ5K/AAAAAAAAAAAAAAAAAAAAAIVk4oJZiG-bBIderHQzD_ACBBMrtlk3S1p5rNOb9_01/img.jpg;https://blog.kakaocdn.net/dn/b7ZMLr/dJMcacrpVdg/KpZl2Gk9BrB949bSuUkPn0/AAAAAAAAAAAAAAAAAAAAAFDQxdFJRfofueEsOWawGrgrOLRTfE8MTHulPYp0B5iy/img.jpg;https://blog.kakaocdn.net/dn/N3urG/dJMb99VBm1y/fjqjHulceDMLwHsV21K8bK/AAAAAAAAAAAAAAAAAAAAAJVbzdsA3S8JZAGQRQZlRrJq2t1xxWMetEl5VQTOBHOl/img.jpg;https://blog.kakaocdn.net/dn/b8uWef/dJMcahlXxLR/MDshnr0dBKZzh6T463WML0/AAAAAAAAAAAAAAAAAAAAACf7yYe1DVPHxDDr7upYFljW-RR7lrCuVe0A4xeZaxHQ/img.jpg;https://blog.kakaocdn.net/dn/HocIH/dJMcacEYST1/VjpBaierDiDsHZRjiOkpQ1/AAAAAAAAAAAAAAAAAAAAAF0yYRLdkAc4KxzqjLOmpLOjjHOCRGi9BSnmyeOgKQUv/img.jpg;https://blog.kakaocdn.net/dn/cATxEN/dJMcahznzRk/iGPlRB8DAXBJlQUk2pkHek/AAAAAAAAAAAAAAAAAAAAAFJRZjFkXOomH7VCWEfWXL_hiY17xmVimIGTxtNQlPza/img.jpg;https://blog.kakaocdn.net/dn/bUiUVA/dJMcairr1iu/opPBcNa1XkBBwRkKVkzyFK/AAAAAAAAAAAAAAAAAAAAAGNPYjt7-VcUZzBiQfCR8HYvuHfgY1rnb-thwonW0QNi/img.jpg",
+        "2025-06-12 | https://youtu.be/__aA3zevYc4 | https://i.ytimg.com/vi/__aA3zevYc4/maxresdefault.jpg | MAGAZINE | 리즈 | PowerCircles | album=PowerCircles 2025년 6월호",
+        "2025-06-11 | https://youtu.be/R8ssW8KNIAg | https://i.ytimg.com/vi/R8ssW8KNIAg/maxresdefault.jpg | MAGAZINE | 리즈 | PowerCircles Q&A | album=PowerCircles 2025년 6월호",
       ];
       // ---- 메인 화면 섹션 ----
       // 각 섹션에서 쓸 수 있는 설정값:
@@ -2406,7 +2520,7 @@
           hideViews: true,
         },
         {
-          title: "MUSIC ACTIVITIES",
+          title: "MUSIC",
           excludeMembers: ["아이브"],
           cats: ["OST", "COVER", "Lyrics", "Special Collaboration"],
           tabs: ["OST", "COVER", "Lyrics", "Special Collaboration"],
@@ -2432,6 +2546,7 @@
           tabs: ["세로 직캠", "가로 직캠"],
           hideMembers: true,
         },
+        { title: "etc.", cats: ["etc.(가사)", "etc.(일정)"], tabs: ["etc."], sort: "date" },
         // 메뉴에 없는 카테고리(SOLO, TEASER, PHOTO 등)는 "전체 영상 보기"에서만 보입니다
       ];
       // "전체 영상 보기"에서 볼 수 있는 모든 탭
@@ -2471,7 +2586,7 @@
         "PHOTO",
       ];
       // =====================================================================
-      const FLAT_ALBUM_TABS = ["RADIO", "MAGAZINE"]; // 폴더를 슬라이더로 펼치지 않는 탭
+      const FLAT_ALBUM_TABS = ["RADIO", "MAGAZINE", "POP-UP", "AD"]; // 폴더를 슬라이더로 펼치지 않는 탭
       const FANCAM_TABS = ["세로 직캠", "가로 직캠"]; // 직캠 탭에서는 멤버 필터/태그(리즈)를 숨김
       let videos = [],
         tab = 0,
@@ -2559,7 +2674,8 @@
           else if (key === "album") out.album = val || null;
           else if (key === "lyrics" || key === "lyricstype")
             out.lyricsType = val || null;
-          else if (key === "title") out.title = val || null; // 영상 제목 직접 지정
+          else if (key === "title")
+            out.title = val || null; // 영상 제목 직접 지정
           else if (key === "date") out.date = val || null; // 업로드일 대신 표시할 날짜 (YYYY-MM-DD)
         });
         return out;
@@ -2600,6 +2716,12 @@
           "0"
         )}.${String(d.getDate()).padStart(2, "0")}.`;
       };
+      // MAGAZINE 게시물은 달까지만 표시 (2026.03.01. → 2026.03.)
+      const fmtMonth = (iso) => fmtDate(iso).replace(/\d\d\.$/, "").replace(/\.$/, ".");
+      const fmtD = (v) =>
+        (v.cats || []).includes("MAGAZINE") && !albumScope // 폴더 안에서는 날짜 전체 표시
+          ? fmtMonth(v.date)
+          : fmtDate(v.date);
       const fmtDur = (s) => {
         const h = Math.floor(s / 3600),
           m = Math.floor((s % 3600) / 60),
@@ -2693,7 +2815,7 @@
           }" target="_blank" rel="noopener">
         <div class="embedfree">${embedHtml}</div>
         <div class="title">${esc(v.title)}</div>
-        <div class="info">${fmtDate(v.date)}</div>
+        <div class="info">${fmtD(v)}</div>
         ${
           shownMem(v).length
             ? `<div class="mem">${shownMem(v)
@@ -2736,7 +2858,7 @@
         ${
           embedHtml ||
           (v.thumb
-            ? `<img src="${v.thumb}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" />`
+            ? `<img src="${v.thumb}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="if(this.src.indexOf('maxresdefault')>-1){this.onerror=null;this.src=this.src.replace('maxresdefault','hqdefault');}" />`
             : isLive
             ? ""
             : `<span class="phtxt" style="color:${
@@ -2769,7 +2891,7 @@
       <div class="title">${esc(v.title)}</div>
       <div class="info pinrow">${
         v.views !== null && !hideViews(v) ? fmtViews(v.views) + "<br>" : ""
-      }${fmtDate(v.date)}<span class="pinbtn${
+      }${fmtD(v)}<span class="pinbtn${
           isPinned(v) ? " on" : ""
         }" role="button" aria-label="상단에 고정" title="상단에 고정" data-pin="${esc(
           pinKey(v)
@@ -2898,14 +3020,31 @@
         w.dataset.kind = kind; // 로딩 후에도 인스타/트위터 구분 유지
         delete w.dataset.lazy;
         const i = w.firstElementChild;
+        // 인스타 주소 정리: /reels/ → /reel/, 쿼리 제거 (잘못된 주소면 임베드가 안 뜸)
+        const igUrl = (u) =>
+          u
+            .replace(/instagram\.com\/reels?\//, "instagram.com/reel/")
+            .replace(/[?#].*$/, "")
+            .replace(/\/?$/, "/");
+        const url2 = kind === "instagram" ? igUrl(url) : url;
         i.innerHTML =
           kind === "twitter"
             ? `<blockquote class="twitter-tweet" data-dnt="true" data-width="326"><a href="${url}"></a></blockquote>`
-            : `<blockquote class="instagram-media" data-instgrm-permalink="${url}" style="margin:0;width:100%"></blockquote>`;
+            : `<blockquote class="instagram-media" data-instgrm-permalink="${url2}" style="margin:0;width:100%"></blockquote>`;
         if (kind === "twitter") {
           if (window.twttr && window.twttr.widgets)
             window.twttr.widgets.load(i);
         } else if (window.instgrm) window.instgrm.Embeds.process();
+        else {
+          // embed.js가 아직 안 불러와졌으면 올 때까지 기다렸다가 처리
+          let tries = 0;
+          const t = setInterval(() => {
+            if (window.instgrm) {
+              clearInterval(t);
+              window.instgrm.Embeds.process();
+            } else if (++tries > 60) clearInterval(t);
+          }, 250);
+        }
       }
       const igIO = window.IntersectionObserver
         ? new IntersectionObserver(
@@ -3168,7 +3307,9 @@
         );
         items = pinnedFirst(sort === "oldest" ? items : pinFirst(items)); // 날짜순일 때는 폴더 맨앞 지정(PIN_FIRST)만 풀고, 귤 도장 고정은 계속 유지
         if (albumScope) {
-          const albumItems = items.filter((v) => v.album === albumScope);
+          const albumItems = items
+            .filter((v) => v.album === albumScope)
+            .sort((a, b) => (b.photos ? 1 : 0) - (a.photos ? 1 : 0)); // 사진첩은 날짜 상관없이 맨 앞 (나머지 순서는 유지)
           $("count").textContent = `${albumScope} · ${albumItems.length}개`;
           $("grid").classList.remove("social-list");
           const albumCard = (v) => card(v);
@@ -3197,36 +3338,65 @@
             items.forEach((v) => {
               if (v.album) (groups[v.album] = groups[v.album] || []).push(v);
             });
-            const isMag = name === "MAGAZINE";
-            const hasPhotos = (a) => groups[a].some((v) => v.photos && v.photos.length);
+            const isMag = ["MAGAZINE", "POP-UP", "AD"].includes(name);
+            const hasPhotos = (a) =>
+              groups[a].some((v) => v.photos && v.photos.length);
             const folderCard = (a) => {
-              const g = groups[a].slice().sort((x, y) => new Date(y.date) - new Date(x.date));
+              const g = groups[a]
+                .slice()
+                .sort((x, y) => new Date(y.date) - new Date(x.date));
               // 사진 묶음 게시물이 있으면 그것을 표지로, 없으면 썸네일이 있는 최신 게시물
               const cover =
                 g.find((v) => v.photos && v.photos.length) ||
                 g.find((v) => v.thumb) ||
                 g[0];
-              const nPhotos = g.reduce((n, v) => n + (v.photos ? v.photos.length : 0), 0);
-              const thumbHtml = cover.thumb
-                ? `<div class="fthumb"><img src="${cover.thumb}" alt="" loading="lazy" referrerpolicy="no-referrer" />${
-                    isMag && nPhotos
-                      ? `<span class="plat">📷 ${nPhotos}</span>`
-                      : ""
+              const nPhotos = g.reduce(
+                (n, v) => n + (v.photos ? v.photos.length : 0),
+                0
+              );
+              const isPop = name === "POP-UP";
+              // POP-UP: 표지에 인스타 영상 임베드를 바로 보여줌 (사진 묶음이 있으면 그쪽 우선)
+              const igCover = isPop
+                ? g.find((v) => v.embed === "instagram" && !v.photos)
+                : null;
+              const thumbHtml = igCover && !(cover.photos && cover.photos.length)
+                ? `<div class="fthumb pu"><div class="thumb igthumb"><div class="igwrap" data-lazy="instagram" data-url="${esc(
+                    igCover.url
+                  )}"><div class="iginner"></div></div></div><div class="pu-shield"></div></div>`
+                : cover.thumb
+                ? `<div class="fthumb"><img src="${
+                    cover.thumb
+                  }" alt="" loading="lazy" referrerpolicy="no-referrer" />${
+                    ""
                   }</div>`
-                : `<div class="fthumb ph"><span class="phtxt" style="color:#b9945f">${esc(a)}</span></div>`;
-              return `<div class="folder-card${isMag ? " auto" : ""}" data-album="${esc(a)}" role="button">
+                : `<div class="fthumb ph"><span class="phtxt" style="color:#b9945f">${esc(
+                    a
+                  )}</span></div>`;
+              return `<div class="folder-card${
+                isMag ? " auto" : ""
+              }" data-album="${esc(a)}" role="button">
                 ${thumbHtml}
                 <div class="title">${esc(a)}</div>
-                <div class="info">${g.length}개 • ${fmtDate(g[g.length - 1].date)} ~ ${fmtDate(g[0].date)}</div>
+                <div class="info">${g.length}개 • ${
+                isPop
+                  ? fmtDate(g[g.length - 1].date)
+                  : name === "MAGAZINE"
+                  ? fmtMonth(g[g.length - 1].date) === fmtMonth(g[0].date)
+                    ? fmtMonth(g[0].date)
+                    : `${fmtMonth(g[g.length - 1].date)} ~ ${fmtMonth(g[0].date)}`
+                  : `${fmtDate(g[g.length - 1].date)} ~ ${fmtDate(g[0].date)}`
+              }</div>
               </div>`;
             };
             let albumKeys = Object.keys(groups);
             if (isMag) {
               // 사진 모음 앨범을 맨 앞으로 (그 안에서는 최신순)
-              const latest = (a) => Math.max(...groups[a].map((v) => +new Date(v.date) || 0));
+              const latest = (a) =>
+                Math.max(...groups[a].map((v) => +new Date(v.date) || 0));
               albumKeys.sort(
                 (x, y) =>
-                  (hasPhotos(y) ? 1 : 0) - (hasPhotos(x) ? 1 : 0) || latest(y) - latest(x)
+                  (hasPhotos(y) ? 1 : 0) - (hasPhotos(x) ? 1 : 0) ||
+                  latest(y) - latest(x)
               );
             }
             $("grid").style.alignItems = isMag ? "start" : "";
@@ -3408,7 +3578,7 @@
         pvEl.innerHTML = `<div class="pv-bar"><button class="pv-x" aria-label="닫기">×</button>
       <div class="pv-h"><div class="pv-t">${esc(
         v.title
-      )}</div><div class="pv-m">${fmtDate(v.date)}${
+      )}</div><div class="pv-m">${fmtD(v)}${
           mem ? " · " + esc(mem) : ""
         } · ${v.photos.length}장${
           v.url && (!v.bare || v.original)
@@ -3603,7 +3773,10 @@
           });
           // 같은 영상을 COVER에서만 다른 제목으로 보여주기: { 영상ID: ["카테고리", "제목"] }
           const CAT_TITLE = {
-            gMXtrfR9gsY: ["COVER", "성시경의 부를텐데 l 너의 모든 순간, 행복한 나를"],
+            gMXtrfR9gsY: [
+              "COVER",
+              "성시경의 부를텐데 l 너의 모든 순간, 행복한 나를",
+            ],
           };
           Object.keys(CAT_TITLE).forEach((id) => {
             const v = videos.find((x) => x.id === id);
