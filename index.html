@@ -32,6 +32,7 @@
         cursor: pointer;
       }
       .wrap {
+        position: relative;
         max-width: 960px;
         margin: 0 auto;
         padding: 0 16px 48px;
@@ -44,6 +45,179 @@
       }
       .logo span {
         color: var(--red);
+      }
+      .gb-btn {
+        position: absolute;
+        top: 40px;
+        right: 16px;
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--red);
+        background: #fff;
+        border: 1.5px solid var(--red);
+      }
+      .gb-btn svg {
+        width: 16px;
+        height: 16px;
+      }
+      .gb {
+        position: fixed;
+        inset: 0;
+        z-index: 300;
+        background: rgba(75, 53, 33, 0.28);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 16px;
+      }
+      .gb-box {
+        width: 100%;
+        max-width: 320px;
+        max-height: 68vh;
+        display: flex;
+        flex-direction: column;
+        background: #fff;
+        border: 1.5px solid #f6c48f;
+        border-radius: 14px;
+        padding: 12px 14px 14px;
+        box-shadow: 0 8px 28px rgba(240, 138, 44, 0.22);
+      }
+      .gb-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 8px;
+        font-weight: 800;
+        font-size: 13px;
+        letter-spacing: 0.08em;
+        color: var(--red);
+      }
+      .gb-head button {
+        font-size: 20px;
+        line-height: 1;
+        color: var(--red);
+      }
+      .gb-box input,
+      .gb-box textarea {
+        width: 100%;
+        margin-bottom: 6px;
+        padding: 7px 10px;
+        border-radius: 8px;
+        border: 1px solid #f6c48f;
+        background: #fff;
+        color: var(--text);
+        font: inherit;
+        font-size: 13px;
+        outline: none;
+      }
+      .gb-box input:focus,
+      .gb-box textarea:focus {
+        border-color: var(--red);
+      }
+      .gb-box textarea {
+        height: 60px;
+        resize: none;
+      }
+      .gb-row {
+        display: flex;
+        justify-content: flex-end;
+        gap: 8px;
+        align-items: center;
+      }
+      .gb-cancel {
+        font-size: 12px;
+        color: var(--red);
+      }
+      .gb-send {
+        padding: 5px 14px;
+        border-radius: 999px;
+        background: var(--red);
+        color: #fff;
+        font-weight: 700;
+        font-size: 12.5px;
+      }
+      .gb-list {
+        margin-top: 10px;
+        overflow-y: auto;
+        border-top: 1px solid #fbe3c4;
+      }
+      .gb-item {
+        padding: 7px 2px;
+        border-bottom: 1px solid #fbe3c4;
+        font-size: 13px;
+        line-height: 1.55;
+      }
+      .gb-top {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .gb-top i {
+        font-style: normal;
+        font-size: 11px;
+        color: var(--muted);
+      }
+      .gb-act {
+        margin-left: auto;
+        display: flex;
+        gap: 8px;
+      }
+      .gb-act button {
+        font-size: 11px;
+        color: var(--red);
+      }
+      .gb-text {
+        white-space: pre-wrap;
+        word-break: break-word;
+      }
+      .thumb.ph.cafeph,
+      .folder-card .fthumb.ph.cafeph {
+        background: #f1ebe1;
+        color: #cfc5b6;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .cafeph svg {
+        width: 64px;
+        height: 64px;
+      }
+      .cafe-img {
+        display: block;
+        width: 100%;
+        max-width: 520px;
+        margin: 0 auto 18px;
+        border-radius: 10px;
+      }
+      .cafe-cms {
+        margin-top: 8px;
+        padding-top: 10px;
+        border-top: 1px solid var(--line);
+      }
+      .cafe-cms-h {
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--muted);
+        margin-bottom: 8px;
+      }
+      .cafe-cm {
+        padding: 8px 0;
+        font-size: 14.5px;
+      }
+      .cafe-cm-t {
+        margin: 2px 0 6px;
+        line-height: 1.6;
+      }
+      .cafe-cm img {
+        display: block;
+        width: 100%;
+        max-width: 240px;
+        border-radius: 8px;
+        margin-top: 6px;
       }
       [hidden] {
         display: none !important;
@@ -734,20 +908,31 @@
         flex-direction: column;
         gap: 10px;
       }
-      .pv-body.pv2 {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 10px;
-        align-items: start;
-      }
-      .pv-body.pv2 .pv-end {
-        grid-column: 1/-1;
-      }
-      .pv-col {
+      .pv-body.pv2 .pv-rows {
         display: flex;
         flex-direction: column;
         gap: 10px;
+      }
+      /* 한 행에 2장: 세로(높이)는 같고, 가로폭은 각 사진 비율에 맞춰 배분 */
+      .pv-row {
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+      }
+      .pv-row img {
+        flex: 1 1 0; /* 인라인 flex-grow(=가로/세로 비율)로 폭 배분 */
         min-width: 0;
+        height: auto;
+        object-fit: cover;
+      }
+      .pv-divider {
+        border: 0;
+        border-top: 1px solid rgba(120, 100, 70, 0.35);
+        margin: 14px 0;
+        width: 100%;
+      }
+      .pv-row.solo img {
+        flex: 0 0 calc(50% - 5px); /* 홀수 장일 때 마지막 1장은 절반 폭 */
       }
       .pv-body img {
         width: 100%;
@@ -842,6 +1027,9 @@
   <body>
     <div class="wrap">
       <div class="logo" id="logo"></div>
+      <button class="gb-btn" id="gbBtn" aria-label="GUESTBOOK" title="GUESTBOOK">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3.5 7l8.5 6.5L20.5 7"/></svg>
+      </button>
       <div id="status">불러오는 중...</div>
       <div class="pinbar" id="pinbar" hidden></div>
       <section id="home" hidden></section>
@@ -876,6 +1064,10 @@
       // -----------------------------------------------------------------
       const SITE_TITLE = "TANGERINE BOX";
       const API_KEY = "AIzaSyCKVVU_-Cl2AQAhawDr4nRVEcQCHvxoek4";
+      // ---- GUESTBOOK 연결 주소 ----
+      // 아래 따옴표 안에 Google Apps Script 웹앱 주소(https://script.google.com/macros/s/.../exec)를 붙여넣으세요.
+      // 비워두면 글이 이 브라우저에만 저장됩니다.
+      const GUESTBOOK_URL = "https://script.google.com/macros/s/AKfycbzHkPffdYq_W8TmkvlCIIHiToTV1RHZo8VWDUJtNcDFf-ay1qYF7dS3XqVhBly93FEXNA/exec";
       // ---- 카테고리별 영상 ----
       // 링크(또는 ID) 뒤에 " | " 로 구분해서 아래 항목들을 원하는 만큼 이어 붙일 수 있습니다. 순서는 상관없어요.
       //   - 멤버: 그냥 이름들을 쉼표로 (예: 안유진,가을)
@@ -1502,6 +1694,11 @@
         }, // 화면엔 "etc."로 표시
         Shorts: {
           ids: [
+            "https://youtube.com/shorts/t-9B3P7Dlek | 레이,리즈",
+            "https://youtube.com/shorts/AkwiVZ5cZNY | 리즈",
+            "https://youtube.com/shorts/ygN8hjhnViQ | 장원영,리즈",
+            "https://youtube.com/shorts/6Mo1HUic8Wk | 리즈",
+            "https://youtube.com/shorts/MWfycgd3_SQ | 리즈",
             "https://youtube.com/shorts/7dz49tjUFSA | 아이브",
             "https://youtube.com/shorts/MP5ZzhUMn94 | 아이브",
             "https://youtube.com/shorts/CWgwK939WjY | 리즈",
@@ -1875,11 +2072,11 @@
             "https://youtu.be/IIKRxq1wnys | 아이브 | album=DAZED 2022년 1월호",
             "https://youtu.be/4D5znJwoKxw | 아이브 | album=ViVi 2023년 3월호",
             "https://youtu.be/jTw-1XMuBm4 | 아이브 | album=ViVi 2023년 3월호",
-            "https://youtu.be/trNC5eW8Ke8 | 리즈 | album=FANS' CHOICE FACE",
-            "https://youtube.com/shorts/3yaFnIUBSi0 | 리즈 | album=FANS' CHOICE FACE",
-            "https://youtube.com/shorts/uWG_Rg3YX0g | 리즈 | album=FANS' CHOICE FACE",
-            "https://youtu.be/Q9Y-N51R6B4 | 리즈 | album=FANS' CHOICE FACE",
-            "https://youtu.be/Q4J5jXfmYlQ | 리즈 | album=FANS' CHOICE FACE",
+            "https://youtu.be/trNC5eW8Ke8 | 리즈 | album=FANS' CHOICE FACE 2026년 7월호",
+            "https://youtube.com/shorts/3yaFnIUBSi0 | 리즈 | album=FANS' CHOICE FACE 2026년 7월호",
+            "https://youtube.com/shorts/uWG_Rg3YX0g | 리즈 | album=FANS' CHOICE FACE 2026년 7월호",
+            "https://youtu.be/Q9Y-N51R6B4 | 리즈 | album=FANS' CHOICE FACE 2026년 7월호",
+            "https://youtu.be/Q4J5jXfmYlQ | 리즈 | album=FANS' CHOICE FACE 2026년 7월호",
             "https://youtu.be/Rjx3xVVkCPM | 아이브 | album=COSMOPOLITAN 2025년 2월호",
             "https://youtu.be/bBZHez6hu4M | 아이브 | album=COSMOPOLITAN 2025년 2월호",
             "https://youtu.be/SX62ADoqaE4 | 아이브 | album=DICON VOLUME N°20",
@@ -1950,6 +2147,16 @@
         Berriz: { ids: [] }, // Platform 하위: platform=Berriz 인 게시물이 자동으로 들어옴
         "DAUM CAFE": { ids: [] }, // SNS 하위(화면 표시: Cafe): Daum Cafe 링크 게시물이 자동으로 들어옴
         "Naver Post": { ids: [] }, // SNS 하위: MANUAL_ITEMS로만 채우는 카테고리
+        Fanclub: {
+          ids: [
+            "https://youtu.be/nY3-oifZu_Y | 아이브 | album=DIVE 1기 | date=2022-05-30",
+            "https://youtu.be/LvrC_wzqBBo | 아이브 | album=DIVE 1기 | date=2022-06-08",
+            "https://youtu.be/8-KQC8hDJ9M | 아이브 | album=DIVE 1기 | date=2022-06-17",
+            "https://youtu.be/4GqrmzMsPjw | 장원영,리즈 | album=DIVE 1기 | date=2022-09-08",
+            "https://youtu.be/sbw88UgpzP0 | 레이,리즈 | album=DIVE 1기 | date=2022-11-16",
+            "https://youtu.be/LWv5pdYk-C8 | 아이브 | album=DIVE 1기 | date=2023-02-02",
+          ],
+        }, // Official 하위: 링크 뒤에 " | album=DIVE 1기" 처럼 붙이면 해당 폴더에 들어감
         "Special Collaboration": { ids: [] }, // MUSIC 하위: 영상 링크를 ids에 넣거나 MANUAL_ITEMS로 채움
       };
       // 어떤 카테고리에도 안 넣고 "전체 영상 보기"에만 보이게 할 영상
@@ -2048,14 +2255,36 @@
       //   "날짜 | 원문링크(없으면 비움) | 표지주소(비우면 첫 사진) | PHOTO | 멤버 | 제목 | album=폴더 | photos=주소1;주소2;주소3"
       //   예) "2026-10-19 |  |  | PHOTO | 리즈 | COSMOPOLITAN 화보 | album=COSMOPOLITAN 2025년 11월호 | photos=https://.../a.jpg;https://.../b.jpg",
       const MANUAL_ITEMS = [
-        "2024-03-11 |  |  | DAUM CAFE | 리즈 | 팬미팅 후유증 🥺💗 | content=다이브 !!2일간의 팬미팅을 끝내고 많은 감정들이 오가며 하고싶은말이 많아서 글로 남겨보아요\n최근에 월드투어로 콘서트도 다니고 다른 스케줄도 하면서 바쁜 하루하루를 보냈는데 많이 보고싶었죠 ?? 나도 많이 보고싶었어요 ㅎㅎ\n그래서 그런지 다이브를 보기전에 너무 설레고 무대도 잘하고싶더라구요\n우리가 리허설할때의 공연장은 무채색이었지만 다이브가 채워졌을때의 공연장은 형형색색의 다이브들로 꽉 차서 아름답더라구요\n사실 처음엔 나를 사랑하는게 무의미하다고 생각했지만 내 자신을 사랑할 이유를 만들어준게 우리 다이브에요\n그런 소중한 감정을 알게 해준 만큼 내가 다이브에게 더 많은 감정을 전해줄게요\n이유는 모르겠지만 다이브 앞에만 서면 마치 어린아이 처럼 눈물이 나요\n저의 마음이 너무 진심이어서 그런걸까요\n나도 모르게 그동안 참아왔던 무언가를 어딘가에 털어놓고 싶었나봐요\n난 그게 다이브여서 좋고 앞으로도 다이브일거에요\n지금까지의 추억, 앞으로의 추억 잘 간직하고 기록하며 소중히 하나하나 쌓아가봐요 ♡\n다이브 내가 어디서 봤는데 사랑은 재채기와 같아서 숨길 수가 없대요\n아무튼 그렇다구요 ♥️",
-        "2023-12-24 | https://youtu.be/oEOZ9MelgNY | https://i.ytimg.com/vi/oEOZ9MelgNY/hqdefault.jpg | DAUM CAFE | 리즈 | 미리 크리스마스 선물 🎁💝",
-        "2023-09-29 | https://youtu.be/XRuP3YBni_g | https://i.ytimg.com/vi/XRuP3YBni_g/hqdefault.jpg | DAUM CAFE | 리즈 | 후라이는 반숙이지 😉",
-        "2023-07-07 | https://m.cafe.daum.net/IVEstarship/Y1rb/24?svc=cafeapp |  | DAUM CAFE | 리즈 | 백예린 - 물고기🐟 (Covered by IVE LIZ)",
-        "2023-04-19 |  |  | DAUM CAFE | 리즈 | 안뇽 ㅎㅎ 리즈에여 | content=다이브 앙뇽.... 오랜만이에요\n어제 새벽에 잠이 안오길래 우리 다이브가 카페에 써준 편지랑 글들을 읽었어요\n많이 감동 받기도 하고 스스로 나란 존재에 대해 깨닫는 시간도 됐던 것 같은데 혼자 생각하는 것보단 다이브랑 내 생각을 공유하고 싶은 마음에 글을 써봐요\n우선 가장 크게 다가온 생각은 나라는 존재는 내가 생각하는 것보다 많은 사람들에게 힘이 되고 있다는 걸 알았어요\n음.......생각보다 정말 많이요 많이많이\n사실 저는 처음에 어떠한 존재가 나한테 힘이 된다는걸 몰랐고 안믿었어요\n모두들 조금의 빈말은 하지 않을까 싶었는데 그런 틀린 생각을 바로잡아준게 우리 다이브에요\n전 진심으로 다이브만 바라봐요 다이브밖에 없어요\n스케줄 할 때, 사진을 찍을 때 등 다이브에게 보여지는 어떠한 일을 할 때 다이브가 이런모습은 어떻게 생각할까? 이 사진은 진짜 좋아하겠다! 이런식으로 머릿속엔 온통 다이브뿐이에요\n내게 운명처럼 다가온 다이브를 내가 실망시키고 싶지도 않고 솔직히 말하자면 아닌 것까지 맞다고 해주길 바라지 않아요\n바라는 건 딱 하나에요. 내 곁에만 있어줘요. 항상\n그리고 이번에 정규앨범으로 컴백하면서 정말 많이 부탁했어요\n제발 다이브 마음에 쏙 들게 해달라고. 우리의 노력을 다이브가 알아줬으면 좋겠다고..\n물론 어떠한 모습으로 나와도 좋아해 줄 거라는 건 알지만 새로운 모습의 나를 저도 처음보다보니 어색하기도하고 확신이 안섰던 것 같아요\n근데 이젠 아니에요 물론 다이브 덕분에요\n지금까지 방황하고 저에 대한 확신이 없었던 저는 이제 없을거에요\n100% 장담은 할 수 없지만 그러려고 할거에요 꼭\n지금까지 버텨온 시간들이 헛되지 않음을 다이브가 증명해줘서 고마워요\n앞으로도 어떠한 일이 있어도 꿋꿋하게 버텨서 항상 밝은 모습으로 다이브앞에 설게요\n좋은 사람으로 다이브에게 다가갈게요\n우리 다이브는 지금처럼만 해줘요 이미 충분해요\n앞으로의 미래가 기대되는 하루하루를 보냈으면 좋겠어요 다이브도,저도\n우리 같이 손잡고 앞으로만 가요\n뒤에서 누가 불러도 절대 따라가지 않겠다고 약속해요 우리\n사랑해요 다이브\n다이브가 생각하는 그 이상으로요\n\n🖤🤍🖤🤍🖤🤍🖤🤍🖤🤍🖤🤍🖤🤍\n\n갑작스레 제 진심을 전해서 당황했죠 ..?\n새벽 감성이랄까요..ㅎㅎ 못말리네요 정말루..\n하지만 모든게 진심이란것만 알아줘요..ㅎ",
-        "2022-12-01 |  |  | DAUM CAFE | 리즈 | 1주년🎂 | content=다이브 벌써 아이브가 1주년이 됐어요\n1년동안 정말 많은 경험도 하고 좋은 상들도 받으며 상상할 수 없이 행복한 일들을 많이 겪었는데 그중에 다이브를 만난게 가장 큰 행운이지 않나 싶어요\n사실 그동안 힘든일도 슬픈일도 있었지만 멀리서 누구보다 가까운 마음으로 절 위로해주고 응원해줘서 고마워요\n다이브가 많은 행복을 주는만큼 저도 다이브에게 행복을 줄 수 있는 사람이될게요 그리고 또 다이브가 주는 사랑 못지않게 내가 더 많은 사랑 줄거예요\n다이브 사랑해요💗",
-        "2022-11-27 |  |  | DAUM CAFE | 리즈 | MMA🏆 | content=다이브 MMA에서 많은 상들을 받았는데 정말 말로 표현할 수 없는 감정들이 많이 느껴졌어요\n거의 1년동안 아이브라는 그룹에 임함으로서 기쁜일도 슬픈일도 힘들었던일도 많았지만 그럴때마다 다이브가 곁에 있어줘서 너무 다행이고 감사하다고 생각했어요\n아이브가 열심히 달려올 수 있었던 원동력이 다이브였고 그게 다이브여서 행복했어요\n앞으로도 다이브 덕분에 행복할 예정이구요\n아이브에겐 다이브 없으면 안된다는거 그리고 안보이지만 뒤에서 정말 많은분들의 많은노력이 따른다는 사실을 상기시키는 시간도 됐던 것 같아요\n다이브한테 받은 사랑들을 더 크게 보답할 수 있도록 앞으로 정말 더 더 열심히 할테니까 많이 기대해주고 함께해줬으면 좋겠어요\n지금 이 자리에서 절대 안도하지 않고 더 크게 성장하고 나가갈 수 있는 아이브 될게요\n다이브 항상 고맙고 사랑해요💗",
-        "2022-01-01 |  |  | DAUM CAFE | 리즈 | 🐯Happy New Year🐯 | content=다이브♥️벌써 2022년이 찾아왔어요 !! 2021년,특히 12월은 저에게 너무나도 특별한 달이었어요😭 아이브라는 그룹의 리즈로 데뷔하고 또 정말 많은분께서 사랑해주시고 응원해주셔서 정말 감사했어요 ☺️\n다이브! 항상 고맙고 많은 사랑 주시는만큼 더 열심히 하는 아이브리즈가 될게요 😘\n제 2022년 소원이었던 음악방송1위를 데뷔 1주일만에 하게 될 줄은 꿈에도 몰랐는데 모두 다이브 덕분이에요ㅠㅠ 🥰\n다이브 아프지말고 2022년에 다이브의 바램 모두 다~~ 이루어지는 해가되길 바랄게요 😊\n아이브도 다이브도 새해 복 많이받으세요\n🧧🎊",
+        "2022-05-23 |  |  | Fanclub | 리즈 | 4컷만화 | album=DIVE 1기 | cols=2 | photos=https://lh3.googleusercontent.com/d/17SKCEBtVbipJer7cuul4By7gY7dU2kcC;https://lh3.googleusercontent.com/d/1F1DUN9sfpXAux2TWBY0CfRzZ7m2K_-ti",
+        "2022-03-01 |  |  | Fanclub | 리즈 | KIT Behind | album=DIVE 1기 | cols=2 | photos=https://lh3.googleusercontent.com/d/1fXDvPJ31JORgRUXdzIzllBxeDlt3O7o9;https://lh3.googleusercontent.com/d/1h8FMQyrphVTQ2yz5JgA9H_qAvxhRH2zj;https://lh3.googleusercontent.com/d/1dSmsNupMXFfKpVZQueuQEv5vLzBmQB4N;https://lh3.googleusercontent.com/d/1dcPawyBcI3YkWXRCBcK3wpzSiH5FJUQE;https://lh3.googleusercontent.com/d/10_u0YSIDt_tCOwZdbZvYyBEoqSOkf7DZ;https://lh3.googleusercontent.com/d/1AQWI_VGHfgoGmQ6ojQNjCtYYVeIvzRK0;https://lh3.googleusercontent.com/d/1fOG9c3YddJeGA7jVzjn2PPDZwVTPkAU_",
+        "2022-03-01 |  |  | Fanclub | 리즈 | Online Photocard | album=DIVE 1기 | cols=2 | photos=https://lh3.googleusercontent.com/d/1WZgesL4Xj05VBUbHILV3NQXXC34AkwAI;https://lh3.googleusercontent.com/d/1v3ElsuEHzMYq55HlhlE39ueeYLSrbE6M",
+        "2023-02-24 |  |  | Fanclub | 리즈 | 다이브 나랑 놀쟝💗 | album=DIVE 1기 | photos=https://lh3.googleusercontent.com/d/18kyvTsjFBeXXKTB4U8M2t8mBB-y_YhYT",
+        "2024-03-11 |  |  | DAUM CAFE | 리즈 | 팬미팅 후유증 🥺💗 | content=다이브 !!2일간의 팬미팅을 끝내고 많은 감정들이 오가며 하고싶은말이 많아서 글로 남겨보아요\n최근에 월드투어로 콘서트도 다니고 다른 스케줄도 하면서 바쁜 하루하루를 보냈는데 많이 보고싶었죠 ?? 나도 많이 보고싶었어요 ㅎㅎ\n그래서 그런지 다이브를 보기전에 너무 설레고 무대도 잘하고싶더라구요\n우리가 리허설할때의 공연장은 무채색이었지만 다이브가 채워졌을때의 공연장은 형형색색의 다이브들로 꽉 차서 아름답더라구요\n사실 처음엔 나를 사랑하는게 무의미하다고 생각했지만 내 자신을 사랑할 이유를 만들어준게 우리 다이브에요\n그런 소중한 감정을 알게 해준 만큼 내가 다이브에게 더 많은 감정을 전해줄게요\n이유는 모르겠지만 다이브 앞에만 서면 마치 어린아이 처럼 눈물이 나요\n저의 마음이 너무 진심이어서 그런걸까요\n나도 모르게 그동안 참아왔던 무언가를 어딘가에 털어놓고 싶었나봐요\n난 그게 다이브여서 좋고 앞으로도 다이브일거에요\n지금까지의 추억, 앞으로의 추억 잘 간직하고 기록하며 소중히 하나하나 쌓아가봐요 ♡\n다이브 내가 어디서 봤는데 사랑은 재채기와 같아서 숨길 수가 없대요\n아무튼 그렇다구요 ♥️ | board=From. IVE",
+        "2023-12-24 | https://youtu.be/oEOZ9MelgNY | https://i.ytimg.com/vi/oEOZ9MelgNY/hqdefault.jpg | DAUM CAFE | 리즈 | 미리 크리스마스 선물 🎁💝 | board=From. IVE",
+        "2023-09-29 | https://youtu.be/XRuP3YBni_g | https://i.ytimg.com/vi/XRuP3YBni_g/hqdefault.jpg | DAUM CAFE | 리즈 | 후라이는 반숙이지 😉 | board=From. IVE",
+        "2023-07-07 | https://m.cafe.daum.net/IVEstarship/Y1rb/24?svc=cafeapp |  | DAUM CAFE | 리즈 | 백예린 - 물고기🐟 (Covered by IVE LIZ) | board=From. IVE",
+        "2023-04-19 |  |  | DAUM CAFE | 리즈 | 안뇽 ㅎㅎ 리즈에여 | content=다이브 앙뇽.... 오랜만이에요\n어제 새벽에 잠이 안오길래 우리 다이브가 카페에 써준 편지랑 글들을 읽었어요\n많이 감동 받기도 하고 스스로 나란 존재에 대해 깨닫는 시간도 됐던 것 같은데 혼자 생각하는 것보단 다이브랑 내 생각을 공유하고 싶은 마음에 글을 써봐요\n우선 가장 크게 다가온 생각은 나라는 존재는 내가 생각하는 것보다 많은 사람들에게 힘이 되고 있다는 걸 알았어요\n음.......생각보다 정말 많이요 많이많이\n사실 저는 처음에 어떠한 존재가 나한테 힘이 된다는걸 몰랐고 안믿었어요\n모두들 조금의 빈말은 하지 않을까 싶었는데 그런 틀린 생각을 바로잡아준게 우리 다이브에요\n전 진심으로 다이브만 바라봐요 다이브밖에 없어요\n스케줄 할 때, 사진을 찍을 때 등 다이브에게 보여지는 어떠한 일을 할 때 다이브가 이런모습은 어떻게 생각할까? 이 사진은 진짜 좋아하겠다! 이런식으로 머릿속엔 온통 다이브뿐이에요\n내게 운명처럼 다가온 다이브를 내가 실망시키고 싶지도 않고 솔직히 말하자면 아닌 것까지 맞다고 해주길 바라지 않아요\n바라는 건 딱 하나에요. 내 곁에만 있어줘요. 항상\n그리고 이번에 정규앨범으로 컴백하면서 정말 많이 부탁했어요\n제발 다이브 마음에 쏙 들게 해달라고. 우리의 노력을 다이브가 알아줬으면 좋겠다고..\n물론 어떠한 모습으로 나와도 좋아해 줄 거라는 건 알지만 새로운 모습의 나를 저도 처음보다보니 어색하기도하고 확신이 안섰던 것 같아요\n근데 이젠 아니에요 물론 다이브 덕분에요\n지금까지 방황하고 저에 대한 확신이 없었던 저는 이제 없을거에요\n100% 장담은 할 수 없지만 그러려고 할거에요 꼭\n지금까지 버텨온 시간들이 헛되지 않음을 다이브가 증명해줘서 고마워요\n앞으로도 어떠한 일이 있어도 꿋꿋하게 버텨서 항상 밝은 모습으로 다이브앞에 설게요\n좋은 사람으로 다이브에게 다가갈게요\n우리 다이브는 지금처럼만 해줘요 이미 충분해요\n앞으로의 미래가 기대되는 하루하루를 보냈으면 좋겠어요 다이브도,저도\n우리 같이 손잡고 앞으로만 가요\n뒤에서 누가 불러도 절대 따라가지 않겠다고 약속해요 우리\n사랑해요 다이브\n다이브가 생각하는 그 이상으로요\n\n🖤🤍🖤🤍🖤🤍🖤🤍🖤🤍🖤🤍🖤🤍\n\n갑작스레 제 진심을 전해서 당황했죠 ..?\n새벽 감성이랄까요..ㅎㅎ 못말리네요 정말루..\n하지만 모든게 진심이란것만 알아줘요..ㅎ | board=From. IVE",
+        "2022-12-01 |  |  | DAUM CAFE | 리즈 | 1주년🎂 | content=다이브 벌써 아이브가 1주년이 됐어요\n1년동안 정말 많은 경험도 하고 좋은 상들도 받으며 상상할 수 없이 행복한 일들을 많이 겪었는데 그중에 다이브를 만난게 가장 큰 행운이지 않나 싶어요\n사실 그동안 힘든일도 슬픈일도 있었지만 멀리서 누구보다 가까운 마음으로 절 위로해주고 응원해줘서 고마워요\n다이브가 많은 행복을 주는만큼 저도 다이브에게 행복을 줄 수 있는 사람이될게요 그리고 또 다이브가 주는 사랑 못지않게 내가 더 많은 사랑 줄거예요\n다이브 사랑해요💗 | board=From. IVE",
+        "2022-11-27 |  |  | DAUM CAFE | 리즈 | MMA🏆 | content=다이브 MMA에서 많은 상들을 받았는데 정말 말로 표현할 수 없는 감정들이 많이 느껴졌어요\n거의 1년동안 아이브라는 그룹에 임함으로서 기쁜일도 슬픈일도 힘들었던일도 많았지만 그럴때마다 다이브가 곁에 있어줘서 너무 다행이고 감사하다고 생각했어요\n아이브가 열심히 달려올 수 있었던 원동력이 다이브였고 그게 다이브여서 행복했어요\n앞으로도 다이브 덕분에 행복할 예정이구요\n아이브에겐 다이브 없으면 안된다는거 그리고 안보이지만 뒤에서 정말 많은분들의 많은노력이 따른다는 사실을 상기시키는 시간도 됐던 것 같아요\n다이브한테 받은 사랑들을 더 크게 보답할 수 있도록 앞으로 정말 더 더 열심히 할테니까 많이 기대해주고 함께해줬으면 좋겠어요\n지금 이 자리에서 절대 안도하지 않고 더 크게 성장하고 나가갈 수 있는 아이브 될게요\n다이브 항상 고맙고 사랑해요💗 | board=From. IVE",
+        "2022-01-01 |  |  | DAUM CAFE | 리즈 | 🐯Happy New Year🐯 | content=다이브♥️벌써 2022년이 찾아왔어요 !! 2021년,특히 12월은 저에게 너무나도 특별한 달이었어요😭 아이브라는 그룹의 리즈로 데뷔하고 또 정말 많은분께서 사랑해주시고 응원해주셔서 정말 감사했어요 ☺️\n다이브! 항상 고맙고 많은 사랑 주시는만큼 더 열심히 하는 아이브리즈가 될게요 😘\n제 2022년 소원이었던 음악방송1위를 데뷔 1주일만에 하게 될 줄은 꿈에도 몰랐는데 모두 다이브 덕분이에요ㅠㅠ 🥰\n다이브 아프지말고 2022년에 다이브의 바램 모두 다~~ 이루어지는 해가되길 바랄게요 😊\n아이브도 다이브도 새해 복 많이받으세요\n🧧🎊 | board=From. IVE",
+        "2021-12-02 |  | https://blog.kakaocdn.net/dn/bQAWP1/dJMcaa0KsVp/M0u0EmK1AbaIzF6oFFzYt0/AAAAAAAAAAAAAAAAAAAAAGN1g6xpIsyLvCA3F0PR4AEOLAJIv8-r7GnHU75waoO7/img.jpg | DAUM CAFE | 리즈 | 안녕하세요 !! 리즈입니다아 😆 | content=안녕하세요 !! 리즈입니다아 😆\n앞으로 공카 자주 찾아올테니까 자주 만나요🙌🏻🙌🏻\n사진은 유진언니가 찍어줬지요~~ | image=https://blog.kakaocdn.net/dn/bQAWP1/dJMcaa0KsVp/M0u0EmK1AbaIzF6oFFzYt0/AAAAAAAAAAAAAAAAAAAAAGN1g6xpIsyLvCA3F0PR4AEOLAJIv8-r7GnHU75waoO7/img.jpg | board=IVE TALK",
+        "2021-12-05 |  | https://blog.kakaocdn.net/dn/CbWNV/dJMcacxv9Qu/eWvEV1F9NEll1lsj4aSqsk/AAAAAAAAAAAAAAAAAAAAANMa1GnF1iWquIDnxPag_AG4QdFAGxRSZxDQO4jPyuFV/img.jpg | DAUM CAFE | 리즈 | 항상 응원해주셔서 감사해요 💘 더 좋은모습 보여드리려고 노력할게요🧸 앞으로도 팟팅 ❗️ | content=항상 응원해주셔서 감사해요 💘 더 좋은모습 보여드리려고 노력할게요🧸 앞으로도 팟팅 ❗️\n(자켓 때 찍은 사진ㅎㅎ 혼자 갖고있기 아까웠어여😜) | image=https://blog.kakaocdn.net/dn/CbWNV/dJMcacxv9Qu/eWvEV1F9NEll1lsj4aSqsk/AAAAAAAAAAAAAAAAAAAAANMa1GnF1iWquIDnxPag_AG4QdFAGxRSZxDQO4jPyuFV/img.jpg | board=IVE TALK",
+        "2021-12-06 |  | https://blog.kakaocdn.net/dn/bc24Vd/dJMcaaGycUL/pjkk441CDcSNz4f2kKiRxk/AAAAAAAAAAAAAAAAAAAAAInEQyhK-2QQ8XrmqhEBjslJ-lV2up242b3AOVesN5bn/img.jpg | DAUM CAFE | 리즈 | 오늘 저의 첫 라이브 어떠셨나용?ㅎㅎ 아침부터 아이브와 함께했으니 좋은하루 보내세요💎 | content=오늘 저의 첫 라이브 어떠셨나용?ㅎㅎ 아침부터 아이브와 함께했으니 좋은하루 보내세요💎 | image=https://blog.kakaocdn.net/dn/bc24Vd/dJMcaaGycUL/pjkk441CDcSNz4f2kKiRxk/AAAAAAAAAAAAAAAAAAAAAInEQyhK-2QQ8XrmqhEBjslJ-lV2up242b3AOVesN5bn/img.jpg | board=IVE TALK",
+        "2021-12-09 |  | https://blog.kakaocdn.net/dn/3bKip/dJMcagUeAQ8/n8Gjc1b1jGpRAXKPvM1NkK/AAAAAAAAAAAAAAAAAAAAANb539EeB6ymdTHetxW6_QMLh5sxokwNKjyRcwBHRvaD/img.jpg | DAUM CAFE | 리즈 | 어제했던 머리 무슨머리게~~요~~?🐰🐶 | content=어제했던 머리 무슨머리게~~요~~?🐰🐶\n전 토끼라고 생각하는데 유진언니는 멍멍이라구.. | image=https://blog.kakaocdn.net/dn/3bKip/dJMcagUeAQ8/n8Gjc1b1jGpRAXKPvM1NkK/AAAAAAAAAAAAAAAAAAAAANb539EeB6ymdTHetxW6_QMLh5sxokwNKjyRcwBHRvaD/img.jpg | board=IVE TALK",
+        "2021-12-11 |  | https://blog.kakaocdn.net/dn/oH4WO/dJMcaiLb3M8/17jbTPU3jjU6MVNwPbshHK/AAAAAAAAAAAAAAAAAAAAAErqOK5yFL3sQIeRRtE1LUWX3gfCr7HOL2KbMslIousQ/img.jpg | DAUM CAFE | 리즈 | 개떡이..탐난다..🧸🌟 | content=개떡이..탐난다..🧸🌟 | image=https://blog.kakaocdn.net/dn/oH4WO/dJMcaiLb3M8/17jbTPU3jjU6MVNwPbshHK/AAAAAAAAAAAAAAAAAAAAAErqOK5yFL3sQIeRRtE1LUWX3gfCr7HOL2KbMslIousQ/img.jpg | comments=가을¦내거얌😘¦https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEirAszd4N0_PpfQ0BeGWCYLb51m6ijgUFFq0-tVFRO22BERiy9-gCK6pk80BDseumkqnz2TrpE4ux3DKrHfGqK4PukOkf2EAJhoYGl8SyrLE_aFTYOUSG8Viaph1Zz5TExrMpYeiJtpqnIGx34NZDllDFjke7VAoZXmp5f_KIV-OD3mxf2CG150fqLXFyk/s4032/img.jpg§레이¦개떡이 피곤해 보여요...¦https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgutXsI-YHAtm7CQoGDnwOQ1D1c44HiwQERP9bbzuztZwLA-oqQL76X0hsHp2BhRTq8VXyzmHVR31DbDmJjz6fVOMvmz65m27Es3ae8Fmg28xSLYtQfLHIZm_nUCEkWtMHdc7-04OV1tdxBPM8e5UDNEM60Ovb1gryDFeFb7oA0aj5oJ3DdLfDyigF9n_E/s4032/img%20%281%29.jpg | board=IVE TALK",
+        "2021-12-16 |  | https://blog.kakaocdn.net/dn/bQl39a/dJMcag0TtIo/0CojcnTL0D8o3XI6mb4J2K/AAAAAAAAAAAAAAAAAAAAAK_MirtnQuKETBfqGSSwvhhCDRxUUi5eg_8cb-ACQ2q5/img.jpg | DAUM CAFE | 리즈 | 다이브~~더쇼,쇼챔 1위 정말 감사해요♥️ 다이브 짱 !!😻😻 | content=다이브~~더쇼,쇼챔 1위 정말 감사해요♥️ 다이브 짱 !!😻😻 | image=https://blog.kakaocdn.net/dn/bQl39a/dJMcag0TtIo/0CojcnTL0D8o3XI6mb4J2K/AAAAAAAAAAAAAAAAAAAAAK_MirtnQuKETBfqGSSwvhhCDRxUUi5eg_8cb-ACQ2q5/img.jpg | comments=리즈¦¦https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhD-qVje4Rnro0Q-Z31LndnZmHclWeh83rfhFsiDBdpa-Bh17UCnvm8PTQOHde1RWK7QzNiZjmvVKd2tEnD672FRU0xVngUfcuQqFUY2E-M6qvmWrbehBxJXVmQCsf-OPL_pzuUA9Cox1hSTojg2hmOSWGnc4-GtjtZClTAX_0bqH_E17FWqngwhYoU0sk/s2880/img%20%282%29.jpg | board=IVE TALK",
+        "2021-12-17 |  | https://blog.kakaocdn.net/dn/dXvf8B/dJMcacK8uLx/vunTVLOwAZk2lEZofjsJKk/AAAAAAAAAAAAAAAAAAAAAMXjsIm2h8XdcL3lEabl7RgUX1BC3iks4jA5QSI1o0bY/img.jpg | DAUM CAFE | 가을 | 리즈 머리가 민들레 같아서 찍었는데 무섭게 쳐다보고 있는.. 귀요미 친구들😝 (자세히 보면 레이도 있음) | content=리즈 머리가 민들레 같아서 찍었는데 무섭게 쳐다보고 있는.. 귀요미 친구들😝 (자세히 보면 레이도 있음) | image=https://blog.kakaocdn.net/dn/dXvf8B/dJMcacK8uLx/vunTVLOwAZk2lEZofjsJKk/AAAAAAAAAAAAAAAAAAAAAMXjsIm2h8XdcL3lEabl7RgUX1BC3iks4jA5QSI1o0bY/img.jpg | board=IVE TALK",
+        "2021-12-20 |  | https://blog.kakaocdn.net/dn/o0Jh8/dJMcagfAFPO/ANsukC6AufKMKaXot9tQ51/AAAAAAAAAAAAAAAAAAAAANFJHUPFI8aWFbOxL9h9BnHq6mrsbzKkbETHBLXRQIR_/img.jpg | DAUM CAFE | 리즈 | 핑쿠핑쿠💕🎀🌸💖 | content=핑쿠핑쿠💕🎀🌸💖 | image=https://blog.kakaocdn.net/dn/o0Jh8/dJMcagfAFPO/ANsukC6AufKMKaXot9tQ51/AAAAAAAAAAAAAAAAAAAAANFJHUPFI8aWFbOxL9h9BnHq6mrsbzKkbETHBLXRQIR_/img.jpg | comments=리즈¦¦https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj-TspkOz4D2QvCgqqHGrBcUzdzcCb3tx10sIa9fix1rSPQ2UQRPz7FVNA0Irulbcbyf_cfzTAkxiC8J21Mkm_nAhg1wR_TtNQiPsEurTCu_JGGG-RtHNJ2bk9EXGUc1dXbatBCPX5fcYnjONu0tjIofAj3eZxoPScEoCcOZyrAtTTZn-6DulrVJUje-e8/s2880/img%20%283%29.jpg | board=IVE TALK",
+        "2021-12-22 |  | https://blog.kakaocdn.net/dn/wCfPX/dJMcahr7RYF/L14b7OwJ3OSCDSTNZGB0FK/AAAAAAAAAAAAAAAAAAAAAOSm2flKv03QHv5ARjt1E7jJQVzQ8elgq5fF8Q-SavpO/img.jpg | DAUM CAFE | 리즈 | (냐옹)리즈왔당🎄3일후면 크리스마스라 지금 좀 많이 설레욯ㅎㅎㅎㅎ 🎅🏻🎅🏻다이브랑 함께 보내다니 ~~~~~💖 | content=(냐옹)리즈왔당🎄3일후면 크리스마스라 지금 좀 많이 설레욯ㅎㅎㅎㅎ 🎅🏻🎅🏻다이브랑 함께 보내다니 ~~~~~💖 | image=https://blog.kakaocdn.net/dn/wCfPX/dJMcahr7RYF/L14b7OwJ3OSCDSTNZGB0FK/AAAAAAAAAAAAAAAAAAAAAOSm2flKv03QHv5ARjt1E7jJQVzQ8elgq5fF8Q-SavpO/img.jpg | board=IVE TALK",
+        "2021-12-26 |  | https://blog.kakaocdn.net/dn/IqwtR/dJMcag0TumU/ksIBTW99yhjRJ2b54SZ611/AAAAAAAAAAAAAAAAAAAAAEb-SA4Zl7f7Cl21gEMiBNgCdQpFMRpsfa45rEjdloCn/img.jpg | DAUM CAFE | 리즈 | 다이브 크리스마스 잘 보내셨나요 ??☺️ 벌써 크리스마스가 지나가버렸네요 😭😭 아 그리구 원영아 상받은거 너무 축하해 🐰💝 | content=다이브 크리스마스 잘 보내셨나요 ??☺️ 벌써 크리스마스가 지나가버렸네요 😭😭 아 그리구 원영아 상받은거 너무 축하해 🐰💝\n그럼 모두 굿나잇 😴 | image=https://blog.kakaocdn.net/dn/IqwtR/dJMcag0TumU/ksIBTW99yhjRJ2b54SZ611/AAAAAAAAAAAAAAAAAAAAAEb-SA4Zl7f7Cl21gEMiBNgCdQpFMRpsfa45rEjdloCn/img.jpg | board=IVE TALK",
+        "2021-12-28 |  | https://blog.kakaocdn.net/dn/bfxulQ/dJMcabeb600/d3J7SUaWU9Z7tVKxK1Bu0K/AAAAAAAAAAAAAAAAAAAAAMvzd-OwEJpVOBlfC7BQvvO-ilFUFQp1DxdAkjrtLQQA/img.jpg | DAUM CAFE | 리즈 | 안녕 난 멋쟁이 밀꾸야 잘부탁해 👋🏻 (밀꾸:밀크+꾸미) | content=안녕 난 멋쟁이 밀꾸야 잘부탁해 👋🏻 (밀꾸:밀크+꾸미) | image=https://blog.kakaocdn.net/dn/bfxulQ/dJMcabeb600/d3J7SUaWU9Z7tVKxK1Bu0K/AAAAAAAAAAAAAAAAAAAAAMvzd-OwEJpVOBlfC7BQvvO-ilFUFQp1DxdAkjrtLQQA/img.jpg | board=IVE TALK",
+        "2021-12-31 |  | https://blog.kakaocdn.net/dn/QYnXd/dJMcaazJ8bh/mlkMj0U2cFAePRKoMm2xJK/AAAAAAAAAAAAAAAAAAAAAH6hBFbICVk0gxMYWjL_s2IQ3KsoH5DcSwHb8aHPT5vE/img.jpg | DAUM CAFE | 레이 | 노트북 감성💻💕 | content=노트북 감성💻💕 | image=https://blog.kakaocdn.net/dn/QYnXd/dJMcaazJ8bh/mlkMj0U2cFAePRKoMm2xJK/AAAAAAAAAAAAAAAAAAAAAH6hBFbICVk0gxMYWjL_s2IQ3KsoH5DcSwHb8aHPT5vE/img.jpg | board=IVE TALK",
+        "2022-01-01 |  | https://blog.kakaocdn.net/dn/dxA9i8/dJMcadXu1aU/7hkFiYclPLOXP3EK7VL131/AAAAAAAAAAAAAAAAAAAAAFopoaTjyRdeyRVzUlCqXm29D_1W9OAbmula-M_B_8S1/img.jpg | DAUM CAFE | 장원영 | 다이브!! 우리 만난지 벌써 한달이 됐는데 2022의 시작을 함께할 수 있어서 너무 좋아요💕 우리 올해는 아이브랑 다이브, 더 행복하고 더 사랑해주면서 보내용 나랑 포에버해 우리 다이브😉✨ | content=다이브!! 우리 만난지 벌써 한달이 됐는데 2022의 시작을 함께할 수 있어서 너무 좋아요💕 우리 올해는 아이브랑 다이브, 더 행복하고 더 사랑해주면서 보내용 나랑 포에버해 우리 다이브😉✨ | image=https://blog.kakaocdn.net/dn/dxA9i8/dJMcadXu1aU/7hkFiYclPLOXP3EK7VL131/AAAAAAAAAAAAAAAAAAAAAFopoaTjyRdeyRVzUlCqXm29D_1W9OAbmula-M_B_8S1/img.jpg | board=IVE TALK",
+        "2022-01-10 |  | https://blog.kakaocdn.net/dn/Zjyhx/dJMcaf10Ryb/gqUC12cKcZYIAc6PsKeFu1/AAAAAAAAAAAAAAAAAAAAAMN5GcF6CtYrdaVnj7CW755z6B9xyiA1b-cnP2OlXsqA/img.jpg | DAUM CAFE | 리즈 | 어흥🐯 다이브도 eleven활동 응원해주느라 수고했어요 💜💜 | content=어흥🐯 다이브도 eleven활동 응원해주느라 수고했어요 💜💜 | image=https://blog.kakaocdn.net/dn/Zjyhx/dJMcaf10Ryb/gqUC12cKcZYIAc6PsKeFu1/AAAAAAAAAAAAAAAAAAAAAMN5GcF6CtYrdaVnj7CW755z6B9xyiA1b-cnP2OlXsqA/img.jpg | comments=리즈¦¦https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi8BFJ77wtp6xnUdh9qindL8Ca_5qiGyUnm67fNQoYEpntHxKT4Etngct3fatEQ_C9gM3hy_WhcMCbtQSoeyXjDgHysiFPlyxlduweoiPhwFnITmxCQbKv-Hu4HGCcbWnAkdRpfswYo68Yt5c3UQnaJ6qFwGdz1WvR7v0bggp4p3yrR2aPuKA3CuyWzAVg/s2880/img%20%284%29.jpg | board=IVE TALK",
+        "2022-01-18 |  | https://blog.kakaocdn.net/dn/F7q8N/dJMcacxwcMP/sKJ3rrDBeNfDBwOXvG19Pk/AAAAAAAAAAAAAAAAAAAAAM9-BRnjRn59eKP4ji96tamPwY8In3OKaD03NGhr5YUM/img.jpg | DAUM CAFE | 리즈 | 흑발 피크닉 갬성샷 📸 | content=흑발 피크닉 갬성샷 📸 | image=https://blog.kakaocdn.net/dn/F7q8N/dJMcacxwcMP/sKJ3rrDBeNfDBwOXvG19Pk/AAAAAAAAAAAAAAAAAAAAAM9-BRnjRn59eKP4ji96tamPwY8In3OKaD03NGhr5YUM/img.jpg | board=IVE TALK",
+        "2022-01-27 |  | https://blog.kakaocdn.net/dn/bqV2Hw/dJMcadC1YNA/dA38LIRihCWmZI0k6Z94kK/AAAAAAAAAAAAAAAAAAAAAMgwLE3q2pI5XeJ-ppXrGiH_Z7nXtRUgTovW8NLzsj_s/img.jpg | DAUM CAFE | 리즈 | 완전 갬성샷찍어버리기~~~📸 | content=완전 갬성샷찍어버리기~~~📸 | image=https://blog.kakaocdn.net/dn/bqV2Hw/dJMcadC1YNA/dA38LIRihCWmZI0k6Z94kK/AAAAAAAAAAAAAAAAAAAAAMgwLE3q2pI5XeJ-ppXrGiH_Z7nXtRUgTovW8NLzsj_s/img.jpg | board=IVE TALK",
+        "2022-01-30 |  | https://blog.kakaocdn.net/dn/bWzcnP/dJMcaa7Cft3/p7EkAkbZtF6xEVF4mIDGy0/AAAAAAAAAAAAAAAAAAAAAOdvxVP6c_355rYTMpruLmVa5lVjekzRglOg47wOADfM/img.jpg | DAUM CAFE | 리즈 | 미니 가을언니와의 만남 🍁😽 | content=미니 가을언니와의 만남 🍁😽 | image=https://blog.kakaocdn.net/dn/bWzcnP/dJMcaa7Cft3/p7EkAkbZtF6xEVF4mIDGy0/AAAAAAAAAAAAAAAAAAAAAOdvxVP6c_355rYTMpruLmVa5lVjekzRglOg47wOADfM/img.jpg | board=IVE TALK",
+        "2022-02-25 |  | https://blog.kakaocdn.net/dn/cEuLKZ/dJMcaiLfyMV/4nqOvKlLW5CIk9z6kzmSy1/AAAAAAAAAAAAAAAAAAAAANFm1BAj3r1D4hlRkkzqzQLyD2UbxsmBDFhbCd_vX2fN/img.jpg | DAUM CAFE | 리즈 | 다이브 굿나잇 🌙😴 | content=다이브 굿나잇 🌙😴 | image=https://blog.kakaocdn.net/dn/cEuLKZ/dJMcaiLfyMV/4nqOvKlLW5CIk9z6kzmSy1/AAAAAAAAAAAAAAAAAAAAANFm1BAj3r1D4hlRkkzqzQLyD2UbxsmBDFhbCd_vX2fN/img.jpg | board=IVE TALK",
         // [Cafe 예시] "2025-06-01 | https://cafe.daum.net/IVEstarship/... | 사진주소(없으면 비움→회색 귤) | DAUM CAFE | 가을 | To. Dive | views=3995",
         // ---- 2026.10.20 추가분 (IVE / Shorts / ELLE / TONYMOLY) ----
         "2022-04-07 | https://www.instagram.com/reel/CcDMzczFOey/ |  | IVE | 리즈 | LOVE DIVE 💙",
@@ -2124,7 +2353,7 @@
         "2022-02-14 | https://www.instagram.com/reel/CZ1Tedflb0W/ |  | MAGAZINE | 리즈 | ELLE 올리브영 비건뷰티 캠페인 | album=ELLE 2022년 3월호",
         "2026-10-19 | https://www.instagram.com/reel/Deq1kTfgf0y/ |  | AD | 리즈 | 𝑳-𝑶-𝑽-𝑬 🐱💌 | album=TONYMOLY",
         "2026-10-24 | https://www.instagram.com/reel/DeyvvGURG_6/ |  | POP-UP | 리즈 | YCH HANNAM | album=YCH",
-        "2026-07-27 | https://www.mnetplus.world/contents/ko/shows/6a434dd9e41135211d9127f0/videos | https://lh3.googleusercontent.com/d/1NHsnYUSweZxB2DS0XpVsbEQgl3AqKU4n | MAGAZINE | 리즈 | FANS' CHOICE FACE | album=FANS' CHOICE FACE | cols=2 | bare=1 | photos=https://lh3.googleusercontent.com/d/1QXT9kX2kCTzDakGMLGvnk6PZaEhAk6Cv;https://lh3.googleusercontent.com/d/1eUQGSrnzwrXKP0luPS6moWOKaR1PCn2F;https://lh3.googleusercontent.com/d/1wX30fcve6WylGw5PRQ54Pm6XzKEv4nEI;https://lh3.googleusercontent.com/d/1Cm4e1lOQXFNBLUgJaJ4Z6jhdexsDl-p5;https://lh3.googleusercontent.com/d/1OKHgwKjCjQyqemJ6jjhndwj31-Xua7Yd;https://lh3.googleusercontent.com/d/1nzihgwrdXY3qYZPgCH55iKw81ts-dA1J;https://lh3.googleusercontent.com/d/1NHsnYUSweZxB2DS0XpVsbEQgl3AqKU4n;https://lh3.googleusercontent.com/d/1q3XfbnayFi9UOf3d8xJDgH2vrXB4LVF8;https://lh3.googleusercontent.com/d/1QyHfyRedNismJd69fnc_oVaZdLlYjSVX;https://lh3.googleusercontent.com/d/1erXTalWVmHsDnXlJCGmulCC6KeodoEQI;https://lh3.googleusercontent.com/d/1CPKo8ddKp4ArcspbfOqX-fTom9OPP_Ph;https://lh3.googleusercontent.com/d/1sIBnNedpZKY1S7oSj5MaC7-ZBsLWFnL1;https://lh3.googleusercontent.com/d/1u-615zFvChyDtvEb8A5deotB6zQbybvx;https://lh3.googleusercontent.com/d/1u08pNPsnpz0w3hyLtpGcd7woRkkSJUSP;https://lh3.googleusercontent.com/d/1aDnS7PTmMLLz3WMVPZlxFWfErBOfD9ZS;https://lh3.googleusercontent.com/d/1yORk38l9UeRj3o0HyiIz7dJfyBnI5RZ6;https://lh3.googleusercontent.com/d/1pJ3MRJW3CPXSP4iQ7e-uwEpw36b_3f--;https://lh3.googleusercontent.com/d/17ycdKJiCia7383f7NnfZnM1L4aqRBtNk;https://lh3.googleusercontent.com/d/1F22egkpFVHlevHfw-2uZYmuTqgbULSYJ;https://lh3.googleusercontent.com/d/1lqkve7slR8MZ6s7ISvuMWacaYaMdIhip;https://lh3.googleusercontent.com/d/1EVqvY6-vTZT-kfu-YAbQt4jeO2btkaPG;https://lh3.googleusercontent.com/d/1lHhKF-ImPXwxnfZUkMEjt5WluJz551wz;https://lh3.googleusercontent.com/d/1-YYT3-46OGQFrEZDAN51_tv8kV5pROg-;https://lh3.googleusercontent.com/d/1Ie1xZ5DwNqf8Ie2ugUJkjS27gkMFJYLM;https://lh3.googleusercontent.com/d/1UdKKaha4rV-kEivDCJjymuLzCEgAMW4w;https://lh3.googleusercontent.com/d/11pYARveenWxuyjpN-WfBw4mZIvVkihSS;https://lh3.googleusercontent.com/d/1U6-maAAZgtGE28qhCUzHnWdYLU-dBc79;https://lh3.googleusercontent.com/d/1RsoVNhXvmYn8C2JPQV_tXQ649o_5Ifo0;https://lh3.googleusercontent.com/d/1KDLDVNH0sGfyvG3uYl-cJ0wXO_T4fZSS;https://lh3.googleusercontent.com/d/13MTBAy35OPG9mmgZe-qUGIk3PLlmcYJp;https://lh3.googleusercontent.com/d/1uoCUzfUrfH4o4iyZk3gONpZSP7vodvE0;https://lh3.googleusercontent.com/d/1Tc2i6LEnHowf61ugJ9dzhBczDuCwhh4G",
+        "2026-07-27 | https://www.mnetplus.world/contents/ko/shows/6a434dd9e41135211d9127f0/videos | https://lh3.googleusercontent.com/d/1NHsnYUSweZxB2DS0XpVsbEQgl3AqKU4n | MAGAZINE | 리즈 | FANS' CHOICE FACE | album=FANS' CHOICE FACE 2026년 7월호 | cols=2 | bare=1 | photos=https://lh3.googleusercontent.com/d/1QXT9kX2kCTzDakGMLGvnk6PZaEhAk6Cv;https://lh3.googleusercontent.com/d/1eUQGSrnzwrXKP0luPS6moWOKaR1PCn2F;https://lh3.googleusercontent.com/d/1wX30fcve6WylGw5PRQ54Pm6XzKEv4nEI;https://lh3.googleusercontent.com/d/1Cm4e1lOQXFNBLUgJaJ4Z6jhdexsDl-p5;https://lh3.googleusercontent.com/d/1OKHgwKjCjQyqemJ6jjhndwj31-Xua7Yd;https://lh3.googleusercontent.com/d/1nzihgwrdXY3qYZPgCH55iKw81ts-dA1J;https://lh3.googleusercontent.com/d/1NHsnYUSweZxB2DS0XpVsbEQgl3AqKU4n;https://lh3.googleusercontent.com/d/1q3XfbnayFi9UOf3d8xJDgH2vrXB4LVF8;https://lh3.googleusercontent.com/d/1QyHfyRedNismJd69fnc_oVaZdLlYjSVX;https://lh3.googleusercontent.com/d/1erXTalWVmHsDnXlJCGmulCC6KeodoEQI;https://lh3.googleusercontent.com/d/1CPKo8ddKp4ArcspbfOqX-fTom9OPP_Ph;https://lh3.googleusercontent.com/d/1sIBnNedpZKY1S7oSj5MaC7-ZBsLWFnL1;https://lh3.googleusercontent.com/d/1u-615zFvChyDtvEb8A5deotB6zQbybvx;https://lh3.googleusercontent.com/d/1u08pNPsnpz0w3hyLtpGcd7woRkkSJUSP;https://lh3.googleusercontent.com/d/1aDnS7PTmMLLz3WMVPZlxFWfErBOfD9ZS;https://lh3.googleusercontent.com/d/1yORk38l9UeRj3o0HyiIz7dJfyBnI5RZ6;https://lh3.googleusercontent.com/d/1pJ3MRJW3CPXSP4iQ7e-uwEpw36b_3f--;https://lh3.googleusercontent.com/d/17ycdKJiCia7383f7NnfZnM1L4aqRBtNk;https://lh3.googleusercontent.com/d/1F22egkpFVHlevHfw-2uZYmuTqgbULSYJ;https://lh3.googleusercontent.com/d/1lqkve7slR8MZ6s7ISvuMWacaYaMdIhip;https://lh3.googleusercontent.com/d/1EVqvY6-vTZT-kfu-YAbQt4jeO2btkaPG;https://lh3.googleusercontent.com/d/1lHhKF-ImPXwxnfZUkMEjt5WluJz551wz;https://lh3.googleusercontent.com/d/1-YYT3-46OGQFrEZDAN51_tv8kV5pROg-;https://lh3.googleusercontent.com/d/1Ie1xZ5DwNqf8Ie2ugUJkjS27gkMFJYLM;https://lh3.googleusercontent.com/d/1UdKKaha4rV-kEivDCJjymuLzCEgAMW4w;https://lh3.googleusercontent.com/d/11pYARveenWxuyjpN-WfBw4mZIvVkihSS;https://lh3.googleusercontent.com/d/1U6-maAAZgtGE28qhCUzHnWdYLU-dBc79;https://lh3.googleusercontent.com/d/1RsoVNhXvmYn8C2JPQV_tXQ649o_5Ifo0;https://lh3.googleusercontent.com/d/1KDLDVNH0sGfyvG3uYl-cJ0wXO_T4fZSS;https://lh3.googleusercontent.com/d/13MTBAy35OPG9mmgZe-qUGIk3PLlmcYJp;https://lh3.googleusercontent.com/d/1uoCUzfUrfH4o4iyZk3gONpZSP7vodvE0;https://lh3.googleusercontent.com/d/1Tc2i6LEnHowf61ugJ9dzhBczDuCwhh4G",
         "2026-10-16 | http://xhslink.com/o/9mhbWbX6YJI |  | AD | 리즈 | H&M CHINA | album=H&M CHINA",
         // ---- 2026.10 추가분 (YCH HANNAM / H&M CHINA) ----
         "2026-10-14 | https://www.instagram.com/reel/Ded1fDLhynI/ |  | POP-UP | 리즈 | YCH HANNAM | album=YCH",
@@ -2564,7 +2793,7 @@
         "2025-12-14 | https://www.lofficielsingapore.com/jewellery/cover-story-ive-s-liz-talks-world-tour-song-writing-and-what-s-next | https://blog.kakaocdn.net/dn/cOxnNH/dJMcadKrbdH/f5sw6Sgt1QiWNOHtRlFzF1/AAAAAAAAAAAAAAAAAAAAAB8691-qTSwst5h4Y3tXcLjKac8Cj370Uj4QNr3lrZ-z/img.webp | MAGAZINE | 리즈 | L'OFFICIEL SINGAPORE | album=L'OFFICIEL SINGAPORE | cols=2 | bare=1 | original=1 | photos=https://blog.kakaocdn.net/dn/cOxnNH/dJMcadKrbdH/f5sw6Sgt1QiWNOHtRlFzF1/AAAAAAAAAAAAAAAAAAAAAB8691-qTSwst5h4Y3tXcLjKac8Cj370Uj4QNr3lrZ-z/img.webp;https://blog.kakaocdn.net/dn/cN50pw/dJMcahfbcCm/YSDAsMb37tjZviby2GynUK/AAAAAAAAAAAAAAAAAAAAAFtRQohwbr4qDGNgI6hiIDB5csmLiIJEakbgGTvscCGW/img.webp;https://blog.kakaocdn.net/dn/y6N5g/dJMcaatyt9e/tR3tnyuFrthUDsfaP8m7Rk/AAAAAAAAAAAAAAAAAAAAACXFkTCi01jRW1l3MsnxwxGbAvBXjowKxeLxWUHTwFmD/img.webp;https://blog.kakaocdn.net/dn/vJV9p/dJMcahF54kb/K4vw0pUuDlJ2KdxJHrtKUk/AAAAAAAAAAAAAAAAAAAAAB-ITUtwRU04J9Qo1ssDwTAfImLBW8_pzz0V8zeWLhA7/img.webp;https://blog.kakaocdn.net/dn/9v00u/dJMcabTrAlh/xcG1D1luMlsXHzeZgA8dGK/AAAAAAAAAAAAAAAAAAAAAKggDEcGd8mibQ5mGTTBfWId9vK0HWbAK685vK5QNjig/img.webp;https://blog.kakaocdn.net/dn/c9mvYQ/dJMcabFPEbC/4KCjeO24KzEKCANNsV15sK/AAAAAAAAAAAAAAAAAAAAAC3mLIzGEdaDDRhrQmPvkpHsovGUTSsb_th3BS05ZAqB/img.webp;https://blog.kakaocdn.net/dn/Qo01k/dJMcabsnC6Y/k0KoEtFUYoXVHhn6KcNbG1/AAAAAAAAAAAAAAAAAAAAAOwaoZysdaaNLD6Mf0bf0qvPed03h3FnOlbJb2m2FmpI/img.webp;https://blog.kakaocdn.net/dn/b4818v/dJMcaaNSVHz/57H85C65SnupFPP4yCC5c1/AAAAAAAAAAAAAAAAAAAAAKOpejt-n1Z-L7SJvXnIPwjkYEos-0lOfulSf30Op7kc/img.webp;https://blog.kakaocdn.net/dn/PhjLk/dJMcabsnC64/dvlp0vQG567QHUuPK45bhk/AAAAAAAAAAAAAAAAAAAAAIeKVnT347jZoZjdBzbJg093uvEGW9thmT11mhbhp7Xv/img.webp;https://blog.kakaocdn.net/dn/mxirx/dJMcadRb7go/3lQ8K8svkDXnKK7SOucWZ1/AAAAAAAAAAAAAAAAAAAAABwimUgu3sg6_zUqD0J76JjHn-wunh2kfv5kRfq6PgRp/img.webp;https://blog.kakaocdn.net/dn/2rFZn/dJMcaaG8QBx/rSXsmrfOSvhvPYaNCgvdjk/AAAAAAAAAAAAAAAAAAAAADvTmCzu82TKtyrHbusgAbCMwDIiJtzRvr4m-CMptHJl/img.webp;https://blog.kakaocdn.net/dn/bPh4EE/dJMcah7kWZa/Z6uibVXqKNmuP9hNZKbkEK/AAAAAAAAAAAAAAAAAAAAABTR5D7XYh0g3Bzl8lEyJO_oxhbUlGimqnP0Q4ooFiJY/img.webp",
         "2025-11-01 |  | https://blog.kakaocdn.net/dn/lEBW3/dJMcacrpZXv/gvVYDv5vOs3zOemPatHT01/AAAAAAAAAAAAAAAAAAAAAPoy1fOBxZ5cTiuPMtGxsPPEXo_oNWYEIpc0LbtOiRLn/img.jpg | MAGAZINE | 리즈 | COSMOPOLITAN 2025년 11월호 | album=COSMOPOLITAN 2025년 11월호 | cols=2 | bare=1 | photos=https://blog.kakaocdn.net/dn/lEBW3/dJMcacrpZXv/gvVYDv5vOs3zOemPatHT01/AAAAAAAAAAAAAAAAAAAAAPoy1fOBxZ5cTiuPMtGxsPPEXo_oNWYEIpc0LbtOiRLn/img.jpg;https://blog.kakaocdn.net/dn/bha5iG/dJMcafIrtva/EKYIxDb7yi9hAc4t4WOuJK/AAAAAAAAAAAAAAAAAAAAAJVAe1fo7Aam0AFUpkw5B0Gn80_bQmfphMGWXoDVZ6iD/img.jpg;https://blog.kakaocdn.net/dn/LHrlB/dJMcahsIWMd/YkGa2LWXAvba3kKibVyXkK/AAAAAAAAAAAAAAAAAAAAAPEuMqXR8TJ9ZHl7BSge_2YS_L0Ec5-1G6uo4Tuvkk72/img.jpg;https://blog.kakaocdn.net/dn/oefnn/dJMcahlXBJ5/hP4tvdTl0GAFcLU9KMWKV0/AAAAAAAAAAAAAAAAAAAAAMNZJimoBzUY5F8ofKhJasOZ0S-z0bc1mO5Dm91fQrWa/img.jpg;https://blog.kakaocdn.net/dn/cb9GiU/dJMcaa8dJOM/HbZRY8EdgBak2rhdrC8jNk/AAAAAAAAAAAAAAAAAAAAABDtqmOz7v8vp8ht-Pa6Ngtpr-Q6QSI6-sHGdnBeoQjP/img.jpg;https://blog.kakaocdn.net/dn/rsaCX/dJMcackt1dg/pydvAyq6byZOI3C3vMq1IK/AAAAAAAAAAAAAAAAAAAAAFzBDC0DPU3H90BKTM_VU3rUhlu7hsxmqMtqu7xhiu8R/img.jpg;https://blog.kakaocdn.net/dn/PrazP/dJMcaiSFdLr/RnscBYrkSteiCZZeSqFKgK/AAAAAAAAAAAAAAAAAAAAAD_04RqcjPTD59ypojEjD0-o1BCSr12m0ru2GFHu-r9d/img.jpg;https://blog.kakaocdn.net/dn/HVxyi/dJMcab0lQz0/IaC0ZkcnCjvPjmDHK0qLB1/AAAAAAAAAAAAAAAAAAAAAL8QJ2MN6FPiR4YxOd3IKnVbPiuyl313hm-x0BcDDaXC/img.jpg;https://blog.kakaocdn.net/dn/dPjCv5/dJMcafn7ZTt/KoHIRVehGKfuKD5vGv1dlK/AAAAAAAAAAAAAAAAAAAAADK-1rWvzgoBPQKLbqhi3DYxvQSnZwBkjD6DTtbnRuZz/img.jpg;https://blog.kakaocdn.net/dn/mnZAv/dJMcaikMqQb/KKJoMGL4w3o4jYNFyaNtNk/AAAAAAAAAAAAAAAAAAAAAKc3A2SfwDXA3lwQYtMK1Un6FbPtlA9T8cBOTKkUcE6S/img.jpg",
         "2025-02-01 |  | https://blog.kakaocdn.net/dn/oeHEq/dJMcacY8DYW/Iy3UjKkWCoMz7iOSlewVy1/AAAAAAAAAAAAAAAAAAAAAFYRm0fT86C_TGeCsecoU1Qz03keW5wZDpPIOxCoNUlL/img.jpg | MAGAZINE | 아이브 | COSMOPOLITAN 2025년 2월호 | album=COSMOPOLITAN 2025년 2월호 | cols=2 | bare=1 | photos=https://blog.kakaocdn.net/dn/oeHEq/dJMcacY8DYW/Iy3UjKkWCoMz7iOSlewVy1/AAAAAAAAAAAAAAAAAAAAAFYRm0fT86C_TGeCsecoU1Qz03keW5wZDpPIOxCoNUlL/img.jpg;https://blog.kakaocdn.net/dn/ccYqfj/dJMcajqgW01/HgOTXiOwa5JBq5wkMEsPFk/AAAAAAAAAAAAAAAAAAAAAFmEcarv2TBzPqJJ9SvD8dgod4eW3-zPJlGhnV74qvJL/img.jpg;https://blog.kakaocdn.net/dn/2RUjP/dJMcaf2xDv7/T1vj6LPF2W2UyBSkiwwuy1/AAAAAAAAAAAAAAAAAAAAAPAl2oC-Fbs2ZK6KVUoqNhJlN-MK8YnSBFkQLCI6-Lrm/img.jpg;https://blog.kakaocdn.net/dn/lfUr2/dJMcadqa9D3/0ZWXPn62lWdTNDrj1qNTbK/AAAAAAAAAAAAAAAAAAAAAFwOMy3_k7SvBj8EgNamULgKpJf2qBmdB1vkN8MI2Do2/img.jpg",
-        "2024-06-14 |  | https://blog.kakaocdn.net/dn/bZNJ2X/dJMcab61E0N/lkKC3WQCNtXdnWH8BxgTH1/AAAAAAAAAAAAAAAAAAAAAK9RH8ueQAIEkNz2qLisGyJv8E-w3BEtOy98F-TPFTuO/img.jpg | MAGAZINE | 아이브 | DICON VOLUME N°20 | album=DICON VOLUME N°20 | cols=2 | bare=1 | photos=https://blog.kakaocdn.net/dn/edqSdf/dJMb99OKwzb/iqVVqkXjmQkVk23dKmXxP1/AAAAAAAAAAAAAAAAAAAAAPCA9ZkV5wdHKjh_YFFbWpVMQEpwziz_i_8q1aWB4VfX/img.jpg;https://blog.kakaocdn.net/dn/bCcik9/dJMcaaG8RTM/cGnvYNMiTA3Urn2UcDcYSk/AAAAAAAAAAAAAAAAAAAAAFEmndoAtO63seJeOISCmQNhZpBH9YEwU7AFNXAuOO1p/img.jpg;https://blog.kakaocdn.net/dn/bBf9ys/dJMcagUNAnW/rgpxvkY9okeirvKta71bm0/AAAAAAAAAAAAAAAAAAAAABEbnag_gwGRjSdM3DjDxAXmc7L3SodEQDG255-ntiDM/img.jpg;https://blog.kakaocdn.net/dn/bX9gp4/dJMcagtHmZO/d28H0Bj17Qv4IRQ6Dm9EBK/AAAAAAAAAAAAAAAAAAAAAE9jsoL8Ze3FJBemG0bGZooxxJJpMYSnO8fhsmPRJeIR/img.jpg;https://blog.kakaocdn.net/dn/rzMdU/dJMcabFPFTD/fwZBJiAEBKZCFKQClhAlQK/AAAAAAAAAAAAAAAAAAAAABxCuhRf3zOt56SznOcfjGkQ1dPVIZp71X4vLe0bax1Y/img.jpg;https://blog.kakaocdn.net/dn/bTnNIr/dJMcag1pii6/p87HM2O1MKSSGpZvqFyFRK/AAAAAAAAAAAAAAAAAAAAACW_V8-jnVcrLj6TJ5Fw5xb-w688lEKaTjJv8zvauzuR/img.jpg;https://blog.kakaocdn.net/dn/lo5Ri/dJMcajxhje1/VbK8jkok3H1K6JjJBjviC0/AAAAAAAAAAAAAAAAAAAAACpRxsyEbjEFWUMXTrD4LYImVhD1SKzo4E63Ju8z1N9_/img.jpg;https://blog.kakaocdn.net/dn/cKkzZM/dJMcah7kYmS/cSgDnagcttA7NuGMre6Au0/AAAAAAAAAAAAAAAAAAAAAHWdUqD7qKxlP7cCHrEXIJqjwQwfNPE2HJQajpjI8X42/img.jpg;https://blog.kakaocdn.net/dn/CwMGn/dJMcabeHuxJ/BS3rF7yE9CA62vFdLF4v2K/AAAAAAAAAAAAAAAAAAAAAHXQGugXVS4BFgibNO0NrHMEwtgqddXD3D1rFdy9zi0c/img.jpg;https://blog.kakaocdn.net/dn/l55eV/dJMcabeHuxL/lE3arKT31zBcBnVtrkMkh1/AAAAAAAAAAAAAAAAAAAAAM5rje_C392SmDFIxqoXxzI3B-HhMJ36ctsHZOzcLqkl/img.jpg;https://blog.kakaocdn.net/dn/FywFL/dJMcai507Oe/38rYOjYmwdeOMSPj7JUxF0/AAAAAAAAAAAAAAAAAAAAANqHTdUyrDQMCmk0pco9LYGQM9JVFEMVsyv2Z55SeaXD/img.jpg;https://blog.kakaocdn.net/dn/bZNJ2X/dJMcab61E0N/lkKC3WQCNtXdnWH8BxgTH1/AAAAAAAAAAAAAAAAAAAAAK9RH8ueQAIEkNz2qLisGyJv8E-w3BEtOy98F-TPFTuO/img.jpg;https://blog.kakaocdn.net/dn/vO9Vf/dJMcahTwPn6/vTCXKD8VkQTbFQOILWvYZ0/AAAAAAAAAAAAAAAAAAAAAOrTFiAdCkmVSxMYkDfN5htzzpI41w1eW90365pT2mF9/img.jpg;https://blog.kakaocdn.net/dn/bf4wpr/dJMcacEZpCa/yJrA6UJESTnQM99fmzzNs0/AAAAAAAAAAAAAAAAAAAAAD_TfEHwJSR1sfobiyoqihE41N0J25dSsUHWgnQMDE0w/img.jpg;https://blog.kakaocdn.net/dn/mobTz/dJMcabeHuG5/j5nhJqSVDWkdZSqMJPb7jk/AAAAAAAAAAAAAAAAAAAAAM9Y_tfYMzlbx9ryeqWeOvuw3DLwe5xNUxSWDeMyOeeX/img.jpg;https://blog.kakaocdn.net/dn/daz1LQ/dJMcab0mjBD/wLzNMZbEtxti8JISGkYQS1/AAAAAAAAAAAAAAAAAAAAAO-6_EhSNn1leuuPA4Gn9U6asxlFSMFAaIfe-kcq35rZ/img.jpg;https://blog.kakaocdn.net/dn/bh88X4/dJMcagArXN5/B75PlaIkIBrGQNOinRmoS0/AAAAAAAAAAAAAAAAAAAAAE-lyD3cYEuRkE0HX7_-iJBBfW48We52jqFIGRlVlP8M/img.jpg;https://blog.kakaocdn.net/dn/vazzH/dJMcaa8edXg/FX52DieVB6ODyTyU1Yx7o0/AAAAAAAAAAAAAAAAAAAAABhqP4z7jCryD-0boO6Iqr2r-aeVUQJvnA1cY8C2gQjH/img.jpg;https://blog.kakaocdn.net/dn/bup3Jd/dJMcah7kYsu/zrjUeSiErUAkLNJAqDXgk0/AAAAAAAAAAAAAAAAAAAAAL6cwfkG81ofzeK4HCom89E5qAd7s6xzLd432L-5jUAA/img.jpg;https://blog.kakaocdn.net/dn/oXy4O/dJMcacx4in3/xeTR2BdA6PnbllMsF11Adk/AAAAAAAAAAAAAAAAAAAAACmNeUBRjUyoj6QDvuzgzK-gkHudb5wqh3BLUiV6Plqg/img.jpg;https://blog.kakaocdn.net/dn/U55JD/dJMcah0mnSZ/keGr3wdfeLBGmMqDEY4DX1/AAAAAAAAAAAAAAAAAAAAACGu9nvu2Qx-OuPGTR-UgLrSWkee8jIckqVhYEw7b6Lx/img.jpg;https://blog.kakaocdn.net/dn/dwo5Ri/dJMcabsnFc9/zK72QWkKK1KmdXlvOMzseK/AAAAAAAAAAAAAAAAAAAAAMfcVQFba2NTHKM22PPHkgUJeJpvEArdFxu-Dw0KvNZm/img.jpg;https://blog.kakaocdn.net/dn/bo4pOr/dJMcacx4iom/gl1l2MOOJUsdUrDRcBr3pk/AAAAAAAAAAAAAAAAAAAAAONpmLseEQotbhZY_81E0VIYQgPXU7C8DIaIC0-iSbxN/img.jpg;https://blog.kakaocdn.net/dn/pvPe1/dJMcajxhjrA/G56URmfS8PFHajyoImRN1K/AAAAAAAAAAAAAAAAAAAAABmmXTeAu6H3ibWiLSOh78yJ7W8wytMyMcuc_Nv9oCH_/img.jpg;https://blog.kakaocdn.net/dn/CJkHp/dJMcaiynPub/DZkbGD3Knzzn4mPMJLnYH1/AAAAAAAAAAAAAAAAAAAAAE6h8XNVNqLtpIZI7zv9_KHdAnnw90F1ZuPoP52wh1tO/img.jpg;https://blog.kakaocdn.net/dn/oPWX3/dJMcab61FcJ/DMb60NGYXxHsauU8pLkPY0/AAAAAAAAAAAAAAAAAAAAAO_icwhCwn_kT4XAd-_x0ingJjYdFqaHcsjwuW8i7P4P/img.jpg;https://blog.kakaocdn.net/dn/bgxdeG/dJMcagN8VeU/a61in3rdUMjl16OaIuqjVK/AAAAAAAAAAAAAAAAAAAAACsPmtLujFWmWHyWoVvnXtv9qdnVm2S6mZ4oWlT-2pzA/img.jpg;https://blog.kakaocdn.net/dn/pAUTU/dJMcahTwPtE/tBPeXSEG1oNmbftARmk0F0/AAAAAAAAAAAAAAAAAAAAAGM8DvJswF_EAeq9K5btOSEjKayLbR-v1VFnuKnjlhkD/img.jpg;https://blog.kakaocdn.net/dn/mWQI2/dJMcabMRpb6/xDPjJEzmYK81S1pjtW2Ko0/AAAAAAAAAAAAAAAAAAAAAOk4tB9p0wRNg1Tqh_Yt6qk2OB7ARSClZDDfIRQ8cbUV/img.jpg;https://blog.kakaocdn.net/dn/cy3pRZ/dJMcah0mnXV/MSc8dAmm7FBJP2IRLKNMT1/AAAAAAAAAAAAAAAAAAAAAPDqt8kxnjt3GIEH9wikiLugeLzfIbLSK_ogMo8e_dxA/img.jpg;https://blog.kakaocdn.net/dn/C1VQQ/dJMcabsnFiu/2Y3CaBrWzYxzlfvvJ8gl50/AAAAAAAAAAAAAAAAAAAAALHog2lrTKLx_Vw6GxCsQ58FjlMWLBLIEC0rbaILAZbp/img.jpg;https://blog.kakaocdn.net/dn/caREZa/dJMcajcQyCW/7U7HZG4DAKaWa3AqkOSCXK/AAAAAAAAAAAAAAAAAAAAALlpIHaC3yMPPnFkvTvT_Axjt4HsszW_RoS7liqkTF2Z/img.jpg;https://blog.kakaocdn.net/dn/bdKpm9/dJMcablI6tF/HX6KmpOyKyCYH2Kmgdibw0/AAAAAAAAAAAAAAAAAAAAAAldME_ykABaFGYl1PhubS1bv0jPydXoIJgbAVHKkkgN/img.jpg;https://blog.kakaocdn.net/dn/xR4Xx/dJMcagHm4bL/eIb5Z6nzKU3MeNLeYC617k/AAAAAAAAAAAAAAAAAAAAADRFUI3BUWJtEkvpiz1-JPCzkSZX_23wEAc2DbGZ-LOl/img.jpg;https://blog.kakaocdn.net/dn/b0Cmqt/dJMcagmSIRP/5nzeme1j08TxTHEAT4njDK/AAAAAAAAAAAAAAAAAAAAANNRM0lC-pk8uhQ5JVUtMczE01B7fvJm8vD8KrCMtpXi/img.jpg;https://blog.kakaocdn.net/dn/cIgnrJ/dJMcaaNSXHB/qdOlOZWj37iZdNvadRTpp0/AAAAAAAAAAAAAAAAAAAAAMAcOvkbbsauS1QhuxEWIfEfv0R4hEaD8K2ynaBKO8Wx/img.jpg;https://blog.kakaocdn.net/dn/STqYO/dJMcacrqtnq/2NRJAOSUeT7gg7xNok94mk/AAAAAAAAAAAAAAAAAAAAAL1F3P0OxQQ7N7N3BauQW3I9xitUFObLWSZtDpOywTVn/img.jpg;https://blog.kakaocdn.net/dn/ccHp18/dJMcadqbFEt/xTCDHT1lshSz1IuLYvTER0/AAAAAAAAAAAAAAAAAAAAANI9lj-lGiBO6rxAN0_uc2NQZaH6cGAtyKGqXNk5514O/img.jpg;https://blog.kakaocdn.net/dn/bWtkln/dJMcadqbFGJ/pFCxyr2tyts6ibqr6cdFl1/AAAAAAAAAAAAAAAAAAAAAIZVhuO48jzeS3K-gSqbjIZ42Mh26SWantpKoTZ1nmkb/img.jpg;https://blog.kakaocdn.net/dn/cHjd7n/dJMcaby5ZXw/sSfh0CetK64uSOX3lUUjt0/AAAAAAAAAAAAAAAAAAAAAP3DrG-21WlchSD5XQ-wgpLf1mFaOLbq9aGAJenngeeX/img.jpg;https://blog.kakaocdn.net/dn/Cg9Dz/dJMb992r4VH/nzE2vUEAYBdxla6vDKlgJ1/AAAAAAAAAAAAAAAAAAAAAOAeqsYoKwfUelPjZ4SgA3S732OK8eiAAMGNXpIW_XcC/img.jpg;https://blog.kakaocdn.net/dn/LAVBK/dJMcafPfBhC/oA8lKyzun7KoC9SeLUYLD1/AAAAAAAAAAAAAAAAAAAAAJ3mPUEtjeZxOrjz1AwIbvM1g-ipYiWF6gJ-Tijfz38D/img.jpg;https://blog.kakaocdn.net/dn/bebDk8/dJMcafn8sAc/KsQwZHVKOlHSbLKE1Cxk1K/AAAAAAAAAAAAAAAAAAAAAK7dObEGLB9w3FwOG-dRm9oIFVa6CJF_E6IaybCouyiG/img.jpg;https://blog.kakaocdn.net/dn/dfLlMA/dJMcaaG8SlW/rC2EQFMs9dAxcOpBIgWGnk/AAAAAAAAAAAAAAAAAAAAALH7VRlOLteLJz0q3ptm2MrzwszbHh8yF67IHO0EcA-L/img.jpg;https://blog.kakaocdn.net/dn/cUzoBd/dJMcaaAjT3S/i4gKsgHViXRcQQLTcKUIDk/AAAAAAAAAAAAAAAAAAAAACLrzNUpYJKfe7aoKnhBeAjSL6sf3VDNr6iAgcUJvb0L/img.jpg;https://blog.kakaocdn.net/dn/bqu2ek/dJMcajcQyIH/zAbp2Dab4YH55twIXGoBXK/AAAAAAAAAAAAAAAAAAAAAD_5ovOKXXUWod-ebMTdvw7Vn414s2bxEka_fX3Mvplx/img.jpg;https://blog.kakaocdn.net/dn/R4vT8/dJMcaa1iZkH/fB7RNVAUoKux4v4zrZ0jY0/AAAAAAAAAAAAAAAAAAAAACeGDv4_u0Oq7U9DjUat7hXH0CRYb2LTj7jPAywWxNTw/img.jpg;https://blog.kakaocdn.net/dn/bljU5x/dJMcabeHu8d/fjeqaUSrXIrR1uPpWjNqPk/AAAAAAAAAAAAAAAAAAAAAFEoo_J1H3Kx6u_uVn5ngpNNqvv1vI2jJg_ALMGlpB16/img.jpg;https://blog.kakaocdn.net/dn/bsgHr4/dJMcaaG8SsO/QyJuMKFYfn8AChdYRItj51/AAAAAAAAAAAAAAAAAAAAAGIHdHaJeaDLEVSVdk3Z4wxlD03zngGosngfurFiYN3-/img.jpg;https://blog.kakaocdn.net/dn/drII9U/dJMcagUNA6e/R8NQ0ZtrU3WfIK0pG5Uwc0/AAAAAAAAAAAAAAAAAAAAAPD-RBpSMu9ZcMfgzfCO0loQFU2ieHXCv9d5L7nAydV8/img.jpg;https://blog.kakaocdn.net/dn/WAhpS/dJMcahTwPLa/pp6VNQJUQfvjeAfg6BCnH0/AAAAAAAAAAAAAAAAAAAAAGkH6CzERcxJGOr7Jeehr_HNZBOvBcAdstbrPt4pQDG6/img.jpg;https://blog.kakaocdn.net/dn/KDVjl/dJMcaamz8se/Th0nm8Ciiomm4hKlKEk7WK/AAAAAAAAAAAAAAAAAAAAAAMEEUQyO5-7-6y3Ho4rFOJXACEumGk1mPg__7xD9N6N/img.jpg;https://blog.kakaocdn.net/dn/b3vqhN/dJMcag1piLt/aBpcrsqiC2orqHPkMlGGdk/AAAAAAAAAAAAAAAAAAAAAEMj68s__ggouPcRKmP2hInF34A4rYE9W-DLgGKB0p19/img.jpg;https://blog.kakaocdn.net/dn/bzZwob/dJMcagN8VDR/jN5VYip3cRoUkfCxOzCxvk/AAAAAAAAAAAAAAAAAAAAANfP2YO6eqsJRvjOW77GQYbDvHsrPVGIQdTpkcAdvXPc/img.jpg;https://blog.kakaocdn.net/dn/daBIDg/dJMcajqhsKQ/HtlaDNtonFuGKdUZg5b9ek/AAAAAAAAAAAAAAAAAAAAAFFEtEcaNzyiutjIpqistwO5wF8kplL4ziiid41DLbEn/img.jpg;https://blog.kakaocdn.net/dn/pItlM/dJMcadwN040/dlBjEsI0A8L8fZnkYBUzCk/AAAAAAAAAAAAAAAAAAAAAPmlHKUwuYIDnCIajDj-HHuectzEFGJPjzTSAmpnu2W9/img.jpg",
+        "2024-06-14 |  | https://blog.kakaocdn.net/dn/bZNJ2X/dJMcab61E0N/lkKC3WQCNtXdnWH8BxgTH1/AAAAAAAAAAAAAAAAAAAAAK9RH8ueQAIEkNz2qLisGyJv8E-w3BEtOy98F-TPFTuO/img.jpg | MAGAZINE | 아이브 | DICON VOLUME N°20 | album=DICON VOLUME N°20 | cols=2 | bare=1 | photos=https://blog.kakaocdn.net/dn/edqSdf/dJMb99OKwzb/iqVVqkXjmQkVk23dKmXxP1/AAAAAAAAAAAAAAAAAAAAAPCA9ZkV5wdHKjh_YFFbWpVMQEpwziz_i_8q1aWB4VfX/img.jpg;https://blog.kakaocdn.net/dn/bCcik9/dJMcaaG8RTM/cGnvYNMiTA3Urn2UcDcYSk/AAAAAAAAAAAAAAAAAAAAAFEmndoAtO63seJeOISCmQNhZpBH9YEwU7AFNXAuOO1p/img.jpg;https://blog.kakaocdn.net/dn/bX9gp4/dJMcagtHmZO/d28H0Bj17Qv4IRQ6Dm9EBK/AAAAAAAAAAAAAAAAAAAAAE9jsoL8Ze3FJBemG0bGZooxxJJpMYSnO8fhsmPRJeIR/img.jpg;https://blog.kakaocdn.net/dn/bBf9ys/dJMcagUNAnW/rgpxvkY9okeirvKta71bm0/AAAAAAAAAAAAAAAAAAAAABEbnag_gwGRjSdM3DjDxAXmc7L3SodEQDG255-ntiDM/img.jpg;https://blog.kakaocdn.net/dn/rzMdU/dJMcabFPFTD/fwZBJiAEBKZCFKQClhAlQK/AAAAAAAAAAAAAAAAAAAAABxCuhRf3zOt56SznOcfjGkQ1dPVIZp71X4vLe0bax1Y/img.jpg;https://blog.kakaocdn.net/dn/bTnNIr/dJMcag1pii6/p87HM2O1MKSSGpZvqFyFRK/AAAAAAAAAAAAAAAAAAAAACW_V8-jnVcrLj6TJ5Fw5xb-w688lEKaTjJv8zvauzuR/img.jpg;https://blog.kakaocdn.net/dn/lo5Ri/dJMcajxhje1/VbK8jkok3H1K6JjJBjviC0/AAAAAAAAAAAAAAAAAAAAACpRxsyEbjEFWUMXTrD4LYImVhD1SKzo4E63Ju8z1N9_/img.jpg;https://blog.kakaocdn.net/dn/cKkzZM/dJMcah7kYmS/cSgDnagcttA7NuGMre6Au0/AAAAAAAAAAAAAAAAAAAAAHWdUqD7qKxlP7cCHrEXIJqjwQwfNPE2HJQajpjI8X42/img.jpg;https://blog.kakaocdn.net/dn/CwMGn/dJMcabeHuxJ/BS3rF7yE9CA62vFdLF4v2K/AAAAAAAAAAAAAAAAAAAAAHXQGugXVS4BFgibNO0NrHMEwtgqddXD3D1rFdy9zi0c/img.jpg;https://blog.kakaocdn.net/dn/l55eV/dJMcabeHuxL/lE3arKT31zBcBnVtrkMkh1/AAAAAAAAAAAAAAAAAAAAAM5rje_C392SmDFIxqoXxzI3B-HhMJ36ctsHZOzcLqkl/img.jpg;https://blog.kakaocdn.net/dn/FywFL/dJMcai507Oe/38rYOjYmwdeOMSPj7JUxF0/AAAAAAAAAAAAAAAAAAAAANqHTdUyrDQMCmk0pco9LYGQM9JVFEMVsyv2Z55SeaXD/img.jpg;https://blog.kakaocdn.net/dn/bZNJ2X/dJMcab61E0N/lkKC3WQCNtXdnWH8BxgTH1/AAAAAAAAAAAAAAAAAAAAAK9RH8ueQAIEkNz2qLisGyJv8E-w3BEtOy98F-TPFTuO/img.jpg;https://blog.kakaocdn.net/dn/vO9Vf/dJMcahTwPn6/vTCXKD8VkQTbFQOILWvYZ0/AAAAAAAAAAAAAAAAAAAAAOrTFiAdCkmVSxMYkDfN5htzzpI41w1eW90365pT2mF9/img.jpg;https://blog.kakaocdn.net/dn/bf4wpr/dJMcacEZpCa/yJrA6UJESTnQM99fmzzNs0/AAAAAAAAAAAAAAAAAAAAAD_TfEHwJSR1sfobiyoqihE41N0J25dSsUHWgnQMDE0w/img.jpg;https://blog.kakaocdn.net/dn/mobTz/dJMcabeHuG5/j5nhJqSVDWkdZSqMJPb7jk/AAAAAAAAAAAAAAAAAAAAAM9Y_tfYMzlbx9ryeqWeOvuw3DLwe5xNUxSWDeMyOeeX/img.jpg;https://blog.kakaocdn.net/dn/daz1LQ/dJMcab0mjBD/wLzNMZbEtxti8JISGkYQS1/AAAAAAAAAAAAAAAAAAAAAO-6_EhSNn1leuuPA4Gn9U6asxlFSMFAaIfe-kcq35rZ/img.jpg;https://blog.kakaocdn.net/dn/bh88X4/dJMcagArXN5/B75PlaIkIBrGQNOinRmoS0/AAAAAAAAAAAAAAAAAAAAAE-lyD3cYEuRkE0HX7_-iJBBfW48We52jqFIGRlVlP8M/img.jpg;https://blog.kakaocdn.net/dn/vazzH/dJMcaa8edXg/FX52DieVB6ODyTyU1Yx7o0/AAAAAAAAAAAAAAAAAAAAABhqP4z7jCryD-0boO6Iqr2r-aeVUQJvnA1cY8C2gQjH/img.jpg;https://blog.kakaocdn.net/dn/bup3Jd/dJMcah7kYsu/zrjUeSiErUAkLNJAqDXgk0/AAAAAAAAAAAAAAAAAAAAAL6cwfkG81ofzeK4HCom89E5qAd7s6xzLd432L-5jUAA/img.jpg;https://blog.kakaocdn.net/dn/oXy4O/dJMcacx4in3/xeTR2BdA6PnbllMsF11Adk/AAAAAAAAAAAAAAAAAAAAACmNeUBRjUyoj6QDvuzgzK-gkHudb5wqh3BLUiV6Plqg/img.jpg;https://blog.kakaocdn.net/dn/U55JD/dJMcah0mnSZ/keGr3wdfeLBGmMqDEY4DX1/AAAAAAAAAAAAAAAAAAAAACGu9nvu2Qx-OuPGTR-UgLrSWkee8jIckqVhYEw7b6Lx/img.jpg;https://blog.kakaocdn.net/dn/dwo5Ri/dJMcabsnFc9/zK72QWkKK1KmdXlvOMzseK/AAAAAAAAAAAAAAAAAAAAAMfcVQFba2NTHKM22PPHkgUJeJpvEArdFxu-Dw0KvNZm/img.jpg;https://blog.kakaocdn.net/dn/bo4pOr/dJMcacx4iom/gl1l2MOOJUsdUrDRcBr3pk/AAAAAAAAAAAAAAAAAAAAAONpmLseEQotbhZY_81E0VIYQgPXU7C8DIaIC0-iSbxN/img.jpg;https://blog.kakaocdn.net/dn/pvPe1/dJMcajxhjrA/G56URmfS8PFHajyoImRN1K/AAAAAAAAAAAAAAAAAAAAABmmXTeAu6H3ibWiLSOh78yJ7W8wytMyMcuc_Nv9oCH_/img.jpg;https://blog.kakaocdn.net/dn/CJkHp/dJMcaiynPub/DZkbGD3Knzzn4mPMJLnYH1/AAAAAAAAAAAAAAAAAAAAAE6h8XNVNqLtpIZI7zv9_KHdAnnw90F1ZuPoP52wh1tO/img.jpg;---;https://blog.kakaocdn.net/dn/oPWX3/dJMcab61FcJ/DMb60NGYXxHsauU8pLkPY0/AAAAAAAAAAAAAAAAAAAAAO_icwhCwn_kT4XAd-_x0ingJjYdFqaHcsjwuW8i7P4P/img.jpg;https://blog.kakaocdn.net/dn/bgxdeG/dJMcagN8VeU/a61in3rdUMjl16OaIuqjVK/AAAAAAAAAAAAAAAAAAAAACsPmtLujFWmWHyWoVvnXtv9qdnVm2S6mZ4oWlT-2pzA/img.jpg;https://blog.kakaocdn.net/dn/pAUTU/dJMcahTwPtE/tBPeXSEG1oNmbftARmk0F0/AAAAAAAAAAAAAAAAAAAAAGM8DvJswF_EAeq9K5btOSEjKayLbR-v1VFnuKnjlhkD/img.jpg;https://blog.kakaocdn.net/dn/mWQI2/dJMcabMRpb6/xDPjJEzmYK81S1pjtW2Ko0/AAAAAAAAAAAAAAAAAAAAAOk4tB9p0wRNg1Tqh_Yt6qk2OB7ARSClZDDfIRQ8cbUV/img.jpg;https://blog.kakaocdn.net/dn/cy3pRZ/dJMcah0mnXV/MSc8dAmm7FBJP2IRLKNMT1/AAAAAAAAAAAAAAAAAAAAAPDqt8kxnjt3GIEH9wikiLugeLzfIbLSK_ogMo8e_dxA/img.jpg;https://blog.kakaocdn.net/dn/C1VQQ/dJMcabsnFiu/2Y3CaBrWzYxzlfvvJ8gl50/AAAAAAAAAAAAAAAAAAAAALHog2lrTKLx_Vw6GxCsQ58FjlMWLBLIEC0rbaILAZbp/img.jpg;https://blog.kakaocdn.net/dn/caREZa/dJMcajcQyCW/7U7HZG4DAKaWa3AqkOSCXK/AAAAAAAAAAAAAAAAAAAAALlpIHaC3yMPPnFkvTvT_Axjt4HsszW_RoS7liqkTF2Z/img.jpg;https://blog.kakaocdn.net/dn/bdKpm9/dJMcablI6tF/HX6KmpOyKyCYH2Kmgdibw0/AAAAAAAAAAAAAAAAAAAAAAldME_ykABaFGYl1PhubS1bv0jPydXoIJgbAVHKkkgN/img.jpg;https://blog.kakaocdn.net/dn/xR4Xx/dJMcagHm4bL/eIb5Z6nzKU3MeNLeYC617k/AAAAAAAAAAAAAAAAAAAAADRFUI3BUWJtEkvpiz1-JPCzkSZX_23wEAc2DbGZ-LOl/img.jpg;https://blog.kakaocdn.net/dn/b0Cmqt/dJMcagmSIRP/5nzeme1j08TxTHEAT4njDK/AAAAAAAAAAAAAAAAAAAAANNRM0lC-pk8uhQ5JVUtMczE01B7fvJm8vD8KrCMtpXi/img.jpg;https://blog.kakaocdn.net/dn/cIgnrJ/dJMcaaNSXHB/qdOlOZWj37iZdNvadRTpp0/AAAAAAAAAAAAAAAAAAAAAMAcOvkbbsauS1QhuxEWIfEfv0R4hEaD8K2ynaBKO8Wx/img.jpg;https://blog.kakaocdn.net/dn/STqYO/dJMcacrqtnq/2NRJAOSUeT7gg7xNok94mk/AAAAAAAAAAAAAAAAAAAAAL1F3P0OxQQ7N7N3BauQW3I9xitUFObLWSZtDpOywTVn/img.jpg;https://blog.kakaocdn.net/dn/ccHp18/dJMcadqbFEt/xTCDHT1lshSz1IuLYvTER0/AAAAAAAAAAAAAAAAAAAAANI9lj-lGiBO6rxAN0_uc2NQZaH6cGAtyKGqXNk5514O/img.jpg;https://blog.kakaocdn.net/dn/bWtkln/dJMcadqbFGJ/pFCxyr2tyts6ibqr6cdFl1/AAAAAAAAAAAAAAAAAAAAAIZVhuO48jzeS3K-gSqbjIZ42Mh26SWantpKoTZ1nmkb/img.jpg;https://blog.kakaocdn.net/dn/cHjd7n/dJMcaby5ZXw/sSfh0CetK64uSOX3lUUjt0/AAAAAAAAAAAAAAAAAAAAAP3DrG-21WlchSD5XQ-wgpLf1mFaOLbq9aGAJenngeeX/img.jpg;https://blog.kakaocdn.net/dn/Cg9Dz/dJMb992r4VH/nzE2vUEAYBdxla6vDKlgJ1/AAAAAAAAAAAAAAAAAAAAAOAeqsYoKwfUelPjZ4SgA3S732OK8eiAAMGNXpIW_XcC/img.jpg;https://blog.kakaocdn.net/dn/LAVBK/dJMcafPfBhC/oA8lKyzun7KoC9SeLUYLD1/AAAAAAAAAAAAAAAAAAAAAJ3mPUEtjeZxOrjz1AwIbvM1g-ipYiWF6gJ-Tijfz38D/img.jpg;https://blog.kakaocdn.net/dn/bebDk8/dJMcafn8sAc/KsQwZHVKOlHSbLKE1Cxk1K/AAAAAAAAAAAAAAAAAAAAAK7dObEGLB9w3FwOG-dRm9oIFVa6CJF_E6IaybCouyiG/img.jpg;https://blog.kakaocdn.net/dn/dfLlMA/dJMcaaG8SlW/rC2EQFMs9dAxcOpBIgWGnk/AAAAAAAAAAAAAAAAAAAAALH7VRlOLteLJz0q3ptm2MrzwszbHh8yF67IHO0EcA-L/img.jpg;https://blog.kakaocdn.net/dn/cUzoBd/dJMcaaAjT3S/i4gKsgHViXRcQQLTcKUIDk/AAAAAAAAAAAAAAAAAAAAACLrzNUpYJKfe7aoKnhBeAjSL6sf3VDNr6iAgcUJvb0L/img.jpg;https://blog.kakaocdn.net/dn/bqu2ek/dJMcajcQyIH/zAbp2Dab4YH55twIXGoBXK/AAAAAAAAAAAAAAAAAAAAAD_5ovOKXXUWod-ebMTdvw7Vn414s2bxEka_fX3Mvplx/img.jpg;https://blog.kakaocdn.net/dn/R4vT8/dJMcaa1iZkH/fB7RNVAUoKux4v4zrZ0jY0/AAAAAAAAAAAAAAAAAAAAACeGDv4_u0Oq7U9DjUat7hXH0CRYb2LTj7jPAywWxNTw/img.jpg;https://blog.kakaocdn.net/dn/bljU5x/dJMcabeHu8d/fjeqaUSrXIrR1uPpWjNqPk/AAAAAAAAAAAAAAAAAAAAAFEoo_J1H3Kx6u_uVn5ngpNNqvv1vI2jJg_ALMGlpB16/img.jpg;https://blog.kakaocdn.net/dn/bsgHr4/dJMcaaG8SsO/QyJuMKFYfn8AChdYRItj51/AAAAAAAAAAAAAAAAAAAAAGIHdHaJeaDLEVSVdk3Z4wxlD03zngGosngfurFiYN3-/img.jpg;https://blog.kakaocdn.net/dn/drII9U/dJMcagUNA6e/R8NQ0ZtrU3WfIK0pG5Uwc0/AAAAAAAAAAAAAAAAAAAAAPD-RBpSMu9ZcMfgzfCO0loQFU2ieHXCv9d5L7nAydV8/img.jpg;https://blog.kakaocdn.net/dn/WAhpS/dJMcahTwPLa/pp6VNQJUQfvjeAfg6BCnH0/AAAAAAAAAAAAAAAAAAAAAGkH6CzERcxJGOr7Jeehr_HNZBOvBcAdstbrPt4pQDG6/img.jpg;https://blog.kakaocdn.net/dn/KDVjl/dJMcaamz8se/Th0nm8Ciiomm4hKlKEk7WK/AAAAAAAAAAAAAAAAAAAAAAMEEUQyO5-7-6y3Ho4rFOJXACEumGk1mPg__7xD9N6N/img.jpg;https://blog.kakaocdn.net/dn/b3vqhN/dJMcag1piLt/aBpcrsqiC2orqHPkMlGGdk/AAAAAAAAAAAAAAAAAAAAAEMj68s__ggouPcRKmP2hInF34A4rYE9W-DLgGKB0p19/img.jpg;https://blog.kakaocdn.net/dn/bzZwob/dJMcagN8VDR/jN5VYip3cRoUkfCxOzCxvk/AAAAAAAAAAAAAAAAAAAAANfP2YO6eqsJRvjOW77GQYbDvHsrPVGIQdTpkcAdvXPc/img.jpg;https://blog.kakaocdn.net/dn/daBIDg/dJMcajqhsKQ/HtlaDNtonFuGKdUZg5b9ek/AAAAAAAAAAAAAAAAAAAAAFFEtEcaNzyiutjIpqistwO5wF8kplL4ziiid41DLbEn/img.jpg;https://blog.kakaocdn.net/dn/pItlM/dJMcadwN040/dlBjEsI0A8L8fZnkYBUzCk/AAAAAAAAAAAAAAAAAAAAAPmlHKUwuYIDnCIajDj-HHuectzEFGJPjzTSAmpnu2W9/img.jpg",
         "2024-03-28 |  | https://blog.kakaocdn.net/dn/ddljvV/dJMcadcxhEB/K8rgLAdpig6Rmmk4N0gIN1/AAAAAAAAAAAAAAAAAAAAAFmY8Xjsi64Gj7AqTVE9nYgerulztXkRJnPuqkJ2Rgrg/img.webp | MAGAZINE | 리즈 | L'OFFICIEL 2024년 S/S | album=L'OFFICIEL 2024년 S/S | cols=2 | bare=1 | photos=https://blog.kakaocdn.net/dn/ddljvV/dJMcadcxhEB/K8rgLAdpig6Rmmk4N0gIN1/AAAAAAAAAAAAAAAAAAAAAFmY8Xjsi64Gj7AqTVE9nYgerulztXkRJnPuqkJ2Rgrg/img.webp;https://blog.kakaocdn.net/dn/bdVOPo/dJMb9987fyk/7wxCqaRt6Enr7K1ByDIE31/AAAAAAAAAAAAAAAAAAAAANYlZSVXsDgAtZZb-kCOXffhtXNvlTx1426IrOMpE4mm/img.jpg;https://blog.kakaocdn.net/dn/bi0Bpo/dJMcabTq8fU/66qNqHeKLvfkbOhzUwKWW0/AAAAAAAAAAAAAAAAAAAAANj4ZI-cJEvbdzrcAKA9e8jQKRoAFHIbpJ2jXEL3Ciqv/img.webp;https://blog.kakaocdn.net/dn/LZWug/dJMcagN8phi/PfrefJ7K9gn4ZrKmEvXeMK/AAAAAAAAAAAAAAAAAAAAAG6pL9ZaaMPd3FaHCnKHvY016d8YS0jWMLu9U5jVhLt8/img.jpg",
         "2024-03-28 | https://www.instagram.com/reels/C5DOFomBFbJ/ |  | MAGAZINE | 리즈 | #SSissue #YKEditon 신비로운 눈빛으로 시선을 사로잡는 아이브 리즈가 출연한 몽환적인 분위기의 영상을 공개합니다. 화사한 플로럴 톱에 데님팬츠와 웨스턴 부츠를 매치해 시크한 모던 웨스턴 룩을 완성한 리즈의 스타일리시한 모먼트를 확인해 보세요. | album=L'OFFICIEL 2024년 S/S",
         "2025-09-11 |  | https://lh3.googleusercontent.com/d/1N8-NrrIFCbb9ghj1Gvx5xws_cghkCSy3 | MAGAZINE | 리즈 | WAVES 2025년 10월호 | album=WAVES 2025년 10월호 | cols=2 | bare=1 | photos=https://lh3.googleusercontent.com/d/1N8-NrrIFCbb9ghj1Gvx5xws_cghkCSy3;https://lh3.googleusercontent.com/d/1xl1RLLvS28TIJWrRYToNBQA1GNfNpM8z;https://lh3.googleusercontent.com/d/1iUZWK8J4AW-NCNwCFCByi4hK4pNCNOqj;https://lh3.googleusercontent.com/d/1dqMSR-R7LvVhmi5_1fyKHMt9ebqlT4Or;https://lh3.googleusercontent.com/d/1qq4p-sW2lIJEfSCw-QeAeH0eTmSF4QyJ;https://lh3.googleusercontent.com/d/1ViQ1HyJYHaahGm0vlzU_gzBoQlUIYwir;https://lh3.googleusercontent.com/d/1k0Osj_Q6P0jxtxewHq2BThlry-7UvD9M;https://lh3.googleusercontent.com/d/1M4Iu5xzzWdPIt3M5IIrLJDlyN91jtbjp;https://lh3.googleusercontent.com/d/1_KpUOA2WRHTpds9xsVq-9xHNDWK1HZlR;https://lh3.googleusercontent.com/d/1Cs_sQBFqe68-n4CBCDB2Vim89md75Iyl;https://lh3.googleusercontent.com/d/1PdfaQ7YRuIFrJsRfodc4Z_o3EDxdbWvI;https://lh3.googleusercontent.com/d/1GfA2MumYmdDDPtImXNvIXwRJM30HFmHk;https://lh3.googleusercontent.com/d/1CWOb2UytMjF4E_ZqC90bg5vASp7SDjPf;https://lh3.googleusercontent.com/d/1RbKZpm-anACwqlETun9HZDGPxfrFtE8b;https://lh3.googleusercontent.com/d/1uIogclQIS_VhBE-HgkufZpf2EWOjmLis",
@@ -2625,8 +2854,22 @@
         },
         {
           title: "Official",
-          cats: ["Instagram", "DAUM CAFE", "Berriz", "Naver Post", "Twitter"],
-          tabs: ["Instagram", "DAUM CAFE", "Berriz", "Naver Post", "Twitter"],
+          cats: [
+            "Instagram",
+            "DAUM CAFE",
+            "Berriz",
+            "Naver Post",
+            "Twitter",
+            "Fanclub",
+          ],
+          tabs: [
+            "Instagram",
+            "DAUM CAFE",
+            "Berriz",
+            "Naver Post",
+            "Twitter",
+            "Fanclub",
+          ],
           sort: "date",
           hideViews: true,
         },
@@ -2657,7 +2900,12 @@
           tabs: ["세로 직캠", "가로 직캠"],
           hideMembers: true,
         },
-        { title: "etc.", cats: ["etc.(가사)", "etc.(일정)"], tabs: ["etc."], sort: "date" },
+        {
+          title: "etc.",
+          cats: ["etc.(가사)", "etc.(일정)"],
+          tabs: ["etc."],
+          sort: "date",
+        },
         // 메뉴에 없는 카테고리(SOLO, TEASER, PHOTO 등)는 "전체 영상 보기"에서만 보입니다
       ];
       // "전체 영상 보기"에서 볼 수 있는 모든 탭
@@ -2693,11 +2941,16 @@
         "Naver Post",
         "Instagram",
         "Twitter",
+        "Fanclub",
         "TEASER",
         "PHOTO",
       ];
       // =====================================================================
-      const FLAT_ALBUM_TABS = ["RADIO", "MAGAZINE", "POP-UP", "AD"]; // 폴더를 슬라이더로 펼치지 않는 탭
+      const FLAT_ALBUM_TABS = ["RADIO", "MAGAZINE", "POP-UP", "AD", "Fanclub"]; // 폴더를 슬라이더로 펼치지 않는 탭
+      // 영상이 없어도 항상 보이는 기본 폴더 (탭 이름 → 폴더 이름들, 이 순서대로 표시)
+      const FOLDER_PRESETS = {
+        Fanclub: ["DIVE 1기", "DIVE 2기", "DIVE 3기", "DIVE 4기", "DIVE ~"],
+      };
       const FANCAM_TABS = ["세로 직캠", "가로 직캠"]; // 직캠 탭에서는 멤버 필터/태그(리즈)를 숨김
       let videos = [],
         tab = 0,
@@ -2754,6 +3007,9 @@
           bare: extra.bare === "1", // bare=1 → 사진 모아보기에서 '끝' 문구 숨김
           original: extra.original === "1", // original=1 → bare 사진 모아보기에서도 '원문 보기' 표시
           cols: extra.cols ? +extra.cols : null, // cols=2 → 사진 모아보기에서 한 줄에 2장씩
+          board: extra.board || null,
+          image: extra.image || null,
+          comments: extra.comments || null,
           content: extra.content || null, // 카페 본문: content=내용 (줄바꿈은 \n)
           views: extra.views ? +extra.views : null, // 카페: views=3995
           photos: extra.photos || null, // PHOTO: photos=주소1;주소2;주소3 (한 게시물에 여러 장)
@@ -2830,9 +3086,14 @@
         )}.${String(d.getDate()).padStart(2, "0")}.`;
       };
       // MAGAZINE 게시물은 달까지만 표시 (2026.03.01. → 2026.03.)
-      const fmtMonth = (iso) => fmtDate(iso).replace(/\d\d\.$/, "").replace(/\.$/, ".");
+      const fmtMonth = (iso) =>
+        fmtDate(iso)
+          .replace(/\d\d\.$/, "")
+          .replace(/\.$/, ".");
       const fmtD = (v) =>
-        (v.cats || []).includes("MAGAZINE") && location.hash === "#list" && !albumScope // 메인·폴더 안에서는 날짜 전체 표시
+        (v.cats || []).includes("MAGAZINE") &&
+        location.hash === "#list" &&
+        !albumScope // 메인·폴더 안에서는 날짜 전체 표시
           ? fmtMonth(v.date)
           : fmtDate(v.date);
       const fmtDur = (s) => {
@@ -2908,11 +3169,14 @@
         clearTimeout(toastTimer);
         toastTimer = setTimeout(() => t.classList.remove("show"), 1600);
       }
+      const cmtN = (v) => (v.comments ? v.comments.split("§").length : 0);
       function cafeRow(v) {
         const mem = (v.members || []).length ? " " + v.members.join(", ") : "";
-        const d = fmtDate(v.date).replace(/\.$/, "");
+        const d = fmtDate(v.date);
         const thumb = v.thumb
-          ? `<img src="${esc(v.thumb)}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.replaceWith(Object.assign(document.createElement('span'),{innerHTML:TANGERINE_SVG}))" />`
+          ? `<img src="${esc(
+              v.thumb
+            )}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.replaceWith(Object.assign(document.createElement('span'),{innerHTML:TANGERINE_SVG}))" />`
           : TANGERINE_SVG;
         return `<a class="card cafe-row${isPinned(v) ? " pinned" : ""}"${
           v.content
@@ -2924,7 +3188,9 @@
       <div class="cafe-thumb">${thumb}</div>
       <div class="cafe-body">
         <div class="cafe-title">${esc(v.title)}</div>
-        <div class="cafe-meta">IVE${esc(mem)}<i>•</i>${d}${
+        <div class="cafe-meta">${v.board ? esc(v.board) + "<i>•</i>" : ""}IVE${esc(mem)}<i>•</i>${d}${
+          cmtN(v) ? `<i>•</i>댓글 ${cmtN(v)}` : ""
+        }${
           v.views != null ? `<i>•</i>조회 ${v.views.toLocaleString()}` : ""
         }</div>
       </div>
@@ -2935,8 +3201,8 @@
         )}">${TANGERINE_SVG}</span>
     </a>`;
       }
-      function card(v, free) {
-        if ((v.cats || []).includes("DAUM CAFE")) return cafeRow(v);
+      function card(v, free, normal) {
+        if ((v.cats || []).includes("DAUM CAFE") && !normal) return cafeRow(v);
         const embedHtml =
           v.embed === "twitter"
             ? free
@@ -2975,11 +3241,18 @@
           (c) => c === "LIVE" || c === "L(IVE)"
         );
         const isPhoto = !!(v.photos && v.photos.length);
+        const isCafeC = (v.cats || []).includes("DAUM CAFE");
         return `<a class="card${isPinned(v) ? " pinned" : ""}${
           isPhoto ? " photo-card" : ""
-        }" href="${v.url || (isPhoto ? "#" : "https://youtu.be/" + v.id)}" ${
+        }" href="${
+          v.content
+            ? "#"
+            : v.url || (isPhoto ? "#" : "https://youtu.be/" + v.id)
+        }" ${
           isPhoto
             ? `data-pk="${esc(pinKey(v))}"`
+            : v.content
+            ? `data-ck="${esc(pinKey(v))}"`
             : 'target="_blank" rel="noopener"'
         }>
       <div class="thumb${isPhoto ? " phthumb" : ""}${
@@ -2993,7 +3266,7 @@
                 ? " ttthumb"
                 : " igthumb")
             : !v.thumb && !isLive
-            ? " ph"
+            ? " ph" + (isCafeC ? " cafeph" : "")
             : ""
         }">
         ${
@@ -3002,6 +3275,8 @@
             ? `<img src="${v.thumb}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="if(this.src.indexOf('maxresdefault')>-1){this.onerror=null;this.src=this.src.replace('maxresdefault','hqdefault');}" />`
             : isLive
             ? ""
+            : isCafeC
+            ? TANGERINE_SVG
             : `<span class="phtxt" style="color:${
                 PLATFORM_COLORS[v.platform] || "#b9945f"
               }">${v.platform || ""}</span>`)
@@ -3032,7 +3307,9 @@
       <div class="title">${esc(v.title)}</div>
       <div class="info pinrow">${
         v.views !== null && !hideViews(v) ? fmtViews(v.views) + "<br>" : ""
-      }${fmtD(v)}<span class="pinbtn${
+      }${isCafeC && v.board ? esc(v.board) + " • " : ""}${fmtD(v)}${
+        isCafeC && cmtN(v) ? " • 댓글 " + cmtN(v) : ""
+      }<span class="pinbtn${
           isPinned(v) ? " on" : ""
         }" role="button" aria-label="상단에 고정" title="상단에 고정" data-pin="${esc(
           pinKey(v)
@@ -3468,7 +3745,7 @@
         $("count").textContent = `${label} · ${items.length}개`;
         $("grid").classList.remove("social-list");
         $("grid").style.alignItems = "";
-        const cardForList = (v) => card(v);
+        const cardForList = (v) => card(v, false, name === "전체");
         if (name === "전체") {
           // 그룹 전체 탭에서는 폴더로 묶지 않고 전부 풀어서 정렬된 채로 보여줌
           $("grid").innerHTML = items.map(cardForList).join("");
@@ -3477,13 +3754,31 @@
           if (FLAT_ALBUM_TABS.includes(name)) {
             // 폴더를 슬라이더로 펼치지 않고, 폴더당 커버 카드 1개만 보여주고 누르면 폴더가 열림
             const groups = {};
+            const presets = FOLDER_PRESETS[name] || [];
+            presets.forEach((a) => (groups[a] = [])); // 기본 폴더는 비어 있어도 먼저 만들어 둠
             items.forEach((v) => {
               if (v.album) (groups[v.album] = groups[v.album] || []).push(v);
             });
             const isMag = ["MAGAZINE", "POP-UP", "AD"].includes(name);
             const hasPhotos = (a) =>
               groups[a].some((v) => v.photos && v.photos.length);
+            const folderPin = (t, a) => {
+              const k = "folder:" + t + ":" + a;
+              return `<span class="pinbtn${
+                pinnedSet.has(k) ? " on" : ""
+              }" role="button" aria-label="상단에 고정" title="상단에 고정" data-pin="${esc(
+                k
+              )}">${TANGERINE_SVG}</span>`;
+            };
             const folderCard = (a) => {
+              if (!groups[a].length)
+                return `<div class="folder-card" data-album="${esc(
+                  a
+                )}" role="button">
+                <div class="fthumb ph${name === "DAUM CAFE" ? " cafeph" : ""}">${name === "DAUM CAFE" ? TANGERINE_SVG : `<span class="phtxt" style="color:#b9945f">${esc(a)}</span>`}</div>
+                <div class="title">${esc(a)}</div>
+                <div class="info pinrow">0개${folderPin(name, a)}</div>
+              </div>`;
               const g = groups[a]
                 .slice()
                 .sort((x, y) => new Date(y.date) - new Date(x.date));
@@ -3501,33 +3796,31 @@
               const igCover = isPop
                 ? g.find((v) => v.embed === "instagram" && !v.photos)
                 : null;
-              const thumbHtml = igCover && !(cover.photos && cover.photos.length)
-                ? `<div class="fthumb pu"><div class="thumb igthumb"><div class="igwrap" data-lazy="instagram" data-url="${esc(
-                    igCover.url
-                  )}"><div class="iginner"></div></div></div><div class="pu-shield"></div></div>`
-                : cover.thumb
-                ? `<div class="fthumb"><img src="${
-                    cover.thumb
-                  }" alt="" loading="lazy" referrerpolicy="no-referrer" />${
-                    ""
-                  }</div>`
-                : `<div class="fthumb ph"><span class="phtxt" style="color:#b9945f">${esc(
-                    a
-                  )}</span></div>`;
+              const thumbHtml =
+                igCover && !(cover.photos && cover.photos.length)
+                  ? `<div class="fthumb pu"><div class="thumb igthumb"><div class="igwrap" data-lazy="instagram" data-url="${esc(
+                      igCover.url
+                    )}"><div class="iginner"></div></div></div><div class="pu-shield"></div></div>`
+                  : cover.thumb
+                  ? `<div class="fthumb"><img src="${
+                      cover.thumb
+                    }" alt="" loading="lazy" referrerpolicy="no-referrer" />${""}</div>`
+                  : `<div class="fthumb ph${name === "DAUM CAFE" ? " cafeph" : ""}">${name === "DAUM CAFE" ? TANGERINE_SVG : `<span class="phtxt" style="color:#b9945f">${esc(a)}</span>`}</div>`;
               return `<div class="folder-card${
                 isMag ? " auto" : ""
               }" data-album="${esc(a)}" role="button">
                 ${thumbHtml}
                 <div class="title">${esc(a)}</div>
-                <div class="info">${g.length}개 • ${
-                isPop
-                  ? fmtDate(g[g.length - 1].date)
-                  : name === "MAGAZINE"
-                  ? fmtMonth(g[g.length - 1].date) === fmtMonth(g[0].date)
-                    ? fmtMonth(g[0].date)
-                    : `${fmtMonth(g[g.length - 1].date)} ~ ${fmtMonth(g[0].date)}`
-                  : `${fmtDate(g[g.length - 1].date)} ~ ${fmtDate(g[0].date)}`
-              }</div>
+                <div class="info pinrow">${g.length}개${
+                name === "MAGAZINE"
+                  ? ""
+                  : " • " +
+                    (isPop
+                      ? fmtDate(g[g.length - 1].date)
+                      : `${fmtDate(g[g.length - 1].date)} ~ ${fmtDate(
+                          g[0].date
+                        )}`)
+              }${folderPin(name, a)}</div>
               </div>`;
             };
             let albumKeys = Object.keys(groups);
@@ -3545,6 +3838,10 @@
                     : latest(y) - latest(x))
               );
             }
+            albumKeys = [
+              ...albumKeys.filter((a) => pinnedSet.has("folder:" + name + ":" + a)),
+              ...albumKeys.filter((a) => !pinnedSet.has("folder:" + name + ":" + a)),
+            ];
             $("grid").style.alignItems = isMag ? "start" : "";
             $("grid").innerHTML =
               albumKeys.map(folderCard).join("") +
@@ -3574,6 +3871,7 @@
         $("home").hidden = isList;
         $("list").hidden = !isList;
         $("pinbar").hidden = isList;
+        $("gbBtn").hidden = isList;
         if (isList) {
           renderTabs();
           const showMem = !(scope && scope.hideMembers);
@@ -3724,9 +4022,9 @@
         pvEl.innerHTML = `<div class="pv-bar"><button class="pv-x" aria-label="닫기">×</button>
       <div class="pv-h"><div class="pv-t">${esc(
         v.title
-      )}</div><div class="pv-m">${fmtD(v)}${
-          mem ? " · " + esc(mem) : ""
-        } · ${v.photos.length}장${
+      )}</div><div class="pv-m">${fmtD(v)}${mem ? " · " + esc(mem) : ""} · ${
+          v.photos.length
+        }장${
           v.url && (!v.bare || v.original)
             ? ` <a href="${esc(
                 v.url
@@ -3735,7 +4033,7 @@
         }</div></div></div>
       <div class="pv-body${v.cols === 2 ? " pv2" : ""}">${
           v.cols === 2
-            ? '<div class="pv-col"></div><div class="pv-col"></div>'
+            ? '<div class="pv-rows"></div>'
             : v.photos
                 .map(
                   (u) =>
@@ -3745,35 +4043,54 @@
                 )
                 .join("")
         }${v.bare ? "" : '<div class="pv-end">· 끝 ·</div>'}</div>`;
-        // 2열 보기: 사진 세로 길이에 맞춰 더 짧은 열에 차례로 쌓기 (빈틈 없이 정렬)
+        // 2열 보기: 한 행에 2장씩, 행마다 세로 높이는 동일하고 가로폭은 사진 비율대로 배분
         if (v.cols === 2) {
           const token = (pvEl._tok = (pvEl._tok || 0) + 1);
-          const cols = pvEl.querySelectorAll(".pv-col");
-          const heights = [0, 0];
+          const box = pvEl.querySelector(".pv-rows");
           const ratios = v.photos.map(
             (u) =>
               new Promise((res) => {
                 const im = new Image();
                 im.referrerPolicy = "no-referrer";
                 im.onload = () =>
-                  res(im.naturalHeight / (im.naturalWidth || 1) || 1.5);
-                im.onerror = () => res(1.5);
+                  res((im.naturalWidth || 1) / (im.naturalHeight || 1) || 0.67);
+                im.onerror = () => res(0.67);
                 im.src = u;
               })
           );
           Promise.all(ratios).then((rs) => {
             if (pvEl._tok !== token) return;
-            v.photos.forEach((u, k) => {
-              const c = heights[0] <= heights[1] ? 0 : 1;
-              heights[c] += rs[k];
+            const brk = new Set(v.breaks || []);
+            let row = null;
+            v.photos.forEach((u, i) => {
+              if (brk.has(i)) {
+                if (row && row.children.length === 1) {
+                  row.classList.add("solo");
+                  row.firstChild.style.flexGrow = "0";
+                }
+                row = null;
+                const hr = document.createElement("hr");
+                hr.className = "pv-divider";
+                box.appendChild(hr);
+              }
+              if (!row || row.children.length === 2) {
+                row = document.createElement("div");
+                row.className = "pv-row";
+                box.appendChild(row);
+              }
               const img = document.createElement("img");
               img.alt = "";
               img.decoding = "async";
               img.referrerPolicy = "no-referrer";
-              img.style.aspectRatio = "1 / " + rs[k];
+              img.style.aspectRatio = String(rs[i]); // 가로/세로
+              img.style.flexGrow = String(rs[i]); // 비율만큼 폭 배분 → 높이 동일
               img.src = u;
-              cols[c].appendChild(img);
+              row.appendChild(img);
             });
+            if (row && row.children.length === 1) {
+              row.classList.add("solo");
+              row.firstChild.style.flexGrow = "0";
+            }
           });
         }
         pvEl.scrollTop = 0;
@@ -3792,6 +4109,24 @@
       });
       // ---- 카페 글 보기 (제목/작성자/날짜 + 본문 펼쳐 보기) ----
       let cafeEl;
+      function cafeComments(v) {
+        if (!v.comments) return "";
+        const rows = v.comments.split("§").map((c) => {
+          const [a, t, u] = c.split("¦");
+          return `<div class="cafe-cm"><b>ㄴ IVE ${esc(a || "")}</b>${
+            t ? `<div class="cafe-cm-t">${esc(t)}</div>` : ""
+          }${
+            u
+              ? `<img src="${esc(
+                  u
+                )}" alt="" loading="lazy" referrerpolicy="no-referrer" />`
+              : ""
+          }</div>`;
+        });
+        return `<div class="cafe-cms"><div class="cafe-cms-h">댓글 ${rows.length}</div>${rows.join(
+          ""
+        )}</div>`;
+      }
       function openCafe(key) {
         const v = videos.find((x) => x.content && pinKey(x) === key);
         if (!v) return;
@@ -3809,16 +4144,24 @@
         }
         const mem = (v.members || []).length ? " " + v.members.join(", ") : "";
         cafeEl.innerHTML = `<div class="pv-bar"><button class="pv-x" aria-label="닫기">×</button>
-      <div class="pv-h"><div class="pv-t">${esc(v.title)}</div><div class="pv-m">IVE${esc(
-          mem
-        )} · ${fmtDate(v.date).replace(/\.$/, "")}${
-          v.views != null ? " · 조회 " + v.views.toLocaleString() : ""
-        }${
+      <div class="pv-h"><div class="pv-t">${esc(
+        v.title
+      )}</div><div class="pv-m">${v.board ? esc(v.board) + " · " : ""}IVE${esc(mem)} · ${fmtDate(v.date)}${v.views != null ? " · 조회 " + v.views.toLocaleString() : ""}${
           v.url
-            ? ` <a href="${esc(v.url)}" target="_blank" rel="noopener">원문 보기</a>`
+            ? ` <a href="${esc(
+                v.url
+              )}" target="_blank" rel="noopener">원문 보기</a>`
             : ""
         }</div></div></div>
-      <div class="pv-body"><div class="cafe-post">${esc(v.content)}</div></div>`;
+      <div class="pv-body"><div class="cafe-post">${esc(
+        v.content
+      )}</div>${
+          v.image
+            ? `<img class="cafe-img" src="${esc(
+                v.image
+              )}" alt="" loading="lazy" referrerpolicy="no-referrer" />`
+            : ""
+        }${cafeComments(v)}</div>`;
         cafeEl.scrollTop = 0;
         cafeEl.hidden = false;
         document.body.style.overflow = "hidden";
@@ -3828,7 +4171,7 @@
         document.body.style.overflow = "";
       }
       document.addEventListener("click", (e) => {
-        const c = e.target.closest && e.target.closest(".cafe-row[data-ck]");
+        const c = e.target.closest && e.target.closest("[data-ck]");
         if (!c || e.target.closest(".pinbtn")) return;
         e.preventDefault();
         openCafe(c.dataset.ck);
@@ -3896,11 +4239,18 @@
           }
           MANUAL_ITEMS.map(parseManual).forEach((m, i) => {
             const isPhoto = (m.cats || []).includes("PHOTO") || !!m.photos;
+            // photos=...;---;... 처럼 '---' 를 넣으면 그 자리에 구분선(행 나눔)이 들어갑니다.
+            const breaks = [];
             const photos = m.photos
               ? m.photos
                   .split(";")
                   .map((x) => x.trim())
                   .filter(Boolean)
+                  .reduce((arr, x) => {
+                    if (x === "---") breaks.push(arr.length);
+                    else arr.push(x);
+                    return arr;
+                  }, [])
               : null;
             videos.push({
               id: "manual" + i,
@@ -3909,12 +4259,18 @@
               date: m.date,
               thumb: m.thumb || (photos ? photos[0] : ""),
               photos,
+              breaks,
               content: m.content || null,
+              board: m.board || null,
+              image: m.image || null,
+              comments: m.comments || null,
               views: m.views != null ? m.views : null,
               sec: 0,
               isShort: false,
               cats: m.cats || [],
-              platform: m.platform || guessPlatform(m.url),
+              platform: (m.cats || []).includes("DAUM CAFE")
+                ? null
+                : m.platform || guessPlatform(m.url),
               members: m.members || [],
               lyricsType: "",
               album: m.album || null,
@@ -3990,6 +4346,173 @@
           $("status").textContent = "네트워크 오류: " + err.message;
         }
       }
+      // ---- GUESTBOOK ----
+      // 연결 주소(GUESTBOOK_URL)는 파일 위쪽 API_KEY 바로 아래에 있습니다.
+      const GB_KEY = "guestbookLocal",
+        GB_OWN = "guestbookOwn";
+      let gbEl,
+        gbEditing = null;
+      const gbRand = () => Math.random().toString(36).slice(2, 10);
+      const gbOwn = () => {
+        try {
+          return JSON.parse(localStorage.getItem(GB_OWN) || "{}");
+        } catch (e) {
+          return {};
+        }
+      };
+      const gbSetOwn = (o) => {
+        try {
+          localStorage.setItem(GB_OWN, JSON.stringify(o));
+        } catch (e) {}
+      };
+      const gbLocalWrite = (list) => {
+        try {
+          localStorage.setItem(GB_KEY, JSON.stringify(list.slice(0, 200)));
+        } catch (e) {}
+      };
+      async function gbLoad() {
+        if (GUESTBOOK_URL) {
+          try {
+            return await (await fetch(GUESTBOOK_URL)).json();
+          } catch (e) {
+            return [];
+          }
+        }
+        try {
+          return JSON.parse(localStorage.getItem(GB_KEY) || "[]");
+        } catch (e) {
+          return [];
+        }
+      }
+      async function gbPost(body) {
+        try {
+          await fetch(GUESTBOOK_URL, {
+            method: "POST",
+            headers: { "Content-Type": "text/plain" },
+            body: JSON.stringify(body),
+          });
+        } catch (e) {}
+      }
+      async function gbAdd(name, text) {
+        const id = Date.now().toString(36) + gbRand(),
+          key = gbRand() + gbRand(),
+          date = fmtDate(new Date().toISOString());
+        const own = gbOwn();
+        own[id] = key;
+        gbSetOwn(own);
+        if (GUESTBOOK_URL) return gbPost({ action: "add", id, key, name, text, date });
+        const list = await gbLoad();
+        list.unshift({ id, name, text, date });
+        gbLocalWrite(list);
+      }
+      async function gbEdit(id, name, text) {
+        if (GUESTBOOK_URL)
+          return gbPost({ action: "edit", id, key: gbOwn()[id], name, text });
+        gbLocalWrite(
+          (await gbLoad()).map((g) => (g.id === id ? { ...g, name, text } : g))
+        );
+      }
+      async function gbDel(id) {
+        if (GUESTBOOK_URL) await gbPost({ action: "delete", id, key: gbOwn()[id] });
+        else gbLocalWrite((await gbLoad()).filter((g) => g.id !== id));
+        const own = gbOwn();
+        delete own[id];
+        gbSetOwn(own);
+      }
+      async function gbRender() {
+        const list = await gbLoad();
+        gbEl._list = list;
+        const own = gbOwn();
+        gbEl.querySelector(".gb-list").innerHTML = list.length
+          ? list
+              .map(
+                (g) =>
+                  `<div class="gb-item"><div class="gb-top"><b>${esc(
+                    String(g.name || "익명")
+                  )}</b><i>${esc(String(g.date || ""))}</i>${
+                    own[g.id]
+                      ? `<span class="gb-act"><button data-gbedit="${esc(
+                          String(g.id)
+                        )}">수정</button><button data-gbdel="${esc(
+                          String(g.id)
+                        )}">삭제</button></span>`
+                      : ""
+                  }</div><div class="gb-text">${esc(String(g.text || ""))}</div></div>`
+              )
+              .join("")
+          : '<div class="gb-item" style="color:var(--muted)">아직 작성된 글이 없어요 🍊</div>';
+      }
+      function gbReset() {
+        gbEditing = null;
+        gbEl.querySelector("#gbText").value = "";
+        gbEl.querySelector("#gbSend").textContent = "남기기";
+        gbEl.querySelector("#gbCancel").hidden = true;
+      }
+      function gbClose() {
+        gbEl.hidden = true;
+        document.body.style.overflow = "";
+      }
+      function openGb() {
+        if (!gbEl) {
+          gbEl = document.createElement("div");
+          gbEl.className = "gb";
+          gbEl.hidden = true;
+          gbEl.innerHTML = `<div class="gb-box">
+            <div class="gb-head"><span>💌 GUESTBOOK</span><button aria-label="닫기" data-gbx>×</button></div>
+            <input id="gbName" maxlength="20" placeholder="닉네임" />
+            <textarea id="gbText" maxlength="500" placeholder="남기고 싶은 말을 적어주세요"></textarea>
+            <div class="gb-row"><button class="gb-cancel" id="gbCancel" hidden>취소</button><button class="gb-send" id="gbSend">남기기</button></div>
+            <div class="gb-list"></div></div>`;
+          document.body.appendChild(gbEl);
+          gbEl.addEventListener("click", async (e) => {
+            if (e.target === gbEl || e.target.closest("[data-gbx]")) return gbClose();
+            const ed = e.target.closest("[data-gbedit]");
+            if (ed) {
+              const g = (gbEl._list || []).find(
+                (x) => String(x.id) === ed.dataset.gbedit
+              );
+              if (!g) return;
+              gbEditing = String(g.id);
+              gbEl.querySelector("#gbName").value = g.name || "";
+              gbEl.querySelector("#gbText").value = g.text || "";
+              gbEl.querySelector("#gbSend").textContent = "수정 완료";
+              gbEl.querySelector("#gbCancel").hidden = false;
+              gbEl.querySelector("#gbText").focus();
+              return;
+            }
+            const dl = e.target.closest("[data-gbdel]");
+            if (dl) {
+              if (!confirm("이 글을 삭제할까요?")) return;
+              await gbDel(dl.dataset.gbdel);
+              if (gbEditing === dl.dataset.gbdel) gbReset();
+              showToast("삭제했어요");
+              gbRender();
+            }
+          });
+          gbEl.querySelector("#gbCancel").onclick = gbReset;
+          gbEl.querySelector("#gbSend").onclick = async () => {
+            const text = gbEl.querySelector("#gbText").value.trim();
+            if (!text) return showToast("내용을 적어주세요");
+            const name = gbEl.querySelector("#gbName").value.trim() || "익명";
+            if (gbEditing) {
+              await gbEdit(gbEditing, name, text);
+              showToast("수정했어요");
+            } else {
+              await gbAdd(name, text);
+              showToast("💌 남겼어요");
+            }
+            gbReset();
+            gbRender();
+          };
+        }
+        gbEl.hidden = false;
+        document.body.style.overflow = "hidden";
+        gbRender();
+      }
+      $("gbBtn").onclick = openGb;
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && gbEl && !gbEl.hidden) gbClose();
+      });
       renderPinBar();
       load();
     </script>
