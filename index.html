@@ -48,27 +48,27 @@
       }
       .gb-btn {
         position: absolute;
-        top: 40px;
-        right: 16px;
-        width: 28px;
-        height: 28px;
+        top: 10px;
+        right: 10px;
+        width: 22px;
+        height: 22px;
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
         color: var(--red);
-        background: #fff;
-        border: 1.5px solid var(--red);
+        background: #fff1e0;
+        border: 1.3px solid var(--red);
       }
       .gb-btn svg {
-        width: 16px;
-        height: 16px;
+        width: 13px;
+        height: 13px;
       }
       .gb {
         position: fixed;
         inset: 0;
         z-index: 300;
-        background: rgba(75, 53, 33, 0.28);
+        background: rgba(240, 138, 44, 0.22);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -80,8 +80,8 @@
         max-height: 68vh;
         display: flex;
         flex-direction: column;
-        background: #fff;
-        border: 1.5px solid #f6c48f;
+        background: linear-gradient(180deg, #ffe3c2 0%, #ffeedb 100%);
+        border: 1.5px solid #f0a458;
         border-radius: 14px;
         padding: 12px 14px 14px;
         box-shadow: 0 8px 28px rgba(240, 138, 44, 0.22);
@@ -107,8 +107,8 @@
         margin-bottom: 6px;
         padding: 7px 10px;
         border-radius: 8px;
-        border: 1px solid #f6c48f;
-        background: #fff;
+        border: 1px solid #f0b36f;
+        background: #fff8ef;
         color: var(--text);
         font: inherit;
         font-size: 13px;
@@ -143,11 +143,11 @@
       .gb-list {
         margin-top: 10px;
         overflow-y: auto;
-        border-top: 1px solid #fbe3c4;
+        border-top: 1px solid #f3c48d;
       }
       .gb-item {
         padding: 7px 2px;
-        border-bottom: 1px solid #fbe3c4;
+        border-bottom: 1px solid #f3c48d;
         font-size: 13px;
         line-height: 1.55;
       }
@@ -196,7 +196,6 @@
       .cafe-cms {
         margin-top: 8px;
         padding-top: 10px;
-        border-top: 1px solid var(--line);
       }
       .cafe-cms-h {
         font-size: 13px;
@@ -204,9 +203,18 @@
         color: var(--muted);
         margin-bottom: 8px;
       }
+      .cafe-cm-box {
+        border: 1px solid #f0c595;
+        border-radius: 10px;
+        background: #fffaf3;
+        padding: 0 12px;
+      }
       .cafe-cm {
-        padding: 8px 0;
+        padding: 10px 0;
         font-size: 14.5px;
+      }
+      .cafe-cm + .cafe-cm {
+        border-top: 1px solid #f0c595;
       }
       .cafe-cm-t {
         margin: 2px 0 6px;
@@ -403,6 +411,115 @@
         color: var(--text);
         font-weight: 700;
         border-color: var(--red);
+      }
+      .searchrow {
+        display: flex;
+        gap: 8px;
+        margin: 16px 0 10px;
+      }
+      .searchrow .search {
+        flex: 1;
+        min-width: 0;
+        width: auto;
+        margin: 0;
+      }
+      .fbtn {
+        position: relative;
+        flex: 0 0 auto;
+        width: 50px;
+        border-radius: 12px;
+        border: 1px solid var(--line);
+        background: var(--panel);
+        color: var(--muted);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .fbtn svg {
+        width: 22px;
+        height: 22px;
+      }
+      .fbtn.on {
+        color: var(--red);
+        border-color: #f2b36b;
+        background: #fff1e0;
+      }
+      .fbtn b {
+        position: absolute;
+        top: -6px;
+        right: -6px;
+        min-width: 18px;
+        height: 18px;
+        padding: 0 4px;
+        border-radius: 9px;
+        background: var(--red);
+        color: #fff;
+        font-size: 11px;
+        line-height: 18px;
+        text-align: center;
+      }
+      .fpanel {
+        margin-bottom: 12px;
+        padding: 12px 14px;
+        border: 1.5px solid #f0b36f;
+        border-radius: 14px;
+        background: #fff4e6;
+      }
+      .fp-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 8px;
+        font-weight: 800;
+        font-size: 13px;
+        color: var(--red);
+        margin-bottom: 8px;
+      }
+      .fp-head button {
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--red);
+        padding: 3px 9px;
+        border-radius: 999px;
+        border: 1px solid #f0b36f;
+        background: #fff;
+        margin-left: 4px;
+      }
+      .fp-head button.on {
+        background: var(--red);
+        color: #fff;
+        border-color: var(--red);
+      }
+      .fp-hint {
+        font-size: 11.5px;
+        color: var(--muted);
+        margin-bottom: 8px;
+      }
+      .fp-sec {
+        margin-top: 8px;
+      }
+      .fp-sec h4 {
+        margin: 0 0 5px;
+        font-size: 12px;
+        color: var(--muted);
+      }
+      .fp-chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+      }
+      .mchip.tg.on {
+        background: #ffd9a8;
+        color: #7a3d00;
+        border-color: var(--red);
+      }
+      .mchip.editing {
+        border-style: dashed;
+        border-color: var(--red);
+      }
+      .mchip.pinned {
+        background: #fff1e0;
+        color: #b85a00;
       }
       .search {
         width: 100%;
@@ -795,12 +912,12 @@
       }
       .cafe-meta {
         margin-top: 4px;
-        font-size: 12.5px;
+        font-size: 10.5px;
         color: var(--muted);
       }
       .cafe-meta i {
         font-style: normal;
-        margin: 0 5px;
+        margin: 0 4px;
         opacity: 0.6;
       }
       .cafe-post {
@@ -1027,8 +1144,23 @@
   <body>
     <div class="wrap">
       <div class="logo" id="logo"></div>
-      <button class="gb-btn" id="gbBtn" aria-label="GUESTBOOK" title="GUESTBOOK">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3.5 7l8.5 6.5L20.5 7"/></svg>
+      <button
+        class="gb-btn"
+        id="gbBtn"
+        aria-label="GUESTBOOK"
+        title="GUESTBOOK"
+      >
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <rect x="3" y="5" width="18" height="14" rx="2.5" />
+          <path d="M3.5 7l8.5 6.5L20.5 7" />
+        </svg>
       </button>
       <div id="status">불러오는 중...</div>
       <div class="pinbar" id="pinbar" hidden></div>
@@ -1036,7 +1168,24 @@
       <section id="list" hidden>
         <button class="back" id="back">← 홈으로</button>
         <div class="tabs" id="tabs"></div>
-        <input class="search" id="search" placeholder="" aria-label="검색" />
+        <div class="searchrow">
+          <input class="search" id="search" placeholder="" aria-label="검색" />
+          <button class="fbtn" id="fbtn" aria-label="필터" title="필터">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            >
+              <path d="M4 7h10M18 7h2M4 17h2M10 17h10" />
+              <circle cx="16" cy="7" r="2.2" />
+              <circle cx="8" cy="17" r="2.2" />
+            </svg>
+            <b id="fcnt" hidden></b>
+          </button>
+        </div>
+        <div class="fpanel" id="fpanel" hidden></div>
         <div class="memf" id="memf"></div>
         <div class="meta">
           <span id="count"></span>
@@ -1067,7 +1216,8 @@
       // ---- GUESTBOOK 연결 주소 ----
       // 아래 따옴표 안에 Google Apps Script 웹앱 주소(https://script.google.com/macros/s/.../exec)를 붙여넣으세요.
       // 비워두면 글이 이 브라우저에만 저장됩니다.
-      const GUESTBOOK_URL = "https://script.google.com/macros/s/AKfycbykRvJCfdm_lugFJwp7qlxRmGwVNI1g9pM_xPxH7zvBjpbpjQdB37YiSLSI73LDS8xwgw/exec";
+      const GUESTBOOK_URL =
+        "https://script.google.com/macros/s/AKfycbykRvJCfdm_lugFJwp7qlxRmGwVNI1g9pM_xPxH7zvBjpbpjQdB37YiSLSI73LDS8xwgw/exec";
       // ---- 카테고리별 영상 ----
       // 링크(또는 ID) 뒤에 " | " 로 구분해서 아래 항목들을 원하는 만큼 이어 붙일 수 있습니다. 순서는 상관없어요.
       //   - 멤버: 그냥 이름들을 쉼표로 (예: 안유진,가을)
@@ -2155,6 +2305,20 @@
             "https://youtu.be/4GqrmzMsPjw | 장원영,리즈 | album=DIVE 1기 | date=2022-09-08",
             "https://youtu.be/sbw88UgpzP0 | 레이,리즈 | album=DIVE 1기 | date=2022-11-16",
             "https://youtu.be/LWv5pdYk-C8 | 아이브 | album=DIVE 1기 | date=2023-02-02",
+            "https://youtu.be/53SVGDJs_MY | 리즈 | album=DIVE 2기 | date=2023-05-06",
+            "https://youtu.be/guhJviNsDak | 아이브 | album=DIVE 2기 | date=2023-07-13",
+            "https://youtu.be/H68IDb0wSrQ | 아이브 | album=DIVE 2기 | date=2023-11-25",
+            "https://youtu.be/aEBTNmjTQ-Q | 아이브 | album=DIVE 2기 | date=2023-12-26",
+            "https://youtu.be/WPLxCJVc5z8 | 아이브 | album=DIVE 2기 | date=2024-01-25",
+            "https://youtu.be/H_ioAd4hzg4 | 장원영,리즈 | album=DIVE 3기 | date=2024-05-22",
+            "https://youtu.be/3slDmQemG5U | 레이,리즈 | album=DIVE 3기 | date=2024-08-28",
+            "https://youtu.be/lKI3UwhFHK0 | 안유진,레이,리즈 | album=DIVE 3기 | date=2024-11-27",
+            "https://youtu.be/OImgNxLZl_U | 아이브 | album=DIVE 3기 | date=2025-01-31",
+            "https://youtu.be/N_zziEyXbMo | 리즈 | album=DIVE 4기 | date=2025-05-27",
+            "https://youtu.be/1nwIh0fqpJk | 아이브 | album=DIVE 4기 | date=2025-06-11",
+            "https://youtu.be/R9VF7M3eNuI | 가을,레이,리즈,이서 | album=DIVE 4기 | date=2025-08-23",
+            "https://youtu.be/EIOdMyByaCc | 가을,레이,리즈 | album=DIVE 4기 | date=2025-11-20",
+            "https://youtu.be/C_ybIpDL0Xo | 아이브 | album=DIVE 4기 | date=2026-01-20",
           ],
         }, // Official 하위: 링크 뒤에 " | album=DIVE 1기" 처럼 붙이면 해당 폴더에 들어감
         "Special Collaboration": { ids: [] }, // MUSIC 하위: 영상 링크를 ids에 넣거나 MANUAL_ITEMS로 채움
@@ -2255,10 +2419,37 @@
       //   "날짜 | 원문링크(없으면 비움) | 표지주소(비우면 첫 사진) | PHOTO | 멤버 | 제목 | album=폴더 | photos=주소1;주소2;주소3"
       //   예) "2026-10-19 |  |  | PHOTO | 리즈 | COSMOPOLITAN 화보 | album=COSMOPOLITAN 2025년 11월호 | photos=https://.../a.jpg;https://.../b.jpg",
       const MANUAL_ITEMS = [
+        "2025-04-21 |  |  | Fanclub | 아이브 | [DIVE INTO IVE]의 IVE 선장들을 소개합니다🚢💙 | album=DIVE 4기 | cols=2 | photos=https://lh3.googleusercontent.com/d/1jO3-OnXjTbgrZqcohICPRQxzV5TcZpD4",
+        "2025-08-31 |  |  | Fanclub | 리즈 | 8월의 리즈 | album=DIVE 4기 | cols=2 | photos=https://lh3.googleusercontent.com/d/1yDj6h8FF469wELhaJxGIydh7D5lijpv4;https://lh3.googleusercontent.com/d/1W4Q8iowDitOVIYFbBbl3LgK88Qg78kTN",
+        "2025-10-31 |  |  | Fanclub | 레이,리즈 | 10월의 커플즈 | album=DIVE 4기 | cols=2 | photos=https://lh3.googleusercontent.com/d/1SJ1PONGNVQs8nmZz5Ht5EpR8YqBIDZSW;https://lh3.googleusercontent.com/d/1LMNcBJWQmoKiF-2Tv0w5GZqR3Vh6y4fH",
+        "2026-01-31 |  |  | Fanclub | 아이브 | IVE CATEGORY | album=DIVE 4기 | cols=2 | photos=https://lh3.googleusercontent.com/d/1qZatXK1IPkPUotjQj0hyiAgYzULYa-gz;https://lh3.googleusercontent.com/d/1mHqbrFuK5R5LHtMnqkaJiVCEQBTHU-mn;https://lh3.googleusercontent.com/d/1_21YFgJRFKRS15F0VOK-UuHg5R_tDka6",
         "2022-05-23 |  |  | Fanclub | 리즈 | 4컷만화 | album=DIVE 1기 | cols=2 | photos=https://lh3.googleusercontent.com/d/17SKCEBtVbipJer7cuul4By7gY7dU2kcC;https://lh3.googleusercontent.com/d/1F1DUN9sfpXAux2TWBY0CfRzZ7m2K_-ti",
         "2022-03-01 |  |  | Fanclub | 리즈 | KIT Behind | album=DIVE 1기 | cols=2 | photos=https://lh3.googleusercontent.com/d/1fXDvPJ31JORgRUXdzIzllBxeDlt3O7o9;https://lh3.googleusercontent.com/d/1h8FMQyrphVTQ2yz5JgA9H_qAvxhRH2zj;https://lh3.googleusercontent.com/d/1dSmsNupMXFfKpVZQueuQEv5vLzBmQB4N;https://lh3.googleusercontent.com/d/1dcPawyBcI3YkWXRCBcK3wpzSiH5FJUQE;https://lh3.googleusercontent.com/d/10_u0YSIDt_tCOwZdbZvYyBEoqSOkf7DZ;https://lh3.googleusercontent.com/d/1AQWI_VGHfgoGmQ6ojQNjCtYYVeIvzRK0;https://lh3.googleusercontent.com/d/1fOG9c3YddJeGA7jVzjn2PPDZwVTPkAU_",
         "2022-03-01 |  |  | Fanclub | 리즈 | Online Photocard | album=DIVE 1기 | cols=2 | photos=https://lh3.googleusercontent.com/d/1WZgesL4Xj05VBUbHILV3NQXXC34AkwAI;https://lh3.googleusercontent.com/d/1v3ElsuEHzMYq55HlhlE39ueeYLSrbE6M",
         "2023-02-24 |  |  | Fanclub | 리즈 | 다이브 나랑 놀쟝💗 | album=DIVE 1기 | photos=https://lh3.googleusercontent.com/d/18kyvTsjFBeXXKTB4U8M2t8mBB-y_YhYT",
+        "2023-04-04 |  |  | Fanclub | 리즈 | 우리 다이브 모하나〰️〰️😚 | album=DIVE 2기 | cols=2 | photos=https://lh3.googleusercontent.com/d/1YkYsBEpiSWVJuEUPkwhyDkgL6B_u4fWl;https://lh3.googleusercontent.com/d/1lVeOZpPaP9vV3iWKHsv92oRLTdsb1QHz",
+        "2023-04-07 |  |  | Fanclub | 아이브 | ＜TEAM MAGAZINE IVE＞를 소개합니다 📗 | album=DIVE 2기 | cols=2 | photos=https://lh3.googleusercontent.com/d/1GYTLeJMIPCQjkZ5ajiFmP-zkd3c6mvXy;https://lh3.googleusercontent.com/d/13eEEC2_mFf5yMVw6DCo-xLnrJKSaW1U5;https://lh3.googleusercontent.com/d/1dd7JfG7lR3jjibq1lOcssU7NMyDIfjsr",
+        "2023-05-06 |  |  | Fanclub | 리즈 | 나.깜냥에디터. | album=DIVE 2기 | cols=2 | photos=https://lh3.googleusercontent.com/d/1NSDaY1PTOECtQHFZKP0y7L6COdran2wf",
+        "2023-05-16 |  |  | Fanclub | 리즈 | 안녕......넌 누구니.... | album=DIVE 2기 | cols=2 | photos=https://lh3.googleusercontent.com/d/1p55fD38uU7Bu44L_6sQKco2O4OEVeOV_",
+        "2023-09-27 |  |  | Fanclub | 리즈 | MONTHLY IVE 9월호 - 리즈 | album=DIVE 2기 | photos=https://lh3.googleusercontent.com/d/1NTPtJlVwBCjx91YKs8ZZqyOPP1wz0BLu;https://lh3.googleusercontent.com/d/1AJp2YuCnnHWItB1-waw0gmudVivlvLnU",
+        "2023-12-09 |  |  | Fanclub | 아이브 | MONTHLY DIVE 특별호 | album=DIVE 2기 | photos=https://lh3.googleusercontent.com/d/1bTVv0Kr7bAnjvgWbgELflV6Kgqup5Xrl;https://lh3.googleusercontent.com/d/11Owa-qDxWtVZIYn0dcV-8xUC3BSAxpJa",
+        "2023-12-31 |  |  | Fanclub | 아이브 | MONTHLY IVE 12월호 | album=DIVE 2기 | photos=https://lh3.googleusercontent.com/d/1fhykiXf7PDlnvJ72h_c_CoogqZGzH_RA;https://lh3.googleusercontent.com/d/1gMZExFXM94mO80K1-efYm3X65ELHtbQy",
+        "2024-01-31 |  |  | Fanclub | 아이브 | MONTHLY IVE 1월호 | album=DIVE 2기 | photos=https://lh3.googleusercontent.com/d/1Os0YTmOad-j8TqJ-XyCPalY9IvBKEGS0;https://lh3.googleusercontent.com/d/1NZIBDTlZBrzm_gtt0dSiG4dRxODMqINt",
+
+        "2024-04-05 |  |  | Fanclub | 아이브 | ＜SCOUT IVE＞의 IVE 대원들을 소개합니다💚 | album=DIVE 3기 | cols=2 | photos=https://lh3.googleusercontent.com/d/1QC226fjjZ9yZk1DlGFIkjkWE6vYaR0gb",
+
+        "2024-06-30 |  |  | Fanclub | 장원영,리즈 | IVE 장원영 관찰 보고서 W. 리즈 | album=DIVE 3기 | cols=2 | photos=https://lh3.googleusercontent.com/d/1n8xQMvSk0DyJvbKr4GxWEfUMGKFSrLpq;https://lh3.googleusercontent.com/d/1SKpTBfj96RGZm_Ig8puNPu4VAcmrERUt;https://lh3.googleusercontent.com/d/1SySjFyIEUKuy-pxsI5jX-yhdU5h49reB",
+
+        "2024-07-31 |  |  | Fanclub | 안유진,리즈 | IVE 리즈 관찰 보고서 W. 안유진 | album=DIVE 3기 | cols=2 | photos=https://lh3.googleusercontent.com/d/1icxW6DYHTvDaZwcvHyVM7xUrnRx7VpZv;https://lh3.googleusercontent.com/d/1A5AioWTA0Ayp8Wa0Xv9CIN6yBXdbqmEh;https://lh3.googleusercontent.com/d/1Lenv414uzXNVx8V9AsnSJzibCa9u2QES",
+
+        "2024-09-17 |  |  | Fanclub | 리즈 | 추석인데 심심한 다이브 나랑 놀자 🐰💗 | album=DIVE 3기 | cols=2 | photos=https://lh3.googleusercontent.com/d/1SdDVIp2EqeYQO8F40r77PEZqQ8aQnrkz;https://lh3.googleusercontent.com/d/1KDETGHED17xEIbt6P9zQZOsw5WT14BBj",
+
+        "2024-12-09 |  |  | Fanclub | 리즈 | KIT Behind | album=DIVE 3기 | cols=2 | photos=https://lh3.googleusercontent.com/d/1nmD-qcL05mOHtVdzi4YtgFfRG5XJymU4;https://lh3.googleusercontent.com/d/1AyMu382EE00DliuDO_pOh9z4msJMsjF-;https://lh3.googleusercontent.com/d/18sIStjraDVgghzPmSDK0DU_Np1NEA7TC;https://lh3.googleusercontent.com/d/1oRhcrPnMx5ToPTMREc6y1gIbWb69wGwn",
+
+        "2024-12-09 |  |  | Fanclub | 아이브 | 2024 IVE 대원 관찰 보고서 | album=DIVE 3기 | cols=2 | photos=https://lh3.googleusercontent.com/d/1bvzoZU2_Uo_RkaHinVXREuF4cNdfHopL;https://lh3.googleusercontent.com/d/1vNDqRTf0eYcpkIrCrxV7CmL1Rkt0OyDp;https://lh3.googleusercontent.com/d/1Y7xn9QOpJ0XZirOnh7iMYWPwO_L115fN;https://lh3.googleusercontent.com/d/1I2vrnmAgCpZ1EgTXpU92iYjCxGZCciUQ;https://lh3.googleusercontent.com/d/1Q6awY6MDHA30NWpjpkSWvgg9_IjUxQb3;https://lh3.googleusercontent.com/d/1PaPlqNjLUQg0WwP6BhYpFCv4W9tbUyLs;https://lh3.googleusercontent.com/d/1PXWo7L9FjIpZCGV1d8sDHGLLDVDfQhAR;https://lh3.googleusercontent.com/d/1Q3lBTft-D0oE7TveDGZO7mjrusDdCldt",
+        "2026-07-31 |  |  | Fanclub | 가을,리즈 | ABOUT GAEUL - FROM. LIZ | album=DIVE ~ | photos=https://lh3.googleusercontent.com/d/1LpjNcydw8op6a5cK1jZj2bNEOR_w_P0E",
+        "2026-08-31 |  |  | Fanclub | 레이,리즈 | ABOUT LIZ - FROM. REI | album=DIVE ~ | photos=https://lh3.googleusercontent.com/d/1nyYDHTi4QEPqCDROXxxk-QavkZ819PBv",
+        "2026-10-15 |  |  | Fanclub | 리즈 | 10월 Monthly Interview - LIZ | album=DIVE ~ | photos=https://lh3.googleusercontent.com/d/1LkdJgLPAcWky9Xi0J7U_A1J1Xz6YCRBe",
         "2024-03-11 |  |  | DAUM CAFE | 리즈 | 팬미팅 후유증 🥺💗 | content=다이브 !!2일간의 팬미팅을 끝내고 많은 감정들이 오가며 하고싶은말이 많아서 글로 남겨보아요\n최근에 월드투어로 콘서트도 다니고 다른 스케줄도 하면서 바쁜 하루하루를 보냈는데 많이 보고싶었죠 ?? 나도 많이 보고싶었어요 ㅎㅎ\n그래서 그런지 다이브를 보기전에 너무 설레고 무대도 잘하고싶더라구요\n우리가 리허설할때의 공연장은 무채색이었지만 다이브가 채워졌을때의 공연장은 형형색색의 다이브들로 꽉 차서 아름답더라구요\n사실 처음엔 나를 사랑하는게 무의미하다고 생각했지만 내 자신을 사랑할 이유를 만들어준게 우리 다이브에요\n그런 소중한 감정을 알게 해준 만큼 내가 다이브에게 더 많은 감정을 전해줄게요\n이유는 모르겠지만 다이브 앞에만 서면 마치 어린아이 처럼 눈물이 나요\n저의 마음이 너무 진심이어서 그런걸까요\n나도 모르게 그동안 참아왔던 무언가를 어딘가에 털어놓고 싶었나봐요\n난 그게 다이브여서 좋고 앞으로도 다이브일거에요\n지금까지의 추억, 앞으로의 추억 잘 간직하고 기록하며 소중히 하나하나 쌓아가봐요 ♡\n다이브 내가 어디서 봤는데 사랑은 재채기와 같아서 숨길 수가 없대요\n아무튼 그렇다구요 ♥️ | board=From. IVE",
         "2023-12-24 | https://youtu.be/oEOZ9MelgNY | https://i.ytimg.com/vi/oEOZ9MelgNY/hqdefault.jpg | DAUM CAFE | 리즈 | 미리 크리스마스 선물 🎁💝 | board=From. IVE",
         "2023-09-29 | https://youtu.be/XRuP3YBni_g | https://i.ytimg.com/vi/XRuP3YBni_g/hqdefault.jpg | DAUM CAFE | 리즈 | 후라이는 반숙이지 😉 | board=From. IVE",
@@ -2951,6 +3142,21 @@
       const FOLDER_PRESETS = {
         Fanclub: ["DIVE 1기", "DIVE 2기", "DIVE 3기", "DIVE 4기", "DIVE ~"],
       };
+      // 폴더 표지 이미지를 직접 지정 (탭 이름 → 폴더 이름 → 이미지 주소)
+      const FOLDER_COVERS = {
+        Fanclub: {
+          "DIVE 1기":
+            "https://lh3.googleusercontent.com/d/1ZrQtmuS5GvGEv1lIsx_GrL36GfAQbqR3",
+          "DIVE 2기":
+            "https://lh3.googleusercontent.com/d/15snyYnURUdRlaVQzLQMYN7JXS0a3__H1",
+          "DIVE 3기":
+            "https://lh3.googleusercontent.com/d/1sWPgz1JSxwUp--4E1r7YrxlC7OzRQdZa",
+          "DIVE 4기":
+            "https://lh3.googleusercontent.com/d/1C7KoLgIV6mxyhqGM8hUm286RAjLe9Kr7",
+          "DIVE ~":
+            "https://lh3.googleusercontent.com/d/19Od8DMbtrdWWROmfmqUSkhmlg3oIfAeS",
+        },
+      };
       const FANCAM_TABS = ["세로 직캠", "가로 직캠"]; // 직캠 탭에서는 멤버 필터/태그(리즈)를 숨김
       let videos = [],
         tab = 0,
@@ -2958,6 +3164,10 @@
         query = "",
         scope = null,
         memberFilter = [],
+        catFilter = [],
+        yearFilter = [],
+        fOpen = false,
+        fEdit = false,
         albumScope = null;
       const sTabs = (s) => s.tabs || s.cats;
       const tabList = () =>
@@ -3188,9 +3398,9 @@
       <div class="cafe-thumb">${thumb}</div>
       <div class="cafe-body">
         <div class="cafe-title">${esc(v.title)}</div>
-        <div class="cafe-meta">${v.board ? esc(v.board) + "<i>•</i>" : ""}IVE${esc(mem)}<i>•</i>${d}${
-          cmtN(v) ? `<i>•</i>댓글 ${cmtN(v)}` : ""
-        }${
+        <div class="cafe-meta">${
+          v.board ? esc(v.board) + "<i>•</i>" : ""
+        }IVE${esc(mem)}<i>•</i>${d}${cmtN(v) ? `<i>•</i>댓글 ${cmtN(v)}` : ""}${
           v.views != null ? `<i>•</i>조회 ${v.views.toLocaleString()}` : ""
         }</div>
       </div>
@@ -3308,8 +3518,8 @@
       <div class="info pinrow">${
         v.views !== null && !hideViews(v) ? fmtViews(v.views) + "<br>" : ""
       }${isCafeC && v.board ? esc(v.board) + " • " : ""}${fmtD(v)}${
-        isCafeC && cmtN(v) ? " • 댓글 " + cmtN(v) : ""
-      }<span class="pinbtn${
+          isCafeC && cmtN(v) ? " • 댓글 " + cmtN(v) : ""
+        }<span class="pinbtn${
           isPinned(v) ? " on" : ""
         }" role="button" aria-label="상단에 고정" title="상단에 고정" data-pin="${esc(
           pinKey(v)
@@ -3611,13 +3821,156 @@
           '<div style="text-align:center"><button class="more" data-all>전체 영상 보기 →</button></div>';
         processEmbeds();
       }
+      // ---- 통합 필터 (멤버 / 카테고리 / 연도) ----
+      const FILTER_YEARS = ["2021", "2022", "2023", "2024", "2025", "2026"];
+      const FPIN_KEY = "pinnedFilters2";
+      let fpins = null;
+      try {
+        fpins = JSON.parse(localStorage.getItem(FPIN_KEY));
+      } catch (e) {}
+      if (!Array.isArray(fpins)) fpins = MEMBER_LIST.map((m) => "m:" + m);
+      const saveFpins = () => {
+        try {
+          localStorage.setItem(FPIN_KEY, JSON.stringify(fpins));
+        } catch (e) {}
+      };
+      const hideMemFor = (name) =>
+        !!(scope && scope.hideMembers) ||
+        name === "SOLO" ||
+        name === "ASMR" ||
+        name === "VLOG" ||
+        FANCAM_TABS.includes(name);
+      const inBase = (v, name) =>
+        name === "전체"
+          ? scope
+            ? sTabs(scope).some((t) => inTab(v, t))
+            : !v.embed &&
+              !v.cats.includes("Lyrics") &&
+              !v.cats.includes("PHOTO")
+          : inTab(v, name);
+      const vYear = (v) => {
+        const m = String(v.date || "").match(/^(\d{4})/);
+        return m ? m[1] : String(new Date(v.date).getFullYear());
+      };
+      const passCat = (v, name) =>
+        name !== "전체" ||
+        !catFilter.length ||
+        catFilter.some((c) => inTab(v, c));
+      const passYear = (v) =>
+        !yearFilter.length || yearFilter.includes(vYear(v));
+      function availCats(name) {
+        if (name !== "전체") return [];
+        const pool = videos.filter((v) => inBase(v, name));
+        return (scope ? sTabs(scope) : TAB_ORDER.slice(1)).filter((c) =>
+          pool.some((v) => inTab(v, c))
+        );
+      }
+      function renderFilters(name) {
+        name = name || tabList()[tab];
+        const hideMem = hideMemFor(name);
+        const cats = availCats(name);
+        const chip = (t, val, label) => {
+          const k = t + ":" + val;
+          const on =
+            t === "m"
+              ? memberFilter.includes(val)
+              : t === "c"
+              ? catFilter.includes(val)
+              : yearFilter.includes(val);
+          const pinned = fpins.includes(k);
+          return `<button class="mchip${t === "m" ? "" : " tg"}${
+            on ? " on" : ""
+          }${fEdit ? " editing" : ""}${
+            fEdit && pinned ? " pinned" : ""
+          }" data-f="${t}" data-v="${esc(val)}"${
+            t === "m" ? ` style="--c:${MEMBER_COLORS[val]}"` : ""
+          }>${fEdit && pinned ? "📌 " : ""}${esc(label)}</button>`;
+        };
+        // 바깥에 계속 보이는 칩 (고정한 것만)
+        const out = [
+          ...(hideMem
+            ? []
+            : MEMBER_LIST.filter((m) => fpins.includes("m:" + m)).map((m) =>
+                chip("m", m, m)
+              )),
+          ...cats
+            .filter((c) => fpins.includes("c:" + c))
+            .map((c) => chip("c", c, TAB_LABELS[c] || c)),
+          ...FILTER_YEARS.filter((y) => fpins.includes("y:" + y)).map((y) =>
+            chip("y", y, y + "년")
+          ),
+        ];
+        $("memf").innerHTML = out.join("");
+        $("memf").hidden = !out.length;
+        const n =
+          (hideMem ? 0 : memberFilter.length) +
+          catFilter.length +
+          yearFilter.length;
+        $("fcnt").hidden = !n;
+        $("fcnt").textContent = n;
+        $("fbtn").classList.toggle("on", fOpen || n > 0);
+        $("fpanel").hidden = !fOpen;
+        if (!fOpen) return;
+        const sec = (title, arr) =>
+          arr.length
+            ? `<div class="fp-sec"><h4>${title}</h4><div class="fp-chips">${arr.join(
+                ""
+              )}</div></div>`
+            : "";
+        $("fpanel").innerHTML = `<div class="fp-head"><span>FILTER</span><span>
+            <button data-fedit class="${fEdit ? "on" : ""}">📌 ${
+          fEdit ? "고정 선택 중 (완료)" : "자주 쓰는 필터 고정"
+        }</button><button data-freset>초기화</button></span></div>${
+          fEdit
+            ? '<div class="fp-hint">고정할 항목을 누르세요. 고정한 항목은 검색창 아래에 계속 보여요. (다시 누르면 해제)</div>'
+            : ""
+        }${
+          hideMem
+            ? ""
+            : sec(
+                "멤버",
+                MEMBER_LIST.map((m) => chip("m", m, m))
+              )
+        }${sec(
+          "카테고리",
+          cats.map((c) => chip("c", c, TAB_LABELS[c] || c))
+        )}${sec(
+          "연도",
+          FILTER_YEARS.map((y) => chip("y", y, y + "년"))
+        )}`;
+      }
       function renderMemberFilter() {
-        $("memf").innerHTML = MEMBER_LIST.map(
-          (m) =>
-            `<button class="mchip ${
-              memberFilter.includes(m) ? "on" : ""
-            }" data-m="${m}" style="--c:${MEMBER_COLORS[m]}">${m}</button>`
-        ).join("");
+        renderFilters();
+      }
+      function filterClick(e) {
+        if (e.target.closest("[data-fedit]")) {
+          fEdit = !fEdit;
+          return renderFilters();
+        }
+        if (e.target.closest("[data-freset]")) {
+          memberFilter = [];
+          catFilter = [];
+          yearFilter = [];
+          return renderList();
+        }
+        const c = e.target.closest("[data-f]");
+        if (!c) return;
+        const t = c.dataset.f,
+          val = c.dataset.v;
+        if (fEdit) {
+          const k = t + ":" + val;
+          fpins = fpins.includes(k)
+            ? fpins.filter((x) => x !== k)
+            : [...fpins, k];
+          saveFpins();
+          return renderFilters();
+        }
+        const arr =
+          t === "m" ? memberFilter : t === "c" ? catFilter : yearFilter;
+        const i = arr.indexOf(val);
+        if (i > -1) arr.splice(i, 1);
+        else arr.push(val);
+        renderList();
       }
       function renderAlbumSections(items) {
         const groups = {};
@@ -3686,9 +4039,9 @@
           name === "ASMR" ||
           name === "VLOG" ||
           FANCAM_TABS.includes(name);
-        $("memf").hidden = hideMem;
         if (hideMem) memberFilter = [];
-        else renderMemberFilter();
+        if (name !== "전체") catFilter = [];
+        renderFilters(name);
         const noViews =
           !!(scope && scope.hideViews) ||
           SCHEDULE_CATS.includes(name) ||
@@ -3704,13 +4057,9 @@
         }
         let items = videos.filter(
           (v) =>
-            (name === "전체"
-              ? scope
-                ? sTabs(scope).some((t) => inTab(v, t))
-                : !v.embed &&
-                  !v.cats.includes("Lyrics") &&
-                  !v.cats.includes("PHOTO")
-              : inTab(v, name)) &&
+            inBase(v, name) &&
+            passCat(v, name) &&
+            passYear(v) &&
             (!memberFilter.length ||
               (memberFilter.length === 1 && memberFilter[0] === "리즈"
                 ? (v.members || []).length === 1 && v.members[0] === "리즈"
@@ -3770,12 +4119,23 @@
                 k
               )}">${TANGERINE_SVG}</span>`;
             };
+            const customCover = (a) => (FOLDER_COVERS[name] || {})[a] || "";
             const folderCard = (a) => {
               if (!groups[a].length)
                 return `<div class="folder-card" data-album="${esc(
                   a
                 )}" role="button">
-                <div class="fthumb ph${name === "DAUM CAFE" ? " cafeph" : ""}">${name === "DAUM CAFE" ? TANGERINE_SVG : `<span class="phtxt" style="color:#b9945f">${esc(a)}</span>`}</div>
+${
+  customCover(a)
+    ? `<div class="fthumb"><img src="${customCover(
+        a
+      )}" alt="" loading="lazy" referrerpolicy="no-referrer" /></div>`
+    : `<div class="fthumb ph${name === "DAUM CAFE" ? " cafeph" : ""}">${
+        name === "DAUM CAFE"
+          ? TANGERINE_SVG
+          : `<span class="phtxt" style="color:#b9945f">${esc(a)}</span>`
+      }</div>`
+}
                 <div class="title">${esc(a)}</div>
                 <div class="info pinrow">0개${folderPin(name, a)}</div>
               </div>`;
@@ -3796,16 +4156,27 @@
               const igCover = isPop
                 ? g.find((v) => v.embed === "instagram" && !v.photos)
                 : null;
-              const thumbHtml =
-                igCover && !(cover.photos && cover.photos.length)
-                  ? `<div class="fthumb pu"><div class="thumb igthumb"><div class="igwrap" data-lazy="instagram" data-url="${esc(
-                      igCover.url
-                    )}"><div class="iginner"></div></div></div><div class="pu-shield"></div></div>`
-                  : cover.thumb
-                  ? `<div class="fthumb"><img src="${
-                      cover.thumb
-                    }" alt="" loading="lazy" referrerpolicy="no-referrer" />${""}</div>`
-                  : `<div class="fthumb ph${name === "DAUM CAFE" ? " cafeph" : ""}">${name === "DAUM CAFE" ? TANGERINE_SVG : `<span class="phtxt" style="color:#b9945f">${esc(a)}</span>`}</div>`;
+              const thumbHtml = customCover(a)
+                ? `<div class="fthumb"><img src="${customCover(
+                    a
+                  )}" alt="" loading="lazy" referrerpolicy="no-referrer" /></div>`
+                : igCover && !(cover.photos && cover.photos.length)
+                ? `<div class="fthumb pu"><div class="thumb igthumb"><div class="igwrap" data-lazy="instagram" data-url="${esc(
+                    igCover.url
+                  )}"><div class="iginner"></div></div></div><div class="pu-shield"></div></div>`
+                : cover.thumb
+                ? `<div class="fthumb"><img src="${
+                    cover.thumb
+                  }" alt="" loading="lazy" referrerpolicy="no-referrer" />${""}</div>`
+                : `<div class="fthumb ph${
+                    name === "DAUM CAFE" ? " cafeph" : ""
+                  }">${
+                    name === "DAUM CAFE"
+                      ? TANGERINE_SVG
+                      : `<span class="phtxt" style="color:#b9945f">${esc(
+                          a
+                        )}</span>`
+                  }</div>`;
               return `<div class="folder-card${
                 isMag ? " auto" : ""
               }" data-album="${esc(a)}" role="button">
@@ -3839,8 +4210,12 @@
               );
             }
             albumKeys = [
-              ...albumKeys.filter((a) => pinnedSet.has("folder:" + name + ":" + a)),
-              ...albumKeys.filter((a) => !pinnedSet.has("folder:" + name + ":" + a)),
+              ...albumKeys.filter((a) =>
+                pinnedSet.has("folder:" + name + ":" + a)
+              ),
+              ...albumKeys.filter(
+                (a) => !pinnedSet.has("folder:" + name + ":" + a)
+              ),
             ];
             $("grid").style.alignItems = isMag ? "start" : "";
             $("grid").innerHTML =
@@ -3874,10 +4249,7 @@
         $("gbBtn").hidden = isList;
         if (isList) {
           renderTabs();
-          const showMem = !(scope && scope.hideMembers);
-          $("memf").hidden = !showMem;
-          if (showMem) renderMemberFilter();
-          else memberFilter = [];
+          if (scope && scope.hideMembers) memberFilter = [];
           renderList();
         }
         window.scrollTo(0, 0);
@@ -3890,6 +4262,7 @@
       $("tabs").onclick = (e) => {
         if (e.target.dataset.i) {
           tab = +e.target.dataset.i;
+          catFilter = [];
           albumScope = null;
           renderTabs();
           renderList();
@@ -3899,14 +4272,12 @@
         query = e.target.value;
         renderList();
       };
-      $("memf").onclick = (e) => {
-        if (!e.target.dataset.m) return;
-        const m = e.target.dataset.m;
-        memberFilter = memberFilter.includes(m)
-          ? memberFilter.filter((x) => x !== m)
-          : [...memberFilter, m];
-        renderMemberFilter();
-        renderList();
+      $("memf").onclick = filterClick;
+      $("fpanel").onclick = filterClick;
+      $("fbtn").onclick = () => {
+        fOpen = !fOpen;
+        if (!fOpen) fEdit = false;
+        renderFilters();
       };
       document.querySelector(".sort").onclick = (e) => {
         if (!e.target.dataset.s) return;
@@ -3972,6 +4343,8 @@
           scope = HOME_SECTIONS[+si];
           query = "";
           memberFilter = [];
+          catFilter = [];
+          yearFilter = [];
           $("search").value = "";
           tab = Math.max(0, tabList().indexOf(name));
           location.hash = "list";
@@ -3993,6 +4366,8 @@
           tab = 0;
           query = "";
           memberFilter = [];
+          catFilter = [];
+          yearFilter = [];
           $("search").value = "";
           if (scope && scope.openTab) {
             const idx = tabList().indexOf(scope.openTab);
@@ -4113,7 +4488,7 @@
         if (!v.comments) return "";
         const rows = v.comments.split("§").map((c) => {
           const [a, t, u] = c.split("¦");
-          return `<div class="cafe-cm"><b>ㄴ IVE ${esc(a || "")}</b>${
+          return `<div class="cafe-cm"><b>IVE ${esc(a || "")}</b>${
             t ? `<div class="cafe-cm-t">${esc(t)}</div>` : ""
           }${
             u
@@ -4123,9 +4498,9 @@
               : ""
           }</div>`;
         });
-        return `<div class="cafe-cms"><div class="cafe-cms-h">댓글 ${rows.length}</div>${rows.join(
-          ""
-        )}</div>`;
+        return `<div class="cafe-cms"><div class="cafe-cms-h">댓글 ${
+          rows.length
+        }</div><div class="cafe-cm-box">${rows.join("")}</div></div>`;
       }
       function openCafe(key) {
         const v = videos.find((x) => x.content && pinKey(x) === key);
@@ -4146,16 +4521,18 @@
         cafeEl.innerHTML = `<div class="pv-bar"><button class="pv-x" aria-label="닫기">×</button>
       <div class="pv-h"><div class="pv-t">${esc(
         v.title
-      )}</div><div class="pv-m">${v.board ? esc(v.board) + " · " : ""}IVE${esc(mem)} · ${fmtDate(v.date)}${v.views != null ? " · 조회 " + v.views.toLocaleString() : ""}${
+      )}</div><div class="pv-m">${v.board ? esc(v.board) + " · " : ""}IVE${esc(
+          mem
+        )} · ${fmtDate(v.date)}${
+          v.views != null ? " · 조회 " + v.views.toLocaleString() : ""
+        }${
           v.url
             ? ` <a href="${esc(
                 v.url
               )}" target="_blank" rel="noopener">원문 보기</a>`
             : ""
         }</div></div></div>
-      <div class="pv-body"><div class="cafe-post">${esc(
-        v.content
-      )}</div>${
+      <div class="pv-body"><div class="cafe-post">${esc(v.content)}</div>${
           v.image
             ? `<img class="cafe-img" src="${esc(
                 v.image
@@ -4400,7 +4777,8 @@
         const own = gbOwn();
         own[id] = key;
         gbSetOwn(own);
-        if (GUESTBOOK_URL) return gbPost({ action: "add", id, key, name, text, date });
+        if (GUESTBOOK_URL)
+          return gbPost({ action: "add", id, key, name, text, date });
         const list = await gbLoad();
         list.unshift({ id, name, text, date });
         gbLocalWrite(list);
@@ -4413,7 +4791,8 @@
         );
       }
       async function gbDel(id) {
-        if (GUESTBOOK_URL) await gbPost({ action: "delete", id, key: gbOwn()[id] });
+        if (GUESTBOOK_URL)
+          await gbPost({ action: "delete", id, key: gbOwn()[id] });
         else gbLocalWrite((await gbLoad()).filter((g) => g.id !== id));
         const own = gbOwn();
         delete own[id];
@@ -4437,7 +4816,9 @@
                           String(g.id)
                         )}">삭제</button></span>`
                       : ""
-                  }</div><div class="gb-text">${esc(String(g.text || ""))}</div></div>`
+                  }</div><div class="gb-text">${esc(
+                    String(g.text || "")
+                  )}</div></div>`
               )
               .join("")
           : '<div class="gb-item" style="color:var(--muted)">아직 작성된 글이 없어요 🍊</div>';
@@ -4465,7 +4846,8 @@
             <div class="gb-list"></div></div>`;
           document.body.appendChild(gbEl);
           gbEl.addEventListener("click", async (e) => {
-            if (e.target === gbEl || e.target.closest("[data-gbx]")) return gbClose();
+            if (e.target === gbEl || e.target.closest("[data-gbx]"))
+              return gbClose();
             const ed = e.target.closest("[data-gbedit]");
             if (ed) {
               const g = (gbEl._list || []).find(
