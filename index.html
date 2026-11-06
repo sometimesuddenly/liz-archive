@@ -1200,96 +1200,136 @@
         margin-top: -2px;
       }
       .pv.bz {
-        background: #111;
-        color: #fff;
-      }
-      .bz .pv-bar {
-        background: rgba(17, 17, 17, 0.96);
-        border-color: #2a2a2a;
-      }
-      .bz .pv-x {
-        background: #2a2a2a;
-        color: #fff;
-      }
-      .bz .pv-m {
-        color: #9a9a9a;
+        color: var(--text);
       }
       .bz-post {
+        position: relative;
         max-width: 680px;
-        margin: 0 auto;
-        padding: 18px 16px 60px;
+        margin: 16px auto 60px;
+        padding: 14px 16px 16px;
+        background: #fde6c8;
+        color: var(--text);
+        border: 1px solid #f6d2a4;
+        border-radius: 16px;
       }
-      .bz-head {
+      .bz-top {
         display: flex;
-        align-items: center;
-        gap: 14px;
-        margin-bottom: 18px;
-      }
-      .bz-av {
-        flex: 0 0 auto;
-        width: 52px;
-        height: 52px;
-        border-radius: 50%;
-        background: #2a2a2a;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 10px;
+        margin-bottom: 10px;
       }
       .bz-name {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        font-size: 19px;
-        font-weight: 700;
-      }
-      .bz-name svg {
-        width: 24px;
-        height: 24px;
+        font-size: 16px;
+        font-weight: 800;
       }
       .bz-date {
-        margin-top: 2px;
-        font-size: 15px;
-        color: #8d8d8d;
+        margin-top: 1px;
+        font-size: 12px;
+        color: var(--muted);
+      }
+      .bz-side {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+      }
+      .bz-side .pinbtn,
+      .bz-go {
+        position: static;
+        transform: none;
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #fff;
+        border: 1px solid #f6d2a4;
+        color: var(--tg-d);
+      }
+      .bz-side .pinbtn.on {
+        animation: none;
+        background: #fff;
+        color: var(--tg-d);
+        border-color: var(--tg);
+        box-shadow: 0 0 0 2px #ffc98a;
+      }
+      .bz-go svg {
+        width: 15px;
+        height: 15px;
       }
       .bz-text {
         white-space: pre-wrap;
         word-break: break-word;
-        font-size: clamp(16px, 4.4vw, 19px);
-        line-height: 1.75;
-        margin-bottom: 22px;
+        font-size: clamp(14.5px, 3.9vw, 16px);
+        line-height: 1.65;
       }
       .bz-tag {
-        color: #ff4fb3;
+        color: #d9622b;
       }
       .bz-imgs {
         display: grid;
-        gap: 10px;
+        gap: 8px;
+        align-items: start;
+        margin-top: 12px;
       }
       .bz-imgs.n2 {
         grid-template-columns: 1fr 1fr;
       }
       .bz-imgs img {
         width: 100%;
+        height: auto;
         display: block;
-        border-radius: 20px;
-        background: #222;
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.5);
       }
-      .bz-imgs.n2 img {
-        aspect-ratio: 4/5;
-        object-fit: cover;
+      .bz-cc {
+        margin: 16px 0 8px;
+        font-size: 16px;
+        font-weight: 800;
+        color: var(--text);
+      }
+      .bz-cbox {
+        background: #fff4e3;
+        border: 1px solid #f6d2a4;
+        border-radius: 14px;
+        padding: 0 14px;
+      }
+      .bz-cm {
+        padding: 12px 0 14px;
+      }
+      .bz-cm + .bz-cm {
+        border-top: 1px solid #f0d3ab;
+      }
+      .bz-cn {
+        font-size: 14px;
+        font-weight: 800;
+      }
+      .bz-ct {
+        margin-top: 6px;
+        font-weight: 700;
+        white-space: pre-wrap;
+        word-break: break-word;
+        font-size: clamp(14px, 3.7vw, 15.5px);
+        line-height: 1.6;
+      }
+      .thumb.bzthumb {
+        aspect-ratio: auto;
+        background: none;
+      }
+      .thumb.bzthumb img {
+        height: auto;
+        object-fit: contain;
       }
       .grid.bz-list {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
         gap: 14px;
-      }
-      .bz-inline {
-        background: #111;
-        color: #fff;
-        border-radius: 18px;
-        max-width: 680px;
+        max-width: 720px;
       }
       .bz-inline .bz-post {
-        padding: 16px 16px 20px;
-      }
-      .bz-inline .bz-text {
-        margin-bottom: 16px;
+        margin: 0;
+        max-width: none;
       }
     </style>
     <link rel="preconnect" href="https://www.instagram.com" />
@@ -2590,15 +2630,15 @@
       //   예) "2026-10-19 |  |  | PHOTO | 리즈 | COSMOPOLITAN 화보 | album=COSMOPOLITAN 2025년 11월호 | photos=https://.../a.jpg;https://.../b.jpg",
       const MANUAL_ITEMS = [
         "2025-04-21 |  |  | Fanclub | 아이브 | [DIVE INTO IVE]의 IVE 선장들을 소개합니다🚢💙 | album=DIVE 4기 | cols=2 | photos=https://lh3.googleusercontent.com/d/1jO3-OnXjTbgrZqcohICPRQxzV5TcZpD4",
-        "2025-08-31 |  |  | Fanclub | 리즈 | 8월의 리즈 | album=DIVE 4기 | cols=2 | photos=https://lh3.googleusercontent.com/d/1yDj6h8FF469wELhaJxGIydh7D5lijpv4;https://lh3.googleusercontent.com/d/1W4Q8iowDitOVIYFbBbl3LgK88Qg78kTN",
-        "2025-10-31 |  |  | Fanclub | 레이,리즈 | 10월의 커플즈 | album=DIVE 4기 | cols=2 | photos=https://lh3.googleusercontent.com/d/1SJ1PONGNVQs8nmZz5Ht5EpR8YqBIDZSW;https://lh3.googleusercontent.com/d/1LMNcBJWQmoKiF-2Tv0w5GZqR3Vh6y4fH",
-        "2026-01-31 |  |  | Fanclub | 아이브 | IVE CATEGORY | album=DIVE 4기 | cols=2 | photos=https://lh3.googleusercontent.com/d/1qZatXK1IPkPUotjQj0hyiAgYzULYa-gz;https://lh3.googleusercontent.com/d/1mHqbrFuK5R5LHtMnqkaJiVCEQBTHU-mn;https://lh3.googleusercontent.com/d/1_21YFgJRFKRS15F0VOK-UuHg5R_tDka6",
-        "2022-05-23 |  |  | Fanclub | 리즈 | 4컷만화 | album=DIVE 1기 | cols=2 | photos=https://lh3.googleusercontent.com/d/17SKCEBtVbipJer7cuul4By7gY7dU2kcC;https://lh3.googleusercontent.com/d/1F1DUN9sfpXAux2TWBY0CfRzZ7m2K_-ti",
+        "2025-08-31 |  |  | Fanclub | 리즈 | 8월의 리즈 | album=DIVE 4기 | photos=https://lh3.googleusercontent.com/d/1yDj6h8FF469wELhaJxGIydh7D5lijpv4;https://lh3.googleusercontent.com/d/1W4Q8iowDitOVIYFbBbl3LgK88Qg78kTN",
+        "2025-10-31 |  |  | Fanclub | 레이,리즈 | 10월의 커플즈 | album=DIVE 4기 | photos=https://lh3.googleusercontent.com/d/1SJ1PONGNVQs8nmZz5Ht5EpR8YqBIDZSW;https://lh3.googleusercontent.com/d/1LMNcBJWQmoKiF-2Tv0w5GZqR3Vh6y4fH",
+        "2026-01-31 |  |  | Fanclub | 아이브 | IVE CATEGORY | album=DIVE 4기 | photos=https://lh3.googleusercontent.com/d/1qZatXK1IPkPUotjQj0hyiAgYzULYa-gz;https://lh3.googleusercontent.com/d/1mHqbrFuK5R5LHtMnqkaJiVCEQBTHU-mn;https://lh3.googleusercontent.com/d/1_21YFgJRFKRS15F0VOK-UuHg5R_tDka6",
+        "2022-05-23 |  |  | Fanclub | 리즈 | 4컷만화 | album=DIVE 1기 | photos=https://lh3.googleusercontent.com/d/17SKCEBtVbipJer7cuul4By7gY7dU2kcC;https://lh3.googleusercontent.com/d/1F1DUN9sfpXAux2TWBY0CfRzZ7m2K_-ti",
         "2022-03-01 |  |  | Fanclub | 리즈 | KIT Behind | album=DIVE 1기 | cols=2 | photos=https://lh3.googleusercontent.com/d/1fXDvPJ31JORgRUXdzIzllBxeDlt3O7o9;https://lh3.googleusercontent.com/d/1h8FMQyrphVTQ2yz5JgA9H_qAvxhRH2zj;https://lh3.googleusercontent.com/d/1dSmsNupMXFfKpVZQueuQEv5vLzBmQB4N;https://lh3.googleusercontent.com/d/1dcPawyBcI3YkWXRCBcK3wpzSiH5FJUQE;https://lh3.googleusercontent.com/d/10_u0YSIDt_tCOwZdbZvYyBEoqSOkf7DZ;https://lh3.googleusercontent.com/d/1AQWI_VGHfgoGmQ6ojQNjCtYYVeIvzRK0;https://lh3.googleusercontent.com/d/1fOG9c3YddJeGA7jVzjn2PPDZwVTPkAU_",
         "2022-03-01 |  |  | Fanclub | 리즈 | Online Photocard | album=DIVE 1기 | cols=2 | photos=https://lh3.googleusercontent.com/d/1WZgesL4Xj05VBUbHILV3NQXXC34AkwAI;https://lh3.googleusercontent.com/d/1v3ElsuEHzMYq55HlhlE39ueeYLSrbE6M",
         "2023-02-24 |  |  | Fanclub | 리즈 | 다이브 나랑 놀쟝💗 | album=DIVE 1기 | photos=https://lh3.googleusercontent.com/d/18kyvTsjFBeXXKTB4U8M2t8mBB-y_YhYT",
         "2023-04-04 |  |  | Fanclub | 리즈 | 우리 다이브 모하나〰️〰️😚 | album=DIVE 2기 | cols=2 | photos=https://lh3.googleusercontent.com/d/1YkYsBEpiSWVJuEUPkwhyDkgL6B_u4fWl;https://lh3.googleusercontent.com/d/1lVeOZpPaP9vV3iWKHsv92oRLTdsb1QHz",
-        "2023-04-07 |  |  | Fanclub | 아이브 | ＜TEAM MAGAZINE IVE＞를 소개합니다 📗 | album=DIVE 2기 | cols=2 | photos=https://lh3.googleusercontent.com/d/1GYTLeJMIPCQjkZ5ajiFmP-zkd3c6mvXy;https://lh3.googleusercontent.com/d/13eEEC2_mFf5yMVw6DCo-xLnrJKSaW1U5;https://lh3.googleusercontent.com/d/1dd7JfG7lR3jjibq1lOcssU7NMyDIfjsr",
+        "2023-04-07 |  |  | Fanclub | 아이브 | ＜TEAM MAGAZINE IVE＞를 소개합니다 📗 | album=DIVE 2기 | photos=https://lh3.googleusercontent.com/d/1GYTLeJMIPCQjkZ5ajiFmP-zkd3c6mvXy;https://lh3.googleusercontent.com/d/13eEEC2_mFf5yMVw6DCo-xLnrJKSaW1U5;https://lh3.googleusercontent.com/d/1dd7JfG7lR3jjibq1lOcssU7NMyDIfjsr",
         "2023-05-06 |  |  | Fanclub | 리즈 | 나.깜냥에디터. | album=DIVE 2기 | cols=2 | photos=https://lh3.googleusercontent.com/d/1NSDaY1PTOECtQHFZKP0y7L6COdran2wf",
         "2023-05-16 |  |  | Fanclub | 리즈 | 안녕......넌 누구니.... | album=DIVE 2기 | cols=2 | photos=https://lh3.googleusercontent.com/d/1p55fD38uU7Bu44L_6sQKco2O4OEVeOV_",
         "2023-09-27 |  |  | Fanclub | 리즈 | MONTHLY IVE 9월호 - 리즈 | album=DIVE 2기 | photos=https://lh3.googleusercontent.com/d/1NTPtJlVwBCjx91YKs8ZZqyOPP1wz0BLu;https://lh3.googleusercontent.com/d/1AJp2YuCnnHWItB1-waw0gmudVivlvLnU",
@@ -2608,15 +2648,15 @@
 
         "2024-04-05 |  |  | Fanclub | 아이브 | ＜SCOUT IVE＞의 IVE 대원들을 소개합니다💚 | album=DIVE 3기 | cols=2 | photos=https://lh3.googleusercontent.com/d/1QC226fjjZ9yZk1DlGFIkjkWE6vYaR0gb",
 
-        "2024-06-30 |  |  | Fanclub | 장원영,리즈 | IVE 장원영 관찰 보고서 W. 리즈 | album=DIVE 3기 | cols=2 | photos=https://lh3.googleusercontent.com/d/1n8xQMvSk0DyJvbKr4GxWEfUMGKFSrLpq;https://lh3.googleusercontent.com/d/1SKpTBfj96RGZm_Ig8puNPu4VAcmrERUt;https://lh3.googleusercontent.com/d/1SySjFyIEUKuy-pxsI5jX-yhdU5h49reB",
+        "2024-06-30 |  |  | Fanclub | 장원영,리즈 | IVE 장원영 관찰 보고서 W. 리즈 | album=DIVE 3기 | photos=https://lh3.googleusercontent.com/d/1n8xQMvSk0DyJvbKr4GxWEfUMGKFSrLpq;https://lh3.googleusercontent.com/d/1SKpTBfj96RGZm_Ig8puNPu4VAcmrERUt;https://lh3.googleusercontent.com/d/1SySjFyIEUKuy-pxsI5jX-yhdU5h49reB",
 
-        "2024-07-31 |  |  | Fanclub | 안유진,리즈 | IVE 리즈 관찰 보고서 W. 안유진 | album=DIVE 3기 | cols=2 | photos=https://lh3.googleusercontent.com/d/1icxW6DYHTvDaZwcvHyVM7xUrnRx7VpZv;https://lh3.googleusercontent.com/d/1A5AioWTA0Ayp8Wa0Xv9CIN6yBXdbqmEh;https://lh3.googleusercontent.com/d/1Lenv414uzXNVx8V9AsnSJzibCa9u2QES",
+        "2024-07-31 |  |  | Fanclub | 안유진,리즈 | IVE 리즈 관찰 보고서 W. 안유진 | album=DIVE 3기 | photos=https://lh3.googleusercontent.com/d/1icxW6DYHTvDaZwcvHyVM7xUrnRx7VpZv;https://lh3.googleusercontent.com/d/1A5AioWTA0Ayp8Wa0Xv9CIN6yBXdbqmEh;https://lh3.googleusercontent.com/d/1Lenv414uzXNVx8V9AsnSJzibCa9u2QES",
 
         "2024-09-17 |  |  | Fanclub | 리즈 | 추석인데 심심한 다이브 나랑 놀자 🐰💗 | album=DIVE 3기 | cols=2 | photos=https://lh3.googleusercontent.com/d/1SdDVIp2EqeYQO8F40r77PEZqQ8aQnrkz;https://lh3.googleusercontent.com/d/1KDETGHED17xEIbt6P9zQZOsw5WT14BBj",
 
         "2024-12-09 |  |  | Fanclub | 리즈 | KIT Behind | album=DIVE 3기 | cols=2 | photos=https://lh3.googleusercontent.com/d/1nmD-qcL05mOHtVdzi4YtgFfRG5XJymU4;https://lh3.googleusercontent.com/d/1AyMu382EE00DliuDO_pOh9z4msJMsjF-;https://lh3.googleusercontent.com/d/18sIStjraDVgghzPmSDK0DU_Np1NEA7TC;https://lh3.googleusercontent.com/d/1oRhcrPnMx5ToPTMREc6y1gIbWb69wGwn",
 
-        "2024-12-09 |  |  | Fanclub | 아이브 | 2024 IVE 대원 관찰 보고서 | album=DIVE 3기 | cols=2 | photos=https://lh3.googleusercontent.com/d/1bvzoZU2_Uo_RkaHinVXREuF4cNdfHopL;https://lh3.googleusercontent.com/d/1vNDqRTf0eYcpkIrCrxV7CmL1Rkt0OyDp;https://lh3.googleusercontent.com/d/1Y7xn9QOpJ0XZirOnh7iMYWPwO_L115fN;https://lh3.googleusercontent.com/d/1I2vrnmAgCpZ1EgTXpU92iYjCxGZCciUQ;https://lh3.googleusercontent.com/d/1Q6awY6MDHA30NWpjpkSWvgg9_IjUxQb3;https://lh3.googleusercontent.com/d/1PaPlqNjLUQg0WwP6BhYpFCv4W9tbUyLs;https://lh3.googleusercontent.com/d/1PXWo7L9FjIpZCGV1d8sDHGLLDVDfQhAR;https://lh3.googleusercontent.com/d/1Q3lBTft-D0oE7TveDGZO7mjrusDdCldt",
+        "2024-12-09 |  |  | Fanclub | 아이브 | 2024 IVE 대원 관찰 보고서 | album=DIVE 3기 | photos=https://lh3.googleusercontent.com/d/1bvzoZU2_Uo_RkaHinVXREuF4cNdfHopL;https://lh3.googleusercontent.com/d/1vNDqRTf0eYcpkIrCrxV7CmL1Rkt0OyDp;https://lh3.googleusercontent.com/d/1Y7xn9QOpJ0XZirOnh7iMYWPwO_L115fN;https://lh3.googleusercontent.com/d/1I2vrnmAgCpZ1EgTXpU92iYjCxGZCciUQ;https://lh3.googleusercontent.com/d/1Q6awY6MDHA30NWpjpkSWvgg9_IjUxQb3;https://lh3.googleusercontent.com/d/1PaPlqNjLUQg0WwP6BhYpFCv4W9tbUyLs;https://lh3.googleusercontent.com/d/1PXWo7L9FjIpZCGV1d8sDHGLLDVDfQhAR;https://lh3.googleusercontent.com/d/1Q3lBTft-D0oE7TveDGZO7mjrusDdCldt",
         "2026-07-31 |  |  | Fanclub | 가을,리즈 | ABOUT GAEUL - FROM. LIZ | album=DIVE ~ | photos=https://lh3.googleusercontent.com/d/1LpjNcydw8op6a5cK1jZj2bNEOR_w_P0E",
         "2026-08-31 |  |  | Fanclub | 레이,리즈 | ABOUT LIZ - FROM. REI | album=DIVE ~ | photos=https://lh3.googleusercontent.com/d/1nyYDHTi4QEPqCDROXxxk-QavkZ819PBv",
         "2026-10-15 |  |  | Fanclub | 리즈 | 10월 Monthly Interview - LIZ | album=DIVE ~ | photos=https://lh3.googleusercontent.com/d/1LkdJgLPAcWky9Xi0J7U_A1J1Xz6YCRBe",
@@ -2687,8 +2727,8 @@
         "2025-06-02 | https://link.berriz.in/ko/web/main/ive/board/01971b76-d2df-cd5d-85cc-0a1e213a6f37/post/01973060-0da1-c251-85f2-2ce5868befea/ | https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgWlusfgznanPAd4PExp9DPS0CffnLdrvqB9x0-lnYTtOsYhIx7DhkUFMwFm4WdksMtxYu_1tbb1xah2OAc_QLZR_ymj9fVbe0o2E7ir023Vgy6n7DHTs6zgeHdlugR3QG5KAWopoELanSuHTnGH7CMw4WuOir3IL3seyVbdOdXdXIT00lggZY3RQcsyGM/s4032/Berriz_20261106154221.jpeg | Berriz | 리즈 | 안뇽 반가워 >< 여기서 재미나게 놀아보쟈😽 | board=From. IVE | content=안뇽 반가워 >< 여기서 재미나게 놀아보쟈😽 | imgs=https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgWlusfgznanPAd4PExp9DPS0CffnLdrvqB9x0-lnYTtOsYhIx7DhkUFMwFm4WdksMtxYu_1tbb1xah2OAc_QLZR_ymj9fVbe0o2E7ir023Vgy6n7DHTs6zgeHdlugR3QG5KAWopoELanSuHTnGH7CMw4WuOir3IL3seyVbdOdXdXIT00lggZY3RQcsyGM/s4032/Berriz_20261106154221.jpeg",
         "2025-10-18 | https://link.berriz.in/ko/web/main/ive/board/01971b76-d2df-cd5d-85cc-0a1e213a6f37/post/0199f6b8-8735-1086-785d-5fe064b76ebd/ | https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEibMkBLLSsCBKibpOCsO_cTWb3xW9RHvDQFymfK8Yt_9yeRv2SOeezACGcHXMmxlaiW4CcozBKHZ5eE_K14shl87f0lTohhZY1K_HicqiR4k1fjNjbwrXFnlOBYJfh5qvw4KjMSXNs1Zy-PejpKQ5Pz2w-RXxFbnfHW0tUheDB2e5AuO2NhVGZzIA0e5lM/s4032/Berriz_20261106154445.jpeg | Berriz | 리즈 | 다이브 음중 1위 너무너무 고마워요 💫✨ 언제나 사랑해ㅐ💋♥️ | board=From. IVE | content=다이브 음중 1위 너무너무 고마워요 💫✨ 언제나 사랑해ㅐ💋♥️ | imgs=https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEibMkBLLSsCBKibpOCsO_cTWb3xW9RHvDQFymfK8Yt_9yeRv2SOeezACGcHXMmxlaiW4CcozBKHZ5eE_K14shl87f0lTohhZY1K_HicqiR4k1fjNjbwrXFnlOBYJfh5qvw4KjMSXNs1Zy-PejpKQ5Pz2w-RXxFbnfHW0tUheDB2e5AuO2NhVGZzIA0e5lM/s4032/Berriz_20261106154445.jpeg;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgCCHOGfzb5JJp9b2dRprMQFMZxhdtK5Fdq1lu997IIY3-3aafMjSHynOjnyWLxTD9NzDGVI9WQOyya9RTLecZQI6Z9Yc0V0f6LN7LK0nGgPT9duh0aDAqhqBk5RSA9VVrCe88IBdMX3DLbMz-7tavb2mdC3egrUtIoEKukH2r6AVty7zTbXX2qBs7rXE4/s3088/Berriz_20261106154450.jpeg",
         "2026-04-07 | https://link.berriz.in/ko/web/main/ive/board/01971b76-d2df-cd5d-85cc-0a1e213a6f37/post/019d66ea-6cdd-1b9c-e2a1-9f92b9f5206a/ | https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEipAYr1UdarKDe9ZRkY74dQQLgmnzfyP8CpwNhMdFE4hKp5O5S4hPbqMJF_8kuTx-EP-go4PBoxSAo4sWgJY5c5BzlGwA6R2KfBf7ps7GLIOg05sOLyOtm61RCrE8LlhrUosg8qFmENrDEdSD3ruuh1POIKrCJeDTbplgJKqAIpSf6rSz_21B54CtuvS64/s4032/Berriz_20261106154619.jpeg | Berriz | 리즈 | 안포토그래퍼 CCTV단속중 😎 | board=From. IVE | content=안포토그래퍼 CCTV단속중 😎\n#안유진 #포토그래퍼 #속도를줄이시오\n#땡스투유진 #안댕댕 #🐶🐱 | imgs=https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEipAYr1UdarKDe9ZRkY74dQQLgmnzfyP8CpwNhMdFE4hKp5O5S4hPbqMJF_8kuTx-EP-go4PBoxSAo4sWgJY5c5BzlGwA6R2KfBf7ps7GLIOg05sOLyOtm61RCrE8LlhrUosg8qFmENrDEdSD3ruuh1POIKrCJeDTbplgJKqAIpSf6rSz_21B54CtuvS64/s4032/Berriz_20261106154619.jpeg;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgMQEZLxtGcFDfY6fQTt-vpgMCnrkljb7OiF9WFzrMw-USr_gB5ykbIJXXXqMo2Bw_SRlG0YEwK2dO9UXvPZuWnoIyOYlpWCr3A5bt75SdqEmjNmT65SfjP-FPvAEZWmNc08x7VV7vs1Sr0WwEYkqURFArotZYZc4m4tqtMzRtVIoiUg9u6W1lTZ1haL3c/s4032/Berriz_20261106154616.jpeg",
-        "2026-05-21 | https://link.berriz.in/ko/web/main/ive/board/01971b76-d2df-cd5d-85cc-0a1e213a6f37/post/019e487d-ed4d-e64b-87b9-2607e215b63d/ | https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh4I-nSJSgRVNSMBpL_2pEQYn6Aatk3n9cd0A9moAhHIUFU3NieqD-l3wBU6GNl0zPwU1GUnhObMrfM13EfgKGaEezkh4JxpxJ-vQXEOi-I4itFdQvGIX8Anjqho_jPYxLsitZHmwHbTjQpFSQ1d2NKaQdRrk78zULUxWnxXQHzU_ZROUAzu9AcrcvLa5I/s4896/Berriz_20261106154713.jpeg | Berriz | 리즈 | 이제 코앞이 여름인데 나랑같이 스노우 초코 먹을사람🍫🤎 | board=From. IVE | content=이제 코앞이 여름인데 나랑같이 스노우 초코 먹을사람🍫🤎 | imgs=https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh4I-nSJSgRVNSMBpL_2pEQYn6Aatk3n9cd0A9moAhHIUFU3NieqD-l3wBU6GNl0zPwU1GUnhObMrfM13EfgKGaEezkh4JxpxJ-vQXEOi-I4itFdQvGIX8Anjqho_jPYxLsitZHmwHbTjQpFSQ1d2NKaQdRrk78zULUxWnxXQHzU_ZROUAzu9AcrcvLa5I/s4896/Berriz_20261106154713.jpeg;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiTWu0lYFNExiipiEbFJGj4yMA6bjphclFtz3zlC3JAfuimK3HGM9pPqigCD-0HpWTDGoA64D1W-qr-u7oAztegzgZowrsaI-uVJlkV845RqkTOH43AGO0nQb5wq9SY569LtRxwaL851rRvnbqFrAsacKlumpkeYB2_9ynj_FrOzE9c8uxYHP0XfcnWeM8/s4896/Berriz_20261106154715.jpeg",
-        "2026-10-16 | https://link.berriz.in/ko/web/main/ive/board/01a119dd-69b5-f24b-6a11-5b1ae87dabba/post/01a14425-cb33-ddbf-8b4c-d7f7a8cef183/ | https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjTTad5XTl8BP6QERMlleAJiOsCsLHtr9DyNiAF_EeipnDO7oEYfLMRhqRoiQ9BXDG28ZL3ytv8yWAIQUZjelcBVzjVvNgXCn7IguuvTdnVKevTjUFNPXju82VRUs5joXoBPKFetv-ZYrwAgErQ3q8H_lTq2IvS6qtLIgn48CqTuqU986OaVFPhFGmKGpQ/s3088/Berriz_20261106155037.jpeg | Berriz | 리즈 | 당신들을 지키러 온 슈퍼블루💙 | board=EVENT | content=당신들을 지키러 온 슈퍼블루💙 | imgs=https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjTTad5XTl8BP6QERMlleAJiOsCsLHtr9DyNiAF_EeipnDO7oEYfLMRhqRoiQ9BXDG28ZL3ytv8yWAIQUZjelcBVzjVvNgXCn7IguuvTdnVKevTjUFNPXju82VRUs5joXoBPKFetv-ZYrwAgErQ3q8H_lTq2IvS6qtLIgn48CqTuqU986OaVFPhFGmKGpQ/s3088/Berriz_20261106155037.jpeg",
+        "2026-05-21 | https://link.berriz.in/ko/web/main/ive/board/01971b76-d2df-cd5d-85cc-0a1e213a6f37/post/019e487d-ed4d-e64b-87b9-2607e215b63d/ | https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh4I-nSJSgRVNSMBpL_2pEQYn6Aatk3n9cd0A9moAhHIUFU3NieqD-l3wBU6GNl0zPwU1GUnhObMrfM13EfgKGaEezkh4JxpxJ-vQXEOi-I4itFdQvGIX8Anjqho_jPYxLsitZHmwHbTjQpFSQ1d2NKaQdRrk78zULUxWnxXQHzU_ZROUAzu9AcrcvLa5I/s4896/Berriz_20261106154713.jpeg | Berriz | 리즈 | 이제 코앞이 여름인데 나랑같이 스노우 초코 먹을사람🍫🤎 | board=From. IVE | content=이제 코앞이 여름인데 나랑같이 스노우 초코 먹을사람🍫🤎 | imgs=https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh4I-nSJSgRVNSMBpL_2pEQYn6Aatk3n9cd0A9moAhHIUFU3NieqD-l3wBU6GNl0zPwU1GUnhObMrfM13EfgKGaEezkh4JxpxJ-vQXEOi-I4itFdQvGIX8Anjqho_jPYxLsitZHmwHbTjQpFSQ1d2NKaQdRrk78zULUxWnxXQHzU_ZROUAzu9AcrcvLa5I/s4896/Berriz_20261106154713.jpeg;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiTWu0lYFNExiipiEbFJGj4yMA6bjphclFtz3zlC3JAfuimK3HGM9pPqigCD-0HpWTDGoA64D1W-qr-u7oAztegzgZowrsaI-uVJlkV845RqkTOH43AGO0nQb5wq9SY569LtRxwaL851rRvnbqFrAsacKlumpkeYB2_9ynj_FrOzE9c8uxYHP0XfcnWeM8/s4896/Berriz_20261106154715.jpeg | comments=리즈¦아 저번에 사놓은거 다 먹었는데 ㅜ 오늘 재구매 해야겠다 히§리즈¦우유랑 같이 먹으면 더 맛있단 말이지 ? 냠냠",
+        "2026-10-16 | https://link.berriz.in/ko/web/main/ive/board/01a119dd-69b5-f24b-6a11-5b1ae87dabba/post/01a14425-cb33-ddbf-8b4c-d7f7a8cef183/ | https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjTTad5XTl8BP6QERMlleAJiOsCsLHtr9DyNiAF_EeipnDO7oEYfLMRhqRoiQ9BXDG28ZL3ytv8yWAIQUZjelcBVzjVvNgXCn7IguuvTdnVKevTjUFNPXju82VRUs5joXoBPKFetv-ZYrwAgErQ3q8H_lTq2IvS6qtLIgn48CqTuqU986OaVFPhFGmKGpQ/s3088/Berriz_20261106155037.jpeg | Berriz | 리즈 | 당신들을 지키러 온 슈퍼블루💙 | board=EVENT | content=당신들을 지키러 온 슈퍼블루💙 | imgs=https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjTTad5XTl8BP6QERMlleAJiOsCsLHtr9DyNiAF_EeipnDO7oEYfLMRhqRoiQ9BXDG28ZL3ytv8yWAIQUZjelcBVzjVvNgXCn7IguuvTdnVKevTjUFNPXju82VRUs5joXoBPKFetv-ZYrwAgErQ3q8H_lTq2IvS6qtLIgn48CqTuqU986OaVFPhFGmKGpQ/s3088/Berriz_20261106155037.jpeg | comments=리즈¦나 이제 간다 !!§리즈¦다들 밥 잘 챙겨먹구 감기 조심 !!!§리즈¦사랑해애 💙💙슈퍼블루도 많이 사랑해줘💙",
         // ---- 2026.10.20 추가분 (IVE / Shorts / ELLE / TONYMOLY) ----
         "2022-04-07 | https://www.instagram.com/reel/CcDMzczFOey/ |  | IVE | 리즈 | LOVE DIVE 💙",
         "2022-01-10 | https://www.instagram.com/reel/CYito2olczc/ |  | IVE | 레이,리즈 | 찡끗찡끗😉😉💗",
@@ -3730,6 +3770,8 @@
             : 'target="_blank" rel="noopener"'
         }>
       <div class="thumb${isPhoto ? " phthumb" : ""}${
+          (v.cats || []).includes("Berriz") && v.images ? " bzthumb" : ""
+        }${
           embedHtml
             ? " embedbox" +
               (v.ratio === "16:9"
@@ -4779,16 +4821,43 @@ ${
           /#[^\s#]+/g,
           (m) => `<span class="bz-tag">${m}</span>`
         );
-        return `<div class="bz-post"><div class="bz-head"><span class="bz-av"></span><div>
+        const cms = v.comments
+          ? `<div class="bz-cc">아티스트 댓글 ${v.comments.split("§").length}</div><div class="bz-cbox">` +
+            v.comments
+              .split("§")
+              .map((c) => {
+                const [a, t] = c.split("¦");
+                return `<div class="bz-cm"><div class="bz-cn">${esc(
+                  a || ""
+                )}</div><div class="bz-ct">${esc(t || "")}</div></div>`;
+              })
+              .join("") +
+            "</div>"
+          : "";
+        return `<div class="bz-post"><div class="bz-top"><div>
       <div class="bz-name">${esc((v.members || [])[0] || "리즈")}</div>
-      <div class="bz-date">${esc(String(v.date).replace(/-/g, "."))}</div></div></div>
-      <div class="bz-text">${text}</div>
-      <div class="bz-imgs n${imgs.length > 1 ? 2 : 1}">${imgs
-          .map(
-            (u) =>
-              `<img src="${esc(u)}" alt="" loading="lazy" referrerpolicy="no-referrer" />`
-          )
-          .join("")}</div></div>`;
+      <div class="bz-date">${esc(String(v.date).replace(/-/g, "."))}</div></div>
+      <div class="bz-side"><span class="pinbtn${
+        isPinned(v) ? " on" : ""
+      }" role="button" aria-label="상단에 고정" title="상단에 고정" data-pin="${esc(
+          pinKey(v)
+        )}">${TANGERINE_SVG}</span>${
+          v.url
+            ? `<a class="bz-go" href="${esc(
+                v.url
+              )}" target="_blank" rel="noopener" aria-label="Berriz 원문" title="Berriz 원문"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"/></svg></a>`
+            : ""
+        }</div></div>
+      <div class="bz-text">${text}</div>${
+          imgs.length
+            ? `<div class="bz-imgs n${imgs.length > 1 ? 2 : 1}">${imgs
+                .map(
+                  (u) =>
+                    `<img src="${esc(u)}" alt="" loading="lazy" referrerpolicy="no-referrer" />`
+                )
+                .join("")}</div>`
+            : ""
+        }${cms}</div>`;
       }
       function openBerriz(v) {
         if (!bzEl) {
