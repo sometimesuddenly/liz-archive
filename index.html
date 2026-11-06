@@ -68,7 +68,7 @@
         position: fixed;
         inset: 0;
         z-index: 300;
-        background: rgba(240, 138, 44, 0.22);
+        background: rgba(60, 45, 30, 0.34);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -80,11 +80,11 @@
         max-height: 68vh;
         display: flex;
         flex-direction: column;
-        background: linear-gradient(180deg, #ffe3c2 0%, #ffeedb 100%);
-        border: 1.5px solid #f0a458;
+        background: var(--bg);
+        border: 1px solid var(--line);
         border-radius: 14px;
         padding: 12px 14px 14px;
-        box-shadow: 0 8px 28px rgba(240, 138, 44, 0.22);
+        box-shadow: 0 8px 28px rgba(75, 53, 33, 0.16);
       }
       .gb-head {
         display: flex;
@@ -107,8 +107,8 @@
         margin-bottom: 6px;
         padding: 7px 10px;
         border-radius: 8px;
-        border: 1px solid #f0b36f;
-        background: #fff8ef;
+        border: 1px solid var(--line);
+        background: #fff;
         color: var(--text);
         font: inherit;
         font-size: 13px;
@@ -143,11 +143,11 @@
       .gb-list {
         margin-top: 10px;
         overflow-y: auto;
-        border-top: 1px solid #f3c48d;
+        border-top: 1px solid var(--line);
       }
       .gb-item {
         padding: 7px 2px;
-        border-bottom: 1px solid #f3c48d;
+        border-bottom: 1px solid var(--line);
         font-size: 13px;
         line-height: 1.55;
       }
@@ -204,21 +204,25 @@
         margin-bottom: 8px;
       }
       .cafe-cm-box {
-        border: 1px solid #f0c595;
-        border-radius: 10px;
-        background: #fffaf3;
-        padding: 0 12px;
+        padding: 0;
       }
       .cafe-cm {
-        padding: 10px 0;
+        padding: 8px 0;
         font-size: 14.5px;
       }
-      .cafe-cm + .cafe-cm {
-        border-top: 1px solid #f0c595;
+      .cafe-cm > b {
+        display: inline-block;
+        padding: 1px 10px;
+        border: 1px solid #f0c595;
+        border-radius: 999px;
+        font-size: 12.5px;
+        font-weight: 700;
       }
       .cafe-cm-t {
-        margin: 2px 0 6px;
+        margin: 6px 0 4px 2px;
         line-height: 1.6;
+        white-space: pre-wrap;
+        word-break: break-word;
       }
       .cafe-cm img {
         display: block;
@@ -415,7 +419,7 @@
       .searchrow {
         display: flex;
         gap: 8px;
-        margin: 16px 0 10px;
+        margin: 12px 0 8px;
       }
       .searchrow .search {
         flex: 1;
@@ -426,7 +430,7 @@
       .fbtn {
         position: relative;
         flex: 0 0 auto;
-        width: 50px;
+        width: clamp(40px, 11vw, 46px);
         border-radius: 12px;
         border: 1px solid var(--line);
         background: var(--panel);
@@ -436,8 +440,8 @@
         justify-content: center;
       }
       .fbtn svg {
-        width: 22px;
-        height: 22px;
+        width: 19px;
+        height: 19px;
       }
       .fbtn.on {
         color: var(--red);
@@ -446,16 +450,16 @@
       }
       .fbtn b {
         position: absolute;
-        top: -6px;
-        right: -6px;
-        min-width: 18px;
-        height: 18px;
+        top: -5px;
+        right: -5px;
+        min-width: 15px;
+        height: 15px;
         padding: 0 4px;
-        border-radius: 9px;
+        border-radius: 8px;
         background: var(--red);
         color: #fff;
-        font-size: 11px;
-        line-height: 18px;
+        font-size: 10px;
+        line-height: 15px;
         text-align: center;
       }
       .fpanel {
@@ -523,18 +527,19 @@
       }
       .search {
         width: 100%;
-        margin: 16px 0 10px;
-        padding: 14px 16px;
+        margin: 12px 0 8px;
+        padding: clamp(9px, 2.6vw, 11px) 14px;
         border-radius: 12px;
         border: 1px solid var(--line);
         background: var(--panel);
         color: var(--text);
-        font-size: 15px;
+        font-size: clamp(13.5px, 3.6vw, 15px);
         outline: none;
-        padding-left: 44px;
+        padding-left: 40px;
         background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2.4' stroke-linecap='round'%3E%3Ccircle cx='10.5' cy='10.5' r='6.5'/%3E%3Cpath d='M20 20l-4.8-4.8'/%3E%3C/svg%3E");
         background-repeat: no-repeat;
-        background-position: 15px center;
+        background-position: 13px center;
+        background-size: 18px;
       }
       .search:focus {
         border-color: #f2b36b;
@@ -543,12 +548,12 @@
         display: flex;
         flex-wrap: wrap;
         gap: 4px;
-        margin-bottom: 12px;
+        margin-bottom: 8px;
       }
       .mchip {
-        padding: 4px 10px;
+        padding: clamp(2px, 0.7vw, 3px) clamp(8px, 2.4vw, 10px);
         border-radius: 999px;
-        font-size: 12px;
+        font-size: clamp(10.5px, 2.8vw, 11.5px);
         font-weight: 700;
         background: var(--panel);
         color: var(--muted);
@@ -1135,6 +1140,157 @@
         padding: 2px 8px;
         border-radius: 999px;
       }
+      .gb-btn.bell {
+        right: 38px;
+      }
+      .gb-btn .dot {
+        position: absolute;
+        top: -2px;
+        right: -2px;
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--red);
+        border: 1.5px solid var(--bg);
+      }
+      .bell-pop {
+        position: absolute;
+        top: 38px;
+        right: 10px;
+        z-index: 310;
+        width: min(300px, calc(100vw - 24px));
+        background: var(--bg);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 10px 12px 6px;
+        box-shadow: 0 8px 28px rgba(75, 53, 33, 0.16);
+      }
+      .bell-h {
+        font-weight: 800;
+        font-size: 13px;
+        letter-spacing: 0.08em;
+        color: var(--red);
+        margin-bottom: 4px;
+      }
+      .bell-it {
+        display: block;
+        width: 100%;
+        text-align: left;
+        padding: 8px 2px;
+        border-top: 1px solid var(--line);
+        font-size: 13px;
+        line-height: 1.45;
+      }
+      .bell-it b {
+        display: inline-block;
+        margin-right: 6px;
+        padding: 0 7px;
+        border: 1px solid var(--red);
+        border-radius: 999px;
+        color: var(--red);
+        font-size: 10.5px;
+      }
+      .bell-it i {
+        display: block;
+        font-style: normal;
+        font-size: 11px;
+        color: var(--muted);
+      }
+      .subf {
+        margin-top: -2px;
+      }
+      .pv.bz {
+        background: #111;
+        color: #fff;
+      }
+      .bz .pv-bar {
+        background: rgba(17, 17, 17, 0.96);
+        border-color: #2a2a2a;
+      }
+      .bz .pv-x {
+        background: #2a2a2a;
+        color: #fff;
+      }
+      .bz .pv-m {
+        color: #9a9a9a;
+      }
+      .bz-post {
+        max-width: 680px;
+        margin: 0 auto;
+        padding: 18px 16px 60px;
+      }
+      .bz-head {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        margin-bottom: 18px;
+      }
+      .bz-av {
+        flex: 0 0 auto;
+        width: 52px;
+        height: 52px;
+        border-radius: 50%;
+        background: #2a2a2a;
+      }
+      .bz-name {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 19px;
+        font-weight: 700;
+      }
+      .bz-name svg {
+        width: 24px;
+        height: 24px;
+      }
+      .bz-date {
+        margin-top: 2px;
+        font-size: 15px;
+        color: #8d8d8d;
+      }
+      .bz-text {
+        white-space: pre-wrap;
+        word-break: break-word;
+        font-size: clamp(16px, 4.4vw, 19px);
+        line-height: 1.75;
+        margin-bottom: 22px;
+      }
+      .bz-tag {
+        color: #ff4fb3;
+      }
+      .bz-imgs {
+        display: grid;
+        gap: 10px;
+      }
+      .bz-imgs.n2 {
+        grid-template-columns: 1fr 1fr;
+      }
+      .bz-imgs img {
+        width: 100%;
+        display: block;
+        border-radius: 20px;
+        background: #222;
+      }
+      .bz-imgs.n2 img {
+        aspect-ratio: 4/5;
+        object-fit: cover;
+      }
+      .grid.bz-list {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+      .bz-inline {
+        background: #111;
+        color: #fff;
+        border-radius: 18px;
+        max-width: 680px;
+      }
+      .bz-inline .bz-post {
+        padding: 16px 16px 20px;
+      }
+      .bz-inline .bz-text {
+        margin-bottom: 16px;
+      }
     </style>
     <link rel="preconnect" href="https://www.instagram.com" />
     <link rel="preconnect" href="https://static.cdninstagram.com" crossorigin />
@@ -1162,6 +1318,14 @@
           <path d="M3.5 7l8.5 6.5L20.5 7" />
         </svg>
       </button>
+      <button class="gb-btn bell" id="bellBtn" aria-label="알림" title="알림">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15z" />
+          <path d="M10 20.5a2 2 0 0 0 4 0" />
+        </svg>
+        <span class="dot" id="bellDot" hidden></span>
+      </button>
+      <div class="bell-pop" id="bellPop" hidden></div>
       <div id="status">불러오는 중...</div>
       <div class="pinbar" id="pinbar" hidden></div>
       <section id="home" hidden></section>
@@ -1187,6 +1351,7 @@
         </div>
         <div class="fpanel" id="fpanel" hidden></div>
         <div class="memf" id="memf"></div>
+        <div class="memf subf" id="subf" hidden></div>
         <div class="meta">
           <span id="count"></span>
           <div class="sort">
@@ -1844,31 +2009,16 @@
         }, // 화면엔 "etc."로 표시
         Shorts: {
           ids: [
-            "https://youtube.com/shorts/t-9B3P7Dlek | 레이,리즈",
-            "https://youtube.com/shorts/AkwiVZ5cZNY | 리즈",
+            "https://youtube.com/shorts/_Ab2JuEMMKc | 아이브",
             "https://youtube.com/shorts/ygN8hjhnViQ | 장원영,리즈",
-            "https://youtube.com/shorts/6Mo1HUic8Wk | 리즈",
-            "https://youtube.com/shorts/MWfycgd3_SQ | 리즈",
             "https://youtube.com/shorts/7dz49tjUFSA | 아이브",
             "https://youtube.com/shorts/MP5ZzhUMn94 | 아이브",
-            "https://youtube.com/shorts/CWgwK939WjY | 리즈",
-            "https://youtube.com/shorts/1fzjHJoahNA | 가을,장원영,리즈",
-            "https://youtube.com/shorts/FgcvFTuAefM | 레이,리즈,이서",
-            "https://youtube.com/shorts/IOJIQBpgYgI | 리즈",
             "https://youtube.com/shorts/qTPzQKYzM8Y | 아이브",
             "https://youtube.com/shorts/PY1_0sowVf8 | 리즈",
-            "https://youtube.com/shorts/OR3fj9tTu84 | 리즈",
-            "https://youtube.com/shorts/dZ0BBG9CWCg | 아이브",
-            "https://youtube.com/shorts/c-AOvy_Rnqg | 리즈",
             "https://youtube.com/shorts/LNaHFnB59WA | 아이브",
-            "https://youtube.com/shorts/fLj_GnvZo8Y | 레이,리즈",
             "https://youtube.com/shorts/zMlftoYEq28 | 장원영,리즈",
             "https://youtube.com/shorts/MkhHRuJTZIc | 아이브",
-            "https://youtube.com/shorts/xwFvMzFlLyI | 리즈,이서",
-            "https://youtube.com/shorts/OR3GoUzdxBU | 아이브",
             "https://youtube.com/shorts/7IE9U2VcGsI | 안유진,레이,리즈,이서",
-            "https://youtube.com/shorts/D2dUR-VBcBA | 아이브",
-            "https://youtube.com/shorts/vBHWUYjCBCE | 리즈",
             "https://youtube.com/shorts/x8M89X6YhGM | 레이,리즈",
             "https://youtube.com/shorts/NxshxoXmQHg | 아이브",
             "https://youtube.com/shorts/9Ym3lpPnPJg | 아이브",
@@ -2012,15 +2162,15 @@
             "https://youtube.com/shorts/jDntDrTPldA | 리즈",
             "https://youtube.com/shorts/VWiv2_QEvNA | 아이브",
             "https://youtube.com/shorts/dxZazwBnAIE | 리즈",
-            "https://youtube.com/shorts/mz1IT5UeZ0o | 가을,레이,리즈",
-            "https://youtube.com/shorts/Cxvg8HwlJqY | 아이브",
             "https://youtube.com/shorts/5lrLGHbE7O0 | 아이브",
-            "https://youtube.com/shorts/auSiCrZ-cJo | 리즈",
-            "https://youtube.com/shorts/VP35gB33s18 | 아이브",
             "https://youtube.com/shorts/J69Ak2gL_dQ | 리즈",
-            "https://youtube.com/shorts/iIC9_hv_6Rs | 가을,리즈",
-            "https://youtube.com/shorts/m8Xr18LENlM | 리즈",
-            "https://youtube.com/shorts/OItpg4Ohbvk | 장원영,리즈",
+          ],
+        },
+        Challenge: {
+          ids: [
+            "https://youtube.com/shorts/MWfycgd3_SQ | 리즈",
+            "https://youtube.com/shorts/AkwiVZ5cZNY | 리즈",
+            "https://youtube.com/shorts/CWgwK939WjY | 리즈",
           ],
         },
         VOCAL: {
@@ -2206,6 +2356,26 @@
             "https://youtube.com/shorts/A_ShpMFfONA | 아이브",
             "https://youtube.com/shorts/vbLF82Dj6tk | 리즈",
             "https://youtube.com/shorts/WvWdCQCVba4 | 아이브",
+            "https://youtube.com/shorts/6Mo1HUic8Wk | 리즈",
+            "https://youtube.com/shorts/t-9B3P7Dlek | 레이,리즈",
+            "https://youtube.com/shorts/dZ0BBG9CWCg | 아이브",
+            "https://youtube.com/shorts/OR3fj9tTu84 | 리즈",
+            "https://youtube.com/shorts/IOJIQBpgYgI | 리즈",
+            "https://youtube.com/shorts/FgcvFTuAefM | 레이,리즈,이서",
+            "https://youtube.com/shorts/1fzjHJoahNA | 가을,장원영,리즈",
+            "https://youtube.com/shorts/c-AOvy_Rnqg | 리즈",
+            "https://youtube.com/shorts/fLj_GnvZo8Y | 레이,리즈",
+            "https://youtube.com/shorts/OR3GoUzdxBU | 아이브",
+            "https://youtube.com/shorts/xwFvMzFlLyI | 리즈,이서",
+            "https://youtube.com/shorts/vBHWUYjCBCE | 리즈",
+            "https://youtube.com/shorts/D2dUR-VBcBA | 아이브",
+            "https://youtube.com/shorts/OItpg4Ohbvk | 장원영,리즈",
+            "https://youtube.com/shorts/m8Xr18LENlM | 리즈",
+            "https://youtube.com/shorts/iIC9_hv_6Rs | 가을,리즈",
+            "https://youtube.com/shorts/VP35gB33s18 | 아이브",
+            "https://youtube.com/shorts/auSiCrZ-cJo | 리즈",
+            "https://youtube.com/shorts/Cxvg8HwlJqY | 아이브",
+            "https://youtube.com/shorts/mz1IT5UeZ0o | 가을,레이,리즈",
           ],
         },
         MAGAZINE: {
@@ -2339,7 +2509,7 @@
       //   예) CONTENTS의 VLOG = NYANG LOG + IVE LOG
       const TAB_GROUPS = {
         VLOG: ["NYANG LOG", "IVE LOG"],
-        Shorts: ["Shorts", "VOCAL", "DANCE", "IVE"],
+        Shorts: ["Shorts", "Challenge", "VOCAL", "DANCE", "IVE"],
         "etc.": ["etc.(가사)", "etc.(일정)"],
       };
       // ---- 멤버 표시 (파스텔 배경) ----
@@ -2477,6 +2647,48 @@
         "2022-01-30 |  | https://blog.kakaocdn.net/dn/bWzcnP/dJMcaa7Cft3/p7EkAkbZtF6xEVF4mIDGy0/AAAAAAAAAAAAAAAAAAAAAOdvxVP6c_355rYTMpruLmVa5lVjekzRglOg47wOADfM/img.jpg | DAUM CAFE | 리즈 | 미니 가을언니와의 만남 🍁😽 | content=미니 가을언니와의 만남 🍁😽 | image=https://blog.kakaocdn.net/dn/bWzcnP/dJMcaa7Cft3/p7EkAkbZtF6xEVF4mIDGy0/AAAAAAAAAAAAAAAAAAAAAOdvxVP6c_355rYTMpruLmVa5lVjekzRglOg47wOADfM/img.jpg | board=IVE TALK",
         "2022-02-25 |  | https://blog.kakaocdn.net/dn/cEuLKZ/dJMcaiLfyMV/4nqOvKlLW5CIk9z6kzmSy1/AAAAAAAAAAAAAAAAAAAAANFm1BAj3r1D4hlRkkzqzQLyD2UbxsmBDFhbCd_vX2fN/img.jpg | DAUM CAFE | 리즈 | 다이브 굿나잇 🌙😴 | content=다이브 굿나잇 🌙😴 | image=https://blog.kakaocdn.net/dn/cEuLKZ/dJMcaiLfyMV/4nqOvKlLW5CIk9z6kzmSy1/AAAAAAAAAAAAAAAAAAAAANFm1BAj3r1D4hlRkkzqzQLyD2UbxsmBDFhbCd_vX2fN/img.jpg | board=IVE TALK",
         // [Cafe 예시] "2025-06-01 | https://cafe.daum.net/IVEstarship/... | 사진주소(없으면 비움→회색 귤) | DAUM CAFE | 가을 | To. Dive | views=3995",
+        // ---- IVE TALK / Berriz 추가분 (2026.11.06) ----
+        "2022-04-11 |  | https://blog.kakaocdn.net/dn/dwYvBZ/dJMcaa7GmQz/15fvQk5DAdrbUiMiLXVPkK/AAAAAAAAAAAAAAAAAAAAAC18SJE4_bOooVMhHsEqFyn44ztYmGPvneyNt0wC9G3r/img.jpg | DAUM CAFE | 가을 | 요정🧚‍♀️💖 | content=요정🧚‍♀️💖 | image=https://blog.kakaocdn.net/dn/dwYvBZ/dJMcaa7GmQz/15fvQk5DAdrbUiMiLXVPkK/AAAAAAAAAAAAAAAAAAAAAC18SJE4_bOooVMhHsEqFyn44ztYmGPvneyNt0wC9G3r/img.jpg | board=IVE TALK",
+        "2022-04-28 |  | https://blog.kakaocdn.net/dn/bodBsl/dJMcahMm4rz/ZBo4KRmTLq5M0yv4vlgw10/AAAAAAAAAAAAAAAAAAAAAA76jFJ31J4i62zZ2dRr9JuElPmEAhT1uMElIurtZD3f/img.jpg | DAUM CAFE | 리즈 | 누구일까요오~?~~?~? | content=누구일까요오~?~~?~? | image=https://blog.kakaocdn.net/dn/bodBsl/dJMcahMm4rz/ZBo4KRmTLq5M0yv4vlgw10/AAAAAAAAAAAAAAAAAAAAAA76jFJ31J4i62zZ2dRr9JuElPmEAhT1uMElIurtZD3f/img.jpg | comments=가을¦나지롱😛§레이¦콩♡§가을¦과정😗§리즈¦미투 !!!🫶🏻§가을¦빼꼼¦https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhVIHsnwk1IVKmKJqYc_RtV9ySzjvl7E62myRrmbjlHWuHa54T3GQ7Y3HgnRf2yr9CSR-Zg1I78biVEnuL7YQADeES29GcBPUO2gn1Mky4lpQwMBkyChQ-TUP4yqjJG5rlSmWHx-KDPv8WLRrXw1F5L9N2cbReAKL_wAGcxDtv5K5BlujSCHJA9c8xy3aA/s2180/img%20(5).jpg | board=IVE TALK",
+        "2022-05-08 |  | https://blog.kakaocdn.net/dn/TZCCd/dJMcacxzONX/OqOQzr5kTGJvTZ5LtNNE60/AAAAAAAAAAAAAAAAAAAAAA01OoRSNz8Ru4R71GodfaWRlt-oQp1OUFTEPH32ESP7/img.jpg | DAUM CAFE | 리즈 | 다이브 💘 인기가요 1위 고마워요 🥇 오늘 하루 잘 마무리하구 앞으로도 같이 행복해요 💝 | content=다이브 💘 인기가요 1위 고마워요 🥇 오늘 하루 잘 마무리하구 앞으로도 같이 행복해요 💝 | image=https://blog.kakaocdn.net/dn/TZCCd/dJMcacxzONX/OqOQzr5kTGJvTZ5LtNNE60/AAAAAAAAAAAAAAAAAAAAAA01OoRSNz8Ru4R71GodfaWRlt-oQp1OUFTEPH32ESP7/img.jpg | board=IVE TALK",
+        "2022-07-03 |  | https://blog.kakaocdn.net/dn/bKsu06/dJMcahlra54/Ubnimx8Z9WbN1ByVkynr2k/AAAAAAAAAAAAAAAAAAAAAA3T4Ex9fn0p1N-kMbLPg9pESQ3uT-UDzQV56s2uswBt/img.jpg | DAUM CAFE | 리즈 | 다이브 인기가요 1위 너무너무 고마워요💕앞으로도 계속 함께해요 다이브 😘😘 | content=다이브 인기가요 1위 너무너무 고마워요💕앞으로도 계속 함께해요 다이브 😘😘 | image=https://blog.kakaocdn.net/dn/bKsu06/dJMcahlra54/Ubnimx8Z9WbN1ByVkynr2k/AAAAAAAAAAAAAAAAAAAAAA3T4Ex9fn0p1N-kMbLPg9pESQ3uT-UDzQV56s2uswBt/img.jpg | board=IVE TALK",
+        "2022-08-25 |  | https://blog.kakaocdn.net/dn/bxEeMn/dJMcadQHNXp/6AXuqFALGZ0y140ZDVYEk0/AAAAAAAAAAAAAAAAAAAAACI0Y_e8EpfFE5sRfXFNn7s0VCABOKWqic-quUH_UHfq/img.jpg | DAUM CAFE | 리즈 | 다이브!!오늘 엠카 첫방 무사히 마무리했고 하트드림어워즈에서 신인상이랑 본상도 받았어요💖 이게 다 다이브 덕분이야☺️ 다이브 항상 고맙구 After LIKE활동 같이 화이팅해용 ❣️ | content=다이브!!오늘 엠카 첫방 무사히 마무리했고 하트드림어워즈에서 신인상이랑 본상도 받았어요💖 이게 다 다이브 덕분이야☺️ 다이브 항상 고맙구 After LIKE활동 같이 화이팅해용 ❣️ | image=https://blog.kakaocdn.net/dn/bxEeMn/dJMcadQHNXp/6AXuqFALGZ0y140ZDVYEk0/AAAAAAAAAAAAAAAAAAAAACI0Y_e8EpfFE5sRfXFNn7s0VCABOKWqic-quUH_UHfq/img.jpg | board=IVE TALK",
+        "2022-10-07 |  | https://blog.kakaocdn.net/dn/qkF1t/dJMcacRMwvW/gfBA3ZzbaIu8UzOGsKvbM1/AAAAAAAAAAAAAAAAAAAAAEffMqoyln8xjK6IFHRHJS8yC_GEndsJBfOPz_gMbiAt/img.jpg | DAUM CAFE | 리즈 | 다이브 오늘 뮤뱅도 1위!!🥇너무 고마워요☺️ | content=다이브 오늘 뮤뱅도 1위!!🥇너무 고마워요☺️ | image=https://blog.kakaocdn.net/dn/qkF1t/dJMcacRMwvW/gfBA3ZzbaIu8UzOGsKvbM1/AAAAAAAAAAAAAAAAAAAAAEffMqoyln8xjK6IFHRHJS8yC_GEndsJBfOPz_gMbiAt/img.jpg | board=IVE TALK",
+        "2022-10-23 |  | https://blog.kakaocdn.net/dn/BA0wx/dJMcacLcAXg/Kmqn1Yka7pPcibiQrgIeV1/AAAAAAAAAAAAAAAAAAAAAHTQxadpdP7WSinE38Bs5o2rpN29gl37kbgfEHnuBaS8/img.jpg | DAUM CAFE | 리즈 | 다이브 언제나 한결같이 아이브곁에 있어줘서 고마워요 💗 나도 다이브 행복하게 해줄게🥰 | content=다이브 언제나 한결같이 아이브곁에 있어줘서 고마워요 💗 나도 다이브 행복하게 해줄게🥰 | image=https://blog.kakaocdn.net/dn/BA0wx/dJMcacLcAXg/Kmqn1Yka7pPcibiQrgIeV1/AAAAAAAAAAAAAAAAAAAAAHTQxadpdP7WSinE38Bs5o2rpN29gl37kbgfEHnuBaS8/img.jpg | board=IVE TALK",
+        "2022-12-28 |  | https://blog.kakaocdn.net/dn/bawmbl/dJMcaaNkWnq/NH7B9pK9pdsLchI7EETmM1/AAAAAAAAAAAAAAAAAAAAAFUysMiafXSjgGXtSjmXESjicd_jaRJB6vNG4kLyQXGk/img.jpg | DAUM CAFE | 리즈 | 다이브 지금 시간돼요~? | content=다이브 지금 시간돼요~? | image=https://blog.kakaocdn.net/dn/bawmbl/dJMcaaNkWnq/NH7B9pK9pdsLchI7EETmM1/AAAAAAAAAAAAAAAAAAAAAFUysMiafXSjgGXtSjmXESjicd_jaRJB6vNG4kLyQXGk/img.jpg | board=IVE TALK",
+        "2023-03-08 |  | https://blog.kakaocdn.net/dn/bbOov5/dJMcahlrcRj/ptcIuTNPUedCA1deuy1AUk/AAAAAAAAAAAAAAAAAAAAAEzy4Jf3JjslihF7YC1f5PlVRMMDyg6PdTflIiBXU8Rl/img.jpg | DAUM CAFE | 리즈 | 뿌우😗 | content=뿌우😗 | image=https://blog.kakaocdn.net/dn/bbOov5/dJMcahlrcRj/ptcIuTNPUedCA1deuy1AUk/AAAAAAAAAAAAAAAAAAAAAEzy4Jf3JjslihF7YC1f5PlVRMMDyg6PdTflIiBXU8Rl/img.jpg | board=IVE TALK",
+        "2023-03-21 |  | https://blog.kakaocdn.net/dn/KrhcM/dJMcadJVLnT/d5MKcffYKDUC3XAUuoKE91/AAAAAAAAAAAAAAAAAAAAACFv8owShYbURqUXyGAzR8j2HJqJvTMZBFUgSMd6IxF0/img.jpg | DAUM CAFE | 리즈 | READY TO DIVE❔ | content=READY TO DIVE❔ | image=https://blog.kakaocdn.net/dn/KrhcM/dJMcadJVLnT/d5MKcffYKDUC3XAUuoKE91/AAAAAAAAAAAAAAAAAAAAACFv8owShYbURqUXyGAzR8j2HJqJvTMZBFUgSMd6IxF0/img.jpg | board=IVE TALK",
+        "2023-03-29 |  | https://blog.kakaocdn.net/dn/wCper/dJMcacYDSbp/K2gRaB6g4596uNKbXLvMG1/AAAAAAAAAAAAAAAAAAAAAD5-V4XEO20jIssBV2eVjwULPo_r6wOaKnxUX4iilt6o/img.jpg | DAUM CAFE | 가을 | ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ 아깽즈 왤케 웃겨..? | content=ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ 아깽즈 왤케 웃겨..? | image=https://blog.kakaocdn.net/dn/wCper/dJMcacYDSbp/K2gRaB6g4596uNKbXLvMG1/AAAAAAAAAAAAAAAAAAAAAD5-V4XEO20jIssBV2eVjwULPo_r6wOaKnxUX4iilt6o/img.jpg | comments=리즈¦유후~~~ 언니.그게 현실이에요.§이서¦가을선배가 우리 웃기대~ @리즈언니 | board=IVE TALK",
+        "2023-03-29 |  | https://blog.kakaocdn.net/dn/bQMzQD/dJMcadWhhcn/DtJxKpikkMEPvWLOs05gQ1/AAAAAAAAAAAAAAAAAAAAADGHryV6clySxFWNO19uxKCVP7v2iX65o2XbTyCAIGwC/img.jpg | DAUM CAFE | 리즈 | ASMR 그 후•••(대왕 테이프공😎🤓🥸) | content=ASMR 그 후•••(대왕 테이프공😎🤓🥸) | image=https://blog.kakaocdn.net/dn/bQMzQD/dJMcadWhhcn/DtJxKpikkMEPvWLOs05gQ1/AAAAAAAAAAAAAAAAAAAAADGHryV6clySxFWNO19uxKCVP7v2iX65o2XbTyCAIGwC/img.jpg | board=IVE TALK",
+        "2023-04-04 |  | https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi6bQKu0m951aXGvz1IQR5dksbsawNIeBObDWsOYXLkCjcEp9NyxzkUqGKpnDJCiPGQZa21jd6qNKCVINPtC5xfjT2V2bbaRbNc8J0Et8THqYRRK2wmzR253HhDFVj_01t1PvKJOwW1vVEB_RqC76zPtF-CFakcVcdSS_uHnrXTsxoCMcgZZC6nnt4yoJA/s2437/resized_IMG_0439_20261106_130327_633.jpg | DAUM CAFE | 리즈 | 아웅ㅇㅇ깅영웡🎀 | content=아웅ㅇㅇ깅영웡🎀 | image=https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi6bQKu0m951aXGvz1IQR5dksbsawNIeBObDWsOYXLkCjcEp9NyxzkUqGKpnDJCiPGQZa21jd6qNKCVINPtC5xfjT2V2bbaRbNc8J0Et8THqYRRK2wmzR253HhDFVj_01t1PvKJOwW1vVEB_RqC76zPtF-CFakcVcdSS_uHnrXTsxoCMcgZZC6nnt4yoJA/s2437/resized_IMG_0439_20261106_130327_633.jpg | board=IVE TALK",
+        "2023-04-09 |  | https://blog.kakaocdn.net/dn/b7ktoZ/dJMcabxo2SB/UFEA1uI37NKg4sS9eOuwm0/AAAAAAAAAAAAAAAAAAAAAITylRQfZJUOcFMs_1lyDQNigYFZY7ymQ8xrxYQsxXY-/img.jpg | DAUM CAFE | 리즈 | 다이브 금방가께 !!🌸 | content=다이브 금방가께 !!🌸 | image=https://blog.kakaocdn.net/dn/b7ktoZ/dJMcabxo2SB/UFEA1uI37NKg4sS9eOuwm0/AAAAAAAAAAAAAAAAAAAAAITylRQfZJUOcFMs_1lyDQNigYFZY7ymQ8xrxYQsxXY-/img.jpg | board=IVE TALK",
+        "2023-04-10 |  | https://blog.kakaocdn.net/dn/d2FENz/dJMcaa6nkJr/iKZTVjqInnOAkgHAVK9tKK/AAAAAAAAAAAAAAAAAAAAACIozvZFhSZy3jdf6kG6bEBcPOV06p5oq8fU8uoZh3zj/img.jpg | DAUM CAFE | 리즈 | 🚨‼️뮤비 스포 ‼️🚨 | content=🚨‼️뮤비 스포 ‼️🚨 | image=https://blog.kakaocdn.net/dn/d2FENz/dJMcaa6nkJr/iKZTVjqInnOAkgHAVK9tKK/AAAAAAAAAAAAAAAAAAAAACIozvZFhSZy3jdf6kG6bEBcPOV06p5oq8fU8uoZh3zj/img.jpg | comments=원영¦이거 뭐양🤣🤣💕💕\n뛰어내리는 워녕이😎리즈랑 같이 6시 기다리는중🤍 | board=IVE TALK",
+        "2023-04-19 |  | https://blog.kakaocdn.net/dn/N4Pip/dJMcagMiHml/BGzsndexs7nSaqm3AVRLi0/AAAAAAAAAAAAAAAAAAAAAEBglAYV2wDW82IwSA9pTXE1JWdMjnggfU_MJC-nPq7l/img.jpg | DAUM CAFE | 리즈 | 다이부우 🤍🖤🤍🖤 쇼챔 1위 꼬마워요오 !!!!! | content=다이부우 🤍🖤🤍🖤 쇼챔 1위 꼬마워요오 !!!!! | image=https://blog.kakaocdn.net/dn/N4Pip/dJMcagMiHml/BGzsndexs7nSaqm3AVRLi0/AAAAAAAAAAAAAAAAAAAAAEBglAYV2wDW82IwSA9pTXE1JWdMjnggfU_MJC-nPq7l/img.jpg | board=IVE TALK",
+        "2023-04-25 |  |  | DAUM CAFE | 리즈 | 나 보고싶찌 ??!!??🐈‍⬛ | content=나 보고싶찌 ??!!??🐈‍⬛ | comments=리즈¦그럼 우리 네쇼라에서 만나쟝 !!!🩵🤍 | board=IVE TALK",
+        "2023-04-28 |  |  | DAUM CAFE | 장원영 | 다이브를 향한 | content=다이브를 향한 | comments=유진¦이 선물은§이서¦아이브의 사랑에 비하면§가을¦약과지♡♡♡♡♡♡§리즈¦맛있게 먹어>< | board=IVE TALK",
+        "2023-05-03 |  | https://blog.kakaocdn.net/dn/bjXfjW/dJMcag6zpi5/BwyhMKSp71IxVSK7xo8yy1/AAAAAAAAAAAAAAAAAAAAAEg9R_skpik-uGcsYnPz-yqoeMcmgGht4aAOaPwVNCcp/img.jpg | DAUM CAFE | 리즈 | (사진) | content=(사진) | image=https://blog.kakaocdn.net/dn/bjXfjW/dJMcag6zpi5/BwyhMKSp71IxVSK7xo8yy1/AAAAAAAAAAAAAAAAAAAAAEg9R_skpik-uGcsYnPz-yqoeMcmgGht4aAOaPwVNCcp/img.jpg | board=IVE TALK",
+        "2023-05-06 |  | https://blog.kakaocdn.net/dn/TBp7r/dJMcabjVDXN/uo0CODIKQ5gmWcX3DwEekk/AAAAAAAAAAAAAAAAAAAAAJbobphTVizZwDhczZkiAy4RQrzNSX_k07GZXIpGg82s/img.jpg | DAUM CAFE | 리즈 | 뿅! | content=뿅! | image=https://blog.kakaocdn.net/dn/TBp7r/dJMcabjVDXN/uo0CODIKQ5gmWcX3DwEekk/AAAAAAAAAAAAAAAAAAAAAJbobphTVizZwDhczZkiAy4RQrzNSX_k07GZXIpGg82s/img.jpg | board=IVE TALK",
+        "2023-05-18 |  | https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg9dNIfg44EXbr1CBwwEYT40zrWy8X1xYBFvfRfQLy5vsu6WFfyvewsiD2Cwn076ny7P8A9Ai0jgpTgBujFYVqs6NUOYBfFyQ65kLJfXCcYyKDj_AiNQ39wss6FJwymAfIwS8jKqkkM_-9E1ycV-mchCzNU5Q7-jAxRfhEo8JUCXM04BsEE291-PBs3s24/s517/resized_IMG_1173_20261106_130250_503.jpg | DAUM CAFE | 이서 | 언니 안녕ㅎㅎ | content=언니 안녕ㅎㅎ | image=https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg9dNIfg44EXbr1CBwwEYT40zrWy8X1xYBFvfRfQLy5vsu6WFfyvewsiD2Cwn076ny7P8A9Ai0jgpTgBujFYVqs6NUOYBfFyQ65kLJfXCcYyKDj_AiNQ39wss6FJwymAfIwS8jKqkkM_-9E1ycV-mchCzNU5Q7-jAxRfhEo8JUCXM04BsEE291-PBs3s24/s517/resized_IMG_1173_20261106_130250_503.jpg | comments=리즈¦우엇 !!!! 나댜 !!!!! 현서 좋겠네~~~ 밖에서도 나 보고~~~~~^^§이서¦마자여ㅎㅎ\n여러분~~~ 리즈언니가 저한테 답장해줬어여어어🥺🩵🩵 언니 사랑해 | board=IVE TALK",
+        "2023-05-22 |  |  | DAUM CAFE | 가을 | 이따 도토리숲 봐야지😊 달아 넌 최고야... | content=이따 도토리숲 봐야지😊 달아 넌 최고야... | comments=리즈¦아니요 | board=IVE TALK",
+        "2023-06-10 |  | https://blog.kakaocdn.net/dn/b0I6He/dJMcabEb0Yo/kzyure0gsLumk0Dk3KNKV0/AAAAAAAAAAAAAAAAAAAAAEG-MVCeo7tyJEY-Tu6wutgBny7q0if_BYBBwIAPscpJ/img.jpg | DAUM CAFE | 이서 | 하트가 채워질랑 말랑 ㅋ.. | content=하트가 채워질랑 말랑 ㅋ.. | image=https://blog.kakaocdn.net/dn/b0I6He/dJMcabEb0Yo/kzyure0gsLumk0Dk3KNKV0/AAAAAAAAAAAAAAAAAAAAAEG-MVCeo7tyJEY-Tu6wutgBny7q0if_BYBBwIAPscpJ/img.jpg | board=IVE TALK",
+        "2023-06-15 |  |  | DAUM CAFE | 리즈 | 다이브 혹시 4시30분에 모해 ❓ | content=다이브 혹시 4시30분에 모해 ❓ | board=IVE TALK",
+        "2023-07-16 |  | https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhzF2c5KUNTlXo-1rSqTvYiDgRV1M6Fonqz_WAE7XgxqhpqsCosWSWNVIhW9AyLa3k-fDBHevfU2JuiNtI-C7eNxhRVyyxD7qWZF6Ynqra-R3P_3yRbTuOPR5xLyvc_Dv78nMokcYTmOLRvF5jZnaWjQZvA4Sad9pM2k21VSVgyptIqw7lVkOPXVTMUvHs/s3884/resized_IMG_9079_20261106_130238_350.jpg | DAUM CAFE | 리즈 | 아이브 마시기 🌽 | content=아이브 마시기 🌽 | image=https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhzF2c5KUNTlXo-1rSqTvYiDgRV1M6Fonqz_WAE7XgxqhpqsCosWSWNVIhW9AyLa3k-fDBHevfU2JuiNtI-C7eNxhRVyyxD7qWZF6Ynqra-R3P_3yRbTuOPR5xLyvc_Dv78nMokcYTmOLRvF5jZnaWjQZvA4Sad9pM2k21VSVgyptIqw7lVkOPXVTMUvHs/s3884/resized_IMG_9079_20261106_130238_350.jpg | board=IVE TALK",
+        "2023-07-29 |  | https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhb_0NRgNuVajTEbrLd5dKnMLO5G5B1JdZSB8EzV4uPipycAfQMhMx5d3ZBSppHnqJs_BR4qtf39o1CvOx1uImmSCc1EGwSvOA9fbkePA-zDkQNfnG55glrRuc4MzUkBE_JdSQaUtyBTtoj6umAOw9qwseFgGwOiemR3_VpNHrOtDNsPxExqN6K5eHO3qU/s842/resized_IMG_5242_20261106_130231_671.jpg | DAUM CAFE | 장원영 | 지워나 이 귀여운 하트는 누구라구 생각하니 | content=지워나 이 귀여운 하트는 누구라구 생각하니 | image=https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhb_0NRgNuVajTEbrLd5dKnMLO5G5B1JdZSB8EzV4uPipycAfQMhMx5d3ZBSppHnqJs_BR4qtf39o1CvOx1uImmSCc1EGwSvOA9fbkePA-zDkQNfnG55glrRuc4MzUkBE_JdSQaUtyBTtoj6umAOw9qwseFgGwOiemR3_VpNHrOtDNsPxExqN6K5eHO3qU/s842/resized_IMG_5242_20261106_130231_671.jpg | comments=리즈¦호호...역시 누구보다 빠르지만 남들과는 다른 그녀 😎 | board=IVE TALK",
+        "2023-10-25 |  | https://blog.kakaocdn.net/dn/H63Ck/dJMcabeflh8/DaLbsSaq5nEbciiuS7Rus0/AAAAAAAAAAAAAAAAAAAAACAw4Ww0BzEPiQFOCVqIMd7RCiKx206z_zuZF3oy77HD/img.jpg | DAUM CAFE | 리즈 | 다이브 이번 활동 첫 일위 너무 고마워요 💗 | content=다이브 이번 활동 첫 일위 너무 고마워요 💗\n우리에게 행복을 준 다이브도 오늘 하루 최고로 행복해요 🖤♥️🖤♥️\n(햅삐냥이😽😻) | image=https://blog.kakaocdn.net/dn/H63Ck/dJMcabeflh8/DaLbsSaq5nEbciiuS7Rus0/AAAAAAAAAAAAAAAAAAAAACAw4Ww0BzEPiQFOCVqIMd7RCiKx206z_zuZF3oy77HD/img.jpg | board=IVE TALK",
+        "2023-11-19 |  | https://blog.kakaocdn.net/dn/WPz2B/dJMcajjcfah/9VCTR48VBoRrkRBvBbqZrK/AAAAAAAAAAAAAAAAAAAAABo-ScQEG5magyj3aPONG5TkvSsF1fYZBavlBMd5GQhO/img.jpg | DAUM CAFE | 리즈 | 다이브 이번주 인가까지 1위 너무너무 고마워요🥹💗 우리에게 행복 주는만큼 다이브도 행복하기 ♥️♥️ | content=다이브 이번주 인가까지 1위 너무너무 고마워요🥹💗 우리에게 행복 주는만큼 다이브도 행복하기 ♥️♥️ | image=https://blog.kakaocdn.net/dn/WPz2B/dJMcajjcfah/9VCTR48VBoRrkRBvBbqZrK/AAAAAAAAAAAAAAAAAAAAABo-ScQEG5magyj3aPONG5TkvSsF1fYZBavlBMd5GQhO/img.jpg | board=IVE TALK",
+        "2024-01-18 |  | https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhTnXJfVBeaZkZHXHb9fiD5sZUefYrAPQHJl0u2D_IWy3N0ROASgnQNi48L28D428WDUt-MK2OlW7JvZVAu3JWDUcdDCrLtLzuMqAPms5tUSZ9QY8sssu-GXYer058yALUfx9ZfIzMwONTOlLk4OjYKPS10aFIKo4-Ram-f5uJ4Ge9OpiT-OJBrgu4U_sw/s3024/resized_IMG_5319_20261106_130855_385.jpg | DAUM CAFE | 장원영 | 이서랑 리즈가 선물해준 날 닮은 🐰🍓 | content=이서랑 리즈가 선물해준 날 닮은 🐰🍓\n이름은 루비💖💖 언니랑 집에 가자 애기🤭 | image=https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhTnXJfVBeaZkZHXHb9fiD5sZUefYrAPQHJl0u2D_IWy3N0ROASgnQNi48L28D428WDUt-MK2OlW7JvZVAu3JWDUcdDCrLtLzuMqAPms5tUSZ9QY8sssu-GXYer058yALUfx9ZfIzMwONTOlLk4OjYKPS10aFIKo4-Ram-f5uJ4Ge9OpiT-OJBrgu4U_sw/s3024/resized_IMG_5319_20261106_130855_385.jpg | comments=리즈¦ㅋㅋㅋㅋㅋ기엽따 루비 >< 루비는 좋은언니 생겨서 조케따아아아 🍓❤️ | board=IVE TALK",
+        "2024-02-08 |  | https://blog.kakaocdn.net/dn/nZ0vI/dJMcaaG5KRQ/YnfA6HnGJKa5t78NQkQICK/AAAAAAAAAAAAAAAAAAAAAEvvPlFKUfGjHdEwOvtlqizRNL1kS9hu4qURxGgTR4VB/img.jpg | DAUM CAFE | 리즈 | 오늘 800일 >< 아이스크림처럼 달달한 하루 보내깅 🍦🤍 | content=오늘 800일 >< 아이스크림처럼 달달한 하루 보내깅 🍦🤍 | image=https://blog.kakaocdn.net/dn/nZ0vI/dJMcaaG5KRQ/YnfA6HnGJKa5t78NQkQICK/AAAAAAAAAAAAAAAAAAAAAEvvPlFKUfGjHdEwOvtlqizRNL1kS9hu4qURxGgTR4VB/img.jpg | board=IVE TALK",
+        "2024-08-26 |  | https://blog.kakaocdn.net/dn/0vvoZ/dJMcacLG6Vj/oBL3dHKVtuKVL5YkY09Clk/AAAAAAAAAAAAAAAAAAAAALtUBCC_QZylkTLbOO29gB-IFXoP2XQ34tfeampFd-54/img.jpg | DAUM CAFE | 장원영 | 1000❤️ | content=1000❤️ | image=https://blog.kakaocdn.net/dn/0vvoZ/dJMcacLG6Vj/oBL3dHKVtuKVL5YkY09Clk/AAAAAAAAAAAAAAAAAAAAALtUBCC_QZylkTLbOO29gB-IFXoP2XQ34tfeampFd-54/img.jpg | board=IVE TALK",
+        "2024-12-15 |  | https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhTFbDastwGreBQ3AwiSqMq7XHBMPEgc2-eCVCFk_7if0yN22YWh8Lwmf3fsfqUSxRc-VxHgxiS9MoeGViulTuuvTzlZnBCrtUdboaU3pgV4sqfWEcSI0TY-brQRYIP5UzIs5nRQ18_KIjq6Jy8aG-0AO9y5vQqG8thdvPGZMa5IhU-m6r6o-8qhPU6Zhc/s1024/resized_IMG_8112_20261106_131238_576.jpg | DAUM CAFE | 장원영 | 리즈야 홧팅💗 | content=리즈야 홧팅💗 | image=https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhTFbDastwGreBQ3AwiSqMq7XHBMPEgc2-eCVCFk_7if0yN22YWh8Lwmf3fsfqUSxRc-VxHgxiS9MoeGViulTuuvTzlZnBCrtUdboaU3pgV4sqfWEcSI0TY-brQRYIP5UzIs5nRQ18_KIjq6Jy8aG-0AO9y5vQqG8thdvPGZMa5IhU-m6r6o-8qhPU6Zhc/s1024/resized_IMG_8112_20261106_131238_576.jpg | comments=리즈¦고마워어🥹💗 | board=IVE TALK",
+        "2024-12-16 |  | https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhTFbDastwGreBQ3AwiSqMq7XHBMPEgc2-eCVCFk_7if0yN22YWh8Lwmf3fsfqUSxRc-VxHgxiS9MoeGViulTuuvTzlZnBCrtUdboaU3pgV4sqfWEcSI0TY-brQRYIP5UzIs5nRQ18_KIjq6Jy8aG-0AO9y5vQqG8thdvPGZMa5IhU-m6r6o-8qhPU6Zhc/s1024/resized_IMG_8112_20261106_131238_576.jpg | DAUM CAFE | 안유진 | 리즈야 리즈야 리즈야 | content=리즈야 리즈야 리즈야\n너무 좋다 지금 내 앞에서 자고있는 리즈야\n일어나면 내 글 확인해줘\n응원하다 사랑한다 사랑은 외나무다리에서 | image=https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhTFbDastwGreBQ3AwiSqMq7XHBMPEgc2-eCVCFk_7if0yN22YWh8Lwmf3fsfqUSxRc-VxHgxiS9MoeGViulTuuvTzlZnBCrtUdboaU3pgV4sqfWEcSI0TY-brQRYIP5UzIs5nRQ18_KIjq6Jy8aG-0AO9y5vQqG8thdvPGZMa5IhU-m6r6o-8qhPU6Zhc/s1024/resized_IMG_8112_20261106_131238_576.jpg | comments=리즈¦바로 일어났다 ..ㅎ 곰마워요오 | board=IVE TALK",
+        "2024-12-16 |  | https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjnDpdHUdL7hSaS4KNo-Bq6d0XjDIxPywnZk7IIEhxkuqSkRskt2u3uLrhz60_B6XErnoleoucrEaDtO-XyUtA-2-GPdzlZujo5lkIbhprRVPaUzjsOUSiwziIfcNd1hyeJqqVsrj2kvrsYDqkJpblNidm8Cb0MQyOBLZD_ktsOXpp94rEkRNk9DmM6tn0/s2294/resized_IMG_2187_20261106_131245_417.jpg | DAUM CAFE | 가을 | 오늘 함께할 노래💚💚 | content=오늘 함께할 노래💚💚 | image=https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjnDpdHUdL7hSaS4KNo-Bq6d0XjDIxPywnZk7IIEhxkuqSkRskt2u3uLrhz60_B6XErnoleoucrEaDtO-XyUtA-2-GPdzlZujo5lkIbhprRVPaUzjsOUSiwziIfcNd1hyeJqqVsrj2kvrsYDqkJpblNidm8Cb0MQyOBLZD_ktsOXpp94rEkRNk9DmM6tn0/s2294/resized_IMG_2187_20261106_131245_417.jpg | comments=리즈¦나랑도 함께해 😘 | board=IVE TALK",
+        "2024-12-24 |  | https://blog.kakaocdn.net/dn/HI9mn/dJMcab6YDx0/Hq1qdlmRwrlkU5C1bVcKpk/AAAAAAAAAAAAAAAAAAAAABGvCVd5onXifytzpOLJXcP1v-N9lZVEjS2c1cpkIE91/img.jpg | DAUM CAFE | 레이 | 리즈가 내 머리 해줬당🩷 | content=리즈가 내 머리 해줬당🩷 | image=https://blog.kakaocdn.net/dn/HI9mn/dJMcab6YDx0/Hq1qdlmRwrlkU5C1bVcKpk/AAAAAAAAAAAAAAAAAAAAABGvCVd5onXifytzpOLJXcP1v-N9lZVEjS2c1cpkIE91/img.jpg | board=IVE TALK",
+        "2025-03-28 |  | https://blog.kakaocdn.net/dn/BNKL5/dJMcacEWUm3/JxMsqpcuPQPWB13i16SUM1/AAAAAAAAAAAAAAAAAAAAAEO8E364PeyYpIV43GxdxBwghBLYzsrygTUWRtDA3ca5/img.jpg | DAUM CAFE | 리즈 | 오늘 밤 9시30분 데뷔스 플랜 많은 관심 부탁드려요오☺️😌 | content=오늘 밤 9시30분 데뷔스 플랜 많은 관심 부탁드려요오☺️😌 | image=https://blog.kakaocdn.net/dn/BNKL5/dJMcacEWUm3/JxMsqpcuPQPWB13i16SUM1/AAAAAAAAAAAAAAAAAAAAAEO8E364PeyYpIV43GxdxBwghBLYzsrygTUWRtDA3ca5/img.jpg | board=IVE TALK",
+        "2025-06-02 | https://link.berriz.in/ko/web/main/ive/board/01971b76-d2df-cd5d-85cc-0a1e213a6f37/post/01973060-0da1-c251-85f2-2ce5868befea/ | https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgWlusfgznanPAd4PExp9DPS0CffnLdrvqB9x0-lnYTtOsYhIx7DhkUFMwFm4WdksMtxYu_1tbb1xah2OAc_QLZR_ymj9fVbe0o2E7ir023Vgy6n7DHTs6zgeHdlugR3QG5KAWopoELanSuHTnGH7CMw4WuOir3IL3seyVbdOdXdXIT00lggZY3RQcsyGM/s4032/Berriz_20261106154221.jpeg | Berriz | 리즈 | 안뇽 반가워 >< 여기서 재미나게 놀아보쟈😽 | board=From. IVE | content=안뇽 반가워 >< 여기서 재미나게 놀아보쟈😽 | imgs=https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgWlusfgznanPAd4PExp9DPS0CffnLdrvqB9x0-lnYTtOsYhIx7DhkUFMwFm4WdksMtxYu_1tbb1xah2OAc_QLZR_ymj9fVbe0o2E7ir023Vgy6n7DHTs6zgeHdlugR3QG5KAWopoELanSuHTnGH7CMw4WuOir3IL3seyVbdOdXdXIT00lggZY3RQcsyGM/s4032/Berriz_20261106154221.jpeg",
+        "2025-10-18 | https://link.berriz.in/ko/web/main/ive/board/01971b76-d2df-cd5d-85cc-0a1e213a6f37/post/0199f6b8-8735-1086-785d-5fe064b76ebd/ | https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEibMkBLLSsCBKibpOCsO_cTWb3xW9RHvDQFymfK8Yt_9yeRv2SOeezACGcHXMmxlaiW4CcozBKHZ5eE_K14shl87f0lTohhZY1K_HicqiR4k1fjNjbwrXFnlOBYJfh5qvw4KjMSXNs1Zy-PejpKQ5Pz2w-RXxFbnfHW0tUheDB2e5AuO2NhVGZzIA0e5lM/s4032/Berriz_20261106154445.jpeg | Berriz | 리즈 | 다이브 음중 1위 너무너무 고마워요 💫✨ 언제나 사랑해ㅐ💋♥️ | board=From. IVE | content=다이브 음중 1위 너무너무 고마워요 💫✨ 언제나 사랑해ㅐ💋♥️ | imgs=https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEibMkBLLSsCBKibpOCsO_cTWb3xW9RHvDQFymfK8Yt_9yeRv2SOeezACGcHXMmxlaiW4CcozBKHZ5eE_K14shl87f0lTohhZY1K_HicqiR4k1fjNjbwrXFnlOBYJfh5qvw4KjMSXNs1Zy-PejpKQ5Pz2w-RXxFbnfHW0tUheDB2e5AuO2NhVGZzIA0e5lM/s4032/Berriz_20261106154445.jpeg;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgCCHOGfzb5JJp9b2dRprMQFMZxhdtK5Fdq1lu997IIY3-3aafMjSHynOjnyWLxTD9NzDGVI9WQOyya9RTLecZQI6Z9Yc0V0f6LN7LK0nGgPT9duh0aDAqhqBk5RSA9VVrCe88IBdMX3DLbMz-7tavb2mdC3egrUtIoEKukH2r6AVty7zTbXX2qBs7rXE4/s3088/Berriz_20261106154450.jpeg",
+        "2026-04-07 | https://link.berriz.in/ko/web/main/ive/board/01971b76-d2df-cd5d-85cc-0a1e213a6f37/post/019d66ea-6cdd-1b9c-e2a1-9f92b9f5206a/ | https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEipAYr1UdarKDe9ZRkY74dQQLgmnzfyP8CpwNhMdFE4hKp5O5S4hPbqMJF_8kuTx-EP-go4PBoxSAo4sWgJY5c5BzlGwA6R2KfBf7ps7GLIOg05sOLyOtm61RCrE8LlhrUosg8qFmENrDEdSD3ruuh1POIKrCJeDTbplgJKqAIpSf6rSz_21B54CtuvS64/s4032/Berriz_20261106154619.jpeg | Berriz | 리즈 | 안포토그래퍼 CCTV단속중 😎 | board=From. IVE | content=안포토그래퍼 CCTV단속중 😎\n#안유진 #포토그래퍼 #속도를줄이시오\n#땡스투유진 #안댕댕 #🐶🐱 | imgs=https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEipAYr1UdarKDe9ZRkY74dQQLgmnzfyP8CpwNhMdFE4hKp5O5S4hPbqMJF_8kuTx-EP-go4PBoxSAo4sWgJY5c5BzlGwA6R2KfBf7ps7GLIOg05sOLyOtm61RCrE8LlhrUosg8qFmENrDEdSD3ruuh1POIKrCJeDTbplgJKqAIpSf6rSz_21B54CtuvS64/s4032/Berriz_20261106154619.jpeg;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgMQEZLxtGcFDfY6fQTt-vpgMCnrkljb7OiF9WFzrMw-USr_gB5ykbIJXXXqMo2Bw_SRlG0YEwK2dO9UXvPZuWnoIyOYlpWCr3A5bt75SdqEmjNmT65SfjP-FPvAEZWmNc08x7VV7vs1Sr0WwEYkqURFArotZYZc4m4tqtMzRtVIoiUg9u6W1lTZ1haL3c/s4032/Berriz_20261106154616.jpeg",
+        "2026-05-21 | https://link.berriz.in/ko/web/main/ive/board/01971b76-d2df-cd5d-85cc-0a1e213a6f37/post/019e487d-ed4d-e64b-87b9-2607e215b63d/ | https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh4I-nSJSgRVNSMBpL_2pEQYn6Aatk3n9cd0A9moAhHIUFU3NieqD-l3wBU6GNl0zPwU1GUnhObMrfM13EfgKGaEezkh4JxpxJ-vQXEOi-I4itFdQvGIX8Anjqho_jPYxLsitZHmwHbTjQpFSQ1d2NKaQdRrk78zULUxWnxXQHzU_ZROUAzu9AcrcvLa5I/s4896/Berriz_20261106154713.jpeg | Berriz | 리즈 | 이제 코앞이 여름인데 나랑같이 스노우 초코 먹을사람🍫🤎 | board=From. IVE | content=이제 코앞이 여름인데 나랑같이 스노우 초코 먹을사람🍫🤎 | imgs=https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh4I-nSJSgRVNSMBpL_2pEQYn6Aatk3n9cd0A9moAhHIUFU3NieqD-l3wBU6GNl0zPwU1GUnhObMrfM13EfgKGaEezkh4JxpxJ-vQXEOi-I4itFdQvGIX8Anjqho_jPYxLsitZHmwHbTjQpFSQ1d2NKaQdRrk78zULUxWnxXQHzU_ZROUAzu9AcrcvLa5I/s4896/Berriz_20261106154713.jpeg;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiTWu0lYFNExiipiEbFJGj4yMA6bjphclFtz3zlC3JAfuimK3HGM9pPqigCD-0HpWTDGoA64D1W-qr-u7oAztegzgZowrsaI-uVJlkV845RqkTOH43AGO0nQb5wq9SY569LtRxwaL851rRvnbqFrAsacKlumpkeYB2_9ynj_FrOzE9c8uxYHP0XfcnWeM8/s4896/Berriz_20261106154715.jpeg",
+        "2026-10-16 | https://link.berriz.in/ko/web/main/ive/board/01a119dd-69b5-f24b-6a11-5b1ae87dabba/post/01a14425-cb33-ddbf-8b4c-d7f7a8cef183/ | https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjTTad5XTl8BP6QERMlleAJiOsCsLHtr9DyNiAF_EeipnDO7oEYfLMRhqRoiQ9BXDG28ZL3ytv8yWAIQUZjelcBVzjVvNgXCn7IguuvTdnVKevTjUFNPXju82VRUs5joXoBPKFetv-ZYrwAgErQ3q8H_lTq2IvS6qtLIgn48CqTuqU986OaVFPhFGmKGpQ/s3088/Berriz_20261106155037.jpeg | Berriz | 리즈 | 당신들을 지키러 온 슈퍼블루💙 | board=EVENT | content=당신들을 지키러 온 슈퍼블루💙 | imgs=https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjTTad5XTl8BP6QERMlleAJiOsCsLHtr9DyNiAF_EeipnDO7oEYfLMRhqRoiQ9BXDG28ZL3ytv8yWAIQUZjelcBVzjVvNgXCn7IguuvTdnVKevTjUFNPXju82VRUs5joXoBPKFetv-ZYrwAgErQ3q8H_lTq2IvS6qtLIgn48CqTuqU986OaVFPhFGmKGpQ/s3088/Berriz_20261106155037.jpeg",
         // ---- 2026.10.20 추가분 (IVE / Shorts / ELLE / TONYMOLY) ----
         "2022-04-07 | https://www.instagram.com/reel/CcDMzczFOey/ |  | IVE | 리즈 | LOVE DIVE 💙",
         "2022-01-10 | https://www.instagram.com/reel/CYito2olczc/ |  | IVE | 레이,리즈 | 찡끗찡끗😉😉💗",
@@ -3077,6 +3289,7 @@
             "NYANG LOG",
             "IVE LOG",
             "Shorts",
+            "Challenge",
             "VOCAL",
             "DANCE",
             "IVE",
@@ -3119,6 +3332,7 @@
         "Lyrics",
         "etc.(가사)",
         "Shorts",
+        "Challenge",
         "VOCAL",
         "DANCE",
         "IVE",
@@ -3169,6 +3383,52 @@
         fOpen = false,
         fEdit = false,
         albumScope = null;
+      // ---- 세부 필터 (탭 이름 → 선택지). by: cat=카테고리 / board=카페·Berriz 게시판 ----
+      const SUB_FILTERS = {
+        VLOG: { by: "cat", opts: [{ k: "NYANG LOG" }, { k: "IVE LOG" }] },
+        Shorts: {
+          by: "cat",
+          opts: [
+            { k: "Shorts", cats: ["Shorts", "VOCAL", "DANCE"] },
+            { k: "Challenge" },
+            { k: "IVE" },
+          ],
+        },
+        "DAUM CAFE": { by: "board", opts: [{ k: "From. IVE" }, { k: "IVE TALK" }] },
+        Berriz: { by: "board", opts: [{ k: "From. IVE" }, { k: "EVENT" }] },
+      };
+      let subFilter = [];
+      const subCfg = (name) => {
+        const c = SUB_FILTERS[name];
+        return c && (scope || c.by === "board") ? c : null;
+      };
+      const passSub = (v, name) => {
+        const c = subCfg(name);
+        if (!c || !subFilter.length) return true;
+        return c.opts.some(
+          (o) =>
+            subFilter.includes(o.k) &&
+            (c.by === "board"
+              ? v.board === o.k
+              : (o.cats || [o.k]).some((x) => v.cats.includes(x)))
+        );
+      };
+      function renderSub(name) {
+        const c = subCfg(name),
+          el = $("subf");
+        el.hidden = true;
+        el.innerHTML = "";
+        return c
+          ? c.opts
+              .map(
+                (o) =>
+                  `<button class="mchip tg${
+                    subFilter.includes(o.k) ? " on" : ""
+                  }" data-f="s" data-v="${esc(o.k)}">${esc(o.k)}</button>`
+              )
+              .join("")
+          : "";
+      }
       const sTabs = (s) => s.tabs || s.cats;
       const tabList = () =>
         scope
@@ -3220,6 +3480,7 @@
           board: extra.board || null,
           image: extra.image || null,
           comments: extra.comments || null,
+          imgs: extra.imgs || null, // Berriz: imgs=주소1;주소2
           content: extra.content || null, // 카페 본문: content=내용 (줄바꿈은 \n)
           views: extra.views ? +extra.views : null, // 카페: views=3995
           photos: extra.photos || null, // PHOTO: photos=주소1;주소2;주소3 (한 게시물에 여러 장)
@@ -3379,9 +3640,12 @@
         clearTimeout(toastTimer);
         toastTimer = setTimeout(() => t.classList.remove("show"), 1600);
       }
+      const cafeName = (m) => ({ 장원영: "원영", 안유진: "유진" }[m] || m);
       const cmtN = (v) => (v.comments ? v.comments.split("§").length : 0);
       function cafeRow(v) {
-        const mem = (v.members || []).length ? " " + v.members.join(", ") : "";
+        const mem = (v.members || []).length
+          ? " " + v.members.map(cafeName).join(", ")
+          : "";
         const d = fmtDate(v.date);
         const thumb = v.thumb
           ? `<img src="${esc(
@@ -3867,6 +4131,7 @@
       }
       function renderFilters(name) {
         name = name || tabList()[tab];
+        const subHtml = renderSub(name);
         const hideMem = hideMemFor(name);
         const cats = availCats(name);
         const chip = (t, val, label) => {
@@ -3905,7 +4170,8 @@
         const n =
           (hideMem ? 0 : memberFilter.length) +
           catFilter.length +
-          yearFilter.length;
+          yearFilter.length +
+          (subHtml ? subFilter.length : 0);
         $("fcnt").hidden = !n;
         $("fcnt").textContent = n;
         $("fbtn").classList.toggle("on", fOpen || n > 0);
@@ -3937,7 +4203,7 @@
         )}${sec(
           "연도",
           FILTER_YEARS.map((y) => chip("y", y, y + "년"))
-        )}`;
+        )}${subHtml ? sec("세부", [subHtml]) : ""}`;
       }
       function renderMemberFilter() {
         renderFilters();
@@ -3951,12 +4217,19 @@
           memberFilter = [];
           catFilter = [];
           yearFilter = [];
+          subFilter = [];
           return renderList();
         }
         const c = e.target.closest("[data-f]");
         if (!c) return;
         const t = c.dataset.f,
           val = c.dataset.v;
+        if (t === "s") {
+          const j = subFilter.indexOf(val);
+          if (j > -1) subFilter.splice(j, 1);
+          else subFilter.push(val);
+          return renderList();
+        }
         if (fEdit) {
           const k = t + ":" + val;
           fpins = fpins.includes(k)
@@ -4060,6 +4333,7 @@
             inBase(v, name) &&
             passCat(v, name) &&
             passYear(v) &&
+            passSub(v, name) &&
             (!memberFilter.length ||
               (memberFilter.length === 1 && memberFilter[0] === "리즈"
                 ? (v.members || []).length === 1 && v.members[0] === "리즈"
@@ -4094,7 +4368,11 @@
         $("count").textContent = `${label} · ${items.length}개`;
         $("grid").classList.remove("social-list");
         $("grid").style.alignItems = "";
-        const cardForList = (v) => card(v, false, name === "전체");
+        const cardForList = (v) =>
+          name === "Berriz" && v.images
+            ? `<div class="bz-inline">${bzPost(v)}</div>`
+            : card(v, false, name === "전체");
+        $("grid").classList.toggle("bz-list", name === "Berriz");
         if (name === "전체") {
           // 그룹 전체 탭에서는 폴더로 묶지 않고 전부 풀어서 정렬된 채로 보여줌
           $("grid").innerHTML = items.map(cardForList).join("");
@@ -4247,7 +4525,10 @@ ${
         $("list").hidden = !isList;
         $("pinbar").hidden = isList;
         $("gbBtn").hidden = isList;
+        $("bellBtn").hidden = isList;
+        $("bellPop").hidden = true;
         if (isList) {
+          subFilter = [];
           renderTabs();
           if (scope && scope.hideMembers) memberFilter = [];
           renderList();
@@ -4263,6 +4544,7 @@ ${
         if (e.target.dataset.i) {
           tab = +e.target.dataset.i;
           catFilter = [];
+          subFilter = [];
           albumScope = null;
           renderTabs();
           renderList();
@@ -4273,6 +4555,7 @@ ${
         renderList();
       };
       $("memf").onclick = filterClick;
+      $("subf").onclick = filterClick;
       $("fpanel").onclick = filterClick;
       $("fbtn").onclick = () => {
         fOpen = !fOpen;
@@ -4483,12 +4766,59 @@ ${
         openPv(c.dataset.pk);
       });
       // ---- 카페 글 보기 (제목/작성자/날짜 + 본문 펼쳐 보기) ----
+      let bzEl;
+      const BZ_BADGE_UNUSED =
+        '<svg viewBox="0 0 24 24"><path d="M12 1.5l2.6 1.7 3.1-.3 1.2 2.9 2.8 1.4-.5 3.1L22.5 12l-1.7 2.6.3 3.1-2.9 1.2-1.4 2.8-3.1-.5L12 22.5l-2.6-1.7-3.1.3-1.2-2.9-2.8-1.4.5-3.1L1.5 12l1.7-2.6-.3-3.1 2.9-1.2 1.4-2.8 3.1.5z" fill="#b82fe0"/><path d="M7.8 12.3l3 3 5.4-6" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+      function closeBz() {
+        bzEl.hidden = true;
+        document.body.style.overflow = "";
+      }
+      function bzPost(v) {
+        const imgs = v.images || [];
+        const text = esc(v.content || v.title).replace(
+          /#[^\s#]+/g,
+          (m) => `<span class="bz-tag">${m}</span>`
+        );
+        return `<div class="bz-post"><div class="bz-head"><span class="bz-av"></span><div>
+      <div class="bz-name">${esc((v.members || [])[0] || "리즈")}</div>
+      <div class="bz-date">${esc(String(v.date).replace(/-/g, "."))}</div></div></div>
+      <div class="bz-text">${text}</div>
+      <div class="bz-imgs n${imgs.length > 1 ? 2 : 1}">${imgs
+          .map(
+            (u) =>
+              `<img src="${esc(u)}" alt="" loading="lazy" referrerpolicy="no-referrer" />`
+          )
+          .join("")}</div></div>`;
+      }
+      function openBerriz(v) {
+        if (!bzEl) {
+          bzEl = document.createElement("div");
+          bzEl.className = "pv bz";
+          bzEl.hidden = true;
+          document.body.appendChild(bzEl);
+          bzEl.addEventListener("click", (e) => {
+            if (e.target.closest(".pv-x")) closeBz();
+          });
+          document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape" && !bzEl.hidden) closeBz();
+          });
+        }
+        bzEl.innerHTML = `<div class="pv-bar"><button class="pv-x" aria-label="닫기">×</button>
+      <div class="pv-h"><div class="pv-m">Berriz${v.board ? " · " + esc(v.board) : ""}${
+          v.url
+            ? ` <a href="${esc(v.url)}" target="_blank" rel="noopener">원문 보기</a>`
+            : ""
+        }</div></div></div>${bzPost(v)}`;
+        bzEl.scrollTop = 0;
+        bzEl.hidden = false;
+        document.body.style.overflow = "hidden";
+      }
       let cafeEl;
       function cafeComments(v) {
         if (!v.comments) return "";
         const rows = v.comments.split("§").map((c) => {
           const [a, t, u] = c.split("¦");
-          return `<div class="cafe-cm"><b>IVE ${esc(a || "")}</b>${
+          return `<div class="cafe-cm"><b>IVE ${esc(cafeName(a || ""))}</b>${
             t ? `<div class="cafe-cm-t">${esc(t)}</div>` : ""
           }${
             u
@@ -4505,6 +4835,7 @@ ${
       function openCafe(key) {
         const v = videos.find((x) => x.content && pinKey(x) === key);
         if (!v) return;
+        if ((v.cats || []).includes("Berriz")) return openBerriz(v);
         if (!cafeEl) {
           cafeEl = document.createElement("div");
           cafeEl.className = "pv";
@@ -4517,7 +4848,9 @@ ${
             if (e.key === "Escape" && !cafeEl.hidden) closeCafe();
           });
         }
-        const mem = (v.members || []).length ? " " + v.members.join(", ") : "";
+        const mem = (v.members || []).length
+          ? " " + v.members.map(cafeName).join(", ")
+          : "";
         cafeEl.innerHTML = `<div class="pv-bar"><button class="pv-x" aria-label="닫기">×</button>
       <div class="pv-h"><div class="pv-t">${esc(
         v.title
@@ -4641,6 +4974,9 @@ ${
               board: m.board || null,
               image: m.image || null,
               comments: m.comments || null,
+              images: m.imgs
+                ? m.imgs.split(";").map((x) => x.trim()).filter(Boolean)
+                : null,
               views: m.views != null ? m.views : null,
               sec: 0,
               isShort: false,
@@ -4718,6 +5054,7 @@ ${
           });
           $("status").remove();
           renderHome();
+          renderBell();
           route();
         } catch (err) {
           $("status").textContent = "네트워크 오류: " + err.message;
@@ -4892,6 +5229,72 @@ ${
         gbRender();
       }
       $("gbBtn").onclick = openGb;
+      // ---- 알림종: 전체에서 가장 최근 항목 5개 ----
+      const BELL_KEY = "bellSeen";
+      let bellItems = [];
+      function renderBell() {
+        const now = Date.now();
+        bellItems = videos
+          .filter(
+            (v) =>
+              v.date &&
+              !String(v.id).includes("~") &&
+              new Date(v.date).getTime() <= now
+          )
+          .sort((a, b) => new Date(b.date) - new Date(a.date))
+          .slice(0, 5);
+        let seen = "";
+        try {
+          seen = localStorage.getItem(BELL_KEY) || "";
+        } catch (e) {}
+        $("bellDot").hidden =
+          !bellItems.length || seen === String(bellItems[0].date);
+        const lab = (v) => {
+          const c = (v.cats || [])[0] || "";
+          return TAB_LABELS[c] || c || "NEW";
+        };
+        $("bellPop").innerHTML =
+          '<div class="bell-h">🔔 NEW</div>' +
+          (bellItems.length
+            ? bellItems
+                .map(
+                  (v, i) =>
+                    `<button class="bell-it" data-bk="${i}"><b>${esc(
+                      lab(v)
+                    )}</b>${esc(v.title || "")}<i>${fmtDate(v.date)}</i></button>`
+                )
+                .join("")
+            : '<div class="bell-it" style="color:var(--muted)">아직 새 소식이 없어요</div>');
+      }
+      $("bellBtn").onclick = (e) => {
+        e.stopPropagation();
+        const pop = $("bellPop");
+        pop.hidden = !pop.hidden;
+        if (!pop.hidden && bellItems.length) {
+          try {
+            localStorage.setItem(BELL_KEY, String(bellItems[0].date));
+          } catch (er) {}
+          $("bellDot").hidden = true;
+        }
+      };
+      $("bellPop").onclick = (e) => {
+        e.stopPropagation();
+        const b = e.target.closest("[data-bk]");
+        if (!b) return;
+        const v = bellItems[+b.dataset.bk];
+        $("bellPop").hidden = true;
+        if (v.photos && v.photos.length) openPv(pinKey(v));
+        else if (v.content) openCafe(pinKey(v));
+        else
+          window.open(
+            v.url || "https://youtu.be/" + String(v.id).split("~")[0],
+            "_blank",
+            "noopener"
+          );
+      };
+      document.addEventListener("click", () => {
+        $("bellPop").hidden = true;
+      });
       document.addEventListener("keydown", (e) => {
         if (e.key === "Escape" && gbEl && !gbEl.hidden) gbClose();
       });
