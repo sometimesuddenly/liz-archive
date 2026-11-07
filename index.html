@@ -190,12 +190,16 @@
         display: block;
         width: 100%;
         max-width: 520px;
-        margin: 0 auto 18px;
+        margin: 8px auto 18px;
         border-radius: 10px;
       }
       .cafe-cms {
-        margin-top: 8px;
-        padding-top: 10px;
+        margin-top: 0;
+        padding-top: 14px;
+        border-top: 1px solid #e3cba3;
+      }
+      .cafe-cm + .cafe-cm {
+        border-top: 1px solid #e3cba3;
       }
       .cafe-cms-h {
         font-size: 13px;
@@ -664,6 +668,14 @@
       .folder-card .fthumb .plat {
         background: rgba(40, 30, 20, 0.72);
       }
+      .folder-card .info.pinrow {
+        position: relative;
+        padding-right: 32px;
+      }
+      .folder-card.pinned .fthumb {
+        outline: 3px solid #ffc98a;
+        outline-offset: -3px;
+      }
       .album-head {
         grid-column: 1/-1;
         font-weight: 700;
@@ -932,7 +944,7 @@
         line-height: 1.85;
         font-size: 15.5px;
         color: var(--text);
-        padding: 8px 4px 40px;
+        padding: 8px 4px 20px;
       }
       .cafe-row .pinbtn {
         right: 4px;
@@ -1234,7 +1246,24 @@
         align-items: center;
         gap: 6px;
       }
-      .bz-side .pinbtn,
+      .bz-side .pinbtn {
+        position: static;
+        transform: none;
+      }
+      .bz-side .pinbtn.on {
+        animation: pinpop2 0.32s ease;
+      }
+      @keyframes pinpop2 {
+        0% {
+          transform: scale(0.6) rotate(-20deg);
+        }
+        60% {
+          transform: scale(1.18) rotate(6deg);
+        }
+        100% {
+          transform: scale(1) rotate(0);
+        }
+      }
       .bz-go {
         position: static;
         transform: none;
@@ -1247,13 +1276,6 @@
         background: #fff;
         border: 1px solid #f6d2a4;
         color: var(--tg-d);
-      }
-      .bz-side .pinbtn.on {
-        animation: none;
-        background: #fff;
-        color: var(--tg-d);
-        border-color: var(--tg);
-        box-shadow: 0 0 0 2px #ffc98a;
       }
       .bz-go svg {
         width: 15px;
@@ -1308,10 +1330,10 @@
       }
       .bz-ct {
         margin-top: 6px;
-        font-weight: 700;
+        font-weight: 500;
         white-space: pre-wrap;
         word-break: break-word;
-        font-size: clamp(14px, 3.7vw, 15.5px);
+        font-size: clamp(13px, 3.4vw, 14.5px);
         line-height: 1.6;
       }
       .thumb.bzthumb {
@@ -1359,7 +1381,14 @@
         </svg>
       </button>
       <button class="gb-btn bell" id="bellBtn" aria-label="알림" title="알림">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
           <path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15z" />
           <path d="M10 20.5a2 2 0 0 0 4 0" />
         </svg>
@@ -2039,14 +2068,6 @@
             "jJt7qpdPRzY | lyrics=단독",
           ],
         },
-        "etc.(가사)": {
-          ids: [
-            "YBNGZWGUGCs | 레이,리즈",
-            "N68rwFjyinI | 리즈",
-            "sAvUqJzft-U | 리즈",
-            "Zat62PEPGtc | 리즈",
-          ],
-        }, // 화면엔 "etc."로 표시
         Shorts: {
           ids: [
             "https://youtube.com/shorts/_Ab2JuEMMKc | 아이브",
@@ -2211,20 +2232,12 @@
             "https://youtube.com/shorts/MWfycgd3_SQ | 리즈",
             "https://youtube.com/shorts/AkwiVZ5cZNY | 리즈",
             "https://youtube.com/shorts/CWgwK939WjY | 리즈",
-          ],
-        },
-        VOCAL: {
-          ids: [
             "https://youtube.com/shorts/1mDSsz24zS4 | 리즈",
             "https://youtube.com/shorts/LtfCAH7mC5I | 리즈",
             "https://youtu.be/CDOPLnsFhhU | 리즈",
             "https://youtu.be/_pjvU_xx6UU | 리즈",
             "https://youtu.be/m4Q3iFYj6pA | 리즈",
             "https://youtu.be/6KCkRbmGGlw | 리즈",
-          ],
-        },
-        DANCE: {
-          ids: [
             "https://youtube.com/shorts/YkCsMM7_4rg | 리즈",
             "https://youtu.be/NTBUDlbIhq4 | 리즈",
             "https://youtu.be/_SI2h4qH5PM | 리즈",
@@ -2456,6 +2469,7 @@
             "https://youtu.be/TLw0Bsvhc_g | album=Harper's BAZAAR 2023년 7월호",
             "https://youtu.be/thSuJfR2INw | album=Singles 2022년 12월호",
             "https://youtu.be/BXf3XvHK1M8 | 가을,레이,리즈 | album=W Korea 2022년 4월호",
+            "https://youtu.be/dcwIhx_9wdw | 레이,리즈 | album=Harper's BAZAAR 2025년",
           ],
         },
         "POP-UP": { ids: [] },
@@ -2481,7 +2495,6 @@
             "https://youtube.com/shorts/WXgNpJnbRl4 | 리즈 | album=8seconds",
             "https://youtube.com/shorts/0hDQykSzSW0 | 리즈 | album=8seconds",
             "https://youtu.be/lKk24NtkJwE | 리즈 | album=8seconds",
-            "https://youtu.be/dcwIhx_9wdw | 레이,리즈 | album=Valentino",
             "https://youtu.be/JTMiVUW1tQo | album=Matin Kim",
             "https://youtu.be/8oQ0MLm0ofA | album=TONYMOLY",
             "https://youtu.be/TSHCiMpTz6A | album=ZIGZAG",
@@ -2506,7 +2519,7 @@
         Twitter: { ids: [] }, // SNS 하위: MANUAL_ITEMS로만 채우는 카테고리
         Berriz: { ids: [] }, // Platform 하위: platform=Berriz 인 게시물이 자동으로 들어옴
         "DAUM CAFE": { ids: [] }, // SNS 하위(화면 표시: Cafe): Daum Cafe 링크 게시물이 자동으로 들어옴
-        "Naver Post": { ids: [] }, // SNS 하위: MANUAL_ITEMS로만 채우는 카테고리
+        "Naver Blog": { ids: [] }, // SNS 하위: MANUAL_ITEMS로만 채우는 카테고리
         Fanclub: {
           ids: [
             "https://youtu.be/nY3-oifZu_Y | 아이브 | album=DIVE 1기 | date=2022-05-30",
@@ -2531,13 +2544,19 @@
             "https://youtu.be/C_ybIpDL0Xo | 아이브 | album=DIVE 4기 | date=2026-01-20",
           ],
         }, // Official 하위: 링크 뒤에 " | album=DIVE 1기" 처럼 붙이면 해당 폴더에 들어감
-        "Special Collaboration": { ids: [] }, // MUSIC 하위: 영상 링크를 ids에 넣거나 MANUAL_ITEMS로 채움
+        "Special Collaboration": {
+          ids: [
+            "YBNGZWGUGCs | 레이,리즈",
+            "N68rwFjyinI | 리즈",
+            "sAvUqJzft-U | 리즈",
+            "Zat62PEPGtc | 리즈",
+          ],
+        }, // MUSIC 하위
       };
       // 어떤 카테고리에도 안 넣고 "전체 영상 보기"에만 보이게 할 영상
       const OTHER_IDS = [];
       // 화면에 다른 이름으로 보이게 할 카테고리 (내부 키는 위 CATEGORIES와 맞춰야 함)
       const TAB_LABELS = {
-        "etc.(가사)": "etc.",
         "etc.(일정)": "etc.",
         RADIO: "Radio",
         "DAUM CAFE": "Cafe",
@@ -2549,8 +2568,8 @@
       //   예) CONTENTS의 VLOG = NYANG LOG + IVE LOG
       const TAB_GROUPS = {
         VLOG: ["NYANG LOG", "IVE LOG"],
-        Shorts: ["Shorts", "Challenge", "VOCAL", "DANCE", "IVE"],
-        "etc.": ["etc.(가사)", "etc.(일정)"],
+        Shorts: ["Shorts", "Challenge", "IVE"],
+        "etc.": ["etc.(일정)"],
       };
       // ---- 멤버 표시 (파스텔 배경) ----
       const MEMBER_COLORS = {
@@ -2795,7 +2814,7 @@
         "2023-06-18 | https://www.tiktok.com/@ive.official/video/7245906262486043912 |  | Shorts | 리즈 | 입에서 나는 소리 (어쨌든) 아님 🧀😽",
         "2022-02-14 | https://www.instagram.com/reel/CZ1Tedflb0W/ |  | MAGAZINE | 리즈 | ELLE 올리브영 비건뷰티 캠페인 | album=ELLE 2022년 3월호",
         "2026-10-19 | https://www.instagram.com/reel/Deq1kTfgf0y/ |  | AD | 리즈 | 𝑳-𝑶-𝑽-𝑬 🐱💌 | album=TONYMOLY",
-        "2026-10-24 | https://www.instagram.com/reel/DeyvvGURG_6/ |  | POP-UP | 리즈 | YCH HANNAM | album=YCH",
+        "2026-10-22 | https://www.instagram.com/reel/DeyvvGURG_6/ |  | POP-UP | 리즈 | YCH HANNAM | album=YCH",
         "2026-07-27 | https://www.mnetplus.world/contents/ko/shows/6a434dd9e41135211d9127f0/videos | https://lh3.googleusercontent.com/d/1NHsnYUSweZxB2DS0XpVsbEQgl3AqKU4n | MAGAZINE | 리즈 | FANS' CHOICE FACE | album=FANS' CHOICE FACE 2026년 7월호 | cols=2 | bare=1 | photos=https://lh3.googleusercontent.com/d/1QXT9kX2kCTzDakGMLGvnk6PZaEhAk6Cv;https://lh3.googleusercontent.com/d/1eUQGSrnzwrXKP0luPS6moWOKaR1PCn2F;https://lh3.googleusercontent.com/d/1wX30fcve6WylGw5PRQ54Pm6XzKEv4nEI;https://lh3.googleusercontent.com/d/1Cm4e1lOQXFNBLUgJaJ4Z6jhdexsDl-p5;https://lh3.googleusercontent.com/d/1OKHgwKjCjQyqemJ6jjhndwj31-Xua7Yd;https://lh3.googleusercontent.com/d/1nzihgwrdXY3qYZPgCH55iKw81ts-dA1J;https://lh3.googleusercontent.com/d/1NHsnYUSweZxB2DS0XpVsbEQgl3AqKU4n;https://lh3.googleusercontent.com/d/1q3XfbnayFi9UOf3d8xJDgH2vrXB4LVF8;https://lh3.googleusercontent.com/d/1QyHfyRedNismJd69fnc_oVaZdLlYjSVX;https://lh3.googleusercontent.com/d/1erXTalWVmHsDnXlJCGmulCC6KeodoEQI;https://lh3.googleusercontent.com/d/1CPKo8ddKp4ArcspbfOqX-fTom9OPP_Ph;https://lh3.googleusercontent.com/d/1sIBnNedpZKY1S7oSj5MaC7-ZBsLWFnL1;https://lh3.googleusercontent.com/d/1u-615zFvChyDtvEb8A5deotB6zQbybvx;https://lh3.googleusercontent.com/d/1u08pNPsnpz0w3hyLtpGcd7woRkkSJUSP;https://lh3.googleusercontent.com/d/1aDnS7PTmMLLz3WMVPZlxFWfErBOfD9ZS;https://lh3.googleusercontent.com/d/1yORk38l9UeRj3o0HyiIz7dJfyBnI5RZ6;https://lh3.googleusercontent.com/d/1pJ3MRJW3CPXSP4iQ7e-uwEpw36b_3f--;https://lh3.googleusercontent.com/d/17ycdKJiCia7383f7NnfZnM1L4aqRBtNk;https://lh3.googleusercontent.com/d/1F22egkpFVHlevHfw-2uZYmuTqgbULSYJ;https://lh3.googleusercontent.com/d/1lqkve7slR8MZ6s7ISvuMWacaYaMdIhip;https://lh3.googleusercontent.com/d/1EVqvY6-vTZT-kfu-YAbQt4jeO2btkaPG;https://lh3.googleusercontent.com/d/1lHhKF-ImPXwxnfZUkMEjt5WluJz551wz;https://lh3.googleusercontent.com/d/1-YYT3-46OGQFrEZDAN51_tv8kV5pROg-;https://lh3.googleusercontent.com/d/1Ie1xZ5DwNqf8Ie2ugUJkjS27gkMFJYLM;https://lh3.googleusercontent.com/d/1UdKKaha4rV-kEivDCJjymuLzCEgAMW4w;https://lh3.googleusercontent.com/d/11pYARveenWxuyjpN-WfBw4mZIvVkihSS;https://lh3.googleusercontent.com/d/1U6-maAAZgtGE28qhCUzHnWdYLU-dBc79;https://lh3.googleusercontent.com/d/1RsoVNhXvmYn8C2JPQV_tXQ649o_5Ifo0;https://lh3.googleusercontent.com/d/1KDLDVNH0sGfyvG3uYl-cJ0wXO_T4fZSS;https://lh3.googleusercontent.com/d/13MTBAy35OPG9mmgZe-qUGIk3PLlmcYJp;https://lh3.googleusercontent.com/d/1uoCUzfUrfH4o4iyZk3gONpZSP7vodvE0;https://lh3.googleusercontent.com/d/1Tc2i6LEnHowf61ugJ9dzhBczDuCwhh4G",
         "2026-10-16 | http://xhslink.com/o/9mhbWbX6YJI |  | AD | 리즈 | H&M CHINA | album=H&M CHINA",
         // ---- 2026.10 추가분 (YCH HANNAM / H&M CHINA) ----
@@ -2832,7 +2851,7 @@
         "2024-03-18 | https://www.instagram.com/reel/C4pU8wQvce3/ |  | Shorts | 리즈 | • ﻌ •. 🌈✨",
         "2024-02-10 | https://www.instagram.com/reel/C3J6iZQP775/ |  | Shorts | 리즈 | 2024, 복복복! 🫳💙",
         "2024-02-06 | https://www.instagram.com/reel/C2_zLtzvU2o/ |  | IVE | 리즈 | With you I feel clarity 🪞",
-        "2023-11-20 | https://www.instagram.com/reel/Cz2oJaGxZIM/ |  | etc.(가사) | 리즈 | SOYEON of (G)I-DLE X WINTER of aespa X #LIZ of #IVE 'NOBODY' 2030 부산월드엑스포 성공적인 유치를 기원합니다 💚",
+        "2023-11-20 | https://www.instagram.com/reel/Cz2oJaGxZIM/ |  | Special Collaboration | 리즈 | SOYEON of (G)I-DLE X WINTER of aespa X #LIZ of #IVE 'NOBODY' 2030 부산월드엑스포 성공적인 유치를 기원합니다 💚",
         "2023-09-20 | https://www.instagram.com/reel/CxaRMjJvKvx/ |  | Shorts | 리즈 | 한다 깜냥이의 챌린지 😎",
         "2023-07-10 | https://www.instagram.com/reel/CugxlpyrA66/ |  | IVE | 리즈,이서 | 댄서 언냐들 수고해떠여 🩵🤍🩵🤍",
         "2023-06-24 | https://www.instagram.com/reel/Ct4CP2NueUT/ |  | IVE | 안유진,레이,리즈 | 오늘은 나오리 경호 🐥🕶 선생님",
@@ -2897,6 +2916,137 @@
         "2025-02-03 | https://x.com/IVE_twt/status/1886334838711718366 |  | Twitter | 레이,리즈 | 자기얌 생일추카해 💋💋 햅삐햅삐한 한 해 보내보쟈ㅏ☺",
         "2025-01-26 | https://x.com/IVE_twt/status/1883456858494742924 |  | Twitter | 리즈 | REBEL HEART 활동 끄읕❕ 다이브 덕분에 행복한 활동이었다아 💗💗 새해 복 많이받아 다이부🙇🏻‍♀🔮",
         "2024-12-01 | https://x.com/IVE_twt/status/1863211035517477214 |  | Twitter | 아이브 | 아이브야 3살 축하해 💗💗",
+        "2024-12-01 | https://x.com/IVE_twt/status/1863189053312790611 |  | Twitter | 아이브 | 아이브님들아 사랑해욤 세살 귀요미들",
+        "2024-12-01 | https://x.com/IVE_twt/status/1863187638402113822 |  | Twitter | 아이브 | 우리의 3주년을 축하해🤍🪽🧚🏻‍♀",
+        "2024-12-01 | https://x.com/IVE_twt/status/1863136555088691613 |  | Twitter | 아이브 | IVE 3주년♡♡♡ (가을언니 괜찮아 내 거에도 내가 없어 ㅎㅎ)다이브가 있어서 아이브가 존재해໒꒱· ﾟ우리 영원하자⸝꙳.⋆ 못 올렸었던 핑크머리 사진도🎀",
+        "2024-12-01 | https://x.com/IVE_twt/status/1863109518185615475 |  | Twitter | 아이브 | 아이브 3주년 추카🥳 (꼭 사진 찍으려 하면 한 명이 없더라,, 햄토리 레이쨩🐹)",
+        "2024-11-24 | https://x.com/IVE_twt/status/1860538585382027693 |  | Twitter | 리즈 | 다이브💗 항상 우리에게 많은 사랑 보내줘서 고마워요🥹 다이브 덕분에 멋진 상도 받고 큰 무대에 오를 수 있어서 매번 고마움을 느껴요 언제나 곁에 있어줘서 고마워어☺️🥰",
+        "2024-11-21 | https://x.com/IVE_twt/status/1859523369626214707 |  | Twitter | 안유진,리즈 | 리즈야 지워나 생일축하😻😽",
+        "2024-11-21 | https://x.com/IVE_twt/status/1859510972907724874 |  | Twitter | 가을,리즈 | 리즈고양이 생일축하한다냥😽",
+        "2024-11-21 | https://x.com/IVE_twt/status/1859484409528975399 |  | Twitter | 레이,리즈 | 자기야 생일 축하해🐈‍⬛🎂ෆ˚* ℐ ℒℴ𝓋ℯ 𝒴ℴ𝓊 ᴵ ᴸᵒᵛᵉ ᵞᵒᶸ - ̗̀ ❤𝙸 𝙻𝚘𝚟𝚎 𝚈𝚘𝚞❤ ̖́-",
+        "2024-11-21 | https://x.com/IVE_twt/status/1859468599825662425 |  | Twitter | 장원영,리즈 | 리즈야 생일축하해💗💕🌷💐🌺 (자고 있는 치즈냥이)",
+        "2024-11-21 | https://x.com/IVE_twt/status/1859508613779423722 |  | Twitter | 리즈,이서 | 생일축하해앵🪽🌀🩵🍇🩷🍀",
+        "2024-10-20 | https://x.com/IVE_twt/status/1847845724861714537 |  | Twitter | 레이,리즈 | 귀여워서 다이브한테 보여주고 싶은 영상들👭🎀⟡.·*.",
+        "2024-10-05 | https://x.com/IVE_twt/status/1842542449333551444 |  | Twitter | 리즈 | 🖤🤍🖤",
+        "2024-09-24 | https://x.com/IVE_twt/status/1838509470802215281 |  | Twitter | 가을,리즈 | 가을언니 생일추카해요옹🤍🤍 꺄아 가을언니의 계절이다아🍂🍁",
+        "2024-09-01 | https://x.com/IVE_twt/status/1830167622882902293 |  | Twitter | 안유진,리즈 | 안댕댕 생일추카해 ~~~💋♥️🐶🤍",
+        "2024-08-31 | https://x.com/IVE_twt/status/1829803285127299129 |  | Twitter | 장원영,리즈 | 워녕아 생일축하해 💗🐰🍀💗 (무언가 옴뇸뇸 먹는 워녕토끼..💗)",
+        "2024-08-26 | https://x.com/IVE_twt/status/1828062414015013344 |  | Twitter | 아이브 | 기여워어엉ㅇ ㅜㅜㅜ💗💗💗💗",
+        "2024-08-26 | https://x.com/IVE_twt/status/1827972105365004532 |  | Twitter | 아이브 | 나의 행운들💚💙❤🩷🩵💛",
+        "2024-08-26 | https://x.com/IVE_twt/status/1827971084999918067 |  | Twitter | 아이브 | 1000🖤🎶",
+        "2024-08-26 | https://x.com/IVE_twt/status/1827953105780056520 |  | Twitter | 아이브 | ❣️사랑하는 멤버들❣️",
+        "2024-08-08 | https://x.com/IVE_twt/status/1821417661391356140 |  | Twitter | 리즈 | 오늘은 세계 고양이의 날 🐱🧀💛🐈",
+        "2024-06-29 | https://x.com/IVE_twt/status/1806908235221442676 |  | Twitter | 레이,리즈 | 그대는 선물입니다~🐱🎀",
+        "2024-06-19 | https://x.com/IVE_twt/status/1803233083639930950 |  | Twitter | 리즈 | 쿠로미리즈 🎀🖤",
+        "2024-05-19 | https://x.com/IVE_twt/status/1792185483839283429 |  | Twitter | 리즈 | 안녕하세요 모래시계입니다 ⏳ ‘복면’가왕에 출연한 만큼 복면을 쓰고 감성 있는 사진을 찍고 싶었는데 좀 무서운 점 양해 바랍니다. 노래 하나는 시간을 쪼개고 쪼개 연습해 맛깔나게 불렀으니 한번씩 들어주세요 💘💖",
+        "2024-05-05 | https://x.com/IVE_twt/status/1787119677921194495 |  | Twitter | 리즈 | 햅삐 어린이날 👶🏻💗",
+        "2024-04-17 | https://x.com/IVE_twt/status/1780411756504109285 |  | Twitter | 리즈 | 모닝선물 🌸 photo by. 햄토리🐹",
+        "2024-03-16 | https://x.com/IVE_twt/status/1768936215276044311 |  | Twitter | 리즈,이서 | 사랑가득🦦🩷",
+        "2024-03-10 | https://x.com/IVE_twt/status/1766669181171495001 |  | Twitter | 레이,리즈 | 이게 내가 말한 내 보물이야💖 자랑 좀 할게 ㅎㅎ",
+        "2024-02-21 | https://x.com/IVE_twt/status/1760241335725093227 |  | Twitter | 안유진,리즈,이서 | ",
+        "2024-02-21 | https://x.com/IVE_twt/status/1760263155694117090 |  | Twitter | 안유진,리즈,이서 | ",
+        "2024-02-21 | https://x.com/IVE_twt/status/1760227277588357506 |  | Twitter | 가을,리즈,이서 | 이서 생축🥳 내 눈엔 영원히 애기일 거야,, 귀요미 행복한 생일 보내💖",
+        "2024-02-21 | https://x.com/IVE_twt/status/1760215177834959041 |  | Twitter | 리즈,이서 | 사랑스런 마이베이비 이서야 생일축하해 💕💕 요즘 흑발해서 언니인 척 많이 하지만 아직 넌 나에게 베이비란다 🍼 그러니까 이 언니만 믿고 따라와🥰😘♥️",
+        "2024-02-21 | https://x.com/IVE_twt/status/1760128174418198721 |  | Twitter | 레이,리즈,이서 | 나의 소중한 동생 이서야 생일 축하해💛 언니가 항상 현서는 해바라기 같다고 얘기하잖아🌻 앞으로도 해바라기처럼 밝은 너의 사랑스러운 미소 많이 보여줘🎀",
+        "2024-02-19 | https://x.com/IVE_twt/status/1759238675031114219 |  | Twitter | 리즈 | 한터뮤직어워즈에서 멋진 상 받게 해줘서 너무 고마워요 다이브 💜 앞으로도 우리 잊지못할 멋진 추억 함께 쌓아나가자 💜💜",
+        "2024-02-11 | https://x.com/IVE_twt/status/1756581435371307348 |  | Twitter | 리즈 | 새해 복 많이받아 다이브 🤍 🧸:새해 복 마니바다 !!",
+        "2024-02-09 | https://x.com/IVE_twt/status/1755848459910042025 |  | Twitter | 레이,리즈 | 다이브ꔛ저희처럼 알콩달콩한 설날 보내세요🐈🖤",
+        "2024-02-08 | https://x.com/IVE_twt/status/1755458436568166730 |  | Twitter | 아이브 | 다이브 우리 오늘 800일😊👌🎀",
+        "2024-02-08 | https://x.com/IVE_twt/status/1755448127652511972 |  | Twitter | 아이브 | 800일 동글동글 타코야끼들",
+        "2024-02-03 | https://x.com/IVE_twt/status/1753764227599507893 |  | Twitter | 가을,레이,리즈,이서 | 콩 생축💚 앞으로도 ✨gorgeous✨",
+        "2024-02-03 | https://x.com/IVE_twt/status/1753735874041581866 |  | Twitter | 레이,리즈 | 마이러브 생일축하해💜앞으로도 영원히 함께해 💋",
+        "2024-01-22 | https://x.com/IVE_twt/status/1749342136632549442 |  | Twitter | 리즈,이서 | 새로운 카메라📸🖤",
+        "2024-01-19 | https://x.com/IVE_twt/status/1748335603257889179 |  | Twitter | 리즈 | All Night🎆🌌",
+        "2023-12-29 | https://x.com/IVE_twt/status/1740704487642423620 |  | Twitter | 리즈 | 크리스마스 가지마🥺🎄",
+        "2023-12-24 | https://x.com/IVE_twt/status/1738801680576393724 |  | Twitter | 리즈 | 미리 크리스마스 선물 🎁💝",
+        "2023-12-16 | https://x.com/IVE_twt/status/1736032475263209853 |  | Twitter | 아이브 | 아이브가 사과가 되어버려도 좋아해줄거야...?🥺🍎",
+        "2023-12-16 | https://x.com/IVE_twt/status/1735926712666611758 |  | Twitter | 리즈,이서 | 라일락💜",
+        "2023-12-13 | https://x.com/IVE_twt/status/1734838716156481975 |  | Twitter | 레이,리즈 | 🩷",
+        "2023-12-09 | https://x.com/IVE_twt/status/1733411780175761765 |  | Twitter | 리즈 | DIVE 〰️〰️",
+        "2023-12-09 | https://x.com/IVE_twt/status/1733404320887132311 |  | Twitter | 리즈 | 다이브 생일축하해 🎂🎉🎁♥️",
+        "2023-12-07 | https://x.com/IVE_twt/status/1732592336755167585 |  | Twitter | 리즈 | 치과에서 사탕먹기 🍭",
+        "2023-12-03 | https://x.com/IVE_twt/status/1731269739731980691 |  | Twitter | 아이브 | 다이브 오늘 1위도 너무너무 고마워요 🍓🍓🍓🍓🍓🍓 요즘 너무 행복한 일이 가득해서 하루하루 기분 좋게 마무리하는 거 같아요 다이브도 오늘 좋은 하루 보냈길!!",
+        "2023-12-03 | https://x.com/IVE_twt/status/1731231020798857682 |  | Twitter | 리즈 | 인가 트리플 크라운 너무 고마워요🏆 이 행복한 기운 다이브에게도 꼭 전해졌으면 좋겠다 🤍 다이브 아프지말고 건강만해요 항상 고마워 🥹😭",
+        "2023-12-02 | https://x.com/IVE_twt/status/1730959962522947680 |  | Twitter | 리즈 | 다이브 항상 우리 곁에 있어줘서 고마워요 곁에 있는 다이브가 자랑스러울 수 있도록 더 열심히 성장해 나가는 아이브 될게요 앞으로의 미래가 걱정이 아닌 희망과 기대로 가득 찬 모습만을 보여줄테니 꼬옥 함께해줘요 2023 MMA에서도 대상 받을 수 있게 해줘서 너무너무 고맙고 자랑스럽다 우리 다이브 멤버들과 다이브와 함께해나갈 앞으로의 나날들이 기다려지고 기대되는 이 마음이 너무 행복하고 소중하네요 🖤 내년도 아이팅 앞으로도 아이팅이야 아이브 다이브 🤍🖤🤍🖤",
+        "2023-12-02 | https://x.com/IVE_twt/status/1730947484334375395 |  | Twitter | 아이브 | 앞으로도 우리 아름다운 추억 많이 만들어가요💚⟡.· 멤버들 그리고 다이브! 진심으로 사랑해요☺️",
+        "2023-11-22 | https://x.com/IVE_twt/status/1727104408331362509 |  | Twitter | 리즈 | 어제 생일 축하해준 다이브, 모든분들 너무너무 감사해요 🖤 내 자신도 잘 챙기지않는 내 생일을 누군가가 먼저 챙겨주고 더 축하해주고 좋아해주는 모습을 보면서 감동도 받고 많은 감정이 들었어요 어제의 제 감정은 최대한 많은 사람들에게 나눠주고싶었어요 나로 인해서 사람들이 행복해하고 나를 위해서 노력해주는 모습이 말로 표현할 수 없을만큼 예쁘고 아름다웠거든요 진정한 행복을 느끼기는 정말 쉽지 않은데 어제 느낀 것 같아요 진정한 행복 24시간동안 계속 행복했던 적은 어제가 처음이었어요 레이가 처음 전화 온 순간부터 촬영장에서 축하받는 순간, 라이브하는 순간, 멤버들이랑 밥먹는 순간까지 정말 너무 행복 그 자체의 하루였어요 이렇게 생각해보니 지금까지 노력해왔던게 헛되지 않았구나라는 생각도 하게되고 처음으로 과거의 나를 반성이 아닌 칭찬을 하게되는 순간도 오네요 이게 다 어제 제 생일을 축하해준 모든분들과 다이브 덕분이 아닐까 싶어요 정말 진심으로 너무너무 감사했습니다 🙇‍♀️🙇‍♀️ 𝒯𝑜. 𝒹𝒾𝓋𝑒 내 생일을 본인 생일만큼 좋아해준 우리 다이브 너무 고마웠어 그랬던 다이브 덕분에 어제 더욱더 뜻깊고 행복한 생일을 보냈어 나도 다이브 생일 하나하나 다 챙겨서 이 기분 느끼게 해주고싶지만 그러지 못해서 미안해 하지만 다이브를 생각하는 마음만은 꼭 알아줘 다이브 생일 때면 꼭 내가 축하해주고 있다고 생각하고 행복한 하루 보내야해 다이브가 나에게 보내줬던 행복처럼 말야 안그러면 내가 속상해 할거야 알겠지 ? 다이브만 생각하면 왜 눈물이 날 것 같지 ..?ㅎㅎ 나에겐 너무 과분한 존재인걸까 그만큼 내가 잘할게 고마워 항상 우리 다이브만큼은 내가 책임질게 사랑해 🤍",
+        "2023-11-21 | https://x.com/IVE_twt/status/1726846956029481050 |  | Twitter | 안유진,리즈 | 햅삐 벌쓰데이~⛄ / 이거 뭔가 흰눈사이로 뛰어놀다 집에 돌아가는 댕댕이와 냥냥이 느낌🐶🐱",
+        "2023-11-21 | https://x.com/IVE_twt/status/1726846718904549543 |  | Twitter | 가을,리즈 | 숨겨져있던 고양이 귀 발견🐱🐱 우리 리즈 생일축하해💛💛💛💛💛 / 나는 언니만의 아기고양이(?)😽😽",
+        "2023-11-21 | https://x.com/IVE_twt/status/1726781037135745460 |  | Twitter | 레이,리즈 | 리즈야 생일 축하해🐱🧀♥️ 너의 밝은 모습을 보면 나도 행복해져⟡.· 우리가 웃을 수 있게 항상 노력 해줘서 고마워🧁ᕷ*.° / 자고있는 나를 깨워서라도 12시 되자마자 전화해서 축하해준 너, 내 생일을 나에게 알려준 너..... 사랑한다....💗",
+        "2023-11-21 | https://x.com/IVE_twt/status/1726846891311443995 |  | Twitter | 장원영,리즈 | 내 고양이🖤 생일 축하해 마이 귀요미🩷💕🥰💕😚😚 / 고양이 ...고양이....고양이 ....고양이....고양이..?.!!!?!! 고양이 !!!!!!!! 🐈‍⬛🐈🐈‍⬛🐈🐈‍⬛🐈 고맙다 토끼야 깡총🐰",
+        "2023-11-21 | https://x.com/IVE_twt/status/1726846818590634253 |  | Twitter | 리즈,이서 | 사랑하는 리즈언니 생일축하해요💖 앞으로도 늘 행복한 일들만 가득하길✨😽 / 그래 앞으로도 영원히 내 동생(중요⭐) 해주길..",
+        "2023-11-14 | https://x.com/IVE_twt/status/1724430431313928407 |  | Twitter | 리즈,이서 | 말랑",
+        "2023-11-12 | https://x.com/IVE_twt/status/1723624906372628771 |  | Twitter | 리즈 | 인기가요 1등 너무 고마워요 🥹 너무 예상치못한 선물이라 더 특별하다 🎁💝",
+        "2023-11-10 | https://x.com/IVE_twt/status/1722814365483905038 |  | Twitter | 리즈 | 고양이입니다 😽",
+        "2023-11-06 | https://x.com/IVE_twt/status/1721487378983088450 |  | Twitter | 리즈 | 저 뒤에 하트 누구게 🤪",
+        "2023-11-01 | https://x.com/IVE_twt/status/1719368820425728506 |  | Twitter | 아이브 | 700일 🩵🩶🩵🩶",
+        "2023-11-01 | https://x.com/IVE_twt/status/1719206469139365982 |  | Twitter | 아이브 | 다이브 우리 오늘 데뷔 700일이에요💝",
+        "2023-10-26 | https://x.com/IVE_twt/status/1717518156317757876 |  | Twitter | 리즈 | 다이브 1위 너무너무 고마워요♥️♥️ 오덕이도 고맙대 🪿🤍",
+        "2023-10-22 | https://x.com/IVE_twt/status/1716002144321704362 |  | Twitter | 리즈 | 마알라앙👶🏻👼🏻",
+        "2023-10-03 | https://x.com/IVE_twt/status/1709047098346549305 |  | Twitter | 리즈 | 🖤♥️🖤♥️",
+        "2023-09-23 | https://x.com/IVE_twt/status/1707757260187775251 |  | Twitter | 리즈 | 후라이는 반숙이지 😉",
+        "2023-09-24 | https://x.com/IVE_twt/status/1705902674200436915 |  | Twitter | 가을,리즈,이서 | 갤언니 생일 추가포카여 😘 오늘 맛있는거 마니먹구 자기 전까지 제일 행복한 사람 되기 약속 😉",
+        "2023-09-21 | https://x.com/IVE_twt/status/1704760416445022219 |  | Twitter | 리즈 | 베이지냥 🐱😽",
+        "2023-09-01 | https://x.com/IVE_twt/status/1697577568915058914 |  | Twitter | 안유진,리즈 | 유진언니 생일 축하해여😎 밥 맛있는거 마니 먹구 행복강쥐 되도록🐶💝💖",
+        "2023-08-31 | https://x.com/IVE_twt/status/1697201565986336981 |  | Twitter | 장원영,리즈 | 워녕아 생일축하해 🎂 오늘 하루 제일 행복하게 보내 ❣️ 저 사진은말야 스페인에서 풍경사진 찍는 모습이 예뻐서 한번 찍어봤어 히히 선물이얌💝",
+        "2023-08-08 | https://x.com/IVE_twt/status/1688752919016099840 |  | Twitter | 리즈 | 🐈🐈‍⬛",
+        "2023-08-04 | https://x.com/IVE_twt/status/1687317030591193088 |  | Twitter | 리즈 | 💕🧸💕",
+        "2023-07-24 | https://x.com/IVE_twt/status/1683153024297091073 |  | Twitter | 리즈 | 600일이다냥 🐱",
+        "2023-07-07 | https://x.com/IVE_twt/status/1676969270935425029 |  | Twitter | 리즈 | 난 바다 다이브는 물고기 💙",
+        "2023-06-25 | https://x.com/IVE_twt/status/1672950148312489984 |  | Twitter | 리즈 | 다이브 인기가요 트리플크라운 고마워어🥹💛 (🐱:나도 고맙다냥💛)",
+        "2023-06-19 | https://x.com/IVE_twt/status/1670718074050473984 |  | Twitter | 리즈 | 어느 깊은 밤... 넘어짐을 받아들이는 김리즈",
+        "2023-06-18 | https://x.com/IVE_twt/status/1670326232938889216 |  | Twitter | 리즈 | 멋지다 〰️〰️다이브 〰️〰️〰️🖤🖤🖤",
+        "2023-06-15 | https://x.com/IVE_twt/status/1669224731843907585 |  | Twitter | 리즈 | 제가 알아서 살게요💚",
+        "2023-06-14 | https://x.com/IVE_twt/status/1668957763874230273 |  | Twitter | 리즈 | I AM 100million🖤🤍🖤🤍",
+        "2023-06-05 | https://x.com/IVE_twt/status/1665639886135898112 |  | Twitter | 리즈 | 오랜만에 돌아온 맥북셀카 📸",
+        "2023-06-03 | https://x.com/IVE_twt/status/1664908854746927105 |  | Twitter | 리즈 | 놀토 토끼 !!!!!! 🐰🐇🖤🩵🩷",
+        "2023-05-27 | https://x.com/IVE_twt/status/1662396024948940803 |  | Twitter | 레이,리즈 | chu〰️💋♥️",
+        "2023-05-25 | https://x.com/IVE_twt/status/1661582909546045440 |  | Twitter | 리즈 | 어머낫 🤭📸",
+        "2023-05-24 | https://x.com/IVE_twt/status/1661311830814490625 |  | Twitter | 리즈 | 옥쓔 🌽💛",
+        "2023-05-23 | https://x.com/IVE_twt/status/1660880727825858562 |  | Twitter | 리즈 | 모여봐요 파산의숲〰️🎶🌲🪵🐿️🌰 / ⚠️🦝⚠️너구리 ‼‼‼",
+        "2023-05-22 | https://x.com/IVE_twt/status/1660610979921793026 |  | Twitter | 리즈 | 하핫 많이 늦은...키치♥️😈♥️",
+        "2023-05-21 | https://x.com/IVE_twt/status/1660193032803880960 |  | Twitter | 리즈 | 예린 선배님께서 주신 소듕한 선물..💝💎",
+        "2023-05-20 | https://x.com/IVE_twt/status/1659930730997354497 |  | Twitter | 리즈 | 아라치 아라초 아라치치 초초초 랄랄라 시스붐바 연세선수 라플라 헤이 연세 야❕💙 / 뿅🧸",
+        "2023-05-18 | https://x.com/IVE_twt/status/1659091224815448068 |  | Twitter | 리즈 | 세종대 다녀와씁니댜➿🧸",
+        "2023-05-16 | https://x.com/IVE_twt/status/1658422171516178433 |  | Twitter | 리즈 | 같이 꽃보러🪻가쟈👒 Z🩷",
+        "2023-05-14 | https://x.com/IVE_twt/status/1657401734850023424 |  | Twitter | 리즈 | ☁️✈️RIMOWA✈️☁️",
+        "2023-05-05 | https://x.com/IVE_twt/status/1654457581996478465 |  | Twitter | 리즈 | ㅇㅓㄹㅣㄴㅇㅣㄴㅏㄹ👶🏻🍼",
+        "2023-05-04 | https://x.com/IVE_twt/status/1653778748083408896 |  | Twitter | 리즈 | 초록초록 성균관대 💚🌱🍀💚 (정차중입니다🚘)",
+        "2023-05-02 | https://x.com/IVE_twt/status/1653331295060267015 |  | Twitter | 리즈 | 얼룩말🦓🖤🤍🖤🤍",
+        "2023-05-01 | https://x.com/IVE_twt/status/1652912839458459654 |  | Twitter | 리즈 | 5월도 아이팅이야🖤🤍🖤🤍 (Cute ver.)",
+        "2023-04-30 | https://x.com/IVE_twt/status/1652505568492548096 |  | Twitter | 리즈 | 모닝키치🖤😈🖤",
+        "2023-04-29 | https://x.com/IVE_twt/status/1652311322464501761 |  | Twitter | 리즈 | 음❕중❕🤍🩷🤍🩷",
+        "2023-04-27 | https://x.com/IVE_twt/status/1651563244556005376 |  | Twitter | 리즈 | 엠카 1위 고마워요 다이브🤍🖤🤍🖤 알러븅 🩶",
+        "2023-04-24 | https://x.com/IVE_twt/status/1650393026680995840 |  | Twitter | 리즈,이서 | 포토바이리즈입니다",
+        "2023-04-24 | https://x.com/IVE_twt/status/1650383325335535616 |  | Twitter | 리즈 | 🤍🎀🤍",
+        "2023-04-18 | https://x.com/IVE_twt/status/1648340405266845702 |  | Twitter | 리즈 | 더쇼 1위 !!!!! 넘무넘무 고마워요 🥰 따랑해요 다이부우🩶🤍🩶🤍",
+        "2023-04-17 | https://x.com/IVE_twt/status/1647919177292988416 |  | Twitter | 리즈 | 😈다소 정상적이지 않은 그녀😈",
+        "2023-04-14 | https://x.com/IVE_twt/status/1646879902053044224 |  | Twitter | 리즈 | 다이브 500일동안 늘 곁에 있어줘서 고마워요💕 앞으로도 우리 사랑만 주고받자 💗 (이 사진 무려 염색한 첫날 .!.!.!) (무려 포토바이 가을..!.!.!)",
+        "2023-04-14 | https://x.com/IVE_twt/status/1646705513797926914 |  | Twitter | 리즈 | 숨겨왔던 나의〰️〰️🎶🎵 뿔‼️😈",
+        "2023-04-09 | https://x.com/IVE_twt/status/1645052849527873539 |  | Twitter | 리즈 | 다이부〰️〰️ 인가1위도 넘!!!!무!!!!! 고마워요오💗💗",
+        "2023-04-08 | https://x.com/IVE_twt/status/1644619432743043075 |  | Twitter | 리즈 | 키치 음중1위 너무너무 고마워요 다이브 💗💗 키치키치〰️🎶",
+        "2023-04-07 | https://x.com/IVE_twt/status/1644174850574155778 |  | Twitter | 리즈 | 다이브❕파리 잘 다녀오께요〰️〰️✈️",
+        "2023-04-01 | https://x.com/IVE_twt/status/1642031542490009601 |  | Twitter | 리즈,이서 | 초면이신데 제 계정을 함부로!!!!!!! 뺏어가시면 어떠카져⁉️ 훙 친구안해여 !!!!😤",
+        "2023-04-01 | https://x.com/IVE_twt/status/1642027760771125248 |  | Twitter | 리즈 | 핫팩처럼 따뜻한 하루 보내요 다이브 ʚ♥ɞ",
+        "2023-04-01 | https://x.com/IVE_twt/status/1642023986023534592 |  | Twitter | 리즈 | 오늘 아무한테도 속지 마 다이브‼️ 우리 다이브는 내가 지킨다🕶️👊🏻",
+        "2023-04-01 | https://x.com/IVE_twt/status/1642025718900232193 |  | Twitter | 가을,리즈 | 우리 깜냥이 예쁘죠ㅎㅎ / 모야앙 부끄럽겡😻",
+        "2023-04-01 | https://x.com/IVE_twt/status/1642018952762265600 |  | Twitter | 리즈 | 이거 이제 내 계정이면 나 완저니 인싸자나❗️❓",
+        "2023-04-01 | https://x.com/IVE_twt/status/1642014183192678408 |  | Twitter | 리즈 | 이 계정 이제 내거지롱〰️ʕ•̫͡•ʕ•̫͡•ʔ•̫͡•ʔ",
+        "2023-03-27 | https://x.com/IVE_twt/status/1640331549806858241 |  | Twitter | 리즈 | Kitsch😈💜🖤❤️‍🔥",
+        "2023-03-22 | https://x.com/IVE_twt/status/1638456237259124737 |  | Twitter | 리즈 | 재밌따아 !!!! 놀아줘서 고마워요 다이브❣️안뇨옹👋🏻👋🏻 #깜냥이_놀아줄사람",
+        "2023-03-22 | https://x.com/IVE_twt/status/1638443709196029958 |  | Twitter | 리즈 | 🐈‍⬛🖤 #깜냥이_놀아줄사람",
+        "2023-03-21 | https://x.com/IVE_twt/status/1638039346870915074 |  | Twitter | 리즈 | 💙#LOVEDIVE 200million💙",
+        "2023-03-15 | https://x.com/IVE_twt/status/1635982552195530752 |  | Twitter | 리즈 | 여언스읍시일 🎤🎵",
+        "2023-03-12 | https://x.com/IVE_twt/status/1634817501535309826 |  | Twitter | 리즈 | ʚ♥ɞ",
+        "2023-03-05 | https://x.com/IVE_twt/status/1632355577497255936 |  | Twitter | 리즈 | 🍭🍬",
+        "2023-02-22 | https://x.com/IVE_twt/status/1628378446610190338 |  | Twitter | 리즈 | 👼🏻🍼",
+        "2023-02-21 | https://x.com/IVE_twt/status/1627886206225903616 |  | Twitter | 리즈 | 현서야~~생일추카해🐯 오늘 체고로 행복한 하루 보내💖나 그만 조아하구 ><😜",
+        "2023-02-18 | https://x.com/IVE_twt/status/1626952392087584768 |  | Twitter | 리즈 | 다이브 오늘 써클차트에서 많은 상들 받게해줘서 고마워요🏆 내가 마니마니 사랑해 다이부💗",
+        "2023-02-13 | https://x.com/IVE_twt/status/1625075391189905408 |  | Twitter | 리즈 | 다이브랑 함께한 첫번째 팬콘 너무너무 좋았지뭐야💘 빤니 또 보구싶땅 다이부ㅜㅜㅜ🥺🥹",
+        "2023-02-11 | https://x.com/IVE_twt/status/1624233263790436357 |  | Twitter | 리즈 | 다이브 우리 좀 이따 만나쟝💘",
+        "2023-02-03 | https://x.com/IVE_twt/status/1621523675282575365 |  | Twitter | 리즈 | 쟈기양~~20대 첫 생일 너무 추카해💗내가 너의 생일 마지막을 장식해주겠어✨ (어때 사랑스럽지~??😉)",
+        "2023-01-28 | https://x.com/IVE_twt/status/1619296845695713280 |  | Twitter | 리즈 | 💛🧀🐈💛",
+        "2023-01-20 | https://x.com/IVE_twt/status/1616382644950036481 |  | Twitter | 리즈 | 다이브 어제 서가대 무대는 봤죵 ?? 열심히 또 즐겁게 무대 했으니 이뿌게 봐줘요오☺️ 어제 멋진 상 받게해줘서 너무 고맙구 새해복 많으세요ㅎㅎ💗💗",
         // ---- AD · Valentino (최신순 / 모두 레이,리즈 / album=Valentino) ----
         // Valentino Antibiblioteca
         "2026-10-04 | https://x.com/MaisonValentino/status/2107762053846794654 |  | AD | 레이,리즈 | Valentino Antibiblioteca | album=Valentino",
@@ -3005,23 +3155,23 @@
         "2026-01-28 | https://www.instagram.com/p/DUFcmBTEtnu/ |  | AD | 레이,리즈 | Valentino Specula Mundi | album=Valentino",
         "2026-01-28 | https://x.com/i/status/2016554725358158281 |  | AD | 레이,리즈 | Valentino Specula Mundi | album=Valentino",
         "2026-01-28 | https://www.instagram.com/p/DUK9AcxCJLO/ |  | AD | 레이,리즈 | Valentino Specula Mundi | album=Valentino",
-        // Valentino Cruise
-        "2025-10-05 | https://www.instagram.com/p/DQwEjM_koLy/ |  | AD | 레이,리즈 | Valentino Cruise | album=Valentino | ratio=16:9",
-        "2025-10-05 | https://www.instagram.com/p/DQwEkE1kv7P/ |  | AD | 레이,리즈 | Valentino Cruise | album=Valentino | ratio=16:9",
-        "2025-10-05 | https://www.instagram.com/reel/DPbfrc1jUgh/ |  | AD | 레이,리즈 | Valentino Cruise | album=Valentino",
-        "2025-10-05 | https://www.instagram.com/reel/DPbcRR2CFmF/ |  | AD | 레이,리즈 | Valentino Cruise | album=Valentino",
-        "2025-10-05 | https://www.instagram.com/reel/DPdbvqLjZCc/ |  | AD | 레이,리즈 | Valentino Cruise | album=Valentino",
-        "2025-10-05 | https://www.instagram.com/reel/DPbcx-RDGJ7/ |  | AD | 레이,리즈 | Valentino Cruise | album=Valentino",
-        "2025-10-05 | https://www.instagram.com/reel/DPbavbXk6rZ/ |  | AD | 레이,리즈 | Valentino Cruise | album=Valentino",
-        "2025-10-05 | https://www.instagram.com/reel/DPbd4-1D0Um/ |  | AD | 레이,리즈 | Valentino Cruise | album=Valentino",
-        "2025-10-05 | https://www.instagram.com/reel/DPbak4Dk7JL/ |  | AD | 레이,리즈 | Valentino Cruise | album=Valentino",
-        "2025-10-05 | https://www.instagram.com/reel/DPbdx3bAfFS/ |  | AD | 레이,리즈 | Valentino Cruise | album=Valentino",
-        "2025-10-05 | https://www.instagram.com/reel/DPb3LO9E1Xl/ |  | AD | 레이,리즈 | Valentino Cruise | album=Valentino",
-        "2025-10-05 | https://www.instagram.com/reel/DPbd8kgjNp8/ |  | AD | 레이,리즈 | Valentino Cruise | album=Valentino",
-        "2025-10-05 | https://www.instagram.com/reel/DPbdMufgBAV/ |  | AD | 레이,리즈 | Valentino Cruise | album=Valentino",
-        "2025-10-05 | https://www.instagram.com/reel/DPbb_9liIab/ |  | AD | 레이,리즈 | Valentino Cruise | album=Valentino",
-        "2025-10-05 | https://www.instagram.com/reel/DPbdQffk_XU/ |  | AD | 레이,리즈 | Valentino Cruise | album=Valentino",
-        "2025-10-05 | https://www.instagram.com/reel/DPbZQQAkdKP/ |  | AD | 레이,리즈 | Valentino Cruise | album=Valentino",
+        // Valentino Cruise 26
+        "2025-10-05 | https://www.instagram.com/p/DQwEjM_koLy/ |  | MAGAZINE | 레이,리즈 | Valentino Cruise 26 | album=Harper's BAZAAR 2025년 | ratio=16:9",
+        "2025-10-05 | https://www.instagram.com/p/DQwEkE1kv7P/ |  | MAGAZINE | 레이,리즈 | Valentino Cruise 26 | album=Harper's BAZAAR 2025년 | ratio=16:9",
+        "2025-10-05 | https://www.instagram.com/reel/DPbfrc1jUgh/ |  | AD | 레이,리즈 | Valentino Cruise 26 | album=Valentino",
+        "2025-10-05 | https://www.instagram.com/reel/DPbcRR2CFmF/ |  | AD | 레이,리즈 | Valentino Cruise 26 | album=Valentino",
+        "2025-10-05 | https://www.instagram.com/reel/DPdbvqLjZCc/ |  | AD | 레이,리즈 | Valentino Cruise 26 | album=Valentino",
+        "2025-10-05 | https://www.instagram.com/reel/DPbcx-RDGJ7/ |  | AD | 레이,리즈 | Valentino Cruise 26 | album=Valentino",
+        "2025-10-05 | https://www.instagram.com/reel/DPbavbXk6rZ/ |  | AD | 레이,리즈 | Valentino Cruise 26 | album=Valentino",
+        "2025-10-05 | https://www.instagram.com/reel/DPbd4-1D0Um/ |  | AD | 레이,리즈 | Valentino Cruise 26 | album=Valentino",
+        "2025-10-05 | https://www.instagram.com/reel/DPbak4Dk7JL/ |  | AD | 레이,리즈 | Valentino Cruise 26 | album=Valentino",
+        "2025-10-05 | https://www.instagram.com/reel/DPbdx3bAfFS/ |  | AD | 레이,리즈 | Valentino Cruise 26 | album=Valentino",
+        "2025-10-05 | https://www.instagram.com/reel/DPb3LO9E1Xl/ |  | AD | 레이,리즈 | Valentino Cruise 26 | album=Valentino",
+        "2025-10-05 | https://www.instagram.com/reel/DPbd8kgjNp8/ |  | AD | 레이,리즈 | Valentino Cruise 26 | album=Valentino",
+        "2025-10-05 | https://www.instagram.com/reel/DPbdMufgBAV/ |  | AD | 레이,리즈 | Valentino Cruise 26 | album=Valentino",
+        "2025-10-05 | https://www.instagram.com/reel/DPbb_9liIab/ |  | AD | 레이,리즈 | Valentino Cruise 26 | album=Valentino",
+        "2025-10-05 | https://www.instagram.com/reel/DPbdQffk_XU/ |  | AD | 레이,리즈 | Valentino Cruise 26 | album=Valentino",
+        "2025-10-05 | https://www.instagram.com/reel/DPbZQQAkdKP/ |  | AD | 레이,리즈 | Valentino Cruise 26 | album=Valentino",
         // Valentino's 2025 Fall Collection Pop-up Store
         "2025-06-20 | https://www.instagram.com/p/DLHiKN_JNoi/ |  | AD | 레이,리즈 | Valentino's 2025 Fall Collection Pop-up Store | album=Valentino",
         "2025-06-20 | https://www.instagram.com/p/DLHiH17yD1C/ |  | AD | 레이,리즈 | Valentino's 2025 Fall Collection Pop-up Store | album=Valentino",
@@ -3259,7 +3409,7 @@
         "2022-05-01 |  | https://blog.kakaocdn.net/dn/rvXAQ/dJMcaaT0Dk6/LDaTb5com8Bv3hZBq1GDpK/AAAAAAAAAAAAAAAAAAAAAN3lq80BIz3CBrvA2ZmZgEBNMybq1mnzkgFvwekMZeW6/tfile.jpg | MAGAZINE | 아이브 | S Cawaii 2022년 5월호 | album=S Cawaii 2022년 5월호 | cols=2 | bare=1 | photos=https://blog.kakaocdn.net/dn/rvXAQ/dJMcaaT0Dk6/LDaTb5com8Bv3hZBq1GDpK/AAAAAAAAAAAAAAAAAAAAAN3lq80BIz3CBrvA2ZmZgEBNMybq1mnzkgFvwekMZeW6/tfile.jpg;https://blog.kakaocdn.net/dn/bHDjSS/dJMcacLakVk/yK3xKCFznrWGAG14DEWFbK/AAAAAAAAAAAAAAAAAAAAAA_7-7ZGCYZ7BHAX0fE6jTVaQkT4t8w7kwkdeM_MZWyb/tfile.jpg;https://blog.kakaocdn.net/dn/SbXfE/dJMcaaT0Dk7/kzNtynMI4N5fBJFpzr0xGK/AAAAAAAAAAAAAAAAAAAAAG-j_ofiTpdmwD1ShN2_GPKabzo2mbYY0tYNnR9UCGyq/tfile.jpg;https://blog.kakaocdn.net/dn/nG2PT/dJMcacLakVl/2auuDsoYckKcI7kj9tzxjk/AAAAAAAAAAAAAAAAAAAAAHDQGuP3ik7zPNNZ1IrKKJmd6NCYs5z6HXP-_5C4blvY/tfile.jpg",
         "2022-02-22 | https://x.com/i/status/1496054657331843077 |  | MAGAZINE | 리즈 | S Cawaii 2022년 5월호 | album=S Cawaii 2022년 5월호",
         "2022-02-14 | https://www.elle.co.kr/article/63807 | https://blog.kakaocdn.net/dn/yUohH/dJMcabMQQSS/Aw4KMzo4vNBCOyfErOTJR0/AAAAAAAAAAAAAAAAAAAAABKgWoWUawO0At-5DCBScFpahp6I419Ah-xDYBNQSxPP/img.jpg | MAGAZINE | 리즈 | ELLE 2022년 3월호 | album=ELLE 2022년 3월호 | cols=2 | bare=1 | original=1 | photos=https://blog.kakaocdn.net/dn/yUohH/dJMcabMQQSS/Aw4KMzo4vNBCOyfErOTJR0/AAAAAAAAAAAAAAAAAAAAABKgWoWUawO0At-5DCBScFpahp6I419Ah-xDYBNQSxPP/img.jpg;https://blog.kakaocdn.net/dn/A3ZfI/dJMcaiSE8GI/S1n9zfMonYTWhpNMiy05x0/AAAAAAAAAAAAAAAAAAAAADX8RqkM57eekfJtENlfHdSMUKrn_9UVIrJ_MQ5VuiZY/img.jpg;https://blog.kakaocdn.net/dn/bp41X2/dJMcahMPBtY/KAXmGnyr5ymTNfgrkvzjz1/AAAAAAAAAAAAAAAAAAAAAPWf94-05YGmERkZuBexOPSd7lEN4MA1rYOxDLaCD0rv/img.jpg;https://blog.kakaocdn.net/dn/8Q7XJ/dJMcafhiaB7/FjHqmzVLJWohcWbuCu7SL0/AAAAAAAAAAAAAAAAAAAAABx-qkSlFPrJoaLD7Ze-c4l1IBZZ4rehiYaVJDYNkq0E/img.jpg;https://blog.kakaocdn.net/dn/tNSeD/dJMcafPe251/WKyrKNILDhKNJxgC6QMpX0/AAAAAAAAAAAAAAAAAAAAAAq51z2VPA95ZnleX8KuCom_wCducKODTaSHZZHF-Sh_/img.jpg",
-        "2022-04-01 |  | https://blog.kakaocdn.net/dn/b77wX1/dJMcahsIRCN/v4ZUx09N5AJrhIElwkjEm1/AAAAAAAAAAAAAAAAAAAAAHeQP6HqyA73Ip1pFtwQTCGZPttyRcMdEA0xy3T-Xu-M/img.jpg | MAGAZINE | 리즈 | W Korea 2022년 4월호 | album=W Korea 2022년 4월호 | cols=2 | bare=1 | photos=https://blog.kakaocdn.net/dn/b77wX1/dJMcahsIRCN/v4ZUx09N5AJrhIElwkjEm1/AAAAAAAAAAAAAAAAAAAAAHeQP6HqyA73Ip1pFtwQTCGZPttyRcMdEA0xy3T-Xu-M/img.jpg;https://blog.kakaocdn.net/dn/3yrm7/dJMcadjyCwZ/mCs17fXNKmJMdvvHwOOcE0/AAAAAAAAAAAAAAAAAAAAALqc1js5nuvfgBPC-QcC648Fxm3Ld9oti1Wrs8lvq7Wa/img.jpg;https://blog.kakaocdn.net/dn/cpKyXV/dJMcaiZchJl/41ELkw1MBjwO29u8KFzvkK/AAAAAAAAAAAAAAAAAAAAAMqTGs58wavqD5HXSqW4wSGWGvG-JStleqzTh-MVCB98/img.jpg;https://blog.kakaocdn.net/dn/cw1v1T/dJMcadjyCwP/feBQL34Nw3GdmmiA3UQip0/AAAAAAAAAAAAAAAAAAAAAF0Wxf7iUGmrfOtZFl6MPmZOB9KeTkQLSqyc7qikKzS2/img.jpg",
+        "2022-04-01 |  | https://blog.kakaocdn.net/dn/cpKyXV/dJMcaiZchJl/41ELkw1MBjwO29u8KFzvkK/AAAAAAAAAAAAAAAAAAAAAMqTGs58wavqD5HXSqW4wSGWGvG-JStleqzTh-MVCB98/img.jpg | MAGAZINE | 리즈 | W Korea 2022년 4월호 | album=W Korea 2022년 4월호 | cols=2 | bare=1 | photos=https://blog.kakaocdn.net/dn/b77wX1/dJMcahsIRCN/v4ZUx09N5AJrhIElwkjEm1/AAAAAAAAAAAAAAAAAAAAAHeQP6HqyA73Ip1pFtwQTCGZPttyRcMdEA0xy3T-Xu-M/img.jpg;https://blog.kakaocdn.net/dn/3yrm7/dJMcadjyCwZ/mCs17fXNKmJMdvvHwOOcE0/AAAAAAAAAAAAAAAAAAAAALqc1js5nuvfgBPC-QcC648Fxm3Ld9oti1Wrs8lvq7Wa/img.jpg;https://blog.kakaocdn.net/dn/cpKyXV/dJMcaiZchJl/41ELkw1MBjwO29u8KFzvkK/AAAAAAAAAAAAAAAAAAAAAMqTGs58wavqD5HXSqW4wSGWGvG-JStleqzTh-MVCB98/img.jpg;https://blog.kakaocdn.net/dn/cw1v1T/dJMcadjyCwP/feBQL34Nw3GdmmiA3UQip0/AAAAAAAAAAAAAAAAAAAAAF0Wxf7iUGmrfOtZFl6MPmZOB9KeTkQLSqyc7qikKzS2/img.jpg",
         "2022-02-01 | https://www.cosmopolitan.co.kr/article/63163 | https://blog.kakaocdn.net/dn/A23jk/dJMcadKqEs2/HbpJBVHalRK09xdk15MDK0/AAAAAAAAAAAAAAAAAAAAACWQIQJLOXW8FaajN2XCmDmFKAd5IipY6lj7GpKmf7GS/img.jpg | MAGAZINE | 아이브 | COSMOPOLITAN 2022년 2월호 | album=COSMOPOLITAN 2022년 2월호 | cols=2 | bare=1 | original=1 | photos=https://blog.kakaocdn.net/dn/A23jk/dJMcadKqEs2/HbpJBVHalRK09xdk15MDK0/AAAAAAAAAAAAAAAAAAAAACWQIQJLOXW8FaajN2XCmDmFKAd5IipY6lj7GpKmf7GS/img.jpg;https://blog.kakaocdn.net/dn/b9Fbko/dJMcafuK9FP/djkQkM8pug1IcK0wosteU0/AAAAAAAAAAAAAAAAAAAAADi5HSv6KHFQcMG_batDGR5A_34jS7k77VGIi70dYs5h/img.jpg;https://blog.kakaocdn.net/dn/cS1muz/dJMcafBy7y3/TyVxDASviKehRxAbBs1F30/AAAAAAAAAAAAAAAAAAAAAESLsLoalWMLWb6HhGeMY0esWF8s-8RF0N0K51fdVgAf/img.jpg;https://blog.kakaocdn.net/dn/b4WCUt/dJMcaf9eX4Z/m3V42k5kynTJJEcud9Zjl1/AAAAAAAAAAAAAAAAAAAAAC9DN5_kiEU22pxVd0uatc720zs52ndILPJ-RvZOWICB/img.jpg",
         "2022-02-07 | https://www.instagram.com/p/CZp-0yyA6GY/ |  | MAGAZINE | 아이브 | So lovely So Cute! #아이브(@ivestarship)의 경쾌하고 사랑스러운 #주얼리 필름을 공개합니다💕보는 순간 에너지도 기분도 상큼해지는 것 같죠?!😍 | album=COSMOPOLITAN 2022년 2월호",
         "2021-12-21 | https://dazedkorea.com/2021/12/21/%ec%9c%a0%ec%a7%84-%ea%b0%80%ec%9d%84-%eb%a0%88%ec%9d%b4-%ec%9b%90%ec%98%81-%eb%a6%ac%ec%a6%88-%ec%9d%b4%ec%84%9c-%ec%97%ac%ec%84%af-%eb%aa%85%ec%9c%bc%eb%a1%9c-%eb%ad%89%ec%b9%9c-%ec%95%84/ | https://blog.kakaocdn.net/dn/et4i7z/dJMcajcPZVv/kLvvnJDWaIo5kBUIgWmLw0/AAAAAAAAAAAAAAAAAAAAABEf6F_zwKOnS9Yac3773KPfTRBMRPOOOXX9_frgfbJc/img.jpg | MAGAZINE | 리즈 | DAZED 2022년 1월호 | album=DAZED 2022년 1월호 | cols=2 | bare=1 | original=1 | photos=https://blog.kakaocdn.net/dn/et4i7z/dJMcajcPZVv/kLvvnJDWaIo5kBUIgWmLw0/AAAAAAAAAAAAAAAAAAAAABEf6F_zwKOnS9Yac3773KPfTRBMRPOOOXX9_frgfbJc/img.jpg;https://blog.kakaocdn.net/dn/5TQKo/dJMcahMPADX/8v7w1mTkRshSm7KZkFmFhk/AAAAAAAAAAAAAAAAAAAAANmzsmabF0Lbz03lu6Ofifigfl4gvYtE3vhs46MNCrRJ/img.jpg",
@@ -3267,6 +3417,67 @@
         "2023-01-01 |  | https://blog.kakaocdn.net/dn/diTwQ1/dJMb99U6sYD/RK8IlisFV2KWzfRFYdeXok/AAAAAAAAAAAAAAAAAAAAADPHIn5PVQjZOWfFAGzE8xDgdyusBXlXwyHQCk7cIXaB/img.jpg | MAGAZINE | 아이브 | AERA 2023년 1월호 | album=AERA 2023년 1월호 | cols=2 | bare=1 | photos=https://blog.kakaocdn.net/dn/diTwQ1/dJMb99U6sYD/RK8IlisFV2KWzfRFYdeXok/AAAAAAAAAAAAAAAAAAAAADPHIn5PVQjZOWfFAGzE8xDgdyusBXlXwyHQCk7cIXaB/img.jpg",
         "2025-06-12 | https://youtu.be/__aA3zevYc4 | https://i.ytimg.com/vi/__aA3zevYc4/maxresdefault.jpg | MAGAZINE | 리즈 | PowerCircles | album=PowerCircles 2025년 6월호",
         "2025-06-11 | https://youtu.be/R8ssW8KNIAg | https://i.ytimg.com/vi/R8ssW8KNIAg/maxresdefault.jpg | MAGAZINE | 리즈 | PowerCircles Q&A | album=PowerCircles 2025년 6월호",
+        // ---- Naver Blog 추가분 (STARSHIP 공식 블로그) ----
+        "2021-12-07 | https://m.blog.naver.com/starship_ent/223734888982 | https://lh3.googleusercontent.com/d/1-FTlCMHREwajsCrYktu4GIpXtk1bk1eI | Naver Blog | 아이브 | IVE 1st Single Album [ELEVEN] 자켓 촬영 비하인드",
+        "2021-12-17 | https://m.blog.naver.com/starship_ent/223734889042 | https://lh3.googleusercontent.com/d/1U-apA6IRGhyqkbpMspbSfehyIK8yJhvO | Naver Blog | 아이브 | IVE 1st Single Album [ELEVEN] MV 촬영 비하인드",
+        "2021-12-27 | https://m.blog.naver.com/starship_ent/223734889111 | https://lh3.googleusercontent.com/d/1DnpqItVL2iBXbq83AhJ6MUkbh_zPwFcX | Naver Blog | 아이브 | IVE <ELEVEN> 음악방송 비하인드",
+        "2022-02-08 | https://m.blog.naver.com/starship_ent/223734889216 | https://lh3.googleusercontent.com/d/1Pc_YETJy9eDmQ9Cb8kmW3NBlED-Vdid8 | Naver Blog | 아이브 | IVE <1theK> 촬영 비하인드",
+        "2022-02-16 | https://m.blog.naver.com/starship_ent/223734889276 | https://lh3.googleusercontent.com/d/1EpZMeaWo2fcdDShkOjLOcf5LBW0E9fhM | Naver Blog | 아이브 | IVE X COSMOPOLITAN 2월호 커버 촬영 현장 비하인드",
+        "2022-02-19 | https://m.blog.naver.com/starship_ent/223734889324 | https://lh3.googleusercontent.com/d/1-fEENRJ0YR9AC8gnQGk2b21LASPvMvCT | Naver Blog | 리즈 | 리즈 X ‘올리브영 비건뷰티’ 촬영 현장 비하인드",
+        "2022-02-26 | https://m.blog.naver.com/starship_ent/223734889386 | https://lh3.googleusercontent.com/d/1ZVv-G4F7fRPM0AmEdbsawGSSe1-nZmcC | Naver Blog | 아이브 | IVE <1,2,3 IVE> 촬영 비하인드",
+        "2022-03-10 | https://m.blog.naver.com/starship_ent/223734889415 | https://lh3.googleusercontent.com/d/1LU3vn12VITaKKUDBU-AIwy6HNHlgiJks | Naver Blog | 아이브 | IVE <HAPPY DEBUT 100 DAYS>",
+        "2022-03-27 | https://m.blog.naver.com/starship_ent/223734889527 | https://lh3.googleusercontent.com/d/1BfLtTF1zZSI_Oc5_wni4zWojFc9H_mtw | Naver Blog | 아이브 | IVE X S Cawaii! 5월호 커버 촬영 현장 비하인드",
+        "2022-04-14 | https://m.blog.naver.com/starship_ent/223734889584 | https://lh3.googleusercontent.com/d/1asDIqdw8swCCa7rbPZozlWuFL8f0krmi | Naver Blog | 아이브 | IVE THE 2nd SINGLE ALBUM [LOVE DIVE] 자켓 촬영 비하인드",
+        "2022-04-25 | https://m.blog.naver.com/starship_ent/223734889753 | https://lh3.googleusercontent.com/d/1DMvlJCxRr3-FvKVRGVUcaJqOPhQ7_o39 | Naver Blog | 아이브 | IVE THE 2nd SINGLE ALBUM [LOVE DIVE] MV 촬영 비하인드",
+        "2022-05-13 | https://m.blog.naver.com/starship_ent/223734889908 | https://lh3.googleusercontent.com/d/12P2VteQgth1RHZ0oxO7KSHnAB3Qs_A3O | Naver Blog | 아이브 | IVE THE 2nd SINGLE ALBUM [LOVE DIVE] 쇼케이스 현장 비하인드",
+        "2022-05-16 | https://m.blog.naver.com/starship_ent/223734890040 | https://lh3.googleusercontent.com/d/1Tyf556nSapjtH7eQ4pq-dWM3M0maEoqc | Naver Blog | 아이브 | IVE <LOVE DIVE> 음악방송 비하인드",
+        "2022-06-03 | https://m.blog.naver.com/starship_ent/223734890156 | https://lh3.googleusercontent.com/d/1GGt78Twf2yDb0R9zdG0OXYZSJ-KKW0RW | Naver Blog | 아이브 | IVE <STAGE BREAK> 촬영 비하인드",
+        "2022-07-14 | https://m.blog.naver.com/starship_ent/223734890336 | https://lh3.googleusercontent.com/d/1cOGCtqvMSBaVWgWnaHc33MjB-NGIcZRC | Naver Blog | 아이브 | IVE <KBS2 뮤직뱅크 상반기 결산> 비하인드",
+        "2022-07-26 | https://m.blog.naver.com/starship_ent/223734890390 | https://lh3.googleusercontent.com/d/1bWYiNnjObZbGsL7HqwWiWd79Ae43xwRt | Naver Blog | 아이브 | IVE <1,2,3 IVE 2> 촬영 비하인드",
+        "2022-08-09 | https://m.blog.naver.com/starship_ent/223734890474 | https://lh3.googleusercontent.com/d/1sJ3IZdf3t_KP6FaQPGjSb_Z5vtzK_kDQ | Naver Blog | 아이브 | IVE <1,2,3 IVE 2> 촬영 비하인드 #2",
+        "2022-09-14 | https://m.blog.naver.com/starship_ent/223734890541 | https://lh3.googleusercontent.com/d/1EALTXofVV5QsBtDW_JqX-KJeyluKpVc4 | Naver Blog | 아이브 | IVE <V 컬러링> 광고 촬영 현장 비하인드",
+        "2022-09-18 | https://m.blog.naver.com/starship_ent/223734890588 | https://lh3.googleusercontent.com/d/1-KPsv8pF_WRaKEFHapOWo3HC1vrLlZ-8 | Naver Blog | 아이브 | IVE 3rd SINGLE ALBUM [After LIKE] 자켓 촬영 비하인드",
+        "2022-09-29 | https://m.blog.naver.com/starship_ent/223734890668 | https://lh3.googleusercontent.com/d/1X8-_X5f_hYgJoYW5SHgm15hwHrUldeJO | Naver Blog | 아이브 | IVE 3rd SINGLE ALBUM [After LIKE] 자켓 촬영 비하인드 #2",
+        "2022-10-12 | https://m.blog.naver.com/starship_ent/223734890718 | https://lh3.googleusercontent.com/d/1BVHwDHFMENdJg8j4GDj79mbqPjNbAofB | Naver Blog | 아이브 | IVE 3rd SINGLE ALBUM [After LIKE] MV 촬영 비하인드",
+        "2022-10-18 | https://m.blog.naver.com/starship_ent/223734890778 | https://lh3.googleusercontent.com/d/1Kl9KzieaIxcwY6vtAL1q3P1gry2TDNY2 | Naver Blog | 아이브 | IVE <I’VE SUMMER FILM> 비하인드",
+        "2022-10-20 | https://m.blog.naver.com/starship_ent/223734890826 | https://lh3.googleusercontent.com/d/1_nepuqTAXUC7xaDhj4LxhMH8qS_c5zWV | Naver Blog | 아이브 | IVE <After LIKE> 음악방송 비하인드",
+        "2022-10-27 | https://m.blog.naver.com/starship_ent/223734890894 | https://lh3.googleusercontent.com/d/1UgIzbbT5HFgy0GwzBk5iUEjiaSV73bZa | Naver Blog | 아이브 | IVE 2022 웰컴 패키지 ‘A RAY OF SUNSHINE’ 촬영 현장 비하인드",
+        "2022-12-01 | https://m.blog.naver.com/starship_ent/223734890946 | https://lh3.googleusercontent.com/d/1yiu7vXAWjGfjfqn5yuw6HZotfl-7FRo0 | Naver Blog | 아이브 | IVE ♥1st anniv.♥ 데뷔 프로필 촬영 비하인드",
+        "2023-01-05 | https://m.blog.naver.com/starship_ent/223734891219 | https://lh3.googleusercontent.com/d/1Jw8zptQM1705kA1KFjIGWDvYu73BCDgu | Naver Blog | 아이브 | IVE <2022 SBS 가요대전> 현장 비하인드",
+        "2023-01-10 | https://m.blog.naver.com/starship_ent/223734891276 | https://lh3.googleusercontent.com/d/1QzciXiGIJbKECF2sJO-ajKa2zucMi3c8 | Naver Blog | 아이브 | IVE X Vogue Korea 1월호 커버 촬영 현장 비하인드",
+        "2023-01-14 | https://m.blog.naver.com/starship_ent/223734891354 | https://lh3.googleusercontent.com/d/1Fkmeua9CtUzpzu146kfc0K6yAi4kfye_ | Naver Blog | 아이브 | IVE <2022 MBC 가요대제전 & 엠카운트다운> 현장 비하인드",
+        "2023-01-18 | https://m.blog.naver.com/starship_ent/223734891424 | https://lh3.googleusercontent.com/d/1dyBh7dLCBMCpKyEnQIcBqidvieumN7Fc | Naver Blog | 아이브 | IVE 2023 시즌그리팅 ‘READY, GET SET, IVE!’ 촬영 현장 비하인드",
+        "2023-04-19 | https://m.blog.naver.com/starship_ent/223734891593 | https://lh3.googleusercontent.com/d/1-tgzx1AWsHLL6AYWQL2POWRWIEUJCrwG | Naver Blog | 아이브 | IVE Pre-release Single [Kitsch] MV 비하인드",
+        "2023-05-07 | https://m.blog.naver.com/starship_ent/223734891694 | https://lh3.googleusercontent.com/d/15fU0MK8Wb2LmzeRDM1CC44lxDotU_p51 | Naver Blog | 아이브 | 깜냥 에디터의 MAGAZINE IVE 비하인드 포스트 !!!!!!!!!!!!!!!!!!!",
+        "2023-05-10 | https://m.blog.naver.com/starship_ent/223734891759 | https://lh3.googleusercontent.com/d/1bCQXbkBP3hkavjGX98IEDSbOc1icFGzT | Naver Blog | 아이브 | IVE THE 1ST ALBUM [I’ve IVE] 자켓 촬영 비하인드",
+        "2023-05-13 | https://m.blog.naver.com/starship_ent/223734891808 | https://lh3.googleusercontent.com/d/1nffpoOsfgyLKAM-B6RDsHZ6LW_4E0v5F | Naver Blog | 아이브 | IVE THE 1ST ALBUM [I’ve IVE] 'I AM' MV 촬영 비하인드",
+        "2023-05-23 | https://m.blog.naver.com/starship_ent/223734891835 | https://lh3.googleusercontent.com/d/1G8r1XpqZJozUstUtJa98S03xyxdQZqt5 | Naver Blog | 아이브 | IVE THE 1ST ALBUM [I’ve IVE] 'I AM' MV 촬영 비하인드 #2",
+        "2023-05-26 | https://m.blog.naver.com/starship_ent/223734891886 | https://lh3.googleusercontent.com/d/1N4-6N2gArKkm7z34tkltfpbl1WuEpghZ | Naver Blog | 안유진,가을,장원영,리즈,이서 | IVE THE 1ST ALBUM [I’ve IVE] 음악방송 비하인드",
+        "2023-06-01 | https://m.blog.naver.com/starship_ent/223734891941 | https://lh3.googleusercontent.com/d/19NNYZb3V7yK4PEAigOxsV6GzT3Q9y_2f | Naver Blog | 안유진,가을,장원영,리즈,이서 | IVE THE 1ST ALBUM [I’ve IVE] 음악방송 비하인드 #2",
+        "2023-06-28 | https://m.blog.naver.com/starship_ent/223734892066 | https://lh3.googleusercontent.com/d/1uS98PbVt_O98tyJ3us9hgE3kgQYCrpI6 | Naver Blog | 아이브 | IVE X ‘파파존스’ 광고 촬영 현장 비하인드",
+        "2023-07-01 | https://m.blog.naver.com/starship_ent/223734892119 | https://lh3.googleusercontent.com/d/1WC8YfYetQSkjR4KSavCkol9V6QLwGfCI | Naver Blog | 리즈 | 리즈 X ‘ZIGZAG’ 캠페인 촬영 현장 비하인드",
+        "2023-07-12 | https://m.blog.naver.com/starship_ent/223734892243 | https://lh3.googleusercontent.com/d/1v3-mJk5mAbGnmFcPfTCLVf8HzU3MqOYG | Naver Blog | 리즈 | 리즈 X 하퍼스 바자 6월호 디지털 커버 촬영 현장 비하인드",
+        "2023-07-12 | https://m.blog.naver.com/starship_ent/223734892328 | https://lh3.googleusercontent.com/d/1fFYDnI3TaDbC05DrlQOeRAAstkOKxrMI | Naver Blog | 아이브 | IVE X MINIVE MAGAZINE IVE 7월호 화보 (with 포토그래퍼 안유진)",
+        "2023-07-18 | https://m.blog.naver.com/starship_ent/223734897044 | https://lh3.googleusercontent.com/d/1rmbXTLZRpYFJN_WVgmwRWTl2T9R8jWj6 | Naver Blog | 아이브 | 2023 PEPSI X STARSHIP CAMPAIGN 뮤직비디오 비하인드",
+        "2023-08-02 | https://m.blog.naver.com/starship_ent/223734892386 | https://lh3.googleusercontent.com/d/1BXshJ6a3XuqAQ93EyBlzZr06aVqKFbPi | Naver Blog | 아이브 | IVE X ‘광동 옥수수수염차’ 광고 촬영 현장 비하인드",
+        "2023-10-28 | https://m.blog.naver.com/starship_ent/223734892564 | https://lh3.googleusercontent.com/d/1il1AyvX1aFuIEedUJ5p37M_lbST7grRN | Naver Blog | 아이브 | IVE THE 1st EP [I’VE MINE] LOVED IVE 자켓 촬영 비하인드",
+        "2023-11-11 | https://m.blog.naver.com/starship_ent/223734892618 | https://lh3.googleusercontent.com/d/1F2T2dSdYG_iYw7BvNeOeDf7l1VJqUzFb | Naver Blog | 아이브 | IVE THE 1st EP [I’VE MINE] ‘Off The Record’ 비하인드",
+        "2023-11-28 | https://m.blog.naver.com/starship_ent/223734892659 | https://lh3.googleusercontent.com/d/1cGxXyTfqXFQrxO-qyxN1GpNNEVbHcTRb | Naver Blog | 아이브 | IVE THE 1st EP [I’VE MINE] ‘Either Way’ 촬영 비하인드",
+        "2024-02-10 | https://m.blog.naver.com/starship_ent/223734892761 | https://lh3.googleusercontent.com/d/1lgD4o2-7CJx6xhpGdt3WPAZYucarJLBi | Naver Blog | 아이브 | IVE 2024 시즌그리팅 ‘A Fairy's Wish’ 촬영 현장 비하인드",
+        "2024-03-05 | https://m.blog.naver.com/starship_ent/223734892788 | https://lh3.googleusercontent.com/d/1czNuxYshDUXmXahTzw8Fq_o_9s6TQvtU | Naver Blog | 아이브 | IVE X ‘파파존스’ 광고 촬영 현장 비하인드",
+        "2024-03-23 | https://m.blog.naver.com/starship_ent/223734892848 | https://lh3.googleusercontent.com/d/140xllBiQDM68qUbDvK1_4BHOzmwlXYoN | Naver Blog | 가을,레이,리즈,이서 | IVE (가을, 레이, 리즈, 이서) X 로피시엘 화보 촬영 비하인드",
+        "2024-04-03 | https://m.blog.naver.com/starship_ent/223734892911 | https://lh3.googleusercontent.com/d/1SKTJMbexeDhe8zBCh0JMfrIB8dF2Pb2R | Naver Blog | 아이브 | 2024 IVE 2ND FANMEETING <MAGAZINE IVE> VCR 촬영 비하인드",
+        "2024-05-29 | https://m.blog.naver.com/starship_ent/223734892972 | https://lh3.googleusercontent.com/d/1jiWfakIXjBdkRUdsv_tPxme98m3NM1wm | Naver Blog | 아이브 | IVE THE 2nd EP [IVE SWITCH] LOVED IVE 자켓 촬영 비하인드",
+        "2024-06-01 | https://m.blog.naver.com/starship_ent/223734893011 | https://lh3.googleusercontent.com/d/1rPhpEPxp8Sc9LjSzez-T35i443LZrbvh | Naver Blog | 아이브 | IVE THE 2nd EP [IVE SWITCH] ‘Accendio’ 촬영 비하인드",
+        "2025-04-11 | https://m.blog.naver.com/starship_ent/223828863300 | https://lh3.googleusercontent.com/d/1qj3uxMsZLbkvWpMyP6ZASIP15031IRnS | Naver Blog | 아이브 | IVE 2025 시즌그리팅 ‘Colorful Days with IVE’ 촬영 현장 비하인드",
+        "2025-08-22 | https://m.blog.naver.com/starship_ent/223979254801 | https://lh3.googleusercontent.com/d/16EYEmMmFx60jg__hkndEx1F-Lc8mGRDO | Naver Blog | 아이브 | IVE X ‘파파존스’ 광고 촬영 현장 비하인드",
+        "2025-12-12 | https://m.blog.naver.com/starship_ent/224106370179 | https://lh3.googleusercontent.com/d/12IH_zfSFjiUQRKdz0RX8jZdgfKCmJ8sY | Naver Blog | 리즈 | 리즈 X '8seconds' 광고 촬영 현장 비하인드",
+        "2026-01-13 | https://m.blog.naver.com/starship_ent/224144194686 | https://lh3.googleusercontent.com/d/1MAQi6rqqhMStzRu2gKit9ALuyTZfgKI8 | Naver Blog | 아이브 | IVE WORLD TOUR <SHOW WHAT I AM> 현장 비하인드",
+        // Valentino Cruise 27
+        "2026-11-06 | https://www.instagram.com/reel/DfZW_5UB7Oh/ |  | AD | 리즈 | Valentino Cruise 27 | album=Valentino",
+        "2026-11-06 | https://www.instagram.com/reel/DfZrYwRSyIO/ |  | AD | 리즈 | Valentino Cruise 27 | album=Valentino",
+        "2026-11-06 | https://www.instagram.com/reel/DfbIE6JhhrP/ |  | AD | 리즈 | Valentino Cruise 27 | album=Valentino",
+        "2026-11-06 | https://www.instagram.com/reel/DfZeROlMX3G/ |  | AD | 리즈 | Valentino Cruise 27 | album=Valentino",
       ];
       // ---- 메인 화면 섹션 ----
       // 각 섹션에서 쓸 수 있는 설정값:
@@ -3301,7 +3512,7 @@
             "Instagram",
             "DAUM CAFE",
             "Berriz",
-            "Naver Post",
+            "Naver Blog",
             "Twitter",
             "Fanclub",
           ],
@@ -3309,7 +3520,7 @@
             "Instagram",
             "DAUM CAFE",
             "Berriz",
-            "Naver Post",
+            "Naver Blog",
             "Twitter",
             "Fanclub",
           ],
@@ -3330,8 +3541,6 @@
             "IVE LOG",
             "Shorts",
             "Challenge",
-            "VOCAL",
-            "DANCE",
             "IVE",
           ],
           tabs: ["ASMR", "VLOG", "Shorts"],
@@ -3346,7 +3555,7 @@
         },
         {
           title: "etc.",
-          cats: ["etc.(가사)", "etc.(일정)"],
+          cats: ["etc.(일정)"],
           tabs: ["etc."],
           sort: "date",
         },
@@ -3370,11 +3579,8 @@
         "OST",
         "Special Collaboration",
         "Lyrics",
-        "etc.(가사)",
         "Shorts",
         "Challenge",
-        "VOCAL",
-        "DANCE",
         "IVE",
         "MAGAZINE",
         "POP-UP",
@@ -3383,7 +3589,7 @@
         "etc.(일정)",
         "Berriz",
         "DAUM CAFE",
-        "Naver Post",
+        "Naver Blog",
         "Instagram",
         "Twitter",
         "Fanclub",
@@ -3429,13 +3635,20 @@
         Shorts: {
           by: "cat",
           opts: [
-            { k: "Shorts", cats: ["Shorts", "VOCAL", "DANCE"] },
+            { k: "Shorts" },
             { k: "Challenge" },
             { k: "IVE" },
           ],
         },
-        "DAUM CAFE": { by: "board", opts: [{ k: "From. IVE" }, { k: "IVE TALK" }] },
+        "DAUM CAFE": {
+          by: "board",
+          opts: [{ k: "From. IVE" }, { k: "IVE TALK" }],
+        },
         Berriz: { by: "board", opts: [{ k: "From. IVE" }, { k: "EVENT" }] },
+        Twitter: {
+          by: "board",
+          opts: [{ k: "IVE_twt" }, { k: "IVEstarship_JP" }],
+        },
       };
       let subFilter = [];
       const subCfg = (name) => {
@@ -4134,7 +4347,7 @@
       try {
         fpins = JSON.parse(localStorage.getItem(FPIN_KEY));
       } catch (e) {}
-      if (!Array.isArray(fpins)) fpins = MEMBER_LIST.map((m) => "m:" + m);
+      if (!Array.isArray(fpins)) fpins = [];
       const saveFpins = () => {
         try {
           localStorage.setItem(FPIN_KEY, JSON.stringify(fpins));
@@ -4319,9 +4532,6 @@
         "DGVGTohhvCk",
         "DB8aoS4pybA",
         "DAYc_lfSvc-",
-        "DeEy3CDiOa5",
-        "DeE82qKuV_g",
-        "DeGf-n2oUS5",
       ];
       function pinFirst(items) {
         const rank = (v) =>
@@ -4442,9 +4652,9 @@
             const customCover = (a) => (FOLDER_COVERS[name] || {})[a] || "";
             const folderCard = (a) => {
               if (!groups[a].length)
-                return `<div class="folder-card" data-album="${esc(
-                  a
-                )}" role="button">
+                return `<div class="folder-card${
+                  pinnedSet.has("folder:" + name + ":" + a) ? " pinned" : ""
+                }" data-album="${esc(a)}" role="button">
 ${
   customCover(a)
     ? `<div class="fthumb"><img src="${customCover(
@@ -4473,7 +4683,7 @@ ${
               );
               const isPop = name === "POP-UP";
               // POP-UP: 표지에 인스타 영상 임베드를 바로 보여줌 (사진 묶음이 있으면 그쪽 우선)
-              const igCover = isPop
+              const igCover = isPop || name === "AD"
                 ? g.find((v) => v.embed === "instagram" && !v.photos)
                 : null;
               const thumbHtml = customCover(a)
@@ -4497,8 +4707,8 @@ ${
                           a
                         )}</span>`
                   }</div>`;
-              return `<div class="folder-card${
-                isMag ? " auto" : ""
+              return `<div class="folder-card${isMag ? " auto" : ""}${
+                pinnedSet.has("folder:" + name + ":" + a) ? " pinned" : ""
               }" data-album="${esc(a)}" role="button">
                 ${thumbHtml}
                 <div class="title">${esc(a)}</div>
@@ -4515,12 +4725,16 @@ ${
               </div>`;
             };
             let albumKeys = Object.keys(groups);
-            if (isMag) {
+            if (["Fanclub", "MAGAZINE", "POP-UP", "AD"].includes(name)) {
               // 폴더 정렬: 최신순 = 사진 모음 앨범을 맨 앞으로 + 최신 날짜 순, 날짜순 = 사진 모음 앨범 맨 앞 + 오래된 날짜 순
               const latest = (a) =>
-                Math.max(...groups[a].map((v) => +new Date(v.date) || 0));
+                groups[a].length
+                  ? Math.max(...groups[a].map((v) => +new Date(v.date) || 0))
+                  : 0;
               const earliest = (a) =>
-                Math.min(...groups[a].map((v) => +new Date(v.date) || 0));
+                groups[a].length
+                  ? Math.min(...groups[a].map((v) => +new Date(v.date) || 0))
+                  : 8.64e15;
               albumKeys.sort(
                 (x, y) =>
                   (hasPhotos(y) ? 1 : 0) - (hasPhotos(x) ? 1 : 0) ||
@@ -4822,7 +5036,9 @@ ${
           (m) => `<span class="bz-tag">${m}</span>`
         );
         const cms = v.comments
-          ? `<div class="bz-cc">아티스트 댓글 ${v.comments.split("§").length}</div><div class="bz-cbox">` +
+          ? `<div class="bz-cc">아티스트 댓글 ${
+              v.comments.split("§").length
+            }</div><div class="bz-cbox">` +
             v.comments
               .split("§")
               .map((c) => {
@@ -4853,7 +5069,9 @@ ${
             ? `<div class="bz-imgs n${imgs.length > 1 ? 2 : 1}">${imgs
                 .map(
                   (u) =>
-                    `<img src="${esc(u)}" alt="" loading="lazy" referrerpolicy="no-referrer" />`
+                    `<img src="${esc(
+                      u
+                    )}" alt="" loading="lazy" referrerpolicy="no-referrer" />`
                 )
                 .join("")}</div>`
             : ""
@@ -4873,9 +5091,13 @@ ${
           });
         }
         bzEl.innerHTML = `<div class="pv-bar"><button class="pv-x" aria-label="닫기">×</button>
-      <div class="pv-h"><div class="pv-m">Berriz${v.board ? " · " + esc(v.board) : ""}${
+      <div class="pv-h"><div class="pv-m">Berriz${
+        v.board ? " · " + esc(v.board) : ""
+      }${
           v.url
-            ? ` <a href="${esc(v.url)}" target="_blank" rel="noopener">원문 보기</a>`
+            ? ` <a href="${esc(
+                v.url
+              )}" target="_blank" rel="noopener">원문 보기</a>`
             : ""
         }</div></div></div>${bzPost(v)}`;
         bzEl.scrollTop = 0;
@@ -4934,13 +5156,15 @@ ${
               )}" target="_blank" rel="noopener">원문 보기</a>`
             : ""
         }</div></div></div>
-      <div class="pv-body"><div class="cafe-post">${esc(v.content)}</div>${
+      <div class="pv-body">${
           v.image
             ? `<img class="cafe-img" src="${esc(
                 v.image
               )}" alt="" loading="lazy" referrerpolicy="no-referrer" />`
             : ""
-        }${cafeComments(v)}</div>`;
+        }<div class="cafe-post">${esc(v.content)}</div>${cafeComments(
+          v
+        )}</div>`;
         cafeEl.scrollTop = 0;
         cafeEl.hidden = false;
         document.body.style.overflow = "hidden";
@@ -5044,7 +5268,10 @@ ${
               image: m.image || null,
               comments: m.comments || null,
               images: m.imgs
-                ? m.imgs.split(";").map((x) => x.trim()).filter(Boolean)
+                ? m.imgs
+                    .split(";")
+                    .map((x) => x.trim())
+                    .filter(Boolean)
                 : null,
               views: m.views != null ? m.views : null,
               sec: 0,
@@ -5080,6 +5307,14 @@ ${
               !v.members.includes("리즈")
             )
               v.members = [...v.members, "리즈"];
+          });
+          videos.forEach((v) => {
+            if ((v.cats || []).includes("Twitter"))
+              v.board = (v.url || "").includes(
+                "IVEstarship_JP/status/2078355662715924845"
+              )
+                ? "IVEstarship_JP"
+                : "IVE_twt";
           });
           // MC: 특정 업로드일 영상의 멤버 지정 (한국 시간 기준 날짜)
           const MC_MEMBERS_BY_DATE = {
@@ -5330,7 +5565,9 @@ ${
                   (v, i) =>
                     `<button class="bell-it" data-bk="${i}"><b>${esc(
                       lab(v)
-                    )}</b>${esc(v.title || "")}<i>${fmtDate(v.date)}</i></button>`
+                    )}</b>${esc(v.title || "")}<i>${fmtDate(
+                      v.date
+                    )}</i></button>`
                 )
                 .join("")
             : '<div class="bell-it" style="color:var(--muted)">아직 새 소식이 없어요</div>');
