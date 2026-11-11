@@ -2560,7 +2560,7 @@
         Berriz: { ids: [] }, // Platform 하위: platform=Berriz 인 게시물이 자동으로 들어옴
         "DAUM CAFE": { ids: [] }, // SNS 하위(화면 표시: Cafe): Daum Cafe 링크 게시물이 자동으로 들어옴
         "Naver Blog": { ids: [] }, // SNS 하위: MANUAL_ITEMS로만 채우는 카테고리
-        Fanclub: {
+        Membership: {
           ids: [
             "https://youtu.be/nY3-oifZu_Y | 아이브 | album=DIVE 1기 | date=2022-05-30",
             "https://youtu.be/LvrC_wzqBBo | 아이브 | album=DIVE 1기 | date=2022-06-08",
@@ -2688,37 +2688,37 @@
       //   "날짜 | 원문링크(없으면 비움) | 표지주소(비우면 첫 사진) | PHOTO | 멤버 | 제목 | album=폴더 | photos=주소1;주소2;주소3"
       //   예) "2026-10-19 |  |  | PHOTO | 리즈 | COSMOPOLITAN 화보 | album=COSMOPOLITAN 2025년 11월호 | photos=https://.../a.jpg;https://.../b.jpg",
       const MANUAL_ITEMS = [
-        "2025-04-21 |  |  | Fanclub | 아이브 | [DIVE INTO IVE]의 IVE 선장들을 소개합니다🚢💙 | album=DIVE 4기 | cols=2 | photos=https://lh3.googleusercontent.com/d/1jO3-OnXjTbgrZqcohICPRQxzV5TcZpD4",
-        "2025-08-31 |  |  | Fanclub | 리즈 | 8월의 리즈 | album=DIVE 4기 | photos=https://lh3.googleusercontent.com/d/1yDj6h8FF469wELhaJxGIydh7D5lijpv4;https://lh3.googleusercontent.com/d/1W4Q8iowDitOVIYFbBbl3LgK88Qg78kTN",
-        "2025-10-31 |  |  | Fanclub | 레이,리즈 | 10월의 커플즈 | album=DIVE 4기 | photos=https://lh3.googleusercontent.com/d/1SJ1PONGNVQs8nmZz5Ht5EpR8YqBIDZSW;https://lh3.googleusercontent.com/d/1LMNcBJWQmoKiF-2Tv0w5GZqR3Vh6y4fH",
-        "2026-01-31 |  |  | Fanclub | 아이브 | IVE CATEGORY | album=DIVE 4기 | photos=https://lh3.googleusercontent.com/d/1qZatXK1IPkPUotjQj0hyiAgYzULYa-gz;https://lh3.googleusercontent.com/d/1mHqbrFuK5R5LHtMnqkaJiVCEQBTHU-mn;https://lh3.googleusercontent.com/d/1_21YFgJRFKRS15F0VOK-UuHg5R_tDka6",
-        "2022-05-23 |  |  | Fanclub | 리즈 | 4컷만화 | album=DIVE 1기 | photos=https://lh3.googleusercontent.com/d/17SKCEBtVbipJer7cuul4By7gY7dU2kcC;https://lh3.googleusercontent.com/d/1F1DUN9sfpXAux2TWBY0CfRzZ7m2K_-ti",
-        "2022-03-01 |  |  | Fanclub | 리즈 | KIT Behind | album=DIVE 1기 | cols=2 | photos=https://lh3.googleusercontent.com/d/1fXDvPJ31JORgRUXdzIzllBxeDlt3O7o9;https://lh3.googleusercontent.com/d/1h8FMQyrphVTQ2yz5JgA9H_qAvxhRH2zj;https://lh3.googleusercontent.com/d/1dSmsNupMXFfKpVZQueuQEv5vLzBmQB4N;https://lh3.googleusercontent.com/d/1dcPawyBcI3YkWXRCBcK3wpzSiH5FJUQE;https://lh3.googleusercontent.com/d/10_u0YSIDt_tCOwZdbZvYyBEoqSOkf7DZ;https://lh3.googleusercontent.com/d/1AQWI_VGHfgoGmQ6ojQNjCtYYVeIvzRK0;https://lh3.googleusercontent.com/d/1fOG9c3YddJeGA7jVzjn2PPDZwVTPkAU_",
-        "2022-03-01 |  |  | Fanclub | 리즈 | Online Photocard | album=DIVE 1기 | cols=2 | photos=https://lh3.googleusercontent.com/d/1WZgesL4Xj05VBUbHILV3NQXXC34AkwAI;https://lh3.googleusercontent.com/d/1v3ElsuEHzMYq55HlhlE39ueeYLSrbE6M",
-        "2023-02-24 |  |  | Fanclub | 리즈 | 다이브 나랑 놀쟝💗 | album=DIVE 1기 | photos=https://lh3.googleusercontent.com/d/18kyvTsjFBeXXKTB4U8M2t8mBB-y_YhYT",
-        "2023-04-04 |  |  | Fanclub | 리즈 | 우리 다이브 모하나〰️〰️😚 | album=DIVE 2기 | cols=2 | photos=https://lh3.googleusercontent.com/d/1YkYsBEpiSWVJuEUPkwhyDkgL6B_u4fWl;https://lh3.googleusercontent.com/d/1lVeOZpPaP9vV3iWKHsv92oRLTdsb1QHz",
-        "2023-04-07 |  |  | Fanclub | 아이브 | ＜TEAM MAGAZINE IVE＞를 소개합니다 📗 | album=DIVE 2기 | photos=https://lh3.googleusercontent.com/d/1GYTLeJMIPCQjkZ5ajiFmP-zkd3c6mvXy;https://lh3.googleusercontent.com/d/13eEEC2_mFf5yMVw6DCo-xLnrJKSaW1U5;https://lh3.googleusercontent.com/d/1dd7JfG7lR3jjibq1lOcssU7NMyDIfjsr",
-        "2023-05-06 |  |  | Fanclub | 리즈 | 나.깜냥에디터. | album=DIVE 2기 | cols=2 | photos=https://lh3.googleusercontent.com/d/1NSDaY1PTOECtQHFZKP0y7L6COdran2wf",
-        "2023-05-16 |  |  | Fanclub | 리즈 | 안녕......넌 누구니.... | album=DIVE 2기 | cols=2 | photos=https://lh3.googleusercontent.com/d/1p55fD38uU7Bu44L_6sQKco2O4OEVeOV_",
-        "2023-09-27 |  |  | Fanclub | 리즈 | MONTHLY IVE 9월호 - 리즈 | album=DIVE 2기 | photos=https://lh3.googleusercontent.com/d/1NTPtJlVwBCjx91YKs8ZZqyOPP1wz0BLu;https://lh3.googleusercontent.com/d/1AJp2YuCnnHWItB1-waw0gmudVivlvLnU",
-        "2023-12-09 |  |  | Fanclub | 아이브 | MONTHLY DIVE 특별호 | album=DIVE 2기 | photos=https://lh3.googleusercontent.com/d/1bTVv0Kr7bAnjvgWbgELflV6Kgqup5Xrl;https://lh3.googleusercontent.com/d/11Owa-qDxWtVZIYn0dcV-8xUC3BSAxpJa",
-        "2023-12-31 |  |  | Fanclub | 아이브 | MONTHLY IVE 12월호 | album=DIVE 2기 | photos=https://lh3.googleusercontent.com/d/1fhykiXf7PDlnvJ72h_c_CoogqZGzH_RA;https://lh3.googleusercontent.com/d/1gMZExFXM94mO80K1-efYm3X65ELHtbQy",
-        "2024-01-31 |  |  | Fanclub | 아이브 | MONTHLY IVE 1월호 | album=DIVE 2기 | photos=https://lh3.googleusercontent.com/d/1Os0YTmOad-j8TqJ-XyCPalY9IvBKEGS0;https://lh3.googleusercontent.com/d/1NZIBDTlZBrzm_gtt0dSiG4dRxODMqINt",
+        "2025-04-21 |  |  | Membership | 아이브 | [DIVE INTO IVE]의 IVE 선장들을 소개합니다🚢💙 | album=DIVE 4기 | cols=2 | photos=https://lh3.googleusercontent.com/d/1jO3-OnXjTbgrZqcohICPRQxzV5TcZpD4",
+        "2025-08-31 |  |  | Membership | 리즈 | 8월의 리즈 | album=DIVE 4기 | photos=https://lh3.googleusercontent.com/d/1yDj6h8FF469wELhaJxGIydh7D5lijpv4;https://lh3.googleusercontent.com/d/1W4Q8iowDitOVIYFbBbl3LgK88Qg78kTN",
+        "2025-10-31 |  |  | Membership | 레이,리즈 | 10월의 커플즈 | album=DIVE 4기 | photos=https://lh3.googleusercontent.com/d/1SJ1PONGNVQs8nmZz5Ht5EpR8YqBIDZSW;https://lh3.googleusercontent.com/d/1LMNcBJWQmoKiF-2Tv0w5GZqR3Vh6y4fH",
+        "2026-01-31 |  |  | Membership | 아이브 | IVE CATEGORY | album=DIVE 4기 | photos=https://lh3.googleusercontent.com/d/1qZatXK1IPkPUotjQj0hyiAgYzULYa-gz;https://lh3.googleusercontent.com/d/1mHqbrFuK5R5LHtMnqkaJiVCEQBTHU-mn;https://lh3.googleusercontent.com/d/1_21YFgJRFKRS15F0VOK-UuHg5R_tDka6",
+        "2022-05-23 |  |  | Membership | 리즈 | 4컷만화 | album=DIVE 1기 | photos=https://lh3.googleusercontent.com/d/17SKCEBtVbipJer7cuul4By7gY7dU2kcC;https://lh3.googleusercontent.com/d/1F1DUN9sfpXAux2TWBY0CfRzZ7m2K_-ti",
+        "2022-03-01 |  |  | Membership | 리즈 | KIT Behind | album=DIVE 1기 | cols=2 | photos=https://lh3.googleusercontent.com/d/1fXDvPJ31JORgRUXdzIzllBxeDlt3O7o9;https://lh3.googleusercontent.com/d/1h8FMQyrphVTQ2yz5JgA9H_qAvxhRH2zj;https://lh3.googleusercontent.com/d/1dSmsNupMXFfKpVZQueuQEv5vLzBmQB4N;https://lh3.googleusercontent.com/d/1dcPawyBcI3YkWXRCBcK3wpzSiH5FJUQE;https://lh3.googleusercontent.com/d/10_u0YSIDt_tCOwZdbZvYyBEoqSOkf7DZ;https://lh3.googleusercontent.com/d/1AQWI_VGHfgoGmQ6ojQNjCtYYVeIvzRK0;https://lh3.googleusercontent.com/d/1fOG9c3YddJeGA7jVzjn2PPDZwVTPkAU_",
+        "2022-03-01 |  |  | Membership | 리즈 | Online Photocard | album=DIVE 1기 | cols=2 | photos=https://lh3.googleusercontent.com/d/1WZgesL4Xj05VBUbHILV3NQXXC34AkwAI;https://lh3.googleusercontent.com/d/1v3ElsuEHzMYq55HlhlE39ueeYLSrbE6M",
+        "2023-02-24 |  |  | Membership | 리즈 | 다이브 나랑 놀쟝💗 | album=DIVE 1기 | photos=https://lh3.googleusercontent.com/d/18kyvTsjFBeXXKTB4U8M2t8mBB-y_YhYT",
+        "2023-04-04 |  |  | Membership | 리즈 | 우리 다이브 모하나〰️〰️😚 | album=DIVE 2기 | cols=2 | photos=https://lh3.googleusercontent.com/d/1YkYsBEpiSWVJuEUPkwhyDkgL6B_u4fWl;https://lh3.googleusercontent.com/d/1lVeOZpPaP9vV3iWKHsv92oRLTdsb1QHz",
+        "2023-04-07 |  |  | Membership | 아이브 | ＜TEAM MAGAZINE IVE＞를 소개합니다 📗 | album=DIVE 2기 | photos=https://lh3.googleusercontent.com/d/1GYTLeJMIPCQjkZ5ajiFmP-zkd3c6mvXy;https://lh3.googleusercontent.com/d/13eEEC2_mFf5yMVw6DCo-xLnrJKSaW1U5;https://lh3.googleusercontent.com/d/1dd7JfG7lR3jjibq1lOcssU7NMyDIfjsr",
+        "2023-05-06 |  |  | Membership | 리즈 | 나.깜냥에디터. | album=DIVE 2기 | cols=2 | photos=https://lh3.googleusercontent.com/d/1NSDaY1PTOECtQHFZKP0y7L6COdran2wf",
+        "2023-05-16 |  |  | Membership | 리즈 | 안녕......넌 누구니.... | album=DIVE 2기 | cols=2 | photos=https://lh3.googleusercontent.com/d/1p55fD38uU7Bu44L_6sQKco2O4OEVeOV_",
+        "2023-09-27 |  |  | Membership | 리즈 | MONTHLY IVE 9월호 - 리즈 | album=DIVE 2기 | photos=https://lh3.googleusercontent.com/d/1NTPtJlVwBCjx91YKs8ZZqyOPP1wz0BLu;https://lh3.googleusercontent.com/d/1AJp2YuCnnHWItB1-waw0gmudVivlvLnU",
+        "2023-12-09 |  |  | Membership | 아이브 | MONTHLY DIVE 특별호 | album=DIVE 2기 | photos=https://lh3.googleusercontent.com/d/1bTVv0Kr7bAnjvgWbgELflV6Kgqup5Xrl;https://lh3.googleusercontent.com/d/11Owa-qDxWtVZIYn0dcV-8xUC3BSAxpJa",
+        "2023-12-31 |  |  | Membership | 아이브 | MONTHLY IVE 12월호 | album=DIVE 2기 | photos=https://lh3.googleusercontent.com/d/1fhykiXf7PDlnvJ72h_c_CoogqZGzH_RA;https://lh3.googleusercontent.com/d/1gMZExFXM94mO80K1-efYm3X65ELHtbQy",
+        "2024-01-31 |  |  | Membership | 아이브 | MONTHLY IVE 1월호 | album=DIVE 2기 | photos=https://lh3.googleusercontent.com/d/1Os0YTmOad-j8TqJ-XyCPalY9IvBKEGS0;https://lh3.googleusercontent.com/d/1NZIBDTlZBrzm_gtt0dSiG4dRxODMqINt",
 
-        "2024-04-05 |  |  | Fanclub | 아이브 | ＜SCOUT IVE＞의 IVE 대원들을 소개합니다💚 | album=DIVE 3기 | cols=2 | photos=https://lh3.googleusercontent.com/d/1QC226fjjZ9yZk1DlGFIkjkWE6vYaR0gb",
+        "2024-04-05 |  |  | Membership | 아이브 | ＜SCOUT IVE＞의 IVE 대원들을 소개합니다💚 | album=DIVE 3기 | cols=2 | photos=https://lh3.googleusercontent.com/d/1QC226fjjZ9yZk1DlGFIkjkWE6vYaR0gb",
 
-        "2024-06-30 |  |  | Fanclub | 장원영,리즈 | IVE 장원영 관찰 보고서 W. 리즈 | album=DIVE 3기 | photos=https://lh3.googleusercontent.com/d/1n8xQMvSk0DyJvbKr4GxWEfUMGKFSrLpq;https://lh3.googleusercontent.com/d/1SKpTBfj96RGZm_Ig8puNPu4VAcmrERUt;https://lh3.googleusercontent.com/d/1SySjFyIEUKuy-pxsI5jX-yhdU5h49reB",
+        "2024-06-30 |  |  | Membership | 장원영,리즈 | IVE 장원영 관찰 보고서 W. 리즈 | album=DIVE 3기 | photos=https://lh3.googleusercontent.com/d/1n8xQMvSk0DyJvbKr4GxWEfUMGKFSrLpq;https://lh3.googleusercontent.com/d/1SKpTBfj96RGZm_Ig8puNPu4VAcmrERUt;https://lh3.googleusercontent.com/d/1SySjFyIEUKuy-pxsI5jX-yhdU5h49reB",
 
-        "2024-07-31 |  |  | Fanclub | 안유진,리즈 | IVE 리즈 관찰 보고서 W. 안유진 | album=DIVE 3기 | photos=https://lh3.googleusercontent.com/d/1icxW6DYHTvDaZwcvHyVM7xUrnRx7VpZv;https://lh3.googleusercontent.com/d/1A5AioWTA0Ayp8Wa0Xv9CIN6yBXdbqmEh;https://lh3.googleusercontent.com/d/1Lenv414uzXNVx8V9AsnSJzibCa9u2QES",
+        "2024-07-31 |  |  | Membership | 안유진,리즈 | IVE 리즈 관찰 보고서 W. 안유진 | album=DIVE 3기 | photos=https://lh3.googleusercontent.com/d/1icxW6DYHTvDaZwcvHyVM7xUrnRx7VpZv;https://lh3.googleusercontent.com/d/1A5AioWTA0Ayp8Wa0Xv9CIN6yBXdbqmEh;https://lh3.googleusercontent.com/d/1Lenv414uzXNVx8V9AsnSJzibCa9u2QES",
 
-        "2024-09-17 |  |  | Fanclub | 리즈 | 추석인데 심심한 다이브 나랑 놀자 🐰💗 | album=DIVE 3기 | cols=2 | photos=https://lh3.googleusercontent.com/d/1SdDVIp2EqeYQO8F40r77PEZqQ8aQnrkz;https://lh3.googleusercontent.com/d/1KDETGHED17xEIbt6P9zQZOsw5WT14BBj",
+        "2024-09-17 |  |  | Membership | 리즈 | 추석인데 심심한 다이브 나랑 놀자 🐰💗 | album=DIVE 3기 | cols=2 | photos=https://lh3.googleusercontent.com/d/1SdDVIp2EqeYQO8F40r77PEZqQ8aQnrkz;https://lh3.googleusercontent.com/d/1KDETGHED17xEIbt6P9zQZOsw5WT14BBj",
 
-        "2024-12-09 |  |  | Fanclub | 리즈 | KIT Behind | album=DIVE 3기 | cols=2 | photos=https://lh3.googleusercontent.com/d/1nmD-qcL05mOHtVdzi4YtgFfRG5XJymU4;https://lh3.googleusercontent.com/d/1AyMu382EE00DliuDO_pOh9z4msJMsjF-;https://lh3.googleusercontent.com/d/18sIStjraDVgghzPmSDK0DU_Np1NEA7TC;https://lh3.googleusercontent.com/d/1oRhcrPnMx5ToPTMREc6y1gIbWb69wGwn",
+        "2024-12-09 |  |  | Membership | 리즈 | KIT Behind | album=DIVE 3기 | cols=2 | photos=https://lh3.googleusercontent.com/d/1nmD-qcL05mOHtVdzi4YtgFfRG5XJymU4;https://lh3.googleusercontent.com/d/1AyMu382EE00DliuDO_pOh9z4msJMsjF-;https://lh3.googleusercontent.com/d/18sIStjraDVgghzPmSDK0DU_Np1NEA7TC;https://lh3.googleusercontent.com/d/1oRhcrPnMx5ToPTMREc6y1gIbWb69wGwn",
 
-        "2024-12-09 |  |  | Fanclub | 아이브 | 2024 IVE 대원 관찰 보고서 | album=DIVE 3기 | photos=https://lh3.googleusercontent.com/d/1bvzoZU2_Uo_RkaHinVXREuF4cNdfHopL;https://lh3.googleusercontent.com/d/1vNDqRTf0eYcpkIrCrxV7CmL1Rkt0OyDp;https://lh3.googleusercontent.com/d/1Y7xn9QOpJ0XZirOnh7iMYWPwO_L115fN;https://lh3.googleusercontent.com/d/1I2vrnmAgCpZ1EgTXpU92iYjCxGZCciUQ;https://lh3.googleusercontent.com/d/1Q6awY6MDHA30NWpjpkSWvgg9_IjUxQb3;https://lh3.googleusercontent.com/d/1PaPlqNjLUQg0WwP6BhYpFCv4W9tbUyLs;https://lh3.googleusercontent.com/d/1PXWo7L9FjIpZCGV1d8sDHGLLDVDfQhAR;https://lh3.googleusercontent.com/d/1Q3lBTft-D0oE7TveDGZO7mjrusDdCldt",
-        "2026-07-31 |  |  | Fanclub | 가을,리즈 | ABOUT GAEUL - FROM. LIZ | album=DIVE ~ | photos=https://lh3.googleusercontent.com/d/1LpjNcydw8op6a5cK1jZj2bNEOR_w_P0E",
-        "2026-08-31 |  |  | Fanclub | 레이,리즈 | ABOUT LIZ - FROM. REI | album=DIVE ~ | photos=https://lh3.googleusercontent.com/d/1nyYDHTi4QEPqCDROXxxk-QavkZ819PBv",
-        "2026-10-15 |  |  | Fanclub | 리즈 | 10월 Monthly Interview - LIZ | album=DIVE ~ | photos=https://lh3.googleusercontent.com/d/1LkdJgLPAcWky9Xi0J7U_A1J1Xz6YCRBe",
+        "2024-12-09 |  |  | Membership | 아이브 | 2024 IVE 대원 관찰 보고서 | album=DIVE 3기 | photos=https://lh3.googleusercontent.com/d/1bvzoZU2_Uo_RkaHinVXREuF4cNdfHopL;https://lh3.googleusercontent.com/d/1vNDqRTf0eYcpkIrCrxV7CmL1Rkt0OyDp;https://lh3.googleusercontent.com/d/1Y7xn9QOpJ0XZirOnh7iMYWPwO_L115fN;https://lh3.googleusercontent.com/d/1I2vrnmAgCpZ1EgTXpU92iYjCxGZCciUQ;https://lh3.googleusercontent.com/d/1Q6awY6MDHA30NWpjpkSWvgg9_IjUxQb3;https://lh3.googleusercontent.com/d/1PaPlqNjLUQg0WwP6BhYpFCv4W9tbUyLs;https://lh3.googleusercontent.com/d/1PXWo7L9FjIpZCGV1d8sDHGLLDVDfQhAR;https://lh3.googleusercontent.com/d/1Q3lBTft-D0oE7TveDGZO7mjrusDdCldt",
+        "2026-07-31 |  |  | Membership | 가을,리즈 | ABOUT GAEUL - FROM. LIZ | album=DIVE ~ | photos=https://lh3.googleusercontent.com/d/1LpjNcydw8op6a5cK1jZj2bNEOR_w_P0E",
+        "2026-08-31 |  |  | Membership | 레이,리즈 | ABOUT LIZ - FROM. REI | album=DIVE ~ | photos=https://lh3.googleusercontent.com/d/1nyYDHTi4QEPqCDROXxxk-QavkZ819PBv",
+        "2026-10-15 |  |  | Membership | 리즈 | 10월 Monthly Interview - LIZ | album=DIVE ~ | photos=https://lh3.googleusercontent.com/d/1LkdJgLPAcWky9Xi0J7U_A1J1Xz6YCRBe",
         "2024-03-11 |  |  | DAUM CAFE | 리즈 | 팬미팅 후유증 🥺💗 | content=다이브 !!2일간의 팬미팅을 끝내고 많은 감정들이 오가며 하고싶은말이 많아서 글로 남겨보아요\n최근에 월드투어로 콘서트도 다니고 다른 스케줄도 하면서 바쁜 하루하루를 보냈는데 많이 보고싶었죠 ?? 나도 많이 보고싶었어요 ㅎㅎ\n그래서 그런지 다이브를 보기전에 너무 설레고 무대도 잘하고싶더라구요\n우리가 리허설할때의 공연장은 무채색이었지만 다이브가 채워졌을때의 공연장은 형형색색의 다이브들로 꽉 차서 아름답더라구요\n사실 처음엔 나를 사랑하는게 무의미하다고 생각했지만 내 자신을 사랑할 이유를 만들어준게 우리 다이브에요\n그런 소중한 감정을 알게 해준 만큼 내가 다이브에게 더 많은 감정을 전해줄게요\n이유는 모르겠지만 다이브 앞에만 서면 마치 어린아이 처럼 눈물이 나요\n저의 마음이 너무 진심이어서 그런걸까요\n나도 모르게 그동안 참아왔던 무언가를 어딘가에 털어놓고 싶었나봐요\n난 그게 다이브여서 좋고 앞으로도 다이브일거에요\n지금까지의 추억, 앞으로의 추억 잘 간직하고 기록하며 소중히 하나하나 쌓아가봐요 ♡\n다이브 내가 어디서 봤는데 사랑은 재채기와 같아서 숨길 수가 없대요\n아무튼 그렇다구요 ♥️ | board=From. IVE",
         "2023-12-24 | https://youtu.be/oEOZ9MelgNY | https://i.ytimg.com/vi/oEOZ9MelgNY/hqdefault.jpg | DAUM CAFE | 리즈 | 미리 크리스마스 선물 🎁💝 | board=From. IVE",
         "2023-09-29 | https://youtu.be/XRuP3YBni_g | https://i.ytimg.com/vi/XRuP3YBni_g/hqdefault.jpg | DAUM CAFE | 리즈 | 후라이는 반숙이지 😉 | board=From. IVE",
@@ -3760,7 +3760,7 @@
             "Berriz",
             "Naver Blog",
             "Twitter",
-            "Fanclub",
+            "Membership",
           ],
           tabs: [
             "Instagram",
@@ -3768,7 +3768,7 @@
             "Berriz",
             "Naver Blog",
             "Twitter",
-            "Fanclub",
+            "Membership",
           ],
           sort: "date",
           hideViews: true,
@@ -3830,7 +3830,7 @@
         "Naver Blog",
         "Instagram",
         "Twitter",
-        "Fanclub",
+        "Membership",
         "TEASER",
         "PHOTO",
       ];
@@ -3842,11 +3842,11 @@
         "MAGAZINE",
         "POP-UP",
         "AD",
-        "Fanclub",
+        "Membership",
       ]; // 폴더를 슬라이더로 펼치지 않는 탭
       // 영상이 없어도 항상 보이는 기본 폴더 (탭 이름 → 폴더 이름들, 이 순서대로 표시)
       const FOLDER_PRESETS = {
-        Fanclub: ["DIVE 1기", "DIVE 2기", "DIVE 3기", "DIVE 4기", "DIVE ~"],
+        Membership: ["DIVE 1기", "DIVE 2기", "DIVE 3기", "DIVE 4기", "DIVE ~"],
       };
       // 폴더 표지 이미지를 직접 지정 (탭 이름 → 폴더 이름 → 이미지 주소)
       const FOLDER_COVERS = {
@@ -3862,7 +3862,7 @@
           "사랑은 외나무다리에서 OST Part 7 - Summer":
             "https://blog.kakaocdn.net/dn/bHRTeT/dJMcabMTB51/NBfRTh32w3xHTKs3k4QMhk/AAAAAAAAAAAAAAAAAAAAAGumi_-om-ZbdZA1v4iM2YiQOlhRP8zwS7c9MQ1b-kn4/tfile.jpg",
         },
-        Fanclub: {
+        Membership: {
           "DIVE 1기":
             "https://lh3.googleusercontent.com/d/1ZrQtmuS5GvGEv1lIsx_GrL36GfAQbqR3",
           "DIVE 2기":
@@ -5056,7 +5056,7 @@ ${
               </div>`;
             };
             let albumKeys = Object.keys(groups);
-            if (["Fanclub", "MAGAZINE", "POP-UP", "AD"].includes(name)) {
+            if (["Membership", "MAGAZINE", "POP-UP", "AD"].includes(name)) {
               // 폴더 정렬: 최신순 = 사진 모음 앨범을 맨 앞으로 + 최신 날짜 순, 날짜순 = 사진 모음 앨범 맨 앞 + 오래된 날짜 순
               const latest = (a) =>
                 groups[a].length
