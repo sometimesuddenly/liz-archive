@@ -572,17 +572,27 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+        gap: 10px;
         margin-bottom: 14px;
         color: var(--muted);
         font-size: 14px;
       }
+      .meta > span {
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
       .sort {
+        flex: 0 0 auto;
         display: flex;
         background: var(--panel);
         border-radius: 999px;
         padding: 3px;
       }
       .sort button {
+        white-space: nowrap;
+        flex: 0 0 auto;
         padding: 4px 10px;
         border-radius: 999px;
         color: var(--muted);
@@ -1729,6 +1739,7 @@
             "https://youtu.be/UL0uUo4FjzA | 장원영,리즈,이서 | date=2025-04-30",
             "https://youtu.be/DyWSlmrtQt4 | 리즈",
             "https://youtu.be/QUJaRLG4z6g | 리즈",
+            "https://youtu.be/Be8qQ0nT7Kg | 리즈",
           ],
           keyword: "COVER",
           exclude: [
@@ -2243,6 +2254,7 @@
             "https://youtube.com/shorts/dxZazwBnAIE | 리즈",
             "https://youtube.com/shorts/5lrLGHbE7O0 | 아이브",
             "https://youtube.com/shorts/J69Ak2gL_dQ | 리즈",
+            "https://youtube.com/shorts/FTMjhOUiUTQ | 리즈",
           ],
         },
         Challenge: {
@@ -2530,6 +2542,8 @@
             "J_vU6FR5aNI",
             "2o_pHbv7Jjw",
             "https://youtu.be/RjRYfz4ULC4 | album=2026 KGMA",
+            "https://youtube.com/shorts/FTMjhOUiUTQ | 리즈 | album=2026 KGMA",
+            "https://youtu.be/Be8qQ0nT7Kg | 리즈 | album=2026 KGMA",
           ],
         },
         "etc.(일정)": {
@@ -3372,6 +3386,7 @@
         "2026-10-03 |  |  | AD | 레이,리즈 | Valentino | album=Valentino | cols=2 | bare=1 | photos=https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEizLZ8FEzt5LcypUHvSSna5zo-t8DbHlcL56cq-Z9X9Buifh439YEV4uYLDWF7cm2CdUQ0F2eWZ23BTYmpVxn9tGZgFCsXAPyGFDEvSJ-hzR8nEwObrvjvln5LeJjYDRm-9eTL2bZoLxrjbbxzwoCU4O1YEM65cbiAosR9OoGSaz3zsKkiJm1owF-uyHB8/s1707/1794300429903.jpg;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEim58w85zsV127ee38_8Vf_HMNWi20sSCyQJZ3zDdh1MP_cYjee9UOTSpJuyFOnc485CGG7fqbxftIh8OgOmgb03_V6ncEwLzbmqJyq0G_rLv9oMmvCooZJ2EuPEswhlUi6uzYmVyBtegcmSsKdVjgUcE8QZlyoyPEPYB_3fkpkIvkMD55dLwgDxp4jce8/s1646/1794300428025.jpg;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgjdDVhFfjLoxRIzYnE1MYcLyMMPxDhRSLWXf7ZMdZjjzQYRliszWMIxUYRXz96sTQuSa9E1UR50FfdyKq-xVTCrNyOwXMFcEy8nFL1Njr42xszD6qLUJpfBF5Wadw0lToJ-h-5cbZA-7hqXcqv4eBvddGu0VLyEwETClkCp1mM6DnmxtOai8IUM7VOTqI/s1600/1794300460177.jpg;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjKKvrvhUmOR_Z6vwEdj5fKpY2bGyOwXwgRMRYsOscJUwy9WQpGo1T3tfh5o1XPJv8jGCzqBK09cO1IItwbeQImpS4Gy2kL4IOn7Y46RG7yY_AC8q_Pe3fB4Q9HgihACoef12Dk6eJTr52gTBX2Qb8xITgESRpfb4gWnuboTymScXDRmW0klDAJqN1Lhm8/s1600/1794300456508.jpg;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjXYXkg7EE2DTD4DyTeXO6L_2qs14uferUcaThB8IcFvRKnb8nUdGw15FTzYXb_wPIDoPWGwG2K9GPodFCIfIliIh2atGbS3p5sAk4uz7wOF8-Y_2wZ1v236Daja2OY9AQoX-7XHpSIJbP_78C5_ZjOah07bMuDa_oRBhslNdWQWG_VEZ1QGZec2z2bHds/s1600/1794300454813.jpg;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi3xcuG41H__00ugjOZodROEsY_1EWzZxPQPzglRv7OHLLk-vWM_lPqfPcyJGIUNROlAWDoa3-AdGYF0Q9xkbuRGcNQ54pqygmrZ15DMWxzOonefyl0jsJ03NioL8ZrH4ilYzDRsQ1tCZs235TzSzR7EEF0pqe2TodnMjy9LpjnbWrSBXcs7YWD_WnAc_I/s1920/1794300475690.jpg;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgFZlaAOBfyTnmFMUs3_0-nVJZYkrYz0a69Jchi1wZpYsqZ2Z4Q0EY_3Y0gITuSKBUU_oAAGjmKlJYCudDnZlJUCkf6wHWXssvLnYWxg8XO2mnvEWDD6OSSSaL-DRZc-CdnMZ-rgHiX4Vn0x7BmlAmaVPF-2cAa8NCq7xC4M6F-DKDXy6nlLA_CSFUatt0/s1600/1794300491990.jpg;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh6UdY5xnoK1ErbfdmBPKVUHhTR7IdnYVxHvw9p2tuiS1OuNaY21-zBPFCJjioJ8-Ck5qBG2FFZc73vCy-xVExrU2D9_-YDjWkFI4qCDOKwUe8UvEskTWhrEBJ1957Zve5jb6GK6GEmEZ0shzQdoj4UknW2Yx12Lq4gPesxOcAakjzigShtiZDWvkhm1DM/s1600/1794300489895.jpg;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhHv5GtkrAKecnd_JF_kcB24XH8QJ2iKXKIhEQRAoqSzI6AB0Q6st-BdmFsvE9j06DIEu_W3gKxDw5nrjKOSRO6wjCNRSphQfwV0D6dvXm8TwKtAOdDfSS7BKtZVjugm5b9HcydJLBLNUw5og7ZGfTgXA9xL4rWCWToHv6q7TFWPzPsrw6n8RcAwHgdxAc/s1920/1794300578871.jpg;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgTzsrlZvMWcFgdnLSw9XoczEi_MemTmTZ43A1tX2bNd5oJQMNKg6RywiTRgEQ4TBXNTsV42ubzjfIjALtcP6Q5CZu8Lrn3iTGpkHcyX3IT9douyFbYqE-6J8Uk-y9vRVSUFiKvCD8fOcm2q0Gu0hwepO4WgDuyUHkLs_8enDCy0LipX_Mg_gz3fvOR960/s1920/1794300576114.jpg;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiFQJI9qYlcNWnqd_kB2FHvu-He9SywVwd34NAbpLha1tcPsZ6LfxaiJheYCwxqT7s4AgmEBxcKZwY44lRISfvs9EJB_L87EQpi-ZrLuS1XH86QAePbAks32lsTbpXwm-590DqZhVQ8t5Am7RhaG-sDleu_7v6tj5fwkAhNvXDJ6eH_fYBKTrNb2bBcQZk/s1919/1794300555061.jpg;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhdKmvddwN7vM59oI-PRLmCQxxiCqtte139uAxdGhNclNW4CMvIy437EMzd2-Pug9HyuzOVv9Iob9z5VweXPo8dJ8bWbjxYoPVvk3yuE6wFcyIz0FQo51TdH6py8LqCDXo6YNVV1zZzLkeiZc6DJaOn9NuJZ6w6qRVLHqtpYibLjUE15Chw_-HtDjm5oII/s1919/1794300536233.jpg;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgssTs_HG0VeFObzHes87CGGBFFjrUkDD_8OKVGalvK_aEEUXM6j6PW9ZnAbLyRN1yStU6akBOFbQh_fAZRndNa3VqbOuwl6uNk98wlMr1CJMoRHw0_R-38wGaFZkmykZmISrNWAKGwUkTQKpkRKhzBxeQRzYNvcd_Cv14JNtdNhqhpPwCdu7AFttXj6Qc/s1919/1794300539483.jpg;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjOgtYRAR06QyKecsrdQNQTPkV0JrWCa3FLHTLxE8EUBpCuPOFU52ZVNH6seu9IOPU8ThRUEWNNWPMfDytAJVtf-dtTkbSX0xfWM__ZmVALrk3AMhDe1l0nxAGEK18efFXPqCs2wf0NyrFQHImotv38vWe4-7rlPUF7ZYc9pssewR1Q7vzngsTs0c3KId4/s1919/1794300556610.jpg;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjoys8U4h5huaX1inuLEm8of8mDOVXCWvwubzfDd6C-qc4mh4N3hzFJioe68yAuQjZ3hIChhlLwb4HoK_x7InE1Da15oFk9MviuKnErvLdX53OuC6FFRAfmr3nzRNgawHwgl69rioDNb1TAJAXRJPTn6TmyJB4o-E-CjOsNoAbHplN1Q4vo9MYfnT5WJJY/s1919/1794300548909.jpg;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjtPg4vzNch5Kf5WxVNyH8nh4vhjgCeCntG4Bty7yC22QPVXAmQjf1f8c0ge65Z7eNca5msAXFZhyphenhyphen6Zwpnz7MCAap5B_t8UdnEgXAyp0ev1a3IRgFOjl7KPHyVs4qR0P4EwoiyZ_-dj6Y139-9vTbRRtrtxxNMQnbTzpMSKGbxgW8n3j84asEWnAt0Uchg/s1919/1794300530099.jpg",
         // ---- AD · TONYMOLY (최신순) ----
         "2026-10-02 | https://www.instagram.com/reel/Dd_FgdjAlJJ/ |  | AD | 리즈 | 가을 햇살처럼 사르르 녹아드는 리즈의 화보 촬영장 비하인드 털이 | album=TONYMOLY",
+        "2026-09-15 |  |  | AD | 리즈 | Butter Cookie Edition | album=TONYMOLY | cols=2 | photos=https://lh3.googleusercontent.com/d/1_eyHJXfUFqoqwO9F9BIxut_YmDWmh36V;https://lh3.googleusercontent.com/d/1W_VRPs3_d0RAacE0KCdTbr-2-v8v_KKw;https://lh3.googleusercontent.com/d/1cbGzy9DNeNDd1wjUQ8McOlGv_iPVLDEl;https://lh3.googleusercontent.com/d/1CqTCic3yVZe8JzZedekQgG51611qA6MD;https://lh3.googleusercontent.com/d/1V4S1tzyfA2ZO1EmpvlbL3R3_6qe4GBNJ;https://lh3.googleusercontent.com/d/1R27AdzBMgonIdnCf-BpfEnDGOy5TuV8T;https://lh3.googleusercontent.com/d/1wPlHQBA6wlO3xZQmU9aNXaIQVNVHYpWf;https://lh3.googleusercontent.com/d/1KyxIUVM0kWL-lT-muVozvFmk1cFrOUqv;https://lh3.googleusercontent.com/d/1M1AhfCdIov4n8qRukUQMtlgqZuMltEjc",
         "2026-09-15 | https://x.com/i/status/2099786624263438503 |  | AD | 리즈 | 리즈 얼굴이 너무 달콤해서 버터 틴트 바르기도 전에 녹아내리는 중..🫠 | album=TONYMOLY",
         "2026-09-11 | https://www.instagram.com/p/DdJCkqXE6Il/ |  | AD | 리즈 | 리즈 마음에 쏙 든 토니모리 버터 쿠키 에디션 컬러는? | album=TONYMOLY",
         "2026-09-09 | https://x.com/i/status/2097542513074512267 |  | AD | 리즈 | 담당자 갤러리 꽉 찰 때까지 찍게 만든 현장 비하인드 컷 📸 | album=TONYMOLY",
@@ -3447,6 +3462,7 @@
         "2026-03-25 | https://www.instagram.com/p/DWSjUVNEkoB/ |  | AD |  | Matin Kim 26 Summer Collection 1st Drop with @liz.yeyo | album=Matin Kim",
         "2026-03-25 | https://m.matinkim.com/collection-view.html?product_no=9065&cate_no=68&display_group=1 |  | AD |  | Matin Kim 26 Summer 'HOUSE, HAUS!' | album=Matin Kim",
         "2026-03-03 | https://www.instagram.com/reel/DVZ56FxE9nj/ |  | AD |  | 좋아하면 눈 뜨기👀🤍 | album=Matin Kim",
+        "2026-02-26 |  |  | AD | 리즈 | My Bucket List | album=Matin Kim | cols=2 | photos=https://lh3.googleusercontent.com/d/1natfapXR1oZsc-uGFdcjnMsfK7QQ-Kxt;https://lh3.googleusercontent.com/d/1WuA0H-TUyfLoTkewhNaZUzqDtKe_tYjl;https://lh3.googleusercontent.com/d/17AZOMqRzZdnK2hUVNCPGLYIjoj0vqAkG;https://lh3.googleusercontent.com/d/1zL-Ps_0neTWvjBzhtcEh0X47mhtzkaqk;https://lh3.googleusercontent.com/d/1GTD3mj79O2Q-yQ886LypgMOJ5ylYL--F;https://lh3.googleusercontent.com/d/1sYhef3mexTseTw5ghvu2zvbdhG2mNDYl;https://lh3.googleusercontent.com/d/1DbfWuGyXBaUk9GpM1d5wDGaFlcl5Z8Os;https://lh3.googleusercontent.com/d/1aaCaMRj7vUBL1Y_jqV6jGAuLEIGSuZJq;https://lh3.googleusercontent.com/d/1yjM5DIeIU6drEDXKnRBc42RpRVHEmZAB;https://lh3.googleusercontent.com/d/1BcQNolEq_zY_C7yUgRCZmjp1QGJX9WGA;https://lh3.googleusercontent.com/d/1ngdprWPr1PM_juL4IC_gQr_QKN4iggEP;https://lh3.googleusercontent.com/d/1GdhI3AugLyuYuWEfdogcQvguNdc3jbvp;https://lh3.googleusercontent.com/d/15zuBybaCpDdrLl5Jrvp79zcgyRrot0M_",
         "2026-02-26 | https://www.instagram.com/p/DVNx-HUktPv/ |  | AD |  | Matin Kim 26 Spring Collection with LIZ ‘My Bucket List’ | album=Matin Kim",
         "2026-02-25 | https://www.instagram.com/p/DVKIgRokktR/ |  | AD |  | Matin Kim X LIZ | album=Matin Kim",
         "2026-02-25 | https://m.matinkim.com/collection-view.html?product_no=8993 |  | AD |  | Matin Kim x LIZ 'BUCKET LIST' | album=Matin Kim",
@@ -3677,6 +3693,31 @@
         "2025-08-22 | https://m.blog.naver.com/starship_ent/223979254801 | https://lh3.googleusercontent.com/d/16EYEmMmFx60jg__hkndEx1F-Lc8mGRDO | Naver Blog | 아이브 | IVE X ‘파파존스’ 광고 촬영 현장 비하인드",
         "2025-12-12 | https://m.blog.naver.com/starship_ent/224106370179 | https://lh3.googleusercontent.com/d/12IH_zfSFjiUQRKdz0RX8jZdgfKCmJ8sY | Naver Blog | 리즈 | 리즈 X '8seconds' 광고 촬영 현장 비하인드",
         "2026-01-13 | https://m.blog.naver.com/starship_ent/224144194686 | https://lh3.googleusercontent.com/d/1MAQi6rqqhMStzRu2gKit9ALuyTZfgKI8 | Naver Blog | 아이브 | IVE WORLD TOUR <SHOW WHAT I AM> 현장 비하인드",
+        "2026-11-11 | https://www.instagram.com/p/DflYFl5ktA1/ |  | MAGAZINE | 아이브 | 거울 앞에 선 6명. 그 안에 비친 것은 단순한 얼굴이 아니었습니다.\n\n아이브는 언제나 당당했습니다. 스스로를 믿고, 사랑하는 태도는 그들만의 색깔이 됐죠. 그 뒤에는 수많은 고민과 노력이 있었습니다. 흔들리는 순간마다 자신을 돌아보고, 서로에게 기대며 조금씩 단단해졌습니다.\n\n\"저희를 응원해 주는 사람들이 가장 큰 버팀목입니다.\" (장원영)\n\n이들이 함께한 시간은 확신이 됐습니다. 멤버들은 서로의 거울이 되어 성장했습니다. 자신을 믿는 것을 넘어, 서로를 더욱 빛나게 하는 방법을 알고 있습니다.\n\n우리가 미처 몰랐던 아이브의 6가지 이야기를 디아이콘에서 공개합니다. | album=DICON D'FESTA THE ORIGIN",
+        "2026-11-11 |  |  | MAGAZINE | 아이브 | DICON D'FESTA THE ORIGIN | album=DICON D'FESTA THE ORIGIN | cols=2 | bare=1 | photos=https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjLIk-RujQ1mRsQJ7y6899Zb8Uf_sbpXY99tQmlFm2hXzHzTDEq8txKuXvtaoqXbx8kBL-Ugp1V55Jyq41ENMlvNGnUfmn4X_57ZJYHwpVp5eDfvgHg7zxNGQuHq5zyvZJHUPMBu8IfhAiF42fYGRzCldy6KlZg0ur0M2237O4dKDLMTPXBok8X4JuuZCQ/s1200/HWzzq36bcAAUKn3.jpg;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj6GCI6kY4chgRBWBzF93r8r-ZRIdpqm948cAAkdWQe8sd20_D7NvD-m3rbwc_qA2yw8iq6h46w3lBXE-I-Y0NK7xB_uJAFRdoNfctps4CKwFGDoxj1woI3bVFpTe9XyLUZQUsKXqEvOj7BgHtKRKvDdoJxT1t2RODKD6vjryFWkIV_jdhyphenhyphenWYGCkmMuqhk/s1200/HWzzq2gaYAAqZJ5.jpg;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhLT59s4MzbyHOnF4okUqhcSkOdQkeGpwkiCgSCt-sF2Dxu6ucy2_bUizvfNbvEn3KzfPcDw9NVUmwpmdJheN_O8_5C6mwB6YDwVoVigph1U3tckE2K3RJusZjGxnrIguvLcrqBl1pTggxxZ6gUTKwIMZkto33Kl4obrOVITddfDFObfn2KtgfPqTeh0MU/s1200/HWzzq1YbcAAddHT.jpg",
+        // ---- Instagram (ivestarship) ----
+        "2023-12-12 | https://www.instagram.com/p/C0wCVOYrB3v/ |  | Instagram | 리즈 | 🐱💖💛 | board=ivestarship",
+        "2023-11-17 | https://www.instagram.com/p/CzvFbEbPwmm/ |  | Instagram | 리즈 | 𝒩𝑜𝒷𝑜𝒹𝓎 🖤✨ | board=ivestarship",
+        "2023-11-07 | https://www.instagram.com/p/CzV6t3qvAe-/ |  | Instagram | 리즈 | 완두콩🫛💚 | board=ivestarship",
+        "2023-11-04 | https://www.instagram.com/p/CzNXZVvvK_J/ |  | Instagram | 리즈 | 🩶고양이 두 마리🩶 | board=ivestarship",
+        "2023-11-03 | https://www.instagram.com/p/CzLN1rvv4SF/ |  | Instagram | 리즈 | 𝓑𝓪𝓭𝓭𝓲𝓮🖤 🐈‍⬛ | board=ivestarship",
+        "2023-10-30 | https://www.instagram.com/p/CzBaJb2vrr4/ |  | Instagram | 리즈 | 배디활동 끝났다냥🧸 | board=ivestarship",
+        "2023-10-15 | https://www.instagram.com/p/CyaxwU9vnpt/ |  | Instagram | 리즈 | 늦어서 쏘리합니다🤍 | board=ivestarship",
+        "2023-09-29 | https://www.instagram.com/p/CxxAtrhvjhK/ |  | Instagram | 리즈 | 🧸햅삐🧸 | board=ivestarship",
+        "2023-09-18 | https://www.instagram.com/p/CxVbmexvbOo/ |  | Instagram | 리즈 | 마치 like 슬리데린 💚🖤💚🖤 | board=ivestarship",
+        "2023-09-11 | https://www.instagram.com/p/CxCLMUcvRcM/ |  | Instagram | 리즈 | 🌊🐳🐬🪼 | board=ivestarship",
+        "2023-09-03 | https://www.instagram.com/p/Cwt7gS_PF1v/ |  | Instagram | 리즈 | 🍃🐬🌱💎 | board=ivestarship",
+        "2023-08-20 | https://www.instagram.com/p/CwJmumYPNz-/ |  | Instagram | 리즈 | 인절미냥🐈💛 | board=ivestarship",
+        "2023-08-11 | https://www.instagram.com/p/Cvyjje5v60l/ |  | Instagram | 리즈 | 💙🐈‍⬛💙 | board=ivestarship",
+        "2023-07-30 | https://www.instagram.com/p/CvTdxBhPLIV/ |  | Instagram | 리즈 | 🇪🇸❤️💛❤️🇪🇸 | board=ivestarship",
+        "2023-07-03 | https://www.instagram.com/p/CuOV7ysvuEl/ |  | Instagram | 리즈 | 삐삐🎀💝💖💘💕 | board=ivestarship",
+        "2023-06-29 | https://www.instagram.com/p/CuFBYucxPOH/ |  | Instagram | 리즈 | in Taipei💙🩵🤍 | board=ivestarship",
+        "2023-06-28 | https://www.instagram.com/p/CuBoW4yv3Jn/ |  | Instagram | 리즈 | 20살의 나•◦❥◦•BAZAAR🖤 | board=ivestarship",
+        "2023-06-18 | https://www.instagram.com/p/Ctn6iC1v4UR/ |  | Instagram | 리즈 | Thanks Manila 🇵🇭🤍 | board=ivestarship",
+        "2023-06-17 | https://www.instagram.com/p/Ctk1HxDPX_l/ |  | Instagram | 리즈 | Manila ʚ♥ɞ | board=ivestarship",
+        "2023-06-15 | https://www.instagram.com/p/Ctg0iDHv8n3/ |  | Instagram | 리즈 | Valextra 🧸🤎 | board=ivestarship",
+        "2023-05-22 | https://www.instagram.com/p/CsiiqHCPTqC/ |  | Instagram | 리즈 | 🐱🐈‍⬛❣ | board=ivestarship",
+        "2026-10-14 |  |  | AD | 리즈 | H&M CHINA | album=H&M CHINA | cols=2 | bare=1 | photos=https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi-EdrmHdamEnxB9a7K1N3XKtXnEz6mJGyrFJc-bXscZYLk1mFzcDkSZEOI1iJFqaNCHBIJqbSK7CB2j97tsGK6U32wI2KjZfihM4NLtz5PAENIpZBCdScf2TZj-rJbpY9FaVGrZnXnFmjg8tuI7pdRuuXxBpxvKGFIy9C6U4HV4mMHzkjLp1jwfHvRJ5k/s2048/HUpAVhaawAANsAh.jpg;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj5GxrO8y22r81NJWvDxu67515QVfCixfOBIPCcjwnh6uZI0dpDW3Yry_L_Azkwpwu553ZneCa543qoKRS7XMP2V4S0CqeJe3rvDE740TuZqa0ZRCElewqdcA1Uz9Thl2lswqe3BSW_EbQicFBd-nYuXWRzFwnxWX_HAOPOSQ4eEYXiML5fPpwXN1rYDqQ/s2048/HUpAVhbaYAAkuTD.jpg;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgzDhRWSYyj_wPgMtnQtb9Y5t_lfxHn2z-ct5JlOZ7rPZTN3eeyq2Y7RV_5Vy6z_LzDxlR2CzaiOTF7qfSpjO12u4IIWZy2nDTprmiV6P1z0ILmrFj5bFaRwtHyF7zKQ3Go0RmitKrWK855ySfqsW6jrOWteJAxADaEC04qWBzqo0hUt39iy8Tspx91XjM/s2048/HUpAVhZaYAELHS9.jpg;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjhIwmGp5QoMpiAUH0gIkDyje8LD3hXSnJ_cyBnLhxy5CMdrUyRdYM3dwloWhqyaMv0aciAIDzJfbs2mIZt92hkb6K_DIeln44GJKhDarvO1l4Hy0yRkdjddn-0jPzI5p3vcrZDBn3HMfWgY_TotEh1O8dpHKPXZm4sBUQrnmVjr3mnq4INS54koRlNklU/s2048/HUpAUwjbkAA9pXA.jpg;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj1V8b4lnge0CPeZv83kEG5mtAy9NDOXqbOFhSsU3Q_yMJqPl3CnTTQCni3e7p3dqBME5tYW_SWe-f4nwVopYAcSwu1GsYKtnols1vejZpomGZ3QDoVjxUYSpYbo5bpZAckVNh67QxJj1a1igQu00e0Qkdjw-YreJUTM7yqbIqwoHm4p-Duob_KboC971E/s2048/HUpAUwhaAAAlv7z.jpg;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjwC8h1FBIhTd2mNUyWzxCzB2BzVLYpvjRnNeWoWfDPlKD70EK5AR-abYN_NDRGx-C8SjjEVTmTIFOnNzTX7I2TBghm7_lwcbK3x8mYRl0In_9Ra3xPnTfifDaPyVCnFvDlidFbB7cLqdaV0gSTob1s7XYOcFOytbotLR_ZC-gLRA_FH42UWrMp9DGF90c/s1660/HVCnBcnbEAAz2kH.jpg;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjKhNAE08FKoAqweRoLzPgknu1tVYXyNORSEUU88EiNlbAoN9GtmwAtOMMoZPfvEVFnys0tcGWJ-CstCUcUO9blGryy5CAdtz1M4GWNVzQf38AcM1YbUtGu6bnvcd32oB1GCZbNhLvK0UXwruE1R0_bRvcKcqt7Ird3NXU60GfP2GhK7YNsZXtzZMHKYAI/s1440/HVCnBcra0AAi3KA.jpg;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg_HLuvtgKTYQGOskbG2x0mv9fjbbcqVUyNoSRHRwtZmgy4hpN-c5saN48fQfhawijQlM-sESsudfTfUWQkGa9i_RN_aMOPnx1u9P3dIXqkRJz_uL4t2OCMUCmccH-m9fuDKNmiwOxqwkB0l55DdcyBe3i4k72sV1vilrpGADBCBgK1GXgY8okBFTOALv0/s1660/HVcnL9LbgAAXRJ3.jpg;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiGpCemBHEU1rieBhLII1ddLjvxSpq0dzRnXgE9fN0qDwDdvNzjfdCqrl_o_UlOgSq8fWQDDy3iWAmZzjje6ZXMuaU1gxOorCTihCeFCQI5raZAoSJk-t1kR3HEnWv4PZ0nlepLVgLDiJ9OIWQj8Yoz5HKef9xwpxxp9BpiEVg5IxH0kl-x2ps0bCw2GJk/s1660/HVcnL9VbUAAcj2U.jpg;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhv-HTOZ9HaSfBgPUg5z3b27Znye7rg3SODf7u595ND1WIcvlhLuch32c5qxSBv0zfvx-6NksusjDjSNyjdZiJUVHTPj1UnyQm4rAHZTPTplsuw6pgVl5pweUZgieFmUD4Xnf6QBR_3t78XENb35yliKw6iyC5sJfAP3ffLoRegBPcqVKdXA2YNkA0IGYE/s1660/HVmsOAJagAAvuRJ.jpg;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEii39nYY5198XXKMWZgRcRexxtDubvXWpWYWZxJqbjHGi5FZrCq_uUMOBn2_K2KLiO8XhUJdREP2XDicEpGTPGFo4Vma5VYMrI3-i0A-v5Suj93RLZ6iIHbSmOcnci240hBjnS7Td7EhW8us_6idGXQhy4FXnYxqzF7ZuA-SJ4VqMthVmLSzlf03A4v4gY/s1660/HVmsOALaEAAuVJF.jpg;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgbRpw_NEg8eMCS-sCYo4M7VnbX6x-z5l_JCWK5XIunuMnpO1nHzPJiZ4pNBqfYWK3MfVzyh2ohbMoC0z05CqL1AQ-uk-WYyF8-Y2ehxjeOE6kS_DV9KfWzN_5nJLrp2iBWE6znbKKnzqiWx4ds81Prwh4fZ9opIsoGdqPf1mUJLs-0X8_QnNaw8NcCEfc/s1660/HVrs4gIbkAAA8OM.jpg;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhGFXRThxWAvPUSZdFN7JUNv3Wno4K9YLREk4-x30VUmoKGDZljk8pr_fhCS85ChkGOAQe2A3mfFAbh_F6J5okW8mzykbr2ei81gxJGHHEn_Ira3gDIS9Q_frdxbhG6It7ZrH9xi1LxhLnsz1kzzS_rUKWaU_mmfAXSK17LMIN9bMXiRtgMQaOYBe2rRBc/s1660/HVrs4gGbQAAjdzB.jpg;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjT6ByaXealDaXCWuqFgjYohkJM8YJHYqwc4Mg-sQ64cI_9p67UDETvfXPxZKKlaqNuqhKsimUHCR_BO-ppTSP8vk1MyOUkkjscyjXBzzMkNCWLG6Bl8r2RGfZjUEGeh1OVbFbkT4AunQsmgKofZ07xvJgJlR-OiVUDKGQazvf29h7rlSiQPKY3UR-mWns/s1660/HVhqavGaAAAmqDI.jpg;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiPCHBwYB6060QS21imeCsPAU72vWGA2h-QYN43SMepk4LXqdISTGosv8cT_KP87fkf5ZZCvokP5s06-zvcH0az-y3t9DYD6gJZsDU8R2N07v1SlUt8eymDMbCeREPhhEixNWxgxvfXmm3F1hH3ALnhDw4FKPmkYC2sond32ccOLOt47Ope3W18d8LNZNE/s1660/HVhqau3bwAAVwBm.jpg",
         // Valentino Cruise 27
         "2026-11-06 | https://www.instagram.com/reel/DfZW_5UB7Oh/ |  | AD | 리즈 | Valentino Cruise 27 | album=Valentino",
         "2026-11-06 | https://www.instagram.com/reel/DfZrYwRSyIO/ |  | AD | 리즈 | Valentino Cruise 27 | album=Valentino",
@@ -3840,7 +3881,8 @@
         OST: {
           "오싹한 연애 OST Part 1 - 터널": "2026.07.19.",
           "오늘도 매진했습니다 OST Part 1 - 첫 눈 그날처럼": "2026.04.22.",
-          "프린세스 캐치! 티니핑 OST - 프린세스 캐치! 티니핑 주제곡": "2025.09.30.",
+          "프린세스 캐치! 티니핑 OST - 프린세스 캐치! 티니핑 주제곡":
+            "2025.09.30.",
           "천국보다 아름다운 OST Part 5 - Heavy Love": "2025.05.18.",
           "사랑은 외나무다리에서 OST Part 7 - Summer": "2024.12.15.",
         },
@@ -3874,13 +3916,38 @@
           opts: [{ k: "From. IVE" }, { k: "IVE TALK" }],
         },
         Berriz: { by: "board", opts: [{ k: "From. IVE" }, { k: "EVENT" }] },
+        Instagram: { by: "board", opts: [{ k: "ivestarship" }] },
+        LIVE: {
+          by: "platform",
+          opts: [
+            { k: "V LIVE" },
+            { k: "YouTube" },
+            { k: "Berriz" },
+            { k: "bubble" },
+          ],
+        },
+        "L(IVE)": {
+          by: "platform",
+          opts: [
+            { k: "V LIVE" },
+            { k: "YouTube" },
+            { k: "Berriz" },
+            { k: "bubble" },
+          ],
+        },
         Twitter: {
           by: "board",
           opts: [{ k: "IVE_twt" }, { k: "IVEstarship_JP" }],
         },
       };
       let subFilter = [];
+      // 플랫폼 뱃지 기준 분류 (뱃지 없는 영상은 V LIVE)
+      const platKey = (v) =>
+        ["YouTube", "Berriz", "bubble"].includes(v.platform)
+          ? v.platform
+          : "V LIVE";
       const subCfg = (name) => {
+        if (name === "전체" && scope && scope.title === "LIVE") name = "LIVE";
         const c = SUB_FILTERS[name];
         return c && (scope || c.by === "board") ? c : null;
       };
@@ -3892,6 +3959,8 @@
             subFilter.includes(o.k) &&
             (c.by === "board"
               ? v.board === o.k
+              : c.by === "platform"
+              ? platKey(v) === o.k
               : (o.cats || [o.k]).some((x) => v.cats.includes(x)))
         );
       };
@@ -4043,12 +4112,7 @@
         fmtDate(iso)
           .replace(/\d\d\.$/, "")
           .replace(/\.$/, ".");
-      const fmtD = (v) =>
-        (v.cats || []).includes("MAGAZINE") &&
-        location.hash === "#list" &&
-        !albumScope // 메인·폴더 안에서는 날짜 전체 표시
-          ? fmtMonth(v.date)
-          : fmtDate(v.date);
+      const fmtD = (v) => fmtDate(v.date); // 날짜는 항상 전체(연.월.일.) 표기
       const fmtDur = (s) => {
         const h = Math.floor(s / 3600),
           m = Math.floor((s % 3600) / 60),
@@ -4062,7 +4126,13 @@
         return (+m[1] || 0) * 3600 + (+m[2] || 0) * 60 + (+m[3] || 0);
       };
       const SCHEDULE_CATS = ["MAGAZINE", "POP-UP", "AD", "MC", "etc.(일정)"];
-      const hideViews = (v) => v.cats.some((c) => SCHEDULE_CATS.includes(c));
+      // 일정 전용 항목만 조회수 숨김 (COVER·Shorts 등에도 속한 영상은 조회수 표시)
+      const VIEW_CATS = ["COVER", "Shorts", "Challenge", "IVE"];
+      let viewCtxHide = false; // SCHEDULES 화면(메인 섹션/목록)에서는 항상 조회수 숨김
+      const hideViews = (v) =>
+        viewCtxHide ||
+        (v.cats.some((c) => SCHEDULE_CATS.includes(c)) &&
+          !v.cats.some((c) => VIEW_CATS.includes(c)));
       const hideTags = () =>
         location.hash === "#list" &&
         (tabList()[tab] === "SOLO" ||
@@ -4554,6 +4624,7 @@
       function renderHome() {
         $("home").innerHTML =
           HOME_SECTIONS.map((s, si) => {
+            viewCtxHide = !!s.hideViews;
             const items = videos
               .filter(
                 (v) =>
@@ -4582,6 +4653,7 @@
           <button class="arrow l" data-d="-1">◀</button><button class="arrow r" data-d="1">▶</button></div>
       </div>`;
           }).join("") +
+          (viewCtxHide = false, "") +
           '<div style="text-align:center"><button class="more" data-all>전체 영상 보기 →</button></div>';
         processEmbeds();
       }
@@ -4816,6 +4888,7 @@
           !!(scope && scope.hideViews) ||
           SCHEDULE_CATS.includes(name) ||
           name === "PHOTO";
+        viewCtxHide = noViews;
         const viewsBtn = document.querySelector('.sort [data-s="views"]');
         document.querySelector(".sort").hidden = false;
         if (viewsBtn) viewsBtn.hidden = noViews; // 조회수가 없는 탭(SCHEDULES 등)은 인기순만 숨기고 최신순/날짜순은 유지
@@ -4849,7 +4922,9 @@
           const albumItems = items
             .filter((v) => v.album === albumScope)
             .sort((a, b) => (b.photos ? 1 : 0) - (a.photos ? 1 : 0)); // 사진첩은 날짜 상관없이 맨 앞 (나머지 순서는 유지)
-          $("count").textContent = `${albumLabel(albumScope)} · ${albumItems.length}개`;
+          $("count").textContent = `${albumLabel(albumScope)} · ${
+            albumItems.length
+          }개`;
           $("grid").classList.remove("social-list");
           const albumCard = (v) => card(v);
           $("grid").innerHTML =
@@ -4874,7 +4949,9 @@
           // 그룹 전체 탭에서는 폴더로 묶지 않고 전부 풀어서 정렬된 채로 보여줌
           $("grid").innerHTML = items.map(cardForList).join("");
         } else {
-          const withoutAlbum = items.filter((v) => !v.album);
+          const withoutAlbum = FLAT_ALBUM_TABS.includes(name)
+            ? items.filter((v) => !v.album)
+            : items; // 폴더 탭이 아니면 앨범 지정이 있어도 일반 목록에 그대로 표시
           if (FLAT_ALBUM_TABS.includes(name)) {
             // 폴더를 슬라이더로 펼치지 않고, 폴더당 커버 카드 1개만 보여주고 누르면 폴더가 열림
             const groups = {};
@@ -4908,7 +4985,9 @@ ${
     : `<div class="fthumb ph${name === "DAUM CAFE" ? " cafeph" : ""}">${
         name === "DAUM CAFE"
           ? TANGERINE_SVG
-          : `<span class="phtxt" style="color:#b9945f">${esc(albumLabel(a))}</span>`
+          : `<span class="phtxt" style="color:#b9945f">${esc(
+              albumLabel(a)
+            )}</span>`
       }</div>`
 }
                 <div class="title">${esc(albumLabel(a))}</div>
@@ -4953,7 +5032,9 @@ ${
                           albumLabel(a)
                         )}</span>`
                   }</div>`;
-              return `<div class="folder-card${isMag ? " auto" : ""}${name === "OST" ? " sq" : ""}${
+              return `<div class="folder-card${isMag ? " auto" : ""}${
+                name === "OST" ? " sq" : ""
+              }${
                 pinnedSet.has("folder:" + name + ":" + a) ? " pinned" : ""
               }" data-album="${esc(a)}" role="button">
                 ${thumbHtml}
@@ -4987,7 +5068,9 @@ ${
               const photoFirst = name !== "MAGAZINE"; // MAGAZINE은 날짜순(최신 폴더가 맨 위)
               albumKeys.sort(
                 (x, y) =>
-                  (photoFirst ? (hasPhotos(y) ? 1 : 0) - (hasPhotos(x) ? 1 : 0) : 0) ||
+                  (photoFirst
+                    ? (hasPhotos(y) ? 1 : 0) - (hasPhotos(x) ? 1 : 0)
+                    : 0) ||
                   (sort === "oldest"
                     ? earliest(x) - earliest(y)
                     : latest(y) - latest(x))
@@ -5016,9 +5099,7 @@ ${
             return;
           }
           $("grid").innerHTML =
-            `<div style="grid-column:1/-1">${renderAlbumSections(
-              items
-            )}</div>` + withoutAlbum.map(cardForList).join("");
+            withoutAlbum.map(cardForList).join("");
         }
         processEmbeds();
       }
