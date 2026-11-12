@@ -449,7 +449,7 @@
         border-radius: 12px;
         border: 1px solid var(--line);
         background: var(--panel);
-        color: var(--muted);
+        color: #999;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -1201,6 +1201,53 @@
       .gb-btn.bell {
         right: 38px;
       }
+      .gb-btn.upd {
+        right: 66px;
+      }
+      .upd-sub {
+        margin: -2px 0 6px;
+        font-size: 11px;
+        color: var(--muted);
+      }
+      .upd-list {
+        overflow-y: auto;
+        border-top: 1px solid var(--line);
+      }
+      .upd-it {
+        padding: 9px 2px;
+        border-bottom: 1px solid var(--line);
+        font-size: 13px;
+        line-height: 1.5;
+      }
+      .upd-it:last-child {
+        border-bottom: 0;
+      }
+      .upd-it b {
+        display: inline-block;
+        margin-right: 6px;
+        padding: 0 7px;
+        border: 1px solid var(--red);
+        border-radius: 999px;
+        color: var(--red);
+        font-size: 10.5px;
+      }
+      .upd-it i {
+        display: block;
+        margin-top: 2px;
+        font-style: normal;
+        font-size: 11.5px;
+        color: var(--muted);
+      }
+      .upd-ok {
+        margin-top: 10px;
+        align-self: flex-end;
+        padding: 5px 16px;
+        border-radius: 999px;
+        background: var(--red);
+        color: #fff;
+        font-weight: 700;
+        font-size: 12.5px;
+      }
       .gb-btn .dot {
         position: absolute;
         top: -2px;
@@ -1564,6 +1611,20 @@
         >
           <rect x="3" y="5" width="18" height="14" rx="2.5" />
           <path d="M3.5 7l8.5 6.5L20.5 7" />
+        </svg>
+      </button>
+      <button class="gb-btn upd" id="updBtn" aria-label="업데이트 내역" title="업데이트 내역">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M12 4v3M12 17v3M4 12h3M17 12h3" />
+          <path d="M8 8l8 8M16 8l-8 8" opacity="0" />
+          <path d="M12 9l1.2 1.8L15 12l-1.8 1.2L12 15l-1.2-1.8L9 12l1.8-1.2z" />
         </svg>
       </button>
       <button class="gb-btn bell" id="bellBtn" aria-label="알림" title="알림">
@@ -2841,8 +2902,8 @@
       //   "날짜 | 원문링크(없으면 비움) | 표지주소(비우면 첫 사진) | PHOTO | 멤버 | 제목 | album=폴더 | photos=주소1;주소2;주소3"
       //   예) "2026-10-19 |  |  | PHOTO | 리즈 | COSMOPOLITAN 화보 | album=COSMOPOLITAN 2025년 11월호 | photos=https://.../a.jpg;https://.../b.jpg",
       const MANUAL_ITEMS = [
-        "2025-04-21 |  |  | Membership | 아이브 | [DIVE INTO IVE]의 IVE 선장들을 소개합니다🚢💙 | album=DIVE 4기 | cols=2 | photos=https://lh3.googleusercontent.com/d/1jO3-OnXjTbgrZqcohICPRQxzV5TcZpD4",
-        "2025-08-31 |  |  | Membership | 리즈 | 8월의 리즈 | album=DIVE 4기 | photos=https://lh3.googleusercontent.com/d/1yDj6h8FF469wELhaJxGIydh7D5lijpv4;https://lh3.googleusercontent.com/d/1W4Q8iowDitOVIYFbBbl3LgK88Qg78kTN",
+        "2025-04-21 |  |  | Membership | 아이브 | [DIVE INTO IVE]의 IVE 선장들을 소개합니다🚢💙 | album=DIVE 4기 | cols=2 | photos=https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjRwH_d0Q55PyzNl5mA7I-UgwOJmR4MtX_ZwstNz4t-2aaveod9jBLeDFvvxYZtPCYsRkLFRumPTE5PCbAeoVrwO5sMxKrnSHbRT_eNHKFiICFUlsfNS89L6e93XMtnTrjQv12_S0sEAVnNcIe9z7gw-vmHC8ArVkrjOQ2FRGj1SJI6gcVncBfZoY1iZ8o/s5000/Berriz_20250628025435.jpg",
+        "2025-08-31 |  |  | Membership | 리즈 | 8월의 리즈 | album=DIVE 4기 | photos=https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg84nnfrnVQrhbat0VgUf7HivZX-_ZVrP6Uplf0oHf6UT0sCzFQPpCRY5AqFbm0DXAqra7qfW9ll8ZqMXdCHkG3_kiIN6zEuAcE2Xp9TZetQWvxbOVJNAt2oa8KSG15fQXEDFBIySXioYCxa27W27EAs8I8MCnpAMmqwwlXTfcWCQAFQBDsD23q4jmMmwE/s3000/Berriz_20250831140022.jpg;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiM7BRKOlfMIH95_rVbnkDxlJglnL2FRGO9phiydL8wytQGGzr7IO-k6uScvcgrKHLUWtwxUi3iWKdXhRr82-4sByYNeNKt7C4GrwM7C54YXho_EtHElviwb5XVUkaPJ66YdCH24EByRX3DW8-DC5cToDQX6Pui0WvDFZoxAWLTXehFUW3chbq4Z2efr3I/s3000/Berriz_20250831140022%20(1).jpg",
         "2025-10-31 |  |  | Membership | 레이,리즈 | 10월의 커플즈 | album=DIVE 4기 | photos=https://lh3.googleusercontent.com/d/1SJ1PONGNVQs8nmZz5Ht5EpR8YqBIDZSW;https://lh3.googleusercontent.com/d/1LMNcBJWQmoKiF-2Tv0w5GZqR3Vh6y4fH",
         "2026-01-31 |  |  | Membership | 아이브 | IVE CATEGORY | album=DIVE 4기 | photos=https://lh3.googleusercontent.com/d/1qZatXK1IPkPUotjQj0hyiAgYzULYa-gz;https://lh3.googleusercontent.com/d/1mHqbrFuK5R5LHtMnqkaJiVCEQBTHU-mn;https://lh3.googleusercontent.com/d/1_21YFgJRFKRS15F0VOK-UuHg5R_tDka6",
         "2022-05-23 |  |  | Membership | 리즈 | 4컷만화 | album=DIVE 1기 | photos=https://lh3.googleusercontent.com/d/17SKCEBtVbipJer7cuul4By7gY7dU2kcC;https://lh3.googleusercontent.com/d/1F1DUN9sfpXAux2TWBY0CfRzZ7m2K_-ti",
@@ -4494,7 +4555,7 @@
       <div class="cafe-body">
         <div class="cafe-title">${esc(v.title)}</div>
         <div class="cafe-meta">${
-          v.board ? esc(v.board) + "<i>•</i>" : ""
+          "" /* 카페 게시판명(IVE TALK / From. IVE) 숨김 - 필터는 v.board 로 계속 작동 */
         }IVE${esc(mem)}<i>•</i>${d}${cmtN(v) ? `<i>•</i>댓글 ${cmtN(v)}` : ""}${
           v.views != null ? `<i>•</i>조회 ${v.views.toLocaleString()}` : ""
         }</div>
@@ -4682,7 +4743,7 @@
       <div class="title">${esc(v.title)}</div>
       <div class="info pinrow">${
         v.views !== null && !hideViews(v) ? fmtViews(v.views) + "<br>" : ""
-      }${isCafeC && v.board ? esc(v.board) + " • " : ""}${fmtD(v)}${
+      }${"" /* 카페 게시판명(IVE TALK / From. IVE) 숨김 - 필터는 v.board 로 계속 작동 */}${fmtD(v)}${
           isCafeC && cmtN(v) ? " • 댓글 " + cmtN(v) : ""
         }${igEmb ? "" : pinHtml}</div>
       ${
@@ -5462,6 +5523,7 @@ ${
         $("pinbar").hidden = isList;
         $("gbBtn").hidden = isList;
         $("bellBtn").hidden = isList;
+        $("updBtn").hidden = isList;
         $("bellPop").hidden = true;
         if (isList) {
           subFilter = [];
@@ -5880,7 +5942,7 @@ ${
         cafeEl.innerHTML = `<div class="pv-bar"><button class="pv-x" aria-label="닫기">×</button>
       <div class="pv-h"><div class="pv-t">${esc(
         v.title
-      )}</div><div class="pv-m">${v.board ? esc(v.board) + " · " : ""}IVE${esc(
+      )}</div><div class="pv-m">${"" /* 카페 게시판명(IVE TALK / From. IVE) 숨김 - 필터는 v.board 로 계속 작동 */}IVE${esc(
           mem
         )} · ${fmtDate(v.date)}${
           v.views != null ? " · 조회 " + v.views.toLocaleString() : ""
@@ -6343,6 +6405,92 @@ ${
       document.addEventListener("keydown", (e) => {
         if (e.key === "Escape" && gbEl && !gbEl.hidden) gbClose();
       });
+      // ---- 업데이트 팝업: "이번 작업에서 무엇이 바뀌었는지" 요약 (알림종과는 별개) ----
+      // 새 작업을 할 때마다 id 를 바꾸고 items 를 새 내용으로 교체하세요.
+      // id 가 바뀌면 처음 접속 시 한 번 자동으로 열리고, 이후엔 우측 상단 ✦ 버튼으로 다시 볼 수 있어요.
+      const UPDATE_LOG = {
+        id: "2026-11-13",
+        title: "UPDATE",
+        sub: "2026.11.13 작업 내용",
+        items: [
+          {
+            tag: "사진",
+            text: "DIVE INTO IVE 선장 소개 · 8월의 리즈",
+            note: "사진 링크를 새 이미지 주소로 교체했어요.",
+          },
+          {
+            tag: "디자인",
+            text: "검색창 돋보기 · 필터 아이콘 색 통일",
+            note: "두 아이콘 모두 같은 회색으로 맞췄어요.",
+          },
+          {
+            tag: "카페",
+            text: "게시판 이름(IVE TALK, From. IVE) 숨김",
+            note: "화면에서만 안 보이고, 세부 필터는 그대로 작동해요.",
+          },
+          {
+            tag: "기능",
+            text: "업데이트 팝업 추가",
+            note: "작업마다 바뀐 점을 정리해서 보여줘요. 알림(최근 5개)과는 별개예요.",
+          },
+        ],
+      };
+      const UPD_KEY = "updSeen";
+      let updEl = null;
+      function closeUpd() {
+        if (!updEl) return;
+        updEl.hidden = true;
+        document.body.style.overflow = "";
+        try {
+          localStorage.setItem(UPD_KEY, UPDATE_LOG.id);
+        } catch (e) {}
+      }
+      function openUpd() {
+        if (!updEl) {
+          updEl = document.createElement("div");
+          updEl.className = "gb";
+          updEl.style.zIndex = 320;
+          document.body.appendChild(updEl);
+          updEl.addEventListener("click", (e) => {
+            if (e.target === updEl || e.target.closest("[data-upd-x]")) closeUpd();
+          });
+        }
+        updEl.innerHTML =
+          '<div class="gb-box"><div class="gb-head"><span>✦ ' +
+          esc(UPDATE_LOG.title) +
+          '</span><button data-upd-x aria-label="닫기">×</button></div>' +
+          '<div class="upd-sub">' +
+          esc(UPDATE_LOG.sub) +
+          '</div><div class="upd-list">' +
+          UPDATE_LOG.items
+            .map(
+              (it) =>
+                '<div class="upd-it"><b>' +
+                esc(it.tag) +
+                "</b>" +
+                esc(it.text) +
+                (it.note ? "<i>" + esc(it.note) + "</i>" : "") +
+                "</div>"
+            )
+            .join("") +
+          '</div><button class="upd-ok" data-upd-x>확인</button></div>';
+        updEl.hidden = false;
+        document.body.style.overflow = "hidden";
+      }
+      $("updBtn").onclick = (e) => {
+        e.stopPropagation();
+        openUpd();
+      };
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && updEl && !updEl.hidden) closeUpd();
+      });
+      (function () {
+        let seen = "";
+        try {
+          seen = localStorage.getItem(UPD_KEY) || "";
+        } catch (e) {}
+        if (seen !== UPDATE_LOG.id) openUpd();
+      })();
       renderPinBar();
       load();
     </script>
