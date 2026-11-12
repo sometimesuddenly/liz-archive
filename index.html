@@ -1458,10 +1458,20 @@
       .igalbum .mem {
         margin-top: 2px;
       }
+      .igtop {
+        position: relative;
+      }
       .igside {
         position: absolute;
         right: 0;
-        top: -27px;
+        top: calc(100% + 9px);
+      }
+      .igemb .title {
+        padding-right: 36px;
+        min-height: 21px;
+      }
+      .igemb .info.pinrow {
+        padding-right: 0;
       }
       .igalbum .title {
         padding-right: 36px;
@@ -4460,7 +4470,7 @@
           }" href="#" data-pk="${esc(pinKey(v))}"${
             hasCaps ? ` data-caps="${esc(JSON.stringify(caps))}"` : ""
           }>
-      <div class="thumb phthumb igcar">
+      <div class="igtop"><div class="thumb phthumb igcar">
         <div class="igtrack">${v.photos
           .map(
             (u) =>
@@ -4479,8 +4489,7 @@
             : ""
         }
       </div>
-      <div class="title">${esc(caps[0])}</div>
-      <div class="info pinrow igrow">${fmtD(v)}<div class="bz-side igside"><span class="pinbtn${
+      <div class="bz-side igside"><span class="pinbtn${
             isPinned(v) ? " on" : ""
           }" role="button" aria-label="상단에 고정" title="상단에 고정" data-pin="${esc(
             pinKey(v)
@@ -4491,6 +4500,8 @@
                 )}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"/></svg></span>`
               : ""
           }</div></div>
+      <div class="title">${esc(caps[0])}</div>
+      <div class="info pinrow igrow">${fmtD(v)}</div>
       ${
         shownMem(v).length
           ? `<div class="mem">${shownMem(v)
@@ -4505,9 +4516,15 @@
       }
     </a>`;
         }
+        const igEmb = v.embed === "instagram" && !isPhoto; // 진짜 인스타 임베드: 귤도장을 사진 아래에 고정
+        const pinHtml = `<span class="pinbtn${
+          isPinned(v) ? " on" : ""
+        }" role="button" aria-label="상단에 고정" title="상단에 고정" data-pin="${esc(
+          pinKey(v)
+        )}">${TANGERINE_SVG}</span>`;
         return `<a class="card${isPinned(v) ? " pinned" : ""}${
           isPhoto ? " photo-card" : ""
-        }" href="${
+        }${igEmb ? " igemb" : ""}" href="${
           v.content
             ? "#"
             : v.url || (isPhoto ? "#" : "https://youtu.be/" + v.id)
@@ -4518,7 +4535,7 @@
             ? `data-ck="${esc(pinKey(v))}"`
             : 'target="_blank" rel="noopener"'
         }>
-      <div class="thumb${isPhoto ? " phthumb" : ""}${
+      ${igEmb ? '<div class="igtop">' : ""}<div class="thumb${isPhoto ? " phthumb" : ""}${
           (v.cats || []).includes("Berriz") && v.images ? " bzthumb" : ""
         }${
           embedHtml
@@ -4568,17 +4585,15 @@
             ? `<span class="plat" style="background:rgba(40,30,20,.72)">📷 ${v.photos.length}</span>`
             : ""
         }
-      </div>
+      </div>${
+        igEmb ? `<div class="bz-side igside">${pinHtml}</div></div>` : ""
+      }
       <div class="title">${esc(v.title)}</div>
       <div class="info pinrow">${
         v.views !== null && !hideViews(v) ? fmtViews(v.views) + "<br>" : ""
       }${isCafeC && v.board ? esc(v.board) + " • " : ""}${fmtD(v)}${
           isCafeC && cmtN(v) ? " • 댓글 " + cmtN(v) : ""
-        }<span class="pinbtn${
-          isPinned(v) ? " on" : ""
-        }" role="button" aria-label="상단에 고정" title="상단에 고정" data-pin="${esc(
-          pinKey(v)
-        )}">${TANGERINE_SVG}</span></div>
+        }${igEmb ? "" : pinHtml}</div>
       ${
         shownMem(v).length
           ? `<div class="mem">${shownMem(v)
