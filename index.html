@@ -1470,6 +1470,13 @@
         padding-right: 36px;
         min-height: 21px;
       }
+      .igfull .title {
+        display: block;
+        -webkit-line-clamp: unset;
+        overflow: visible;
+        white-space: pre-line;
+        word-break: break-word;
+      }
       .igemb .info.pinrow {
         padding-right: 0;
       }
@@ -4465,7 +4472,7 @@
           const hasCaps = !!(v.captions && v.captions.some(Boolean));
           const chev =
             '<svg viewBox="0 0 24 24" width="9" height="9" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>';
-          return `<a class="card photo-card igalbum${
+          return `<a class="card photo-card igalbum igfull${
             isPinned(v) ? " pinned" : ""
           }" href="#" data-pk="${esc(pinKey(v))}"${
             hasCaps ? ` data-caps="${esc(JSON.stringify(caps))}"` : ""
@@ -4524,7 +4531,9 @@
         )}">${TANGERINE_SVG}</span>`;
         return `<a class="card${isPinned(v) ? " pinned" : ""}${
           isPhoto ? " photo-card" : ""
-        }${igEmb ? " igemb" : ""}" href="${
+        }${igEmb ? " igemb" : ""}${
+          (v.cats || []).includes("Instagram") ? " igfull" : ""
+        }" href="${
           v.content
             ? "#"
             : v.url || (isPhoto ? "#" : "https://youtu.be/" + v.id)
