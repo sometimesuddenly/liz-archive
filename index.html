@@ -6210,6 +6210,7 @@ ${
           $("status").remove();
           renderHome();
           renderBell();
+          history.replaceState(null, "", location.pathname + location.search);
           route();
           checkUpd();
         } catch (err) {
