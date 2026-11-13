@@ -1114,6 +1114,15 @@
       .pv-row.solo img {
         flex: 0 0 calc(50% - 5px); /* 홀수 장일 때 마지막 1장은 절반 폭 */
       }
+      .pv-row iframe {
+        flex: 1 1 0;
+        min-width: 0;
+        width: auto;
+        max-height: none;
+      }
+      .pv-row.solo iframe {
+        flex: 0 0 calc(50% - 5px);
+      }
       .pv-body img {
         width: 100%;
         height: auto;
@@ -5785,7 +5794,7 @@ ${
           const box = pvEl.querySelector(".pv-rows");
           const ratios = v.photos.map(
             (u) =>
-              new Promise((res) => {
+              ytIdOf(u) ? Promise.resolve(9 / 16) : new Promise((res) => {
                 const im = new Image();
                 im.referrerPolicy = "no-referrer";
                 im.onload = () =>
@@ -5814,13 +5823,21 @@ ${
                 row.className = "pv-row";
                 box.appendChild(row);
               }
-              const img = document.createElement("img");
-              img.alt = "";
-              img.decoding = "async";
-              img.referrerPolicy = "no-referrer";
+              const yt = ytIdOf(u);
+              const img = document.createElement(yt ? "iframe" : "img");
+              if (yt) {
+                img.src = "https://www.youtube.com/embed/" + yt + "?playsinline=1&rel=0";
+                img.allow = "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; fullscreen";
+                img.allowFullscreen = true;
+                img.title = "동영상";
+              } else {
+                img.alt = "";
+                img.decoding = "async";
+                img.referrerPolicy = "no-referrer";
+                img.src = u;
+              }
               img.style.aspectRatio = String(rs[i]); // 가로/세로
               img.style.flexGrow = String(rs[i]); // 비율만큼 폭 배분 → 높이 동일
-              img.src = u;
               row.appendChild(img);
             });
             if (row && row.children.length === 1) {
