@@ -1465,6 +1465,24 @@
       .igtrack::-webkit-scrollbar {
         display: none;
       }
+      .igtrack iframe {
+        flex: 0 0 100%;
+        width: 100%;
+        height: 100%;
+        border: 0;
+        background: #000;
+        scroll-snap-align: center;
+        scroll-snap-stop: always;
+      }
+      .pv-body iframe {
+        width: 100%;
+        aspect-ratio: 9 / 16;
+        max-height: 85vh;
+        border: 0;
+        border-radius: 10px;
+        background: #000;
+        display: block;
+      }
       .igtrack img {
         flex: 0 0 100%;
         width: 100%;
@@ -4575,6 +4593,19 @@
           ? v.url || v.id
           : v.id;
       const isPinned = (v) => pinnedSet.has(pinKey(v));
+            // 사진 칸에 유튜브 링크가 있으면 사진 대신 영상으로 보여줌
+      const ytIdOf = (u) => {
+        const m = String(u || "").match(
+          /(?:youtu\.be\/|youtube\.com\/(?:shorts\/|watch\?v=|embed\/|live\/))([\w-]{11})/
+        );
+        return m ? m[1] : null;
+      };
+      const mediaHtml = (u) => {
+        const id = ytIdOf(u);
+        return id
+          ? `<iframe class="ytmedia" src="https://www.youtube.com/embed/${id}?playsinline=1&rel=0" title="동영상" loading="lazy" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen></iframe>`
+          : `<img src="${esc(u)}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" />`;
+      };
       const pinnedFirst = (arr) => [
         ...arr.filter(isPinned),
         ...arr.filter((v) => !isPinned(v)),
@@ -4684,15 +4715,8 @@
             hasCaps ? ` data-caps="${esc(JSON.stringify(caps))}"` : ""
           }>
       <div class="igtop"><div class="thumb phthumb igcar">
-        <div class="igtrack">${v.photos
-          .map(
-            (u) =>
-              `<img src="${esc(
-                u
-              )}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" />`
-          )
-          .join("")}</div>
-        <button type="button" class="igar prev" aria-label="이전 사진" hidden>${chev}</button>
+        <div class="igtrack">${v.photos.map(mediaHtml).join("")}</div>
+           <button type="button" class="igar prev" aria-label="이전 사진" hidden>${chev}</button>
         ${
           v.photos.length > 1
             ? `<button type="button" class="igar next" aria-label="다음 사진">${chev}</button>
@@ -5753,14 +5777,7 @@ ${
       <div class="pv-body${v.cols === 2 ? " pv2" : ""}">${
           v.cols === 2
             ? '<div class="pv-rows"></div>'
-            : v.photos
-                .map(
-                  (u) =>
-                    `<img src="${esc(
-                      u
-                    )}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" />`
-                )
-                .join("")
+            : v.photos.map(mediaHtml).join("")
         }${v.bare ? "" : '<div class="pv-end">· 끝 ·</div>'}</div>`;
         // 2열 보기: 한 행에 2장씩, 행마다 세로 높이는 동일하고 가로폭은 사진 비율대로 배분
         if (v.cols === 2) {
