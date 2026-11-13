@@ -4605,17 +4605,30 @@
           ? v.url || v.id
           : v.id;
       const isPinned = (v) => pinnedSet.has(pinKey(v));
-            // 사진 칸에 유튜브 링크가 있으면 사진 대신 영상으로 보여줌
+       // 사진 칸에 유튜브·구글 드라이브 영상 링크가 있으면 사진 대신 영상으로 보여줌
       const ytIdOf = (u) => {
         const m = String(u || "").match(
           /(?:youtu\.be\/|youtube\.com\/(?:shorts\/|watch\?v=|embed\/|live\/))([\w-]{11})/
         );
         return m ? m[1] : null;
       };
+      const driveIdOf = (u) => {
+        const m = String(u || "").match(
+          /drive\.google\.com\/(?:file\/d\/|open\?id=|uc\?(?:export=\w+&)?id=)([\w-]{20,})/
+        );
+        return m ? m[1] : null;
+      };
+      const embedSrc = (u) => {
+        const y = ytIdOf(u);
+        if (y) return "https://www.youtube.com/embed/" + y + "?playsinline=1&rel=0";
+        const d = driveIdOf(u);
+        if (d) return "https://drive.google.com/file/d/" + d + "/preview";
+        return null;
+      };
       const mediaHtml = (u) => {
-        const id = ytIdOf(u);
-        return id
-          ? `<iframe class="ytmedia" src="https://www.youtube.com/embed/${id}?playsinline=1&rel=0" title="동영상" loading="lazy" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen></iframe>`
+        const src = embedSrc(u);
+        return src
+          ? `<iframe class="ytmedia" src="${esc(src)}" title="동영상" loading="lazy" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen></iframe>`
           : `<img src="${esc(u)}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" />`;
       };
       const pinnedFirst = (arr) => [
@@ -5797,7 +5810,7 @@ ${
           const box = pvEl.querySelector(".pv-rows");
           const ratios = v.photos.map(
             (u) =>
-              ytIdOf(u) ? Promise.resolve(9 / 16) : new Promise((res) => {
+              embedSrc(u) ? Promise.resolve(9 / 16) : new Promise((res) => {
                 const im = new Image();
                 im.referrerPolicy = "no-referrer";
                 im.onload = () =>
@@ -5826,10 +5839,10 @@ ${
                 row.className = "pv-row";
                 box.appendChild(row);
               }
-              const yt = ytIdOf(u);
+              const yt = embedSrc(u);
               const img = document.createElement(yt ? "iframe" : "img");
               if (yt) {
-                img.src = "https://www.youtube.com/embed/" + yt + "?playsinline=1&rel=0";
+                img.src = yt;
                 img.allow = "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; fullscreen";
                 img.allowFullscreen = true;
                 img.title = "동영상";
