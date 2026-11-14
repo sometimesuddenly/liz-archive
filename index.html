@@ -4,6 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>TANGERINE BOX</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <style>
       @font-face {
         font-family: "Tuktak";
@@ -28,8 +31,9 @@
         zoom: 1.1;
         background: var(--bg);
         color: var(--text);
-        font-family: "Tuktak", -apple-system, "Pretendard", "Apple SD Gothic Neo",
-          "Malgun Gothic", sans-serif;
+        /* 영문/숫자: Poppins 먼저 → 한글은 글꼴에 없으니 자동으로 Tuktak 사용 */
+        font-family: "Poppins", "Helvetica Neue", Arial, "Tuktak", -apple-system,
+          "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
       }
       input,
       textarea,
@@ -214,7 +218,7 @@
         border-top: 1px solid #e3cba3;
       }
       .cafe-cms-h {
-        font-size: 13px;
+        font-size: 12px;
         font-weight: 700;
         color: var(--muted);
         margin-bottom: 8px;
@@ -223,15 +227,15 @@
         padding: 0;
       }
       .cafe-cm {
-        padding: 8px 0;
-        font-size: 14.5px;
+        padding: 6px 0;
+        font-size: 12.5px;
       }
       .cafe-cm > b {
         display: inline-block;
         padding: 1px 10px;
         border: 1px solid #f0c595;
         border-radius: 999px;
-        font-size: 12.5px;
+        font-size: 11px;
         font-weight: 700;
       }
       .cafe-cm-t {
@@ -964,7 +968,7 @@
         flex: 1;
       }
       .cafe-title {
-        font-size: 16px;
+        font-size: 14px;
         line-height: 1.4;
         color: var(--text);
         display: -webkit-box;
@@ -987,8 +991,8 @@
         white-space: pre-wrap;
         word-break: keep-all;
         overflow-wrap: anywhere;
-        line-height: 1.85;
-        font-size: 15.5px;
+        line-height: 1.8;
+        font-size: 13.5px;
         color: var(--text);
         padding: 8px 4px 20px;
       }
@@ -1070,6 +1074,12 @@
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
+      }
+      .cafe-pv .pv-t {
+        font-size: 13px;
+      }
+      .cafe-pv .pv-m {
+        font-size: 11px;
       }
       .pv-m {
         font-size: 12px;
@@ -1640,8 +1650,8 @@
       .bz-go {
         position: static;
         transform: none;
-        width: 26px;
-        height: 26px;
+        width: 20px;
+        height: 20px;
         border-radius: 50%;
         display: flex;
         align-items: center;
@@ -1651,8 +1661,8 @@
         color: var(--tg-d);
       }
       .bz-go svg {
-        width: 15px;
-        height: 15px;
+        width: 12px;
+        height: 12px;
       }
       .bz-text {
         white-space: pre-wrap;
@@ -3273,7 +3283,7 @@
         "2022-12-28 |  | https://blog.kakaocdn.net/dn/bawmbl/dJMcaaNkWnq/NH7B9pK9pdsLchI7EETmM1/AAAAAAAAAAAAAAAAAAAAAFUysMiafXSjgGXtSjmXESjicd_jaRJB6vNG4kLyQXGk/img.jpg | DAUM CAFE | 리즈 | 다이브 지금 시간돼요~? | content=다이브 지금 시간돼요~? | image=https://blog.kakaocdn.net/dn/bawmbl/dJMcaaNkWnq/NH7B9pK9pdsLchI7EETmM1/AAAAAAAAAAAAAAAAAAAAAFUysMiafXSjgGXtSjmXESjicd_jaRJB6vNG4kLyQXGk/img.jpg | board=IVE TALK",
         "2023-03-08 |  | https://blog.kakaocdn.net/dn/bbOov5/dJMcahlrcRj/ptcIuTNPUedCA1deuy1AUk/AAAAAAAAAAAAAAAAAAAAAEzy4Jf3JjslihF7YC1f5PlVRMMDyg6PdTflIiBXU8Rl/img.jpg | DAUM CAFE | 리즈 | 뿌우😗 | content=뿌우😗 | image=https://blog.kakaocdn.net/dn/bbOov5/dJMcahlrcRj/ptcIuTNPUedCA1deuy1AUk/AAAAAAAAAAAAAAAAAAAAAEzy4Jf3JjslihF7YC1f5PlVRMMDyg6PdTflIiBXU8Rl/img.jpg | board=IVE TALK",
         "2023-03-21 |  | https://blog.kakaocdn.net/dn/KrhcM/dJMcadJVLnT/d5MKcffYKDUC3XAUuoKE91/AAAAAAAAAAAAAAAAAAAAACFv8owShYbURqUXyGAzR8j2HJqJvTMZBFUgSMd6IxF0/img.jpg | DAUM CAFE | 리즈 | READY TO DIVE❔ | content=READY TO DIVE❔ | image=https://blog.kakaocdn.net/dn/KrhcM/dJMcadJVLnT/d5MKcffYKDUC3XAUuoKE91/AAAAAAAAAAAAAAAAAAAAACFv8owShYbURqUXyGAzR8j2HJqJvTMZBFUgSMd6IxF0/img.jpg | board=IVE TALK",
-        "2023-03-29 |  | https://blog.kakaocdn.net/dn/wCper/dJMcacYDSbp/K2gRaB6g4596uNKbXLvMG1/AAAAAAAAAAAAAAAAAAAAAD5-V4XEO20jIssBV2eVjwULPo_r6wOaKnxUX4iilt6o/img.jpg | DAUM CAFE | 가을 | ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ 아깽즈 왤케 웃겨..? | content=ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ 아깽즈 왤케 웃겨..? | image=https://blog.kakaocdn.net/dn/wCper/dJMcacYDSbp/K2gRaB6g4596uNKbXLvMG1/AAAAAAAAAAAAAAAAAAAAAD5-V4XEO20jIssBV2eVjwULPo_r6wOaKnxUX4iilt6o/img.jpg | comments=리즈¦유후~~~ 언니.그게 현실이에요.§이서¦가을선배가 우리 웃기대~ @리즈언니 | board=IVE TALK",
+        "2023-03-29 |  | https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhOPpKQtRBZ1LU2NWnKi5D0BSk-YV8skaVE4kbKQFhNwuMnyibaKy15rOE-KRdtJLj7d9JEy04yiXKUE_I83sK9hyB5Htj9zhsuPiY600agS1-oTqGl9RS_kFNiB27-mLOaLbirqfyue5d9lpXBvCgg-icGEhs5GVyxo1sQ8UiPHqq9WvA5G6_a7jLIXwM/s2796/resized_IMG_0032_20261114_214116_265.jpg | DAUM CAFE | 가을 | ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ 아깽즈 왤케 웃겨..? | content=ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ 아깽즈 왤케 웃겨..? | image=https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhOPpKQtRBZ1LU2NWnKi5D0BSk-YV8skaVE4kbKQFhNwuMnyibaKy15rOE-KRdtJLj7d9JEy04yiXKUE_I83sK9hyB5Htj9zhsuPiY600agS1-oTqGl9RS_kFNiB27-mLOaLbirqfyue5d9lpXBvCgg-icGEhs5GVyxo1sQ8UiPHqq9WvA5G6_a7jLIXwM/s2796/resized_IMG_0032_20261114_214116_265.jpg | comments=리즈¦유후~~~ 언니.그게 현실이에요.§이서¦가을선배가 우리 웃기대~ @리즈언니 | board=IVE TALK",
         "2023-03-29 |  | https://blog.kakaocdn.net/dn/bQMzQD/dJMcadWhhcn/DtJxKpikkMEPvWLOs05gQ1/AAAAAAAAAAAAAAAAAAAAADGHryV6clySxFWNO19uxKCVP7v2iX65o2XbTyCAIGwC/img.jpg | DAUM CAFE | 리즈 | ASMR 그 후•••(대왕 테이프공😎🤓🥸) | content=ASMR 그 후•••(대왕 테이프공😎🤓🥸) | image=https://blog.kakaocdn.net/dn/bQMzQD/dJMcadWhhcn/DtJxKpikkMEPvWLOs05gQ1/AAAAAAAAAAAAAAAAAAAAADGHryV6clySxFWNO19uxKCVP7v2iX65o2XbTyCAIGwC/img.jpg | board=IVE TALK",
         "2023-04-04 |  | https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi6bQKu0m951aXGvz1IQR5dksbsawNIeBObDWsOYXLkCjcEp9NyxzkUqGKpnDJCiPGQZa21jd6qNKCVINPtC5xfjT2V2bbaRbNc8J0Et8THqYRRK2wmzR253HhDFVj_01t1PvKJOwW1vVEB_RqC76zPtF-CFakcVcdSS_uHnrXTsxoCMcgZZC6nnt4yoJA/s2437/resized_IMG_0439_20261106_130327_633.jpg | DAUM CAFE | 리즈 | 아웅ㅇㅇ깅영웡🎀 | content=아웅ㅇㅇ깅영웡🎀 | image=https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi6bQKu0m951aXGvz1IQR5dksbsawNIeBObDWsOYXLkCjcEp9NyxzkUqGKpnDJCiPGQZa21jd6qNKCVINPtC5xfjT2V2bbaRbNc8J0Et8THqYRRK2wmzR253HhDFVj_01t1PvKJOwW1vVEB_RqC76zPtF-CFakcVcdSS_uHnrXTsxoCMcgZZC6nnt4yoJA/s2437/resized_IMG_0439_20261106_130327_633.jpg | board=IVE TALK",
         "2023-04-09 |  | https://blog.kakaocdn.net/dn/b7ktoZ/dJMcabxo2SB/UFEA1uI37NKg4sS9eOuwm0/AAAAAAAAAAAAAAAAAAAAAITylRQfZJUOcFMs_1lyDQNigYFZY7ymQ8xrxYQsxXY-/img.jpg | DAUM CAFE | 리즈 | 다이브 금방가께 !!🌸 | content=다이브 금방가께 !!🌸 | image=https://blog.kakaocdn.net/dn/b7ktoZ/dJMcabxo2SB/UFEA1uI37NKg4sS9eOuwm0/AAAAAAAAAAAAAAAAAAAAAITylRQfZJUOcFMs_1lyDQNigYFZY7ymQ8xrxYQsxXY-/img.jpg | board=IVE TALK",
@@ -3284,7 +3294,6 @@
         "2023-05-03 |  | https://blog.kakaocdn.net/dn/bjXfjW/dJMcag6zpi5/BwyhMKSp71IxVSK7xo8yy1/AAAAAAAAAAAAAAAAAAAAAEg9R_skpik-uGcsYnPz-yqoeMcmgGht4aAOaPwVNCcp/img.jpg | DAUM CAFE | 리즈 | (사진) | content=(사진) | image=https://blog.kakaocdn.net/dn/bjXfjW/dJMcag6zpi5/BwyhMKSp71IxVSK7xo8yy1/AAAAAAAAAAAAAAAAAAAAAEg9R_skpik-uGcsYnPz-yqoeMcmgGht4aAOaPwVNCcp/img.jpg | board=IVE TALK",
         "2023-05-06 |  | https://blog.kakaocdn.net/dn/TBp7r/dJMcabjVDXN/uo0CODIKQ5gmWcX3DwEekk/AAAAAAAAAAAAAAAAAAAAAJbobphTVizZwDhczZkiAy4RQrzNSX_k07GZXIpGg82s/img.jpg | DAUM CAFE | 리즈 | 뿅! | content=뿅! | image=https://blog.kakaocdn.net/dn/TBp7r/dJMcabjVDXN/uo0CODIKQ5gmWcX3DwEekk/AAAAAAAAAAAAAAAAAAAAAJbobphTVizZwDhczZkiAy4RQrzNSX_k07GZXIpGg82s/img.jpg | board=IVE TALK",
         "2023-05-18 |  | https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg9dNIfg44EXbr1CBwwEYT40zrWy8X1xYBFvfRfQLy5vsu6WFfyvewsiD2Cwn076ny7P8A9Ai0jgpTgBujFYVqs6NUOYBfFyQ65kLJfXCcYyKDj_AiNQ39wss6FJwymAfIwS8jKqkkM_-9E1ycV-mchCzNU5Q7-jAxRfhEo8JUCXM04BsEE291-PBs3s24/s517/resized_IMG_1173_20261106_130250_503.jpg | DAUM CAFE | 이서 | 언니 안녕ㅎㅎ | content=언니 안녕ㅎㅎ | image=https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg9dNIfg44EXbr1CBwwEYT40zrWy8X1xYBFvfRfQLy5vsu6WFfyvewsiD2Cwn076ny7P8A9Ai0jgpTgBujFYVqs6NUOYBfFyQ65kLJfXCcYyKDj_AiNQ39wss6FJwymAfIwS8jKqkkM_-9E1ycV-mchCzNU5Q7-jAxRfhEo8JUCXM04BsEE291-PBs3s24/s517/resized_IMG_1173_20261106_130250_503.jpg | comments=리즈¦우엇 !!!! 나댜 !!!!! 현서 좋겠네~~~ 밖에서도 나 보고~~~~~^^§이서¦마자여ㅎㅎ\n여러분~~~ 리즈언니가 저한테 답장해줬어여어어🥺🩵🩵 언니 사랑해 | board=IVE TALK",
-        "2023-05-22 |  |  | DAUM CAFE | 가을 | 이따 도토리숲 봐야지😊 달아 넌 최고야... | content=이따 도토리숲 봐야지😊 달아 넌 최고야... | comments=리즈¦아니요 | board=IVE TALK",
         "2023-06-10 |  | https://blog.kakaocdn.net/dn/b0I6He/dJMcabEb0Yo/kzyure0gsLumk0Dk3KNKV0/AAAAAAAAAAAAAAAAAAAAAEG-MVCeo7tyJEY-Tu6wutgBny7q0if_BYBBwIAPscpJ/img.jpg | DAUM CAFE | 이서 | 하트가 채워질랑 말랑 ㅋ.. | content=하트가 채워질랑 말랑 ㅋ.. | image=https://blog.kakaocdn.net/dn/b0I6He/dJMcabEb0Yo/kzyure0gsLumk0Dk3KNKV0/AAAAAAAAAAAAAAAAAAAAAEG-MVCeo7tyJEY-Tu6wutgBny7q0if_BYBBwIAPscpJ/img.jpg | board=IVE TALK",
         "2023-06-15 |  |  | DAUM CAFE | 리즈 | 다이브 혹시 4시30분에 모해 ❓ | content=다이브 혹시 4시30분에 모해 ❓ | board=IVE TALK",
         "2023-07-16 |  | https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhzF2c5KUNTlXo-1rSqTvYiDgRV1M6Fonqz_WAE7XgxqhpqsCosWSWNVIhW9AyLa3k-fDBHevfU2JuiNtI-C7eNxhRVyyxD7qWZF6Ynqra-R3P_3yRbTuOPR5xLyvc_Dv78nMokcYTmOLRvF5jZnaWjQZvA4Sad9pM2k21VSVgyptIqw7lVkOPXVTMUvHs/s3884/resized_IMG_9079_20261106_130238_350.jpg | DAUM CAFE | 리즈 | 아이브 마시기 🌽 | content=아이브 마시기 🌽 | image=https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhzF2c5KUNTlXo-1rSqTvYiDgRV1M6Fonqz_WAE7XgxqhpqsCosWSWNVIhW9AyLa3k-fDBHevfU2JuiNtI-C7eNxhRVyyxD7qWZF6Ynqra-R3P_3yRbTuOPR5xLyvc_Dv78nMokcYTmOLRvF5jZnaWjQZvA4Sad9pM2k21VSVgyptIqw7lVkOPXVTMUvHs/s3884/resized_IMG_9079_20261106_130238_350.jpg | board=IVE TALK",
@@ -6872,7 +6881,7 @@ ${
         if ((v.cats || []).includes("Berriz")) return openBerriz(v);
         if (!cafeEl) {
           cafeEl = document.createElement("div");
-          cafeEl.className = "pv";
+          cafeEl.className = "pv cafe-pv";
           cafeEl.hidden = true;
           document.body.appendChild(cafeEl);
           cafeEl.addEventListener("click", (e) => {
