@@ -1117,12 +1117,14 @@
       .pv-body.pv2 .pv-row img {
         cursor: zoom-in;
       }
+      .pv-row.zoom {
+        flex-wrap: wrap;
+      }
       .pv-row.zoom img {
-        display: none;
+        flex: 0 0 100% !important;
       }
       .pv-row.zoom img.zoomed {
-        display: block;
-        flex: 0 0 100% !important;
+        order: -1;
         cursor: zoom-out;
       }
       .pv-row iframe {
@@ -4364,6 +4366,7 @@
       ];
       // =====================================================================
       const FLAT_ALBUM_TABS = [
+        "TV",
         "RADIO",
         "OST",
         "MC",
@@ -5918,7 +5921,9 @@ ${
             const im = e.target.closest(".pv2 .pv-row img");
             if (im) {
               const row = im.parentNode;
-              const on = !row.classList.contains("zoom");
+              const on = !(
+                row.classList.contains("zoom") && im.classList.contains("zoomed")
+              );
               row.classList.toggle("zoom", on);
               row.querySelectorAll("img").forEach((x) =>
                 x.classList.toggle("zoomed", on && x === im)
@@ -6420,6 +6425,24 @@ ${
               v.cats = v.cats.filter((c) => c !== cat);
             }
           });
+          // TV: 같은 프로그램 이름끼리 폴더로 묶기 (앞부분 이름 기준, 제목 끝의 "N회"는 뺌 / 2개 이상일 때만 폴더)
+          {
+            const tvBase = (s) =>
+              (s || "")
+                .split(/\s[-–]\s/)[0]
+                .replace(/\s*\d+(\s*~\s*\d+)?\s*회\s*$/, "")
+                .trim();
+            const tvg = {};
+            videos.forEach((v) => {
+              if (v.cats.includes("TV") && !v.album && v.title) {
+                const b = tvBase(v.title);
+                if (b) (tvg[b] = tvg[b] || []).push(v);
+              }
+            });
+            Object.keys(tvg).forEach((b) => {
+              if (tvg[b].length >= 2) tvg[b].forEach((v) => (v.album = b));
+            });
+          }
           $("status").remove();
           renderHome();
           renderBell();
