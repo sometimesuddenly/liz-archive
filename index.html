@@ -5744,6 +5744,36 @@ ${
               ),
             ];
             $("grid").style.alignItems = isMag ? "start" : "";
+            if (!isMag && !FOLDER_DATES[name] && withoutAlbum.length) {
+              // 폴더와 일반 카드를 날짜(정렬 기준)에 맞춰 한 목록으로 섞어서 배치 (귤 도장 고정한 것만 맨 앞)
+              const dts = (a) => groups[a].map((v) => +new Date(v.date) || 0);
+              const fkey = (a) =>
+                !groups[a].length
+                  ? 0
+                  : sort === "views"
+                  ? Math.max(...groups[a].map((v) => v.views || 0))
+                  : sort === "oldest"
+                  ? Math.min(...dts(a))
+                  : Math.max(...dts(a));
+              const ikey = (v) =>
+                sort === "views" ? v.views || 0 : +new Date(v.date) || 0;
+              const isPinF = (a) => pinnedSet.has("folder:" + name + ":" + a);
+              const isPinI = (v) => pinnedSet.has(pinKey(v));
+              const mixed = [
+                ...albumKeys
+                  .filter((a) => !isPinF(a))
+                  .map((a) => ({ k: fkey(a), h: folderCard(a) })),
+                ...withoutAlbum
+                  .filter((v) => !isPinI(v))
+                  .map((v) => ({ k: ikey(v), h: cardForList(v) })),
+              ].sort((x, y) => (sort === "oldest" ? x.k - y.k : y.k - x.k));
+              $("grid").innerHTML =
+                albumKeys.filter(isPinF).map(folderCard).join("") +
+                withoutAlbum.filter(isPinI).map(cardForList).join("") +
+                mixed.map((m) => m.h).join("");
+              processEmbeds();
+              return;
+            }
             $("grid").innerHTML =
               albumKeys.map(folderCard).join("") +
               withoutAlbum.map(cardForList).join("");
