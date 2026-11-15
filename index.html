@@ -1327,6 +1327,13 @@ right: 12px;
 .lb-nav[hidden] {
 display: none;
 }
+.lb-nav svg {
+display: block;
+filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5));
+}
+.lb-img {
+cursor: pointer;
+}
 .lb-cnt {
 position: absolute;
 top: 20px;
@@ -1339,10 +1346,14 @@ font-variant-numeric: tabular-nums;
 }
 @media (max-width: 600px) {
 .lb-nav {
-width: 38px;
-height: 38px;
+width: 40px;
+height: 40px;
 font-size: 22px;
-background: rgba(255, 255, 255, 0.1);
+background: rgba(255, 255, 255, 0.16);
+}
+.lb-nav svg {
+width: 22px;
+height: 22px;
 }
 .lb-prev {
 left: 6px;
@@ -2742,6 +2753,11 @@ const CATEGORIES = {
             "https://youtu.be/VapUNK8NXPk | 레이,리즈",
             "https://youtu.be/FLYZH2ZyVmE | 레이,리즈",
             "https://youtube.com/shorts/6p0JPFqs1Yg | 리즈",
+            "https://youtube.com/shorts/g_C-RGU4srg | 리즈 | date=2023-12-03",
+            "https://youtube.com/shorts/_0Si-XF5cPs | 리즈,이서 | date=2022-01-07",
+            "https://youtube.com/shorts/vFA8rd6m5LE | 아이브 | date=2021-12-14",
+            "https://youtube.com/shorts/ZQ86JEgHJY0 | 리즈 | date=2023-10-17",
+            "https://youtube.com/shorts/XU-tk6gaiQs | 레이,리즈 | date=2023-10-14",
         ],
     },
     IVE: {
@@ -4167,7 +4183,7 @@ const MANUAL_ITEMS = [
     "2026-08-06 | https://www.instagram.com/p/DbrJx93E1JM |  | Instagram | 리즈 |  | board=liz.yeyo | cols=2 | captions=꺄아 해리포터 !!!♥️;together..?;보일링 크랩도 !!;야무지게 먹었어용😝😝;😎;꺄아🙈;설레이는 발걸음💗;키티 머리가 푹식해요;도비도…..사랑해죠 ……;;설레지 히히;간직해야징;식곤증을 이기고 끝까지 시청 완료😉 | photos=https://lh3.googleusercontent.com/d/1Tfu5v43bJtbhVV9eUC3jRuyce8nIlo_8=d;https://lh3.googleusercontent.com/d/1S1sGPxW_N18iE0C_pEnEsdFVNXWad15Z=d;https://lh3.googleusercontent.com/d/1i3dw3sO-P8qsQpESY0cutWYsoE9eGiIj=d;https://lh3.googleusercontent.com/d/1eAIisklM9dFUxaiSMbdCrBxXNS4p7W0M=d;https://lh3.googleusercontent.com/d/1E72CxA6bU5BZ9o1Hcr1Su28FLB3c1VMr=d;https://lh3.googleusercontent.com/d/1qh2m3-XofNqLEE70S3pY13RemcAmz2F5=d;https://lh3.googleusercontent.com/d/1zjZjFMfJDm2NeJIICYbq8X_2KliBzTjb=d;https://lh3.googleusercontent.com/d/19P1KSfX-Pa3i5yMTp8po1gP7zTX0lUbL=d;https://lh3.googleusercontent.com/d/1V4pG1BFeYcwTzDaN_fnKnPA0OnDGDCQz=d;https://lh3.googleusercontent.com/d/1VVU77dG4kyZWqQfuzzUo8XhXQkzHSGiU=d;https://lh3.googleusercontent.com/d/1V0OZWujx8Jd0jvzq37TQVqvfJsG_U_G9=d;https://lh3.googleusercontent.com/d/1OjuxKuWcMXwiR7OkGXJdB04ERaTrX1N2=d;https://lh3.googleusercontent.com/d/1yX79tkhELT3qeVw_7JTAO52WNmTPZmOf=d",
     "2026-08-04 | https://www.instagram.com/p/DbmNdDXmEpw |  | Instagram | 리즈 | 여름이 머문 자리🌿🍃🌱🍏🍀 | board=liz.yeyo | cols=2 | photos=https://lh3.googleusercontent.com/d/1CTfyyQ_ua5fpk0GXY1mgvtkVDUCb-k_r=d;https://lh3.googleusercontent.com/d/17f_czGg32DdF_UeVG12EvcPE_upEHLk6=d;https://lh3.googleusercontent.com/d/1wmiyRXo3tjE5SGzGrjbeGPVVmyzki548=d;https://lh3.googleusercontent.com/d/1tlM59GYONZEsaJAea6UlvJb5alM09l9J=d;https://lh3.googleusercontent.com/d/111tsUapeVTSECDZxw2NO5BzhAwo-Gymg=d;https://lh3.googleusercontent.com/d/1T3XE_GSebJfT9rdZChuAfozZP9dchb7X=d;https://lh3.googleusercontent.com/d/1dJnUc01-nnMsnSru15DOCbpj6VjDGnON=d;https://lh3.googleusercontent.com/d/1vhyHYmZmlQWKE07nWFYRoM4uEF_VH1iY=d;https://lh3.googleusercontent.com/d/1ZrKfS2iifjM6QEvNc4jwQquC5OCMwv0f=d;https://lh3.googleusercontent.com/d/1NG3CCyEOVgpTKtV9tobkQ4OBZmMV2cyf=d;https://lh3.googleusercontent.com/d/1IoE1XAcXIL0DQ-1JQOinauqLp_QoeIyh=d;https://lh3.googleusercontent.com/d/1V8HuOyDgYmqKd3zhdb_gYz18jhKT_QmW=d;https://lh3.googleusercontent.com/d/1RO5QhIW6sn0QUjvggbdLKVipPPL_OXlD=d;https://lh3.googleusercontent.com/d/1nEEuY9IaOVOyL7f_GgT0pTduFYeOtvTF=d;https://lh3.googleusercontent.com/d/1CC4Y3cr5AMXUAR618W6RFxNGDCChr3J7=d;https://lh3.googleusercontent.com/d/1qQw7kTMVP3Qp6dUv8tzEWkY5q-vU54ZP=d",
     "2026-07-30 | https://www.instagram.com/p/DbaG72CDs6h |  | Instagram | 리즈 | 🅔🅐🅣 ​ 🅢🅞🅜🅔🅣🅗🅘🅝🅖 | board=liz.yeyo | cols=2 | photos=https://lh3.googleusercontent.com/d/1tan1RZJunxc3YvutHpijE6ygLjggi2vj=d;https://lh3.googleusercontent.com/d/1CbUoDQ7AHT0TVSGAMX9eZClUPClqoIqN=d;https://lh3.googleusercontent.com/d/1zdW14G3xtcIc-xBkD7rsNviKdjh5eVZB=d;https://lh3.googleusercontent.com/d/1lKUPyeOw7oJ8QxdrV7lwufCVop2k3up6=d;https://lh3.googleusercontent.com/d/1kSp-npKEiYVNFCj5z3CfilnP-QaL_syr=d;https://lh3.googleusercontent.com/d/1evSMAjHJBLHJI-2lwEbufnyqj7owLUw1=d;https://lh3.googleusercontent.com/d/16QaVcFq026IpuW4jRIeXWCUdsxOPKwoZ=d;https://lh3.googleusercontent.com/d/1SEVg_0LhPgpMfHiylMt1FQKhrmBSuGt7=d;https://lh3.googleusercontent.com/d/122-TCuSWz518Qscv9hICeVfr9jDhor7N=d;https://lh3.googleusercontent.com/d/10fd77BOhw7clOyV6PLmksQSdwFmwYuVt=d;https://lh3.googleusercontent.com/d/1rccvM5NbTw8AxTawsr3v1gfJrLZrhNIH=d;https://lh3.googleusercontent.com/d/1WqGDnWMxV9IA48STu5dZd5eO5LSs2v-4=d;https://lh3.googleusercontent.com/d/1JNaNqLWSXtDr6vwPNgUkEe2QSfoqTcjk=d;https://lh3.googleusercontent.com/d/19ckNhzqNESdATL4KbIQk6weJmrWxJWwo=d",
-    "2026-07-21 | https://www.instagram.com/p/DbDwNetFBYd |  | Instagram | 리즈 |  | board=liz.yeyo | cols=2 | captions=히히;원숭이 죠아 !;히히;...;좀 닮았나..?;💟;나랑 싸우자.;갑자기 비가 와요 !!!!;햅삐-;너 좀 귀욥당 ?;너희 뷰 되게 좋은곳에서 밥을 먹는구나;뀨잉;뿌이>< | photos=https://lh3.googleusercontent.com/d/1roLYAHUMjii58ydTFBBAr1P9FZkL_KSx=d;https://lh3.googleusercontent.com/d/1xwdHR7h9OGWHlsXvvRM_c3n5zszXCLvu=d;https://lh3.googleusercontent.com/d/1oiNG3R8KKUtXzodP01BUurKQsj0p_5MS=d;https://lh3.googleusercontent.com/d/1FUtwFFzX4nusHFHi8_8Ce3qdBsxKxLvY=d;https://lh3.googleusercontent.com/d/1uUL59SP9x7JaUXNhquHjb03s8BbY8Xkb=d;https://lh3.googleusercontent.com/d/1caxnJIyQwfl7pO3xC5tRa_I34yfJAFG8=d;https://lh3.googleusercontent.com/d/1hAfKZ6FM_yFluF43T_XM1hArwt2CaB30=d;https://lh3.googleusercontent.com/d/1iKJlE3TYZU9rA3bOc6b9XWj07hpcqJ99=d;https://lh3.googleusercontent.com/d/1msTd5zZ48idzGarHKLNvgU4q254KybXc=d;https://lh3.googleusercontent.com/d/1MINC-jf2lNfA_9Igg1hbUZjlpDbhJZk4=d;https://lh3.googleusercontent.com/d/1mToFmQLzXi0YJ_F_nhmAJ8nHCXFV7bZy=d;https://lh3.googleusercontent.com/d/1tnHJE-mGli5ZnYjeI4Ej0wJPg53prFE4=d;https://lh3.googleusercontent.com/d/10m0j0U00e0waJuOxu45Lo7J_iMbZhTMn=d",
+    "2026-07-21 | https://www.instagram.com/p/DbDwNetFBYd |  | Instagram | 리즈 |  | board=liz.yeyo | cols=2 | captions=날씨 좋으다아ㅏ☀️;원숭이 죠아 !;히히;...;좀 닮았나..?;💟;나랑 싸우자.;갑자기 비가 와요 !!!!;햅삐-;너 좀 귀욥당 ?;너희 뷰 되게 좋은곳에서 밥을 먹는구나;뀨잉;뿌이>< | photos=https://lh3.googleusercontent.com/d/1roLYAHUMjii58ydTFBBAr1P9FZkL_KSx=d;https://lh3.googleusercontent.com/d/1xwdHR7h9OGWHlsXvvRM_c3n5zszXCLvu=d;https://lh3.googleusercontent.com/d/1oiNG3R8KKUtXzodP01BUurKQsj0p_5MS=d;https://lh3.googleusercontent.com/d/1FUtwFFzX4nusHFHi8_8Ce3qdBsxKxLvY=d;https://lh3.googleusercontent.com/d/1uUL59SP9x7JaUXNhquHjb03s8BbY8Xkb=d;https://lh3.googleusercontent.com/d/1caxnJIyQwfl7pO3xC5tRa_I34yfJAFG8=d;https://lh3.googleusercontent.com/d/1hAfKZ6FM_yFluF43T_XM1hArwt2CaB30=d;https://lh3.googleusercontent.com/d/1iKJlE3TYZU9rA3bOc6b9XWj07hpcqJ99=d;https://lh3.googleusercontent.com/d/1msTd5zZ48idzGarHKLNvgU4q254KybXc=d;https://lh3.googleusercontent.com/d/1MINC-jf2lNfA_9Igg1hbUZjlpDbhJZk4=d;https://lh3.googleusercontent.com/d/1mToFmQLzXi0YJ_F_nhmAJ8nHCXFV7bZy=d;https://lh3.googleusercontent.com/d/1tnHJE-mGli5ZnYjeI4Ej0wJPg53prFE4=d;https://lh3.googleusercontent.com/d/10m0j0U00e0waJuOxu45Lo7J_iMbZhTMn=d",
     "2026-07-19 | https://www.instagram.com/p/Da99YoAAbrl |  | Instagram | 리즈 | 성수에서 토니모리즈와 함께하세요오☺️💕 | board=liz.yeyo | cols=2 | photos=https://lh3.googleusercontent.com/d/1xmgQqsFa4eE5b6EjXHuTQSao2s6ejcqt=d;https://lh3.googleusercontent.com/d/1pGCWjMF2AH1BKCHp0xWOmvX7NRz2u3T4=d;https://lh3.googleusercontent.com/d/1NB4iAghNvISecPjUNLm_1MCYt120tMt1=d;https://lh3.googleusercontent.com/d/1MvabjSkq9e-80EwOompNSIb5ktGQLRy9=d;https://lh3.googleusercontent.com/d/15dpHy-_93ga0igw8_xhE7o2Kn7DEWqTu=d;https://lh3.googleusercontent.com/d/15LfP5d_LxsETLp5VJHPsXWDV5Z1C7Hyu=d;https://lh3.googleusercontent.com/d/1ETsC2A9pd7ZZWLOs1w7F9SFp8TjcktOJ=d;https://lh3.googleusercontent.com/d/1qMdOoYL2Uj72TzUqUR5TFB5nHzCKQNR2=d;https://lh3.googleusercontent.com/d/1TMEA0g3w5_iLvlS8-Jvtj0IfLFxUZwQk=d;https://lh3.googleusercontent.com/d/1yNCsaUEwaF55q-AJ-4BPtzSmHS-pzjoR=d;https://lh3.googleusercontent.com/d/1Ol08mQpZMGfBIlcBMujif665IGSN-5qh=d;https://lh3.googleusercontent.com/d/1V2NaRupul_7vXk91kIo8tnEocOvrBtyt=d;https://lh3.googleusercontent.com/d/1jEp-GwGJGaPxubi9qTzVtUXzKVf3XuXE=d;https://lh3.googleusercontent.com/d/1ITlzF5YjhWL8S-cp9BGXF4pLzx4VIpm5=d;https://lh3.googleusercontent.com/d/1lmiPMZM_2s3w9K0yzVwze-5EXOKUtZaP=d;https://lh3.googleusercontent.com/d/1UcXwmMXqjgWxBFTsF8k9T2xlbuIszNud=d",
     "2026-07-03 | https://www.instagram.com/p/DaT_DIZAYbK |  | Instagram | 리즈 | 幸せだった..💕 | board=liz.yeyo | cols=2 | photos=https://lh3.googleusercontent.com/d/1uCJ5bazodXpaeDkLVSp7n8l5YzobWSbN=d;https://lh3.googleusercontent.com/d/1qtekV7fURI177R55Z8CFawxskdcn4Zb5=d;https://lh3.googleusercontent.com/d/11jNOQHXMpAid2y8a6Ct-NMs8ev6OtQ9x=d;https://lh3.googleusercontent.com/d/1E2r3SHEsyoreO50X0VheXDXTuoAOkklr=d;https://lh3.googleusercontent.com/d/1iS19ZOS3LXjI3FkItFC86jvm0k9uwPCh=d;https://lh3.googleusercontent.com/d/1UmcA_wbbLEkFrzKIaNMfnaiHdcIwpKGK=d;https://lh3.googleusercontent.com/d/1wAzPZgF6iQbke3WN_SN3hDyn7ieM16oE=d;https://lh3.googleusercontent.com/d/1vd2hZjhx5wZFWCh-YpXTL3raS3Fn-dLo=d;https://lh3.googleusercontent.com/d/17PR4sOPKPeHbls6IMA3ZmaW7Bx0DDm5V=d",
     "2026-04-10 | https://www.instagram.com/p/DW8bLDGE5_8 |  | Instagram | 리즈 | ☘️🌿🍀🥦🌱🍏 | board=liz.yeyo | cols=2 | photos=https://lh3.googleusercontent.com/d/1Oz_x1cn3GMSORR0AUIVGgtj6_y1k2yVD=d;https://lh3.googleusercontent.com/d/1GDfZ0V6zL9VaashBwyVaIDhgrpFm16KC=d;https://lh3.googleusercontent.com/d/1SmxcQrK2cp9r-2GsuuuRTwsKBo1jLogg=d;https://lh3.googleusercontent.com/d/1-vyXFL-7LhtaN7ObaLPGEUCeucmaZynv=d;https://lh3.googleusercontent.com/d/1EfgcMtP37wtlGE0spfKythvYV1Kwcfty=d;https://drive.google.com/file/d/12DEkxj2uhhO5WU62JunkIWyNommVKyJy/view?usp=drive_link;https://lh3.googleusercontent.com/d/1iSjccsyMLAosZbJBDLJZGJnTxgzgJVj6=d;https://lh3.googleusercontent.com/d/18K7OVRKbgtc1dsZ-YRLQXDKNq7Gi-w5C=d;https://lh3.googleusercontent.com/d/1orJnhVFWyg8KK_v3P9gi7bcktiO2-ybz=d;https://lh3.googleusercontent.com/d/1UaHOd7jY6CqPNPyx6-spFILeOTSJ9NA_=d;https://lh3.googleusercontent.com/d/1QaFACTENXcFFPbIJBxFlQaSQ47eXh78s=d;https://lh3.googleusercontent.com/d/1jTVA6TtWAgQD1UPIwNg9f8Ts92T6TJaZ=d;https://lh3.googleusercontent.com/d/1ZsVucVqtDFPnYRtJSJztl8o76nUyAN7U=d;https://lh3.googleusercontent.com/d/1D4TrTNN7KbMCA8BQwDBuUJfnV8OM_wj9=d;https://lh3.googleusercontent.com/d/1iZ6m92X9CArF5p5oQ4u_Lk8ZMdLG3EPo=d;https://lh3.googleusercontent.com/d/1YhNnS1lb-tBUtkMv4Bt5L8AQd_UJxsMw=d",
@@ -4242,37 +4258,37 @@ const MANUAL_ITEMS = [
     "2025-07-13 | https://www.instagram.com/p/DMCj4lGsiCK |  | Instagram | 리즈,이서 | ᴇʟɪᴢᴀʙᴇᴛʜ ʜᴇʟɢᴀ ᴍüʟʟᴇʀ‘ꜱ ʟɪꜰᴇ 🇩🇪 | board=liz.yeyo | cols=2 | photos=https://lh3.googleusercontent.com/d/1LoExFbqbXw3OxJxNbZ5oWjlg_YwKqssU=d;https://lh3.googleusercontent.com/d/1mMK1OfrmH3QJ8-AXM2NxfCoCNgv8sPVA=d;https://lh3.googleusercontent.com/d/1mkSv-fgHpuTa_L_MLikb5KJjxIRfyloE=d;https://lh3.googleusercontent.com/d/11Pwkkd7RMmVXitKVnD_09rt3aL_a1UHX=d;https://lh3.googleusercontent.com/d/1r_eZymhaZdwg93njHuRDie825jJofMTz=d;https://lh3.googleusercontent.com/d/1INhFqf6KKSv1dh3aBCtnrpO7mG2kAWqm=d;https://lh3.googleusercontent.com/d/1ZsIOyuRllJCzss1ux9toFc5w-sFI-H3P=d;https://lh3.googleusercontent.com/d/1Kd0i8qLhOYRgdio_EvKjwStTdM3tOoUQ=d;https://lh3.googleusercontent.com/d/173n9DsYL7Jd2EH44gAHRhUIJfXOmaDum=d;https://lh3.googleusercontent.com/d/1gkjRnp_aQ1L3aJuNP4-oT8vOUrCxByeA=d;https://lh3.googleusercontent.com/d/18-t1Dd-uuiE7hVGw6DUHymx0EOC9xydv=d;https://lh3.googleusercontent.com/d/14cG4f_KHbme_NlyYisEUMbDVmDJENEcV=d;https://lh3.googleusercontent.com/d/1HaU_PJhQMmeMjRrEiUFCZpWmY2Rj0_i5=d;https://lh3.googleusercontent.com/d/1wYXoBxBCizmH075fE2-JDX3UI4OlW3Oh=d;https://lh3.googleusercontent.com/d/1TG66GcnUhGjoASyFPB_fA7qvPFkSB-Ib=d;https://lh3.googleusercontent.com/d/1rspzwQCxSXiVj-YUlRVJL2r2XBLvz1MZ=d;https://lh3.googleusercontent.com/d/1wi1Co_x7wVjDHZwyVuZPV2iGNjLWyI_i=d;https://lh3.googleusercontent.com/d/18flOZXYcXiOJw-SjpafgddiWYbBXxBsW=d",
     "2025-07-06 | https://www.instagram.com/p/DLv85Zphk1g |  | Instagram | 리즈, | 햅삐한하루🌸🤍 | board=liz.yeyo | cols=2 | photos=https://lh3.googleusercontent.com/d/1vmuLjlGwIjtbMsQoKdMUYgHKzxkGHjaD=d;https://lh3.googleusercontent.com/d/1mfRewyv2mqA3gdTROHNfx_tz7fQFEoCT=d;https://lh3.googleusercontent.com/d/1_45h5s_XjEv0woNsJIkfj8i26QYgk-_E=d;https://lh3.googleusercontent.com/d/1-vaeuKdmCUSvN9cwhtIiZZsEHAs5OGSq=d;https://lh3.googleusercontent.com/d/1g5Cn1yflALgXB5-FLDt7S6M6JGNGI8jg=d;https://lh3.googleusercontent.com/d/1obZPeJZVOjxs-51ypAozSyYoXzEK7isV=d;https://lh3.googleusercontent.com/d/1DQRUQ2S3pUSDJybI5hl5DvCvJ5V_fd65=d;https://lh3.googleusercontent.com/d/19tAOwJGSwt6cSgbDJsGqYgRysmzc1AqO=d;https://lh3.googleusercontent.com/d/1jsB87UAqD1TfE2-T0stFKlaTB12r2lU9=d;https://lh3.googleusercontent.com/d/10Ttyq5UcbwujEfgA18BAN8fclI4Tndg7=d;https://lh3.googleusercontent.com/d/1a63uUKx6loHz9K96x5Ntw_qOGzAy5PbJ=d",
     "2025-07-01 | https://www.instagram.com/p/DLjvnO1ByuU |  | Instagram | 리즈, | 재밌었숩니댜 💛🐣 | board=liz.yeyo | cols=2 | photos=https://lh3.googleusercontent.com/d/17Jw4YSwlnscJpCk0YRNQfoSjWs0oTtGa=d;https://lh3.googleusercontent.com/d/1XswXvOJ5NJpJwkQoTsODU2bvnuz7IHlq=d;https://lh3.googleusercontent.com/d/1iEQGhlIH8O-QHOH-Tjqwjiy4Sa0RL1I6=d;https://lh3.googleusercontent.com/d/1ibT5xgJwRwSOeBZ0GB1tP4w-wE40ihPi=d;https://lh3.googleusercontent.com/d/1a-7HO88u4YEZ_HrO6TYcDefjl1Km3HI4=d;https://lh3.googleusercontent.com/d/1Lx7rzGDZW03JaEhPhTkr6CfUpqovXzva=d",
-    "2025-06-21 |  |  | Instagram | 리즈,레이 | 𝓿𝓪𝓵𝓮𝓷𝓽𝓲𝓷𝓸 🖤 | cols=2 | photos=https://lh3.googleusercontent.com/d/1gKlOHRYfxKkXsPYqryQm-oviGX9_xhyY=d;https://lh3.googleusercontent.com/d/1qMH0V4xFyCI-Pkn7FFnfzu0mYRCpt0IY=d;https://lh3.googleusercontent.com/d/1_f21tRXayUX5b6uFu0Mw8Kczul4mZtOJ=d;https://lh3.googleusercontent.com/d/19PYrMvWsXCG2_JHzh9SvPYQD82n4-SjW=d;https://lh3.googleusercontent.com/d/1VA4NIYLesP8k3s7wJoAqUFR0ysuhdm9U=d;https://lh3.googleusercontent.com/d/1kFXhdo0XgT6NO0Km6kd9n6J1boSJrn9b=d;https://lh3.googleusercontent.com/d/1ZDFvvy8Nr07TbEK9kFDMqC52tCy4IJnx=d;https://lh3.googleusercontent.com/d/1s4mf7KOsw4Wyd-N2EVFvzLjVmFndLQjl=d;https://lh3.googleusercontent.com/d/17pp94f3wpCsU4D2lxnVSJAEHVbcvCI-a=d",
-    "2025-06-15 |  |  | Instagram | 리즈 | 여름이다아💦😎 | cols=2 | photos=https://lh3.googleusercontent.com/d/1cRGsSUMgg0ojE-FqJkqM7uoe3PgzDhpq=d;https://lh3.googleusercontent.com/d/10WhKz7zA3NwEucYcBFHg7H-lJlmMLNAx=d;https://lh3.googleusercontent.com/d/1Y3liy308dZWRZ4WKeeb8_FNBWRadGXs0=d;https://lh3.googleusercontent.com/d/1F_vZK6ZeAftcM7UKh0U1l-k5Koh96F81=d;https://lh3.googleusercontent.com/d/11bOMQlLbaqTqS79I_QwQVb4QkBpii838=d;https://lh3.googleusercontent.com/d/1q80g9A8v47Xlglywjt2k4sPtjEpZbwiM=d;https://lh3.googleusercontent.com/d/10sn6rux3z41QlruhM014TTkA8ZhQlQNI=d;https://lh3.googleusercontent.com/d/1gZ3_o8wRP8ZiD2HCj8bO4CZ58wQM4nIU=d;https://lh3.googleusercontent.com/d/1pQaqk5jXPphLuzH0F0uxCZ-sIPNs7sG8=d",
-    "2025-06-10 |  |  | Instagram | 리즈,이서 | 폭싹 속았수다 🌱🌸🌼🌿 | cols=2 | photos=https://lh3.googleusercontent.com/d/1VXMALs48NAE349auJcTXyKpPl2b9WlMN=d;https://lh3.googleusercontent.com/d/1ADedpNUdC6zi2qNKdpoBPCJuKB4OYldB=d;https://lh3.googleusercontent.com/d/1yodR6pP5o0s4ojdf90g6y7H28QBrbNxb=d;https://lh3.googleusercontent.com/d/1WY2raDC2MCVGXwCLCucxdkZnNY-J57K_=d;https://lh3.googleusercontent.com/d/1W3h5YjXbz9GH77FiU11DR-oQHXhD9eSg=d;https://lh3.googleusercontent.com/d/17F8acJbSHbIv1NlDzn7whwGtpUn87CXp=d;https://lh3.googleusercontent.com/d/1kIEDZChIdAux6P-FtKu31c9k_F4VrWxO=d;https://lh3.googleusercontent.com/d/1V0q98PwfK-GUdC-17AlxiRCiwgvdxlrz=d",
-    "2025-06-05 |  |  | Instagram | 리즈 | 🖤🖤🖤 | cols=2 | photos=https://lh3.googleusercontent.com/d/1PUZzMyG-g7HUoMVakvuvvUfgee2gWkML=d;https://lh3.googleusercontent.com/d/1zPG5OV6xvKvHZQ0tkpkTnY9UU9T4MZIJ=d;https://lh3.googleusercontent.com/d/1h3PqUgAamDrta12LrqMDT2XXsh_kg3qb=d;https://lh3.googleusercontent.com/d/15WGxYV_LVtf5kP-za-fbx3X5EIokRMqR=d;https://lh3.googleusercontent.com/d/1EviIN34u2ZH0ihOczBgpc4sCZZxHTPsM=d;https://lh3.googleusercontent.com/d/1x82rHcCx4OCzaYiepJWNStrzlPOboIJH=d;https://lh3.googleusercontent.com/d/1tZ2S2nIGTVhzuZQC9lWaEes-afQv22Aw=d",
-    "2025-05-24 |  |  | Instagram | 리즈 | 🆂🅴🅻🅵 🅼🅰🅺🅴🆄🅿 🖤 | cols=2 | photos=https://lh3.googleusercontent.com/d/1NpZnR1Hfo3IAZKZF5VyxkQ_hSK-y_pCP=d;https://lh3.googleusercontent.com/d/1w7-DcU5qKA_Hg7ibYUUXw3HxfE15EG12=d;https://lh3.googleusercontent.com/d/14HJ8bKG8Mkt_N73g31NnkYsw0X8OsUKG=d;https://lh3.googleusercontent.com/d/1iwLj3-qgnMEYoYEZoHReAWgumWwzCVSv=d;https://lh3.googleusercontent.com/d/1qA4Yy3LyPCZebLJpbR0ckWR-3mBpjVIt=d;https://lh3.googleusercontent.com/d/1ofBBEgr1rygXPU9nABwKpUFmvi3E1YbC=d",
-    "2025-05-15 |  |  | Instagram | 리즈 | 냥이들 복복복 😻😸😽 | cols=2 | photos=https://lh3.googleusercontent.com/d/152nvnVk-3zqq8x5mUOqwZ1nxSTUXPkOv=d;https://lh3.googleusercontent.com/d/14RYLXdefTWAgIsmmbyZcZnzBA2b0AhzM=d;https://lh3.googleusercontent.com/d/1w3rVH147Z2gQfdUcUdeSyN--Mhircl_t=d;https://lh3.googleusercontent.com/d/1Gtb2INBmpnhPsrcChmDWugVaUIT0OMbb=d;https://lh3.googleusercontent.com/d/1WwFPZbPMG6t1S1XC1LdBhiSjEO9zOIf_=d",
-    "2025-05-13 |  |  | Instagram | 리즈 | 바람바람바람바람바람바람바람바람리즈바람바람바람바람바람바람바람바람 | cols=2 | photos=https://lh3.googleusercontent.com/d/1xB5cZ5N705dz-emUkbPRXPbfaQT3SM8y=d;https://lh3.googleusercontent.com/d/1ggrbbgNqjqic1aIzsm0cZ7GRBpK2nFh8=d;https://lh3.googleusercontent.com/d/1Z4PW6cUkBFHoFC2W_cH8JS3Uxz9VprLx=d;https://lh3.googleusercontent.com/d/1vLP9wLx_Yym3tB1uP9UQ5OxWEHH3f52_=d",
-    "2025-05-10 |  |  | Instagram | 리즈 | 비맞기 전과후 💦 | cols=2 | photos=https://lh3.googleusercontent.com/d/1zJpymThjnhxE3xCBJWsN0G1pw1j_q72J=d;https://lh3.googleusercontent.com/d/1rYFhwqBkMGqB21cqY6Gp8uXu8A0F67SP=d;https://lh3.googleusercontent.com/d/1c-HhoIB5BXmDwmEjSeh_Gnw8syqtdaHu=d;https://lh3.googleusercontent.com/d/1BinKBecczqPpWv1gVQHxtpOLTGZomw9w=d;https://lh3.googleusercontent.com/d/1c_Urn9sNe_dqim_b4G1Z64_s0DSVlvTO=d;https://lh3.googleusercontent.com/d/1NqcaXGKSH3o4gIXBtYaly6T4O9SUkaHY=d;https://lh3.googleusercontent.com/d/147r-EjiDoO84buM9bWxEdylv_9PPLJh_=d;https://lh3.googleusercontent.com/d/1GXtaBzUInrSpUHn7910dPI3h8z9VJaK4=d",
-    "2025-05-09 |  |  | Instagram | 리즈 | 추적추적 비오는날 🌧···전 먹고싶다 ❤ | cols=2 | photos=https://lh3.googleusercontent.com/d/1JHwhhYbDHJvulWpUofCX09Oabca3Cu1E=d;https://lh3.googleusercontent.com/d/1vNwCl2Ohcreldq8vHbqfGkuANtF1-Hpl=d;https://lh3.googleusercontent.com/d/1BxKc-8UEX_MoY7Ik-5q9AuoNp6tssat9=d;https://lh3.googleusercontent.com/d/1o7dQ2MIIKnhTlVMj0pd4iZguLHVKWOvy=d;https://lh3.googleusercontent.com/d/1bEdlhw3i5CQOK5XIp34p3lEpWWgU9cKg=d;https://lh3.googleusercontent.com/d/1rr9ARiix6YjTlbu_LYTV1V3yMvwxScaC=d",
-    "2025-05-01 |  |  | Instagram | 리즈 | DIVEと一緒だったから幸せだった日々♥️🖤 | cols=2 | photos=https://lh3.googleusercontent.com/d/1cLfp9RkVurcnPjQOQOA3GlKJEumGMXOx=d;https://lh3.googleusercontent.com/d/1avAEv5nl9XeSnWLEUIiVrJvJd3EluXLR=d;https://lh3.googleusercontent.com/d/1OxZHcIX2lti6pPXBazPAKza_gKGpycrj=d;https://lh3.googleusercontent.com/d/1KLZdO5gFZ7VHRbMI0XZEAtLiK6YWOBxN=d;https://lh3.googleusercontent.com/d/1kj8I5G7xlMgvaHffOr-rxt-uGmJrIW6W=d;https://lh3.googleusercontent.com/d/1e7LtRt7sLzKAGA3KPs3XSbVHc58XaLPg=d;https://lh3.googleusercontent.com/d/1DLdPFX2vZf3iwSP4ENSWx-Qdj5GxmTPN=d;https://lh3.googleusercontent.com/d/1LGn-IiaO_ru2cf_0Ute1Yig9MqKu3V2m=d;https://lh3.googleusercontent.com/d/1b3rT5oTvPh2DXPtw8mIUxduXSjp51OQ8=d;https://lh3.googleusercontent.com/d/14qKR1sHgw-nMByQ0IyePinGHtmrotR-P=d;https://lh3.googleusercontent.com/d/14ShSXbJxl3jE436QtVMAZYZQfrfjhK-B=d;https://lh3.googleusercontent.com/d/1N40AfiJ4-sHiaM3wHSoDLC48W8dUEXvB=d;https://lh3.googleusercontent.com/d/1XAyK4WrAd0XTHRReZi7qB1MWpzElirM0=d",
-    "2025-04-30 |  |  | Instagram | 리즈 | かわいい🫎🤎 | cols=2 | photos=https://lh3.googleusercontent.com/d/122uRVcgcJDcbRqyPT0ioM7crXbwzlNEg=d;https://lh3.googleusercontent.com/d/1e4nVQvzCVnJ9p-xUW6fmVyFWQKWVbgIc=d;https://lh3.googleusercontent.com/d/1r4NocfClGs8uH0d7OHTvTVc5f066Vwyk=d;https://lh3.googleusercontent.com/d/19gXem72KTY373gZfLKGm9EV49rQKKaIn=d;https://lh3.googleusercontent.com/d/1DslEdgn7PW90IoFmO4wZTmoZVvDAn3gb=d;https://lh3.googleusercontent.com/d/1SNvnSOTapBt1yHNwbPEk1YaWUnIsyOMB=d;https://lh3.googleusercontent.com/d/10fBSzDebSBgEcZnNhurYotpsJsbPdiUS=d;https://lh3.googleusercontent.com/d/17auhe27NYyQFZfYvojHKwtJjfF7vp4T3=d;https://lh3.googleusercontent.com/d/1gbj2Xb8OeoWaAcw76m26h61JwfJTpqna=d;https://lh3.googleusercontent.com/d/1V2jvwy12W9ff3JzOaAwRFsgMLcTjJdKu=d;https://lh3.googleusercontent.com/d/1sKSWQcUT3wTkm85IkYI_Hcg7Ynm45EWC=d",
-    "2025-04-28 |  |  | Instagram | 리즈 | 🌱🍏🐢💚 | cols=2 | photos=https://lh3.googleusercontent.com/d/1U-QoXF0XEaay549Te_ViC3jX_gCYXrOo=d;https://lh3.googleusercontent.com/d/1eOe4xxd7-6MikJMlStDvdnAq31D-JVyI=d;https://lh3.googleusercontent.com/d/1US2TGF2oO-4gh1MOQf_3atH3sXPq-rtl=d;https://lh3.googleusercontent.com/d/1wCGLSfv8FYLlxDe10Ipq5szkcRwzWNZW=d;https://lh3.googleusercontent.com/d/1udkSCoDE8QoC09M56-pbdy_j8LAmUg1e=d;https://lh3.googleusercontent.com/d/1kaU0mC9-VAXgyCyrLt6JYGVHV67aqHnI=d;https://lh3.googleusercontent.com/d/1UHIlodOrgsd0Mb0K2AXBU0bQNKdzQcZs=d;https://lh3.googleusercontent.com/d/1Ng3UaPYNk0IoRmGzGhCzGmC2Y5knXDWG=d;https://lh3.googleusercontent.com/d/1IAeD9ygLvjAA9Vx1Vth605KRLM55jsBz=d",
-    "2025-04-21 |  |  | Instagram | 리즈 | 🌊💙🌊 | cols=2 | photos=https://lh3.googleusercontent.com/d/1tQFDgEBXOO7NMMf1Pmu5bn4cDjtqg7Mi=d;https://lh3.googleusercontent.com/d/1ZPBWVhgtvJHmMAvyj9-y9CsAiJumpdeI=d;https://lh3.googleusercontent.com/d/1slU_CePg2A8Y6w3P0iYryi2B24SooSY2=d;https://lh3.googleusercontent.com/d/1pfVG-aAqmpFw8MbRgANeDnbn_p-KzUmz=d;https://lh3.googleusercontent.com/d/14R47_tClppn89DUQecuZPwgANgVTpAtF=d;https://lh3.googleusercontent.com/d/1_2HM7YVBQnt_UJN0GhQaGkdmDgo6Ce2p=d",
-    "2025-04-19 |  |  | Instagram | 리즈 | mood🖤 | cols=2 | photos=https://lh3.googleusercontent.com/d/1HTU1pYv6zmD9_VG8Wy1nZ2zNaICs6LZr=d;https://lh3.googleusercontent.com/d/1i1VUz3YuDEJCAJUaDEcOY9CZ7GQ7xiA1=d;https://lh3.googleusercontent.com/d/1WTfKAV3Kwxx8iHm7Amth5tA1k8s_Xirm=d;https://lh3.googleusercontent.com/d/1s5_Ce1BLRKGkgv7PG2IAjnM0dLkSLqdX=d;https://lh3.googleusercontent.com/d/1EnOCbjbPG1yG1RjLEpvlby3kt33yKE9e=d;https://lh3.googleusercontent.com/d/1U6dQfab5TsQVIuCwJ081lgp99BNlJy-q=d;https://lh3.googleusercontent.com/d/1IljncQDhT1Fyl7CeLhJ6eaOg77RoXULG=d;https://lh3.googleusercontent.com/d/1MISGlsFsvxY7bgI9Cbab9lSzGTuW1qdt=d",
-    "2025-04-17 |  |  | Instagram | 리즈 | 名古屋に行って来ました❣ | cols=2 | photos=https://lh3.googleusercontent.com/d/1DtqEY9D05S4ZEldsZ_kyco75DKCWvCH7=d;https://lh3.googleusercontent.com/d/1H2kSUsbXZE0URIZwAUjichUFRJTJfCEs=d;https://lh3.googleusercontent.com/d/1iakuxJi7FOnQrGAIJHqjke9q6AJ8TfCg=d;https://lh3.googleusercontent.com/d/1jpVq4cKhw5Y2Lk-h2FptDNp0fwc6kVcL=d;https://lh3.googleusercontent.com/d/1wc8KuGMp_OMiAkUfnMvx_ng4_6qpeqeU=d;https://lh3.googleusercontent.com/d/15Yo9Yo8goSGekRb7HCKKGvRGd5uA4B3o=d;https://lh3.googleusercontent.com/d/16VQK8rGpDozAZWb9ZQ5hCreMTM1l6ZIl=d",
-    "2025-04-09 |  |  | Instagram | 리즈 | with DIVE ♥️🖤 | cols=2 | photos=https://lh3.googleusercontent.com/d/1_PSqMCnhU9VoQ-A6adTD1Welwp1CXfRZ=d;https://lh3.googleusercontent.com/d/19hiTRvMBAx-VVZZhNRTHsnlmSPvl67Wf=d;https://lh3.googleusercontent.com/d/1PPH6vgSvytXf-nFoitjcCOKkCbajLxFZ=d;https://lh3.googleusercontent.com/d/10Crjd2pMWkyd692SN9qClylhPBxzFSoo=d;https://lh3.googleusercontent.com/d/1T9K688kh9lgKeUuglVT2mJNDVaD1BShv=d;https://lh3.googleusercontent.com/d/1XRExSp_DCFOziRtjNNOqEnc9vb7gKseg=d;https://lh3.googleusercontent.com/d/13X5JjESiCDm0NQ1MJbeNGaiv33HUAjYk=d;https://lh3.googleusercontent.com/d/1yG_0Gk8Fh35Hx6b5OiNxa83iLWNKuqKT=d",
-    "2025-03-31 |  |  | Instagram | 리즈 | 🥀 | cols=2 | photos=https://lh3.googleusercontent.com/d/14FSQrLn_4OfsgbQ0_6nTMvFnECW4LQI0=d;https://lh3.googleusercontent.com/d/1J7sjMWe3ey3kiQ7zxIUqxsMINWH99pB2=d;https://lh3.googleusercontent.com/d/1aYHkaNuTyuvjQsojPvTM7AyTCPH1X_KP=d;https://lh3.googleusercontent.com/d/173hzF4sVTam9n3qComPL_Fn-KzfDeQQz=d;https://lh3.googleusercontent.com/d/1ZDUggiSP8Uj5cvyyiIa0ngmxx-awSsOD=d;https://lh3.googleusercontent.com/d/1r2wuIKPcMOZBQLAqNuw00ZeCr9AD_LBb=d;https://lh3.googleusercontent.com/d/1zUai44s7dY7RNwndLJhTI58JduWuyhBa=d;https://lh3.googleusercontent.com/d/1owScTrI9DjkSRFypAVlcUQ0P4Vi0ch8w=d;https://lh3.googleusercontent.com/d/1McFf96uLGDP7WvoBhsAHaW0XhtyVYRLL=d;https://lh3.googleusercontent.com/d/1W1FrMhYGQlmfj058eI0eH-vem4qR5JFl=d",
-    "2025-03-22 |  |  | Instagram | 리즈 | 봄이 다가온다아 🌸🌷 | cols=2 | photos=https://lh3.googleusercontent.com/d/1jNDKbVtN8qQmiBmLKuQzUI0RixWxpq51=d;https://lh3.googleusercontent.com/d/1hR3a-xTj_s4qTWbdhP2J3yjaIQCc08la=d;https://lh3.googleusercontent.com/d/14ESOvIFRpMU4l9PGrwwcAzVSG7xXFPnd=d;https://lh3.googleusercontent.com/d/1-BHoXI6wF_WV3T9URoROC50Sl5Qqj8EF=d;https://lh3.googleusercontent.com/d/1dc-NEY3FvCz_qu4IXPHf9BPVU9hKjllT=d;https://lh3.googleusercontent.com/d/1ZcLwh7iDGhQbShorDAlryW1i5XZ_sgH9=d;https://lh3.googleusercontent.com/d/1dx1dFUEv7sZCTvSHgyzOlQx72DED64X5=d;https://lh3.googleusercontent.com/d/1wqc2R0HcEWljO00zRSEMwS-o0VTYmKwO=d",
-    "2025-03-16 |  |  | Instagram | 리즈 | 𝓔𝓵𝓲𝔃𝓪𝓫𝓮𝓽𝓱 𝓗𝓮𝓵𝓰𝓪 𝓜𝓾̈𝓵𝓵𝓮𝓻 🖤♥️💛 | cols=2 | photos=https://lh3.googleusercontent.com/d/1LlaLUCWW-OY-bFWplxWLuiyAZApOZYT4=d;https://lh3.googleusercontent.com/d/1Uwo_HyAAxPKJpP_PiMYe5u7PDWH7-XDc=d;https://lh3.googleusercontent.com/d/1hJc0nCIbcfDPbwHZvaszystTcilykqPy=d;https://lh3.googleusercontent.com/d/18WQ_b6ZRTr90g50xtIx9SkJ8L0_lHn_a=d",
-    "2025-03-05 |  |  | Instagram | 리즈 | 눈이 죠아요❄️☃️🤍 | cols=2 | photos=https://lh3.googleusercontent.com/d/101Rk2DQMsoepfCcpgnwU3CCBW308K47G=d;https://lh3.googleusercontent.com/d/1ClvMTh_VZLfBBO0N8jxyUhZV_WGgwC2q=d;https://lh3.googleusercontent.com/d/1GKDzSrbswZVIqr17zkAgVQlmIJYMLt0Y=d;https://lh3.googleusercontent.com/d/1iMgk84sl49wT2bebXvmEwKrpct7rHBnQ=d;https://lh3.googleusercontent.com/d/1HbqCl4xyhKwglEz2moYRGLEMbLUJCUiU=d;https://lh3.googleusercontent.com/d/1_H1wshZ-Fj-hWGM8jiXy-i1SkSygspbt=d;https://lh3.googleusercontent.com/d/1ervkSivjzTtkC1LIrKJFCm5Gau1HYyWS=d;https://lh3.googleusercontent.com/d/1Y-oq387ce0WAtS_aKDrgn9_kyuunJC3t=d",
-    "2025-03-02 |  |  | Instagram | 리즈 | 𝕤𝕒𝕡𝕡𝕠𝕣𝕠 🤍🩵 | cols=2 | photos=https://lh3.googleusercontent.com/d/1gbXvkIzdO3qsABDFnv_VLXdpdaZ5ejwF=d;https://lh3.googleusercontent.com/d/1FxxlWkWkeMBZywkoo0rrTa-JzMeuQc0J=d;https://lh3.googleusercontent.com/d/1RkmiWzjzIvi__wULx_TFdIHnb3dqRZmS=d;https://lh3.googleusercontent.com/d/13eMHoUg8nuJX0pGYAz0y3Q9hWa45b4pf=d;https://lh3.googleusercontent.com/d/1FiTvYPrULAkFYgCtXZHf7F8Y35daQVk7=d;https://lh3.googleusercontent.com/d/1W1LRU6QeclzI_9EA4reZOnLInEGxLFSH=d;https://lh3.googleusercontent.com/d/1Tti-P5zmPos9GCc3stYofPTk2-Sdi-xB=d",
+    "2025-06-21 | https://www.instagram.com/p/DLJYxCXBeTZ |  | Instagram | 리즈,레이 | 𝓿𝓪𝓵𝓮𝓷𝓽𝓲𝓷𝓸 🖤 | board=liz.yeyo | cols=2 | photos=https://lh3.googleusercontent.com/d/1gKlOHRYfxKkXsPYqryQm-oviGX9_xhyY=d;https://lh3.googleusercontent.com/d/1qMH0V4xFyCI-Pkn7FFnfzu0mYRCpt0IY=d;https://lh3.googleusercontent.com/d/1_f21tRXayUX5b6uFu0Mw8Kczul4mZtOJ=d;https://lh3.googleusercontent.com/d/19PYrMvWsXCG2_JHzh9SvPYQD82n4-SjW=d;https://lh3.googleusercontent.com/d/1VA4NIYLesP8k3s7wJoAqUFR0ysuhdm9U=d;https://lh3.googleusercontent.com/d/1kFXhdo0XgT6NO0Km6kd9n6J1boSJrn9b=d;https://lh3.googleusercontent.com/d/1ZDFvvy8Nr07TbEK9kFDMqC52tCy4IJnx=d;https://lh3.googleusercontent.com/d/1s4mf7KOsw4Wyd-N2EVFvzLjVmFndLQjl=d;https://lh3.googleusercontent.com/d/17pp94f3wpCsU4D2lxnVSJAEHVbcvCI-a=d",
+    "2025-06-15 | https://www.instagram.com/p/DK6E3pZhCk1 |  | Instagram | 리즈 | 여름이다아💦😎 | board=liz.yeyo | cols=2 | photos=https://lh3.googleusercontent.com/d/1cRGsSUMgg0ojE-FqJkqM7uoe3PgzDhpq=d;https://lh3.googleusercontent.com/d/10WhKz7zA3NwEucYcBFHg7H-lJlmMLNAx=d;https://lh3.googleusercontent.com/d/1Y3liy308dZWRZ4WKeeb8_FNBWRadGXs0=d;https://lh3.googleusercontent.com/d/1F_vZK6ZeAftcM7UKh0U1l-k5Koh96F81=d;https://lh3.googleusercontent.com/d/11bOMQlLbaqTqS79I_QwQVb4QkBpii838=d;https://lh3.googleusercontent.com/d/1q80g9A8v47Xlglywjt2k4sPtjEpZbwiM=d;https://lh3.googleusercontent.com/d/10sn6rux3z41QlruhM014TTkA8ZhQlQNI=d;https://lh3.googleusercontent.com/d/1gZ3_o8wRP8ZiD2HCj8bO4CZ58wQM4nIU=d;https://lh3.googleusercontent.com/d/1pQaqk5jXPphLuzH0F0uxCZ-sIPNs7sG8=d",
+    "2025-06-10 | https://www.instagram.com/p/DKtOejtBWiC |  | Instagram | 리즈,이서 | 폭싹 속았수다 🌱🌸🌼🌿 | board=liz.yeyo | cols=2 | photos=https://lh3.googleusercontent.com/d/1VXMALs48NAE349auJcTXyKpPl2b9WlMN=d;https://lh3.googleusercontent.com/d/1ADedpNUdC6zi2qNKdpoBPCJuKB4OYldB=d;https://lh3.googleusercontent.com/d/1yodR6pP5o0s4ojdf90g6y7H28QBrbNxb=d;https://lh3.googleusercontent.com/d/1WY2raDC2MCVGXwCLCucxdkZnNY-J57K_=d;https://lh3.googleusercontent.com/d/1W3h5YjXbz9GH77FiU11DR-oQHXhD9eSg=d;https://lh3.googleusercontent.com/d/17F8acJbSHbIv1NlDzn7whwGtpUn87CXp=d;https://lh3.googleusercontent.com/d/1kIEDZChIdAux6P-FtKu31c9k_F4VrWxO=d;https://lh3.googleusercontent.com/d/1V0q98PwfK-GUdC-17AlxiRCiwgvdxlrz=d",
+    "2025-06-05 | https://www.instagram.com/p/DKgxPI7hXAx |  | Instagram | 리즈 | 🖤🖤🖤 | board=liz.yeyo | cols=2 | photos=https://lh3.googleusercontent.com/d/1PUZzMyG-g7HUoMVakvuvvUfgee2gWkML=d;https://lh3.googleusercontent.com/d/1zPG5OV6xvKvHZQ0tkpkTnY9UU9T4MZIJ=d;https://lh3.googleusercontent.com/d/1h3PqUgAamDrta12LrqMDT2XXsh_kg3qb=d;https://lh3.googleusercontent.com/d/15WGxYV_LVtf5kP-za-fbx3X5EIokRMqR=d;https://lh3.googleusercontent.com/d/1EviIN34u2ZH0ihOczBgpc4sCZZxHTPsM=d;https://lh3.googleusercontent.com/d/1x82rHcCx4OCzaYiepJWNStrzlPOboIJH=d;https://lh3.googleusercontent.com/d/1tZ2S2nIGTVhzuZQC9lWaEes-afQv22Aw=d",
+    "2025-05-24 | https://www.instagram.com/p/DKB-l8kzPop |  | Instagram | 리즈 | 🆂🅴🅻🅵 🅼🅰🅺🅴🆄🅿 🖤 | board=liz.yeyo | cols=2 | photos=https://lh3.googleusercontent.com/d/1NpZnR1Hfo3IAZKZF5VyxkQ_hSK-y_pCP=d;https://lh3.googleusercontent.com/d/1w7-DcU5qKA_Hg7ibYUUXw3HxfE15EG12=d;https://lh3.googleusercontent.com/d/14HJ8bKG8Mkt_N73g31NnkYsw0X8OsUKG=d;https://lh3.googleusercontent.com/d/1iwLj3-qgnMEYoYEZoHReAWgumWwzCVSv=d;https://lh3.googleusercontent.com/d/1qA4Yy3LyPCZebLJpbR0ckWR-3mBpjVIt=d;https://lh3.googleusercontent.com/d/1ofBBEgr1rygXPU9nABwKpUFmvi3E1YbC=d",
+    "2025-05-15 | https://www.instagram.com/p/DJrZjSNzfYU |  | Instagram | 리즈 | 냥이들 복복복 😻😸😽 | board=liz.yeyo | cols=2 | photos=https://lh3.googleusercontent.com/d/152nvnVk-3zqq8x5mUOqwZ1nxSTUXPkOv=d;https://lh3.googleusercontent.com/d/14RYLXdefTWAgIsmmbyZcZnzBA2b0AhzM=d;https://lh3.googleusercontent.com/d/1w3rVH147Z2gQfdUcUdeSyN--Mhircl_t=d;https://lh3.googleusercontent.com/d/1Gtb2INBmpnhPsrcChmDWugVaUIT0OMbb=d;https://lh3.googleusercontent.com/d/1WwFPZbPMG6t1S1XC1LdBhiSjEO9zOIf_=d",
+    "2025-05-13 | https://www.instagram.com/p/DJlnBQOT5Pq |  | Instagram | 리즈 | 바람바람바람바람바람바람바람바람리즈바람바람바람바람바람바람바람바람 | board=liz.yeyo | cols=2 | photos=https://lh3.googleusercontent.com/d/1xB5cZ5N705dz-emUkbPRXPbfaQT3SM8y=d;https://lh3.googleusercontent.com/d/1ggrbbgNqjqic1aIzsm0cZ7GRBpK2nFh8=d;https://lh3.googleusercontent.com/d/1Z4PW6cUkBFHoFC2W_cH8JS3Uxz9VprLx=d;https://lh3.googleusercontent.com/d/1vLP9wLx_Yym3tB1uP9UQ5OxWEHH3f52_=d",
+    "2025-05-10 | https://www.instagram.com/p/DJdfT3zTR9R |  | Instagram | 리즈 | 비맞기 전과후 💦 | board=liz.yeyo | cols=2 | photos=https://lh3.googleusercontent.com/d/1zJpymThjnhxE3xCBJWsN0G1pw1j_q72J=d;https://lh3.googleusercontent.com/d/1rYFhwqBkMGqB21cqY6Gp8uXu8A0F67SP=d;https://lh3.googleusercontent.com/d/1c-HhoIB5BXmDwmEjSeh_Gnw8syqtdaHu=d;https://lh3.googleusercontent.com/d/1BinKBecczqPpWv1gVQHxtpOLTGZomw9w=d;https://lh3.googleusercontent.com/d/1c_Urn9sNe_dqim_b4G1Z64_s0DSVlvTO=d;https://lh3.googleusercontent.com/d/1NqcaXGKSH3o4gIXBtYaly6T4O9SUkaHY=d;https://lh3.googleusercontent.com/d/147r-EjiDoO84buM9bWxEdylv_9PPLJh_=d;https://lh3.googleusercontent.com/d/1GXtaBzUInrSpUHn7910dPI3h8z9VJaK4=d",
+    "2025-05-09 | https://www.instagram.com/p/DJbkyUrTou0 |  | Instagram | 리즈 | 추적추적 비오는날 🌧···전 먹고싶다 ❤ | board=liz.yeyo | cols=2 | photos=https://lh3.googleusercontent.com/d/1JHwhhYbDHJvulWpUofCX09Oabca3Cu1E=d;https://lh3.googleusercontent.com/d/1vNwCl2Ohcreldq8vHbqfGkuANtF1-Hpl=d;https://lh3.googleusercontent.com/d/1BxKc-8UEX_MoY7Ik-5q9AuoNp6tssat9=d;https://lh3.googleusercontent.com/d/1o7dQ2MIIKnhTlVMj0pd4iZguLHVKWOvy=d;https://lh3.googleusercontent.com/d/1bEdlhw3i5CQOK5XIp34p3lEpWWgU9cKg=d;https://lh3.googleusercontent.com/d/1rr9ARiix6YjTlbu_LYTV1V3yMvwxScaC=d",
+    "2025-05-01 | https://www.instagram.com/p/DJHTmpATGFB |  | Instagram | 리즈 | DIVEと一緒だったから幸せだった日々♥️🖤 | board=liz.yeyo | cols=2 | photos=https://lh3.googleusercontent.com/d/1cLfp9RkVurcnPjQOQOA3GlKJEumGMXOx=d;https://lh3.googleusercontent.com/d/1avAEv5nl9XeSnWLEUIiVrJvJd3EluXLR=d;https://lh3.googleusercontent.com/d/1OxZHcIX2lti6pPXBazPAKza_gKGpycrj=d;https://lh3.googleusercontent.com/d/1KLZdO5gFZ7VHRbMI0XZEAtLiK6YWOBxN=d;https://lh3.googleusercontent.com/d/1kj8I5G7xlMgvaHffOr-rxt-uGmJrIW6W=d;https://lh3.googleusercontent.com/d/1e7LtRt7sLzKAGA3KPs3XSbVHc58XaLPg=d;https://lh3.googleusercontent.com/d/1DLdPFX2vZf3iwSP4ENSWx-Qdj5GxmTPN=d;https://lh3.googleusercontent.com/d/1LGn-IiaO_ru2cf_0Ute1Yig9MqKu3V2m=d;https://lh3.googleusercontent.com/d/1b3rT5oTvPh2DXPtw8mIUxduXSjp51OQ8=d;https://lh3.googleusercontent.com/d/14qKR1sHgw-nMByQ0IyePinGHtmrotR-P=d;https://lh3.googleusercontent.com/d/14ShSXbJxl3jE436QtVMAZYZQfrfjhK-B=d;https://lh3.googleusercontent.com/d/1N40AfiJ4-sHiaM3wHSoDLC48W8dUEXvB=d;https://lh3.googleusercontent.com/d/1XAyK4WrAd0XTHRReZi7qB1MWpzElirM0=d",
+    "2025-04-30 | https://www.instagram.com/p/DJEG1ZiTwNp |  | Instagram | 리즈 | かわいい🫎🤎 | board=liz.yeyo | cols=2 | photos=https://lh3.googleusercontent.com/d/122uRVcgcJDcbRqyPT0ioM7crXbwzlNEg=d;https://lh3.googleusercontent.com/d/1e4nVQvzCVnJ9p-xUW6fmVyFWQKWVbgIc=d;https://lh3.googleusercontent.com/d/1r4NocfClGs8uH0d7OHTvTVc5f066Vwyk=d;https://lh3.googleusercontent.com/d/19gXem72KTY373gZfLKGm9EV49rQKKaIn=d;https://lh3.googleusercontent.com/d/1DslEdgn7PW90IoFmO4wZTmoZVvDAn3gb=d;https://lh3.googleusercontent.com/d/1SNvnSOTapBt1yHNwbPEk1YaWUnIsyOMB=d;https://lh3.googleusercontent.com/d/10fBSzDebSBgEcZnNhurYotpsJsbPdiUS=d;https://lh3.googleusercontent.com/d/17auhe27NYyQFZfYvojHKwtJjfF7vp4T3=d;https://lh3.googleusercontent.com/d/1gbj2Xb8OeoWaAcw76m26h61JwfJTpqna=d;https://lh3.googleusercontent.com/d/1V2jvwy12W9ff3JzOaAwRFsgMLcTjJdKu=d;https://lh3.googleusercontent.com/d/1sKSWQcUT3wTkm85IkYI_Hcg7Ynm45EWC=d",
+    "2025-04-28 | https://www.instagram.com/p/DI_edKXzLW8 |  | Instagram | 리즈 | 🌱🍏🐢💚 | board=liz.yeyo | cols=2 | photos=https://lh3.googleusercontent.com/d/1U-QoXF0XEaay549Te_ViC3jX_gCYXrOo=d;https://lh3.googleusercontent.com/d/1eOe4xxd7-6MikJMlStDvdnAq31D-JVyI=d;https://lh3.googleusercontent.com/d/1US2TGF2oO-4gh1MOQf_3atH3sXPq-rtl=d;https://lh3.googleusercontent.com/d/1wCGLSfv8FYLlxDe10Ipq5szkcRwzWNZW=d;https://lh3.googleusercontent.com/d/1udkSCoDE8QoC09M56-pbdy_j8LAmUg1e=d;https://lh3.googleusercontent.com/d/1kaU0mC9-VAXgyCyrLt6JYGVHV67aqHnI=d;https://lh3.googleusercontent.com/d/1UHIlodOrgsd0Mb0K2AXBU0bQNKdzQcZs=d;https://lh3.googleusercontent.com/d/1Ng3UaPYNk0IoRmGzGhCzGmC2Y5knXDWG=d;https://lh3.googleusercontent.com/d/1IAeD9ygLvjAA9Vx1Vth605KRLM55jsBz=d",
+    "2025-04-21 | https://www.instagram.com/p/DIs6DSGT78n |  | Instagram | 리즈 | 🌊💙🌊 | board=liz.yeyo | cols=2 | photos=https://lh3.googleusercontent.com/d/1tQFDgEBXOO7NMMf1Pmu5bn4cDjtqg7Mi=d;https://lh3.googleusercontent.com/d/1ZPBWVhgtvJHmMAvyj9-y9CsAiJumpdeI=d;https://lh3.googleusercontent.com/d/1slU_CePg2A8Y6w3P0iYryi2B24SooSY2=d;https://lh3.googleusercontent.com/d/1pfVG-aAqmpFw8MbRgANeDnbn_p-KzUmz=d;https://lh3.googleusercontent.com/d/14R47_tClppn89DUQecuZPwgANgVTpAtF=d;https://lh3.googleusercontent.com/d/1_2HM7YVBQnt_UJN0GhQaGkdmDgo6Ce2p=d",
+    "2025-04-19 | https://www.instagram.com/p/DIoTOJuTnR5 |  | Instagram | 리즈 | mood🖤 | board=liz.yeyo | cols=2 | photos=https://lh3.googleusercontent.com/d/1HTU1pYv6zmD9_VG8Wy1nZ2zNaICs6LZr=d;https://lh3.googleusercontent.com/d/1i1VUz3YuDEJCAJUaDEcOY9CZ7GQ7xiA1=d;https://lh3.googleusercontent.com/d/1WTfKAV3Kwxx8iHm7Amth5tA1k8s_Xirm=d;https://lh3.googleusercontent.com/d/1s5_Ce1BLRKGkgv7PG2IAjnM0dLkSLqdX=d;https://lh3.googleusercontent.com/d/1EnOCbjbPG1yG1RjLEpvlby3kt33yKE9e=d;https://lh3.googleusercontent.com/d/1U6dQfab5TsQVIuCwJ081lgp99BNlJy-q=d;https://lh3.googleusercontent.com/d/1IljncQDhT1Fyl7CeLhJ6eaOg77RoXULG=d;https://lh3.googleusercontent.com/d/1MISGlsFsvxY7bgI9Cbab9lSzGTuW1qdt=d",
+    "2025-04-17 | https://www.instagram.com/p/DIh487LTFDd |  | Instagram | 리즈 | 名古屋に行って来ました❣ | board=liz.yeyo | cols=2 | photos=https://lh3.googleusercontent.com/d/1DtqEY9D05S4ZEldsZ_kyco75DKCWvCH7=d;https://lh3.googleusercontent.com/d/1H2kSUsbXZE0URIZwAUjichUFRJTJfCEs=d;https://lh3.googleusercontent.com/d/1iakuxJi7FOnQrGAIJHqjke9q6AJ8TfCg=d;https://lh3.googleusercontent.com/d/1jpVq4cKhw5Y2Lk-h2FptDNp0fwc6kVcL=d;https://lh3.googleusercontent.com/d/1wc8KuGMp_OMiAkUfnMvx_ng4_6qpeqeU=d;https://lh3.googleusercontent.com/d/15Yo9Yo8goSGekRb7HCKKGvRGd5uA4B3o=d;https://lh3.googleusercontent.com/d/16VQK8rGpDozAZWb9ZQ5hCreMTM1l6ZIl=d",
+    "2025-04-09 | https://www.instagram.com/p/DIOL57XTe3i |  | Instagram | 리즈 | with DIVE ♥️🖤 | board=liz.yeyo | cols=2 | photos=https://lh3.googleusercontent.com/d/1_PSqMCnhU9VoQ-A6adTD1Welwp1CXfRZ=d;https://lh3.googleusercontent.com/d/19hiTRvMBAx-VVZZhNRTHsnlmSPvl67Wf=d;https://lh3.googleusercontent.com/d/1PPH6vgSvytXf-nFoitjcCOKkCbajLxFZ=d;https://lh3.googleusercontent.com/d/10Crjd2pMWkyd692SN9qClylhPBxzFSoo=d;https://lh3.googleusercontent.com/d/1T9K688kh9lgKeUuglVT2mJNDVaD1BShv=d;https://lh3.googleusercontent.com/d/1XRExSp_DCFOziRtjNNOqEnc9vb7gKseg=d;https://lh3.googleusercontent.com/d/13X5JjESiCDm0NQ1MJbeNGaiv33HUAjYk=d;https://lh3.googleusercontent.com/d/1yG_0Gk8Fh35Hx6b5OiNxa83iLWNKuqKT=d",
+    "2025-03-31 | https://www.instagram.com/p/DH2nwS8zFWM |  | Instagram | 리즈 | 🥀 | board=liz.yeyo | cols=2 | photos=https://lh3.googleusercontent.com/d/14FSQrLn_4OfsgbQ0_6nTMvFnECW4LQI0=d;https://lh3.googleusercontent.com/d/1J7sjMWe3ey3kiQ7zxIUqxsMINWH99pB2=d;https://lh3.googleusercontent.com/d/1aYHkaNuTyuvjQsojPvTM7AyTCPH1X_KP=d;https://lh3.googleusercontent.com/d/173hzF4sVTam9n3qComPL_Fn-KzfDeQQz=d;https://lh3.googleusercontent.com/d/1ZDUggiSP8Uj5cvyyiIa0ngmxx-awSsOD=d;https://lh3.googleusercontent.com/d/1r2wuIKPcMOZBQLAqNuw00ZeCr9AD_LBb=d;https://lh3.googleusercontent.com/d/1zUai44s7dY7RNwndLJhTI58JduWuyhBa=d;https://lh3.googleusercontent.com/d/1owScTrI9DjkSRFypAVlcUQ0P4Vi0ch8w=d;https://lh3.googleusercontent.com/d/1McFf96uLGDP7WvoBhsAHaW0XhtyVYRLL=d;https://lh3.googleusercontent.com/d/1W1FrMhYGQlmfj058eI0eH-vem4qR5JFl=d",
+    "2025-03-22 | https://www.instagram.com/p/DHfKOkpTT6S |  | Instagram | 리즈 | 봄이 다가온다아 🌸🌷 | board=liz.yeyo | cols=2 | photos=https://lh3.googleusercontent.com/d/1jNDKbVtN8qQmiBmLKuQzUI0RixWxpq51=d;https://lh3.googleusercontent.com/d/1hR3a-xTj_s4qTWbdhP2J3yjaIQCc08la=d;https://lh3.googleusercontent.com/d/14ESOvIFRpMU4l9PGrwwcAzVSG7xXFPnd=d;https://lh3.googleusercontent.com/d/1-BHoXI6wF_WV3T9URoROC50Sl5Qqj8EF=d;https://lh3.googleusercontent.com/d/1dc-NEY3FvCz_qu4IXPHf9BPVU9hKjllT=d;https://lh3.googleusercontent.com/d/1ZcLwh7iDGhQbShorDAlryW1i5XZ_sgH9=d;https://lh3.googleusercontent.com/d/1dx1dFUEv7sZCTvSHgyzOlQx72DED64X5=d;https://lh3.googleusercontent.com/d/1wqc2R0HcEWljO00zRSEMwS-o0VTYmKwO=d",
+    "2025-03-16 | https://www.instagram.com/p/DHQ4y8mz5fv |  | Instagram | 리즈 | 𝓔𝓵𝓲𝔃𝓪𝓫𝓮𝓽𝓱 𝓗𝓮𝓵𝓰𝓪 𝓜𝓾̈𝓵𝓵𝓮𝓻 🖤♥️💛 | board=liz.yeyo | cols=2 | photos=https://lh3.googleusercontent.com/d/1LlaLUCWW-OY-bFWplxWLuiyAZApOZYT4=d;https://lh3.googleusercontent.com/d/1Uwo_HyAAxPKJpP_PiMYe5u7PDWH7-XDc=d;https://lh3.googleusercontent.com/d/1hJc0nCIbcfDPbwHZvaszystTcilykqPy=d;https://lh3.googleusercontent.com/d/18WQ_b6ZRTr90g50xtIx9SkJ8L0_lHn_a=d",
+    "2025-03-05 | https://www.instagram.com/p/DGzkTART4fa |  | Instagram | 리즈 | 눈이 죠아요❄️☃️🤍 | board=liz.yeyo | cols=2 | photos=https://lh3.googleusercontent.com/d/101Rk2DQMsoepfCcpgnwU3CCBW308K47G=d;https://lh3.googleusercontent.com/d/1ClvMTh_VZLfBBO0N8jxyUhZV_WGgwC2q=d;https://lh3.googleusercontent.com/d/1GKDzSrbswZVIqr17zkAgVQlmIJYMLt0Y=d;https://lh3.googleusercontent.com/d/1iMgk84sl49wT2bebXvmEwKrpct7rHBnQ=d;https://lh3.googleusercontent.com/d/1HbqCl4xyhKwglEz2moYRGLEMbLUJCUiU=d;https://lh3.googleusercontent.com/d/1_H1wshZ-Fj-hWGM8jiXy-i1SkSygspbt=d;https://lh3.googleusercontent.com/d/1ervkSivjzTtkC1LIrKJFCm5Gau1HYyWS=d;https://lh3.googleusercontent.com/d/1Y-oq387ce0WAtS_aKDrgn9_kyuunJC3t=d",
+    "2025-03-02 | https://www.instagram.com/p/DGsZM5nzDrz |  | Instagram | 리즈 | 𝕤𝕒𝕡𝕡𝕠𝕣𝕠 🤍🩵 | board=liz.yeyo | cols=2 | photos=https://lh3.googleusercontent.com/d/1gbXvkIzdO3qsABDFnv_VLXdpdaZ5ejwF=d;https://lh3.googleusercontent.com/d/1FxxlWkWkeMBZywkoo0rrTa-JzMeuQc0J=d;https://lh3.googleusercontent.com/d/1RkmiWzjzIvi__wULx_TFdIHnb3dqRZmS=d;https://lh3.googleusercontent.com/d/13eMHoUg8nuJX0pGYAz0y3Q9hWa45b4pf=d;https://lh3.googleusercontent.com/d/1FiTvYPrULAkFYgCtXZHf7F8Y35daQVk7=d;https://lh3.googleusercontent.com/d/1W1LRU6QeclzI_9EA4reZOnLInEGxLFSH=d;https://lh3.googleusercontent.com/d/1Tti-P5zmPos9GCc3stYofPTk2-Sdi-xB=d",
     "2026-11-10 | https://www.instagram.com/p/DfjgaxaE_-w/ |  | Instagram | 리즈 | KGMA 🥀♥️ | cols=2 | captions=KGMA 🥀♥️;;;;;😎😎;;다이브 덕분에 받은 상 🥺🖤 너무너무 고맙구 사랑해 다이브♥️;🎂🤍;;;; | photos=https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg4bdErGw29P7r1UBZjTsGPAoAiLJnmHg-20caxA9ny76x8WB1H_EkWwti2Nxex_AcP1E8CceqHA2Q-pbXe3GsHa71U52nQO9sOSvHPPW8cKDVEZlAxoJA8MP_RwbaZZ9nkDLUys0J3XYQEa6w8afGztv5cvf9Dr9iFlK1IdrumdQaQUVMX48CUEU5T3GY/s3872/liz.yeyo_20261110_p_4027205069044973488_1_4027202621638760955.jpg;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEghpxyRWlVINamiAENVb_b2AGkS_rl7sPv0hXYqthmMfymUWT63XLQnsxmEmSDZFb4eWaxIkR7s0SMWaft_HCqylMYa_OdGP0e1Gc62PbNH2lF33Vsv_TMVI-Wg2eQ9Z7HdcSdEqSCN-pJt10cAGdYFSzQDQNXUEQ-wsUMgA9cPnLUAsQiG-5SlmXkZ5lo/s4096/liz.yeyo_20261110_p_4027205069044973488_2_4027202624339944649.jpg;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhkZHiaEFqRC8xbFnfO4id54f9V-hXHNrQ5sAz7BmVvoHpDoDnDnv2D5KjFC7Qx_clRajqkt4D8c9kdXaaIyWBAZteHCRKWvEKo9ipgH29aWpi6V85NJ7CCPu-bsW9XQDVI6NvJb0pbZY563viQde3xbEVI66DFn8hilhXXhz9zOmQQvI_ndjSW6EjZH_s/s4032/liz.yeyo_20261110_p_4027205069044973488_3_4027202627108311269.jpg;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhZkdzIPQnlEaOmcdCgsEeUJJIJw9qB5TNo0vMD9eW3Lz1Y1iSb91Wd_TQKQWA_9N5IlXiKiR3aPbAhFOEdQldDTtucdzLm3YUJvoBXbpi8eXfRDYF-N2O-eIV-s3gFPJpzOAvxuIF_t1blcJ0Qo4N5P0Eos2lNByu_nuwrvdmuyZbTsPqOFgmjADijsMs/s4096/liz.yeyo_20261110_p_4027205069044973488_4_4027202629817858333.jpg;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhFF1-sXdhlTxNyB3yK1_5k4qW8R19of7sKWb222huBwmY1sXkf_B7rt9oV_N62A_0Zk5KI_BxD7vC_AmBHhMRVdZdvMUNFW4rT00YqhfP03V_f8r07BHr8W593tNaPYVndbLZPcI7JXmRxq0-Itmzo3NeAgaAdDiDw1nFQyg628TQeKMA6zOzAsPRpjbI/s2960/liz.yeyo_20261110_p_4027205069044973488_5_4027202632049210648.jpg;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgQbLdtrZ8NypRdVwieNlGc-Z-vDNrqILLKS6oGyJWYnBhBqL54Gu6YiAKDXvDtanq3T7bfGS5Z43ns9Csu8U2lroGnpdgLzM2BsLH60WqmsA5lONjg_UA2IDhEjGkIrAGGJUX_DnjigkR9kyRCykBn7u2Q7V2tRWuLMKLBfy3fo6CKMIhchozbPy1Dnns/s4096/liz.yeyo_20261110_p_4027205069044973488_6_4027202633005337711.jpg;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjH8lSz5YRmKyZpB2VTqezFu-aOxgZd6Q699oQ4fF0llkWNtXDT-mrdDlAx1F0Fyj_0n_5ZpTB8zQUhGbw_cpj7iArox7lZuFRbNebw6ManWG-0pW2vVIgj_bJRicrwnxWXOiPZBq9QpxBnBuFGB06TMZbJKvRuEgCYZQxb-lDY12wt__GYaRif4yb0fDg/s4096/liz.yeyo_20261110_p_4027205069044973488_7_4027202635538762631.jpg;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiA99ciIHUF27TCxyYddHNdMAK4QRz8YyPeiBftRrcIah4hyNh7kwS0WzOH7hA9NNYyFTS_RZ1fR8wqamCoBrY6qdvhWdFwULVZ5JdfoeoA8oNfpVPoeggrBeC-2u5lDKBltpEfMg74PFyoLjmGodHW4qRl0irA-jULpp4GOx09ALjNjBxP0gf0fPkoAEc/s3509/liz.yeyo_20261110_p_4027205069044973488_8_4027202636989922335.jpg;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiJgJRkhqWJKk5wgVk7drzP59c2mLi2x-XpEW0g0ZR19vTXRz5OuEYpJPbgN3nb3CgYl8cQe_HokdTRYjln-u3AKoTeOCFgsiX4-0JNNm2pemOp8Re-Xq2Uio7N4TkBijlG1NvahNLD1mTfJMSWzV9wXDLNqq-7EzesyoliZ_6uj_w-WFZov_RAC-OXspw/s4096/liz.yeyo_20261110_p_4027205069044973488_9_4027202639372333325.jpg;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjLUfLzP4uqW6lJFWiqiYrUdeueTRH8t-wfRdJoqdaN37fc_LaDcWjeZoCxXSB_ApMsPSibZT0d_EWXVJL78I8WxZxDqVNIY6YI8dN13NomnQ4dmnif8eA8puojqji-j41ECR9f718QDlfqyBocfhDZUDNYiKhVrg2Y5bqV56ZF-cJin87IMq9UTkPYK0E/s3160/liz.yeyo_20261110_p_4027205069044973488_10_4027202642559947319.jpg;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiu6omgepaziVh0s6zGOXG_9g6k0QTTsyUKbOkoES2wkr7UapiPQkjRBRSy6jiEG0hlu1MaeVu0DMHjFD3dqH10pTPZa0Q5XUXczZ-cbGVdQfwvD4CKbH8lJefO49GM6WAnFsLz_ZcBN-kqB2q0uheqPX6r08c2tAx68OUyX0FhvH8xiNIHw2ziXA3xnQk/s4096/liz.yeyo_20261110_p_4027205069044973488_11_4027202657441508625.jpg;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgSbHApuJMqZQ7gQjjvp2pI7a_7TFixlWpz2Al04Yy2N-jtPUzD1E-0l6jJoy0ixdWUr13CFSiXt7COySUmUaghgvFaFn0tW7NSflcY2SCyv5ZWXG9WV03vfb4ZCZdifdWJyzcjCOWIlSGf6zD0514e1P-1NhxxmH_gKdSZlAFMWRBO98mcvhfzNSoLU_4/s3417/liz.yeyo_20261110_p_4027205069044973488_12_4027202659941294231.jpg;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhFzJfa4m32aLCYdHPDYSzARwaOEV9R9xWz-VhN1r_QtvpejoGCHIetV8pMmYWxLC26YbatP6e0rqeDLVwioRYx_l93RAsJazuHyMZCyQN02oiL96p5fTAbGGldwOMVwvsL2W7FQzJy1lJN0VKa2q5Es5jl5CFNigneKjLxS_7lL2zsP8xKV4LSY_4krTA/s4032/liz.yeyo_20261110_p_4027205069044973488_13_4027202663019865192.jpg",
-    "2025-02-27 |  |  | Instagram | 리즈 | 행복한 하류🍀💚 | cols=2 | photos=https://lh3.googleusercontent.com/d/1QFghMhJ5_DvnrQ6xVL_gzVACKaUW0hRS=d;https://lh3.googleusercontent.com/d/1ryi_mZvenqf9tbbdTzga2k7tQS1FoVMU=d;https://lh3.googleusercontent.com/d/1xsh8YONqT1JYx6RZCLx2jvNB-B2b4jtz=d;https://lh3.googleusercontent.com/d/1ytex3Y1eXvOW70v-WAOjWYRVyf6yb44f=d;https://lh3.googleusercontent.com/d/1MIi1lF710ugw2db17aeomVg8TzS-c4Da=d",
-    "2025-02-21 |  |  | Instagram | 리즈 | 코치코치코치코치코치코치코치코치리즈코치코치코치코치코치코치코치코치🍒🩵 | cols=2 | photos=https://lh3.googleusercontent.com/d/18AM_OLi5AKKwP7fxXuglkTM3r6jgoxpT=d;https://lh3.googleusercontent.com/d/157Q-BJnJp-7DUl3v4-hToCgHekQTd8lA=d;https://lh3.googleusercontent.com/d/1ERCIdqcN5rEBnsO2Mg2mXipDVo_vdDHU=d;https://lh3.googleusercontent.com/d/1XAIAAgasj12d8QG-oT9rD8ORAeN6ZiKx=d;https://lh3.googleusercontent.com/d/1Je3ywle1md6PnGhuh6thACVPy87egnwL=d;https://lh3.googleusercontent.com/d/1gbuSNLuDEEoKQAwTcNL3I3hV7L_MS9Hf=d",
-    "2025-02-20 |  |  | Instagram | 리즈,레이 | 𝕃𝕆ℕ𝔾𝕀ℕ𝔼𝕊⏱✨ | cols=2 | photos=https://lh3.googleusercontent.com/d/1Tus2_6599zbHlj2l_YWtdhaVoM_s1rnV=d;https://lh3.googleusercontent.com/d/1fqbKOi9t0FGra4g0g6aBiwOmxTRzVfYm=d;https://lh3.googleusercontent.com/d/1PwKEM7Mo8mu30jSn34QxuEOZtmtiHUSg=d;https://lh3.googleusercontent.com/d/1j7ciz5EX9AS8WrAyGYQhN48zG48wi6D-=d;https://lh3.googleusercontent.com/d/1axrhTqHl0zu_vlKjBMgPnoH05TiRDVxZ=d;https://lh3.googleusercontent.com/d/1kBOQwahCrt36H-5QqTT55NqX8nTBIsrk=d;https://lh3.googleusercontent.com/d/1y6XS1WeKXlovkTt7e1n14rJ-r2PePnku=d",
-    "2025-02-14 |  |  | Instagram | 리즈 | 𝓗𝓪𝓹𝓹𝔂 𝓥𝓪𝓵𝓮𝓷𝓽𝓲𝓷𝓮‘𝓼 𝓓𝓪𝔂 🥀🍫 | cols=2 | photos=https://lh3.googleusercontent.com/d/1afvwXMjNW8kIrYsbfFpoe9Z3JkM4Oe9F=d;https://lh3.googleusercontent.com/d/1FPxhMKEqF_hKBQMNiZssnmICBIDRVd_s=d;https://lh3.googleusercontent.com/d/1sFRLoIq2R7lnkDElbabI8orjAQXhWxnr=d;https://lh3.googleusercontent.com/d/1R1v7EmlJG3YE3SLlhWOpXWwCB4YWHAvh=d;https://lh3.googleusercontent.com/d/17322i85rImPSYYl0-liM-j1r0gu8Jeoj=d",
-    "2025-02-08 |  |  | Instagram | 리즈 | 오렌지오렌지오렌지오렌지오🍊🍊 | cols=2 | photos=https://lh3.googleusercontent.com/d/1I_1TbM0_e5mSHqk6AEIQMPobZyLrNfxu=d;https://lh3.googleusercontent.com/d/16_ahuM880Ha1cN9TkJ-fMIulD5wGhfZG=d;https://lh3.googleusercontent.com/d/14TmFGbEWMeI92AbdNtvoXUcPwPmTLAj7=d;https://lh3.googleusercontent.com/d/1fX00J0PcmE2Xcs5Q8lSqpigmCGqT3wii=d;https://lh3.googleusercontent.com/d/1DfEhIF-BhLsSAbxVy4xsY9q0CHpVPrhC=d",
-    "2025-01-28 |  |  | Instagram | 리즈 | 손이 꽁꽁꽁 발이 꽁꽁꽁❄️☃️ | cols=2 | photos=https://lh3.googleusercontent.com/d/1KWd4odDPSuvKu3z2OAdgWKHe3sAW3OeN=d;https://lh3.googleusercontent.com/d/1GVl-3adDa4O2O2X0J_nKY22rfrfrIX7c=d;https://lh3.googleusercontent.com/d/19GBHEuQ6rTCRxkACDlZYW_3cDJJCQm-C=d;https://lh3.googleusercontent.com/d/1jL0b3X_BqRdRKyPFJQrb6dYh_Ki3th3N=d",
-    "2025-01-18 |  |  | Instagram | 리즈 | 동글동글동글동글동글동글동글동글동글동글동글동글동글동글동글왕밤빵🤍 | cols=2 | photos=https://lh3.googleusercontent.com/d/1n8yAYUyQPfqBJ8r-1uRTTnPnSwGqMsAG=d;https://lh3.googleusercontent.com/d/15smu48mfHlnc4pPD5eBhnbbxwW3XZFMO=d;https://lh3.googleusercontent.com/d/17yScKdMyRZ-mUM09dLOhpmwSiE6pXvQO=d;https://lh3.googleusercontent.com/d/1SVp3BFsNL7-IBUuluiVZMl8c0l_l_Lis=d;https://lh3.googleusercontent.com/d/10OCdrbiTTDVN3-KzA0xD-L2Y674ucMDL=d;https://lh3.googleusercontent.com/d/15UdHa_bq-iqDsuMSfglFlSSK6CJYKsW0=d;https://lh3.googleusercontent.com/d/1McvnQXIHZzfR-1UbKGWOd24ORyVjNsEH=d",
-    "2025-01-13 |  |  | Instagram | 리즈 | 덕분에 즐거운 촬영이어따 내 아가들아 💋💋 | cols=2 | photos=https://lh3.googleusercontent.com/d/1JKWe3vwygf6g2gQmJWbmG86_hndvAX9w=d;https://lh3.googleusercontent.com/d/1Yh3lKmgwp9ObtvFqfMEr2se-lskeQgjd=d;https://lh3.googleusercontent.com/d/1sSLRvUcgoY4QsyuRF6z1M802vCq4C3fN=d;https://lh3.googleusercontent.com/d/1Ez-ncMX6lFby7KTiTyVn9gGbGPIxq2a0=d;https://lh3.googleusercontent.com/d/1kYT1g3Yt8E5zyOIW7W1I-xqOwOwu3Hhm=d;https://lh3.googleusercontent.com/d/1pDAwtxEwH2ATOY_aSB4sZFD7sXDFGsEE=d;https://lh3.googleusercontent.com/d/1_K6JJj30zmw1ncQ3JHXE55TRHdtX7EIw=d",
-    "2025-01-07 |  |  | Instagram | 리즈 | 눈이 왤케 무리해 ..🥹 | cols=2 | photos=https://lh3.googleusercontent.com/d/1KNcr9FPhzAokwsidTEdbYSVKTTgVW2qR=d;https://lh3.googleusercontent.com/d/1UgV9i7oROn54XJOCJyr71jfKV5CFvDzb=d;https://lh3.googleusercontent.com/d/1nSIPpECl10idRU40qabQwtHiZHjTi7vz=d;https://lh3.googleusercontent.com/d/1D5Lbh6CrosDikYF0qFTeGLOOpU6Em9Ex=d;https://lh3.googleusercontent.com/d/1Z7R1TLnrmWdEnJH_o2hIiuCiLTIK5x76=d;https://lh3.googleusercontent.com/d/1fHUNsUoeB5A2_0EgYDIDdKF-XvsPyDeP=d;https://lh3.googleusercontent.com/d/1cbObIK54nwA4AUyBxO2dg4AK03y1PAQY=d",
+    "2025-02-27 | https://www.instagram.com/p/DGkh8oxThnR |  | Instagram | 리즈 | 행복한 하류🍀💚 | board=liz.yeyo | cols=2 | photos=https://lh3.googleusercontent.com/d/1QFghMhJ5_DvnrQ6xVL_gzVACKaUW0hRS=d;https://lh3.googleusercontent.com/d/1ryi_mZvenqf9tbbdTzga2k7tQS1FoVMU=d;https://lh3.googleusercontent.com/d/1xsh8YONqT1JYx6RZCLx2jvNB-B2b4jtz=d;https://lh3.googleusercontent.com/d/1ytex3Y1eXvOW70v-WAOjWYRVyf6yb44f=d;https://lh3.googleusercontent.com/d/1MIi1lF710ugw2db17aeomVg8TzS-c4Da=d",
+    "2025-02-21 | https://www.instagram.com/p/DGVjmd6yidB |  | Instagram | 리즈 | 코치코치코치코치코치코치코치코치리즈코치코치코치코치코치코치코치코치🍒🩵 | board=liz.yeyo | cols=2 | photos=https://lh3.googleusercontent.com/d/18AM_OLi5AKKwP7fxXuglkTM3r6jgoxpT=d;https://lh3.googleusercontent.com/d/157Q-BJnJp-7DUl3v4-hToCgHekQTd8lA=d;https://lh3.googleusercontent.com/d/1ERCIdqcN5rEBnsO2Mg2mXipDVo_vdDHU=d;https://lh3.googleusercontent.com/d/1XAIAAgasj12d8QG-oT9rD8ORAeN6ZiKx=d;https://lh3.googleusercontent.com/d/1Je3ywle1md6PnGhuh6thACVPy87egnwL=d;https://lh3.googleusercontent.com/d/1gbuSNLuDEEoKQAwTcNL3I3hV7L_MS9Hf=d",
+    "2025-02-20 | https://www.instagram.com/p/DGSPwN9yaoa |  | Instagram | 리즈,레이 | 𝕃𝕆ℕ𝔾𝕀ℕ𝔼𝕊⏱✨ | board=liz.yeyo | cols=2 | photos=https://lh3.googleusercontent.com/d/1Tus2_6599zbHlj2l_YWtdhaVoM_s1rnV=d;https://lh3.googleusercontent.com/d/1fqbKOi9t0FGra4g0g6aBiwOmxTRzVfYm=d;https://lh3.googleusercontent.com/d/1PwKEM7Mo8mu30jSn34QxuEOZtmtiHUSg=d;https://lh3.googleusercontent.com/d/1j7ciz5EX9AS8WrAyGYQhN48zG48wi6D-=d;https://lh3.googleusercontent.com/d/1axrhTqHl0zu_vlKjBMgPnoH05TiRDVxZ=d;https://lh3.googleusercontent.com/d/1kBOQwahCrt36H-5QqTT55NqX8nTBIsrk=d;https://lh3.googleusercontent.com/d/1y6XS1WeKXlovkTt7e1n14rJ-r2PePnku=d",
+    "2025-02-14 | https://www.instagram.com/p/DGCsTrdyOnW |  | Instagram | 리즈 | 𝓗𝓪𝓹𝓹𝔂 𝓥𝓪𝓵𝓮𝓷𝓽𝓲𝓷𝓮‘𝓼 𝓓𝓪𝔂 🥀🍫 | board=liz.yeyo | cols=2 | photos=https://lh3.googleusercontent.com/d/1afvwXMjNW8kIrYsbfFpoe9Z3JkM4Oe9F=d;https://lh3.googleusercontent.com/d/1FPxhMKEqF_hKBQMNiZssnmICBIDRVd_s=d;https://lh3.googleusercontent.com/d/1sFRLoIq2R7lnkDElbabI8orjAQXhWxnr=d;https://lh3.googleusercontent.com/d/1R1v7EmlJG3YE3SLlhWOpXWwCB4YWHAvh=d;https://lh3.googleusercontent.com/d/17322i85rImPSYYl0-liM-j1r0gu8Jeoj=d",
+    "2025-02-08 | https://www.instagram.com/p/DFytS1Fzoom |  | Instagram | 리즈 | 오렌지오렌지오렌지오렌지오🍊🍊 | board=liz.yeyo | cols=2 | captions=오렌지오렌지오렌지오렌지오🍊🍊;오렌지오렌지오렌지오렌지오🍊🍊;오렌지오렌지오렌지오렌지오🍊🍊;오렌지오렌지오렌지오렌지오🍊🍊;(feat.이서가 정성스레 까준계란🥚) | photos=https://lh3.googleusercontent.com/d/1I_1TbM0_e5mSHqk6AEIQMPobZyLrNfxu=d;https://lh3.googleusercontent.com/d/16_ahuM880Ha1cN9TkJ-fMIulD5wGhfZG=d;https://lh3.googleusercontent.com/d/14TmFGbEWMeI92AbdNtvoXUcPwPmTLAj7=d;https://lh3.googleusercontent.com/d/1fX00J0PcmE2Xcs5Q8lSqpigmCGqT3wii=d;https://lh3.googleusercontent.com/d/1DfEhIF-BhLsSAbxVy4xsY9q0CHpVPrhC=d",
+    "2025-01-28 | https://www.instagram.com/p/DFXff3pypk6 |  | Instagram | 리즈 | 손이 꽁꽁꽁 발이 꽁꽁꽁❄️☃️ | board=liz.yeyo | cols=2 | photos=https://lh3.googleusercontent.com/d/1KWd4odDPSuvKu3z2OAdgWKHe3sAW3OeN=d;https://lh3.googleusercontent.com/d/1GVl-3adDa4O2O2X0J_nKY22rfrfrIX7c=d;https://lh3.googleusercontent.com/d/19GBHEuQ6rTCRxkACDlZYW_3cDJJCQm-C=d;https://lh3.googleusercontent.com/d/1jL0b3X_BqRdRKyPFJQrb6dYh_Ki3th3N=d",
+    "2025-01-18 | https://www.instagram.com/p/DE93miCymSt |  | Instagram | 리즈 | 동글동글동글동글동글동글동글동글동글동글동글동글동글동글동글왕밤빵🤍 | board=liz.yeyo | cols=2 | photos=https://lh3.googleusercontent.com/d/1n8yAYUyQPfqBJ8r-1uRTTnPnSwGqMsAG=d;https://lh3.googleusercontent.com/d/15smu48mfHlnc4pPD5eBhnbbxwW3XZFMO=d;https://lh3.googleusercontent.com/d/17yScKdMyRZ-mUM09dLOhpmwSiE6pXvQO=d;https://lh3.googleusercontent.com/d/1SVp3BFsNL7-IBUuluiVZMl8c0l_l_Lis=d;https://lh3.googleusercontent.com/d/10OCdrbiTTDVN3-KzA0xD-L2Y674ucMDL=d;https://lh3.googleusercontent.com/d/15UdHa_bq-iqDsuMSfglFlSSK6CJYKsW0=d;https://lh3.googleusercontent.com/d/1McvnQXIHZzfR-1UbKGWOd24ORyVjNsEH=d",
+    "2025-01-13 | https://www.instagram.com/p/DExComKyAwu |  | Instagram | 리즈 | 덕분에 즐거운 촬영이어따 내 아가들아 💋💋 | board=liz.yeyo | cols=2 | photos=https://lh3.googleusercontent.com/d/1JKWe3vwygf6g2gQmJWbmG86_hndvAX9w=d;https://lh3.googleusercontent.com/d/1Yh3lKmgwp9ObtvFqfMEr2se-lskeQgjd=d;https://lh3.googleusercontent.com/d/1sSLRvUcgoY4QsyuRF6z1M802vCq4C3fN=d;https://lh3.googleusercontent.com/d/1Ez-ncMX6lFby7KTiTyVn9gGbGPIxq2a0=d;https://lh3.googleusercontent.com/d/1kYT1g3Yt8E5zyOIW7W1I-xqOwOwu3Hhm=d;https://lh3.googleusercontent.com/d/1pDAwtxEwH2ATOY_aSB4sZFD7sXDFGsEE=d;https://lh3.googleusercontent.com/d/1_K6JJj30zmw1ncQ3JHXE55TRHdtX7EIw=d",
+    "2025-01-07 | https://www.instagram.com/p/DEhqbTHSboe |  | Instagram | 리즈 | 눈이 왤케 무리해 ..🥹 | board=liz.yeyo | cols=2 | photos=https://lh3.googleusercontent.com/d/1KNcr9FPhzAokwsidTEdbYSVKTTgVW2qR=d;https://lh3.googleusercontent.com/d/1UgV9i7oROn54XJOCJyr71jfKV5CFvDzb=d;https://lh3.googleusercontent.com/d/1nSIPpECl10idRU40qabQwtHiZHjTi7vz=d;https://lh3.googleusercontent.com/d/1D5Lbh6CrosDikYF0qFTeGLOOpU6Em9Ex=d;https://lh3.googleusercontent.com/d/1Z7R1TLnrmWdEnJH_o2hIiuCiLTIK5x76=d;https://lh3.googleusercontent.com/d/1fHUNsUoeB5A2_0EgYDIDdKF-XvsPyDeP=d;https://lh3.googleusercontent.com/d/1cbObIK54nwA4AUyBxO2dg4AK03y1PAQY=d",
     "2023-12-12 | https://www.instagram.com/p/C0wCVOYrB3v/ |  | Instagram | 리즈 | 🐱💖💛 | board=ivestarship | cols=2 | photos=https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjRDi4VS61fJTe_LL7weMs2xMqrpMk7toM4q2tjP4umtwT1J5pMijLcYNJNL7-HFhiagKIdqpqHIims0QyyOBClIfS_LfUgmIy6cwTLtDIOOuIdlvGNSMP9oR7R2fXhtxMu3LXjO9uM-ToIyp2CtlZgJMBiuK2sPuLMgu9jLloarW9hQ674UgDk7QfJjNs/s1800/ivestarship_20231212_p_3256112785237220847_1_3256112780279609879.jpg;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgojmhq3VRan2dLJ0hbFGtuXPr0yT98ntzK3GkBrdQc3vUttvLtuK-cDfIQtJYrrVspM7K9fLvpzJbHYB_p9AOb8GsPdnucpMvDtYrXTN27h8RfuXXI8idsV5jlaDp4sJACiKyhb00m5hS5wlVzRSiPXajmTdBNOQuIj6v9fKxGar0qCIZCxcaqao_iJx4/s1800/ivestarship_20231212_p_3256112785237220847_2_3256112780229234287.jpg",
     "2023-11-17 | https://www.instagram.com/p/CzvFbEbPwmm/ |  | Instagram | 리즈 | 𝒩𝑜𝒷𝑜𝒹𝓎 🖤✨ | board=ivestarship | cols=2 | photos=https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjx-4pasutLB2LS2eSCbLK6mF01oi8Rh6Tui-TdRPirmHO7HBzy5KkyC_y_RwIOpfAKrLaQ07rLVIBBz13sNsbATGXSJWB3gkOlgIM0yTqxH9t6arSxok195Ur-H84p9IlY-DtDx5vyIoh3gLnBHYx71829dfvizBO-XnoZZ6HxYDBqtSlp_CyFoh3Qhsc/s1800/ivestarship_20231117_p_3237830507513186726_1_3237830501154572739.jpg;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjgHSz3l4IyEWnHkxkCnSsrTKpmPeT9-1UoiYb3ezcYDDhQmN7T3itBhw5aMYz8MvNYdw6xQ9xm-j4p9o4EYyQtkSmjQAQ91EF7ItkW3QdYFK49De6lofSKTLjTGQqD93XSC49j_duEAtGcjaCW8N4jWpp52gb6ZNkSMR78MMkboMKee0FEW39m5Keo1_A/s1800/ivestarship_20231117_p_3237830507513186726_2_3237830501154583371.jpg;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiLiEVbhKq_WsFIDGMuErtZF5Xkdwy55cbQoviy8CPCoDUxW69fwPTGj4E3TFq7Q69LtyOe0ZNLfTS3iK_OzFrPNcWQgk5NwYeYU0nBo2gXbkwztkpnTrmfXCo0cYKZbyCHx9v05-GI1XhjLqBkIRrFZlh92ELJn00mfU6ffTIOCXlgsirJ1E0lfEf0iCU/s1800/ivestarship_20231117_p_3237830507513186726_3_3237830501204760700.jpg;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhXHwtOibwSYlMyGFF-JfP08FObnzqSKj0Iud0eM9aemljY3Vs6rTc_ttn9F_wpGgzIcfos3-mGz3AUOzuLP5yp0XUOWLoN2_ft_ZyYE8tDgnbOLwu__ZEZCiTD5U0BgmEOI7iE6YsA2pm0fUwjkYnZN7QaJ15x4M6AdXH4a1zArx01sPo3Z1nTv4eb8yM/s1799/ivestarship_20231117_p_3237830507513186726_4_3237830501037176287.jpg;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEivplJwstToJB8pRQV0ppvm0PS1_VF1FuveZKbI-cdpCrroVr4Xs-SHb8lCh9_zCOFF6G2z1e14RNNX4PHqt_AacoQb2N8AByEYwPMU3OmG14F90nKZroNuHYoBX3vmu8EvmSqlulR7SLcDnvpz-1csMZ-4JL6wXH95ijckKUoxFLruOCASu45spgnQy64/s1800/ivestarship_20231117_p_3237830507513186726_5_3237830501162924846.jpg;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgZuC4ILvggsVc6ZpGUbva1o54dLxa2V5ucLRTiA9GRefj5It8bFGOCUmio4XNapt1vRm8GdgmzaGmYPar_NTtsHreim1cA83BpqtYyPzO307aqp09udrgwHJfyFKM17VsPaCXUkpkmefxJYXtzkJR4BljyzNrXLGFb_D4kdY22uUbOUJgNccIErYFXpRI/s1800/ivestarship_20231117_p_3237830507513186726_6_3237830501045555636.jpg;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhxtQFUn75Kj5WlQH_put1MaHsZwZDX5DafAm2yhmIkHVRzDMLqVYeSaici_msyjOsUlMfiAYrrWqWXWQ6bUEvd9gZFC-D49zhBb-bp1vdHHIFBEwEoyMVlHkTrne58ZmwxH5_qPjmBNmISihqOuxq6qmbWJuj6WPLLY_Yd5MYOJSpojGUlkKyzIkXdkzU/s1800/ivestarship_20231117_p_3237830507513186726_7_3237830501154629257.jpg;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiHMZGB7wM34QCmR3W3gtySW1IcKgcKQkTVPoQVlmuk7IYY-58egCWZmHIrHVH4jxdg-QEU20_EElKe2VEg0BtXAmqCwEdktxwaAivCy-yjP3R0RscCqstvmv-g-qPuLLW5yi13QU_Sc7WFo0I_IqcxjLbB0St2LXVHpghrdg8id7QbxUKEKOQ1YfQXUhw/s1800/ivestarship_20231117_p_3237830507513186726_8_3237830501028687264.jpg;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgrojOSjVsUIq7hSgihTAzrFicLR7Z40JM0vFbbCTxCEZxYVnp7o8dU49l9csbxLztw-O9gR6_rsGM-Q_tyRMHEoKSfcIXIiibcocb23bvjLBcLLJOVmzzWKtkQ8EauFVATKOdOBPDu7WyifAFniZdjjVBa9cbg0HgK_Nhf6svX4PkMvXMZ_TBTrPVd5FA/s1800/ivestarship_20231117_p_3237830507513186726_9_3237830501037233574.jpg;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjuYUNZqFvBaXfKnc1jbkuemX57XnHqimE-Mobh595WzxAMcp-AU9yWHJIdySU8OFgp4Fiek_5BkWCzshdsNrmOJyBqOCYrr3HEAgkNtvuCJU9SHcKlz5Ri7mSNDgC_OFcTQRbmkVZeKJeLnDOpkEaxhboNqQD1nZgcB08uWt2gwJwgrWFTjZFW4nyYrZQ/s1800/ivestarship_20231117_p_3237830507513186726_10_3237830501045382204.jpg",
     "2023-11-07 | https://www.instagram.com/p/CzV6t3qvAe-/ |  | Instagram | 리즈 | 완두콩🫛💚 | board=ivestarship | cols=2 | photos=https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEijCaEJWvdMqcbmNLpxvCgaIRutODb7dzrpAPThd4LL6tX1NgXX1HUHAGPp0-tFXq_oK4PUqI_a2ujgqz_5T4UPHU1gdAEhQtL-MfRTZfg8YswXfPhlZRN6eQLUO8OBzLDIobQ3dXlNLdmFLmNDhKEZzj1376CiE1Q0YUv0N9cWARZdlD4Hm16hZqslpEw/s1799/ivestarship_20231107_p_3230746546555062206_1_3230746539986942670.jpg;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi-8ite84tU9mBIg3GtbzQFezoSOi1-7gfG9R48awIx_VWXNvIhSPYAX5W5h_dbd1vT8E9zrOsG-tpjXkraiETcityihAXM8da85_dovnLk8S4xTDOXyTwg0CzVrgxfAJRzobhpUd8Rqcf68VL-1-YOg50V525wlQvQytTyQSyVcbmwxrECo-05MvOiZ0k/s1799/ivestarship_20231107_p_3230746546555062206_2_3230746540196619276.jpg;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjoveWJCvPxnR-8zL_PkPKZ20PEApXlKocXiXwbMSjw3y5YPb_HSS5lSd5Ce30KqbbMMoInT-UsYGWArSDqVSy5KhkL97sF1vNNnrI1wQsY2r1qixafDzQ-2cOgGkMT_h6n15xNX0NXdpW342tY4hj5Mg02QsznAMH8VbivY7zDBwTR6s5zmVhuBKV0MHc/s1799/ivestarship_20231107_p_3230746546555062206_3_3230746539986908560.jpg;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEibTg235sPmLlvf3nJByz0_iG62wkATS0xYLVu5rA7-Ks1Ykct5bN515y13VnhK3YHc6T-o7kprSZjLtySKg7uOKRYFMPUGGMt2TqkdYKvPeR3aChRtOO9QN5u4UcRZeXV0L3xdus78WxLRQALPYX27q_DBuRPm4CRPsEvP-DzcjOd5L5c8SjmpSNX_gqU/s1799/ivestarship_20231107_p_3230746546555062206_4_3230746539978415925.jpg;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjZOaHIjFFjYIQwk3laTp53yMrRQn2oLYORvjSHLxB_I9v8j6IYI0-7dcVektLRKWDpCxezZiZde4N4wHQThn8zGj9qX7wEo5vWnSJfdB5Jg07_lujEK_LC5T8xEBxIHp7UBDY0dbOcmlDYUwwM-Z-9Y0iL8KLB9QJhudtlm3koxD32862aPG85iXfGN30/s1799/ivestarship_20231107_p_3230746546555062206_5_3230746540154623101.jpg;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgUv_UpJf_-plN5Km2QIUPE-jB-ccXF9UuSaWtResLg_BreYnNyYG0Jqf_2N4J2oNBhm6NxZqpvxUEwHaqHdpsAXrhaqlYpkPzFGD476VxezaK14czPhmvul-5huR-C__NLmavXm_Eik8Rd8IVAyYPz2P6EfqVXiGMWh25c2OF23-TkP3IIboSjn4XkzlA/s1799/ivestarship_20231107_p_3230746546555062206_6_3230746539978474983.jpg;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj16ow9RtbXWqlUzJnFRUq2gqrAZLzwaj5nRMIA_p4kM8K28vVmKHiQn5zPGKvqN3VjdbHCeeuotC3RtYhZ3_jjc2k8q5slqa5axffp9G34e21iaB-JgixsR3IW1m5Uw1NjvKDYHmL145PqfYJ8fxpwH4OeecSC3xev5Q9JJxQ3mjlPmnBLxy0nmAsvTnY/s1799/ivestarship_20231107_p_3230746546555062206_7_3230746540112620514.jpg",
@@ -5457,6 +5473,9 @@ function renderList() {
             `<button class="back" id="albumBack" style="grid-column:1/-1">← ${label} 전체로</button>` +
                 albumItems.map(albumCard).join("");
         $("albumBack").onclick = () => {
+            const st = history.state;
+            if (st && st.ls && st.ls.album && (st.lsd || 1) > 1)
+                return history.back();
             albumScope = null;
             renderList();
         };
@@ -5617,8 +5636,60 @@ function renderTabs() {
         .map((t, i) => `<button class="tab ${i === tab ? "on" : ""}" data-i="${i}">${TAB_LABELS[t] || t}</button>`)
         .join("");
 }
+let lastView = null, listFromHome = false, homeY = 0;
+window.addEventListener("scroll", () => {
+    if (lastView === "home" && location.hash !== "#list")
+        homeY = window.scrollY;
+}, { passive: true });
+function lsSnap() {
+    return {
+        tab,
+        sec: scope ? HOME_SECTIONS.indexOf(scope) : -1,
+        album: albumScope,
+        q: query,
+        mf: [...memberFilter],
+        cf: [...catFilter],
+        yf: [...yearFilter],
+        sf: [...subFilter],
+    };
+}
+function lsNav(fn) {
+    const inList = location.hash === "#list" && !ovStack.length;
+    const d = (history.state && history.state.lsd) || 1;
+    if (inList)
+        history.replaceState({ ls: lsSnap(), lsd: d, y: window.scrollY }, "");
+    fn();
+    if (inList)
+        history.pushState({ ls: lsSnap(), lsd: d + 1, y: 0 }, "");
+}
+window.addEventListener("popstate", (e) => {
+    const st = e.state;
+    if (!st || !st.ls || location.hash !== "#list")
+        return;
+    const s = st.ls;
+    if (JSON.stringify(s) === JSON.stringify(lsSnap()))
+        return;
+    tab = s.tab;
+    scope = s.sec >= 0 ? HOME_SECTIONS[s.sec] : null;
+    albumScope = s.album;
+    query = s.q || "";
+    memberFilter = s.mf || [];
+    catFilter = s.cf || [];
+    yearFilter = s.yf || [];
+    subFilter = s.sf || [];
+    $("search").value = query;
+    renderTabs();
+    renderList();
+    window.scrollTo(0, st.y || 0);
+});
 function route() {
     const isList = location.hash === "#list";
+    if (isList && lastView === "home")
+        listFromHome = true;
+    if (!isList)
+        listFromHome = false;
+    const wasList = lastView === "list";
+    lastView = isList ? "list" : "home";
     $("home").hidden = isList;
     $("list").hidden = !isList;
     $("pinbar").hidden = isList;
@@ -5633,21 +5704,30 @@ function route() {
             memberFilter = [];
         renderList();
     }
-    window.scrollTo(0, 0);
+    window.scrollTo(0, !isList && wasList ? homeY : 0);
 }
 $("back").onclick = () => {
+    if (listFromHome) {
+        history.go(-((history.state && history.state.lsd) || 1));
+        return;
+    }
     albumScope = null;
     location.hash = "";
 };
 window.onhashchange = route;
 $("tabs").onclick = (e) => {
     if (e.target.dataset.i) {
-        tab = +e.target.dataset.i;
-        catFilter = [];
-        subFilter = [];
-        albumScope = null;
+        if (+e.target.dataset.i === tab && !albumScope)
+            return;
+        lsNav(() => {
+            tab = +e.target.dataset.i;
+            catFilter = [];
+            subFilter = [];
+            albumScope = null;
+        });
         renderTabs();
         renderList();
+        window.scrollTo(0, 0);
     }
 };
 $("search").oninput = (e) => {
@@ -5737,7 +5817,9 @@ document.addEventListener("click", (e) => {
     }
     const albumBtn = e.target.closest("[data-album]");
     if (albumBtn) {
-        albumScope = albumBtn.dataset.album;
+        lsNav(() => {
+            albumScope = albumBtn.dataset.album;
+        });
         renderList();
         window.scrollTo(0, 0);
     }
@@ -5877,7 +5959,7 @@ function closePv() {
     ovClose("pv");
 }
 const ovStack = [];
-const ovHide = { pv: () => hidePv(), lb: () => hideLb(), vo: () => hideVo() };
+const ovHide = { pv: () => hidePv(), lb: () => hideLb(), vo: () => hideVo(), bz: () => hideBz(), cafe: () => hideCafe(), gb: () => hideGb(), upd: () => hideUpd() };
 function ovPush(name) {
     ovStack.push(name);
     history.pushState({ ov: ovStack.length }, "");
@@ -5991,14 +6073,27 @@ function openLb(list, i) {
         lbEl.innerHTML = `<div class="lb-stage"></div>
       <div class="lb-cnt"></div>
       <button class="lb-x" aria-label="닫기">×</button>
-      <button class="lb-nav lb-prev" aria-label="이전 사진">‹</button>
-      <button class="lb-nav lb-next" aria-label="다음 사진">›</button>`;
+      <button class="lb-nav lb-prev" aria-label="이전 사진"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <button class="lb-nav lb-next" aria-label="다음 사진"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>`;
         document.body.appendChild(lbEl);
         lbEl.addEventListener("click", (e) => {
             if (e.target.closest(".lb-prev"))
                 return lbShow(lbIdx - 1);
             if (e.target.closest(".lb-next"))
                 return lbShow(lbIdx + 1);
+            if (e.target.closest(".lb-x"))
+                return closeLb();
+            const isVid = e.target.closest("video, iframe, .lb-frame");
+            if (lbList.length > 1 && !isVid) {
+                const vv = window.visualViewport;
+                const fx = vv
+                    ? (e.clientX - vv.offsetLeft) / vv.width
+                    : e.clientX / window.innerWidth;
+                if (fx < 0.3)
+                    return lbShow(lbIdx - 1);
+                if (fx > 0.7)
+                    return lbShow(lbIdx + 1);
+            }
             if (e.target.closest(".lb-media"))
                 return;
             closeLb();
@@ -6017,10 +6112,8 @@ function openLb(list, i) {
             tracking = false;
             const t = e.changedTouches[0];
             const dx = t.clientX - sx, dy = t.clientY - sy;
-            if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) {
-                lbShow(lbIdx + (dx < 0 ? 1 : -1));
-            }
-            else if (dy > 90 && Math.abs(dy) > Math.abs(dx) * 1.5) {
+            const zoomed = window.visualViewport && window.visualViewport.scale > 1.01;
+            if (!zoomed && dy > 90 && Math.abs(dy) > Math.abs(dx) * 1.5) {
                 closeLb();
             }
         }, { passive: true });
@@ -6249,9 +6342,16 @@ document.addEventListener("click", (e) => {
     });
 }, true);
 let bzEl;
-function closeBz() {
+function hideBz() {
+    if (!bzEl || bzEl.hidden)
+        return;
     bzEl.hidden = true;
     document.body.style.overflow = "";
+}
+function closeBz() {
+    if (!bzEl || bzEl.hidden)
+        return;
+    ovClose("bz");
 }
 function bzPost(v) {
     const imgs = v.images || [];
@@ -6301,6 +6401,8 @@ function openBerriz(v) {
     bzEl.scrollTop = 0;
     bzEl.hidden = false;
     document.body.style.overflow = "hidden";
+    if (!ovStack.includes("bz"))
+        ovPush("bz");
 }
 let cafeEl;
 function cafeComments(v) {
@@ -6347,10 +6449,19 @@ function openCafe(key) {
     cafeEl.scrollTop = 0;
     cafeEl.hidden = false;
     document.body.style.overflow = "hidden";
+    if (!ovStack.includes("cafe"))
+        ovPush("cafe");
 }
-function closeCafe() {
+function hideCafe() {
+    if (!cafeEl || cafeEl.hidden)
+        return;
     cafeEl.hidden = true;
     document.body.style.overflow = "";
+}
+function closeCafe() {
+    if (!cafeEl || cafeEl.hidden)
+        return;
+    ovClose("cafe");
 }
 document.addEventListener("click", (e) => {
     const c = e.target.closest && e.target.closest("[data-ck]");
@@ -6654,9 +6765,16 @@ function gbReset() {
     gbEl.querySelector("#gbSend").textContent = "남기기";
     gbEl.querySelector("#gbCancel").hidden = true;
 }
-function gbClose() {
+function hideGb() {
+    if (!gbEl || gbEl.hidden)
+        return;
     gbEl.hidden = true;
     document.body.style.overflow = "";
+}
+function gbClose() {
+    if (!gbEl || gbEl.hidden)
+        return;
+    ovClose("gb");
 }
 function openGb() {
     if (!gbEl) {
@@ -6717,6 +6835,8 @@ function openGb() {
     }
     gbEl.hidden = false;
     document.body.style.overflow = "hidden";
+    if (!ovStack.includes("gb"))
+        ovPush("gb");
     gbRender();
 }
 $("gbBtn").onclick = openGb;
@@ -6902,11 +7022,16 @@ function checkUpd() {
     catch (e) { }
     openUpd();
 }
-function closeUpd() {
-    if (!updEl)
+function hideUpd() {
+    if (!updEl || updEl.hidden)
         return;
     updEl.hidden = true;
     document.body.style.overflow = "";
+}
+function closeUpd() {
+    if (!updEl || updEl.hidden)
+        return;
+    ovClose("upd");
 }
 function openUpd() {
     if (!updEl) {
@@ -6945,6 +7070,8 @@ function openUpd() {
             '</div><button class="upd-ok" data-upd-x>확인</button></div>';
     updEl.hidden = false;
     document.body.style.overflow = "hidden";
+    if (!ovStack.includes("upd"))
+        ovPush("upd");
 }
 $("updBtn").onclick = (e) => {
     e.stopPropagation();
