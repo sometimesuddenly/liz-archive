@@ -4726,7 +4726,7 @@ const passSub = (v, name) => {
         return true;
     return c.opts.some((o) => subFilter.includes(o.k) &&
         (c.by === "board"
-            ? v.board === o.k
+            ? String(v.board || "").split(",").map((b) => b.trim()).includes(o.k)
             : c.by === "platform"
                 ? platKey(v) === o.k
                 : (o.cats || [o.k]).some((x) => v.cats.includes(x))));
