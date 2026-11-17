@@ -72,6 +72,11 @@ letter-spacing: 0.02em;
 .logo span {
 color: var(--red);
 }
+@media (max-width: 600px) {
+.logo {
+font-size: 20px;
+}
+}
 .gb-btn {
 position: absolute;
 top: 10px;
@@ -5814,7 +5819,8 @@ function renderList() {
         if (FLAT_ALBUM_TABS.includes(name)) {
             const groups = {};
             const presets = FOLDER_PRESETS[name] || [];
-            presets.forEach((a) => (groups[a] = []));
+            if (!subFilter.length)
+                presets.forEach((a) => (groups[a] = []));
             items.forEach((v) => {
                 if (v.album)
                     (groups[v.album] = groups[v.album] || []).push(v);
