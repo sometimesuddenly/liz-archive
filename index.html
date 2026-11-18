@@ -1965,6 +1965,42 @@ background: #fff;
 .gb-btn.upd{right:54px}
 .bell-pop{top:34px}
 }
+/* 게시물 아래 하위목록(토글) */
+.subwrap {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+.subwrap > .card {
+    width: 100%;
+}
+.subs {
+    margin-top: 6px;
+}
+.subs > summary {
+    cursor: pointer;
+    list-style: none;
+    font-size: 13px;
+    font-weight: 600;
+    color: #b9945f;
+    padding: 6px 4px;
+    user-select: none;
+}
+.subs > summary::-webkit-details-marker {
+    display: none;
+}
+.subs > summary::before {
+    content: "▸ ";
+}
+.subs[open] > summary::before {
+    content: "▾ ";
+}
+.sublist {
+    display: grid;
+    gap: 10px;
+    padding: 4px 0 8px 10px;
+    border-left: 2px solid #ead9bf;
+}
 </style>
     <link rel="preconnect" href="https://www.instagram.com" />
     <link rel="preconnect" href="https://static.cdninstagram.com" crossorigin />
@@ -5299,7 +5335,16 @@ function cafeRow(v) {
       <span class="pinbtn${isPinned(v) ? " on" : ""}" role="button" aria-label="상단에 고정" title="상단에 고정" data-pin="${esc(pinKey(v))}">${TANGERINE_SVG}</span>
     </a>`;
 }
+// 하위목록(토글)이 있는 게시물은 카드 아래에 ▸ 클립 목록을 붙임
 function card(v, free, normal) {
+    const h = cardBase(v, free, normal);
+    if (!v.subs || !v.subs.length)
+        return h;
+    return `<div class="subwrap">${h}<details class="subs"><summary>클립 ${v.subs.length}개</summary><div class="sublist">${v.subs
+        .map((x) => cardBase(x, free, normal))
+        .join("")}</div></details></div>`;
+}
+function cardBase(v, free, normal) {
     if ((v.cats || []).includes("DAUM CAFE") && !normal)
         return cafeRow(v);
     const embedHtml = v.embed === "twitter"
@@ -7072,6 +7117,29 @@ async function load() {
                 v.cats = v.cats.filter((c) => c !== cat);
             }
         });
+        // 하위목록으로 보여줄 폴더: 같은 폴더 안의 유튜브 클립을, 방송 날짜가 같은 회차 게시물 아래에 붙임
+            const SUBLIST_ALBUMS = ["놀면 뭐하니?"];
+            const kstDay = (d) => {
+                const t = new Date(d).getTime();
+                return isNaN(t) ? "" : new Date(t + 9 * 3600 * 1000).toISOString().slice(0, 10);
+            };
+            const isYt = (v) => /youtu\.?be/.test(v.url || "");
+            SUBLIST_ALBUMS.forEach((name) => {
+                const grp = videos.filter((v) => v.album === name);
+                const eps = grp.filter((v) => !isYt(v));
+                grp.forEach((v) => (v.album = null)); // 폴더로 묶지 않음
+                grp.filter(isYt).forEach((c) => {
+                    const p = eps.find((e) => kstDay(e.date) && kstDay(e.date) === kstDay(c.date));
+                    if (!p)
+                        return; // 같은 날짜 회차가 없으면 따로 게시물로 표시
+                    (p.subs = p.subs || []).push(c);
+                    c._sub = true;
+                });
+            });
+            for (let i = videos.length - 1; i >= 0; i--)
+                if (videos[i]._sub)
+                    videos.splice(i, 1);
+        }
         $("status").remove();
         renderHome();
         renderBell();
