@@ -1992,14 +1992,62 @@ background: #fff;
 .subs > summary::before {
     content: "▸ ";
 }
+.subs > summary .subof {
+    display: none;
+}
+.grid .subs[open] > summary .subof {
+    display: inline;
+    margin-left: 6px;
+    font-size: 11px;
+    font-weight: 500;
+    color: #9a8a74;
+}
+.grid .subs[open] > summary .subof::before {
+    content: "· ";
+}
+.subs:not([open]) {
+    border-top: 1px solid #ead9bf;
+}
 .subs[open] > summary::before {
     content: "▾ ";
 }
 .sublist {
-    display: grid;
+    display: flex;
     gap: 10px;
-    padding: 4px 0 8px 10px;
-    border-left: 2px solid #ead9bf;
+    overflow-x: auto;
+    overflow-y: hidden;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    padding: 4px 2px 10px;
+}
+.sublist > * {
+    flex: 0 0 calc((100% - 12px) / 2);
+    min-width: 0;
+    scroll-snap-align: start;
+}
+@media (min-width: 700px) {
+    .sublist > * {
+        flex-basis: max(180px, calc((100% - 36px) / 4));
+    }
+}
+/* 토글을 열면 회차 카드는 제자리에 두고, 클립 목록만 다음 줄 전체로 펼침 */
+.grid:has(> .subwrap > .subs[open]) {
+    grid-auto-flow: row dense;
+}
+.grid > .subwrap:has(> .subs[open]) {
+    display: contents;
+}
+.grid > .subwrap > .subs[open] {
+    grid-column: 1 / -1;
+    margin-top: -8px;
+    padding: 2px 0 4px;
+    border-top: 1px solid #ead9bf;
+    border-bottom: 1px solid #ead9bf;
+}
+.grid > .subwrap > .subs[open] .sublist {
+    gap: 12px;
 }
 </style>
     <link rel="preconnect" href="https://www.instagram.com" />
@@ -4262,6 +4310,7 @@ const MANUAL_ITEMS = [
     "2025-02-03 | https://deep.wavve.com/content/J3801_J38000000014?contentType=vod&audiomode=n | https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgJTTgoMpq7yN9KOD2uBhBo3CutTdCg0B6Z9f0ZHexAl5pol2QSUL61Wb-uHY47Ubd51_9mXnWQuhz-dhBueBG7jdlLY4ndmni8gzNp_3NhNlMd-rQH0uwUA4RR_N_AkaxR37CXChGhX3_bflVyh-S_8SgipS68COkhuHcZwxFRXQi43tOxGNRQufiCAkg/s1920/최강야구.jpg | TV | 안유진,리즈 | 최강야구 117회",
     "2023-12-23 | https://www.tving.com/contents/E004108060 | https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgALusps3NGgwoCo5owIfwZ3nNHBDe16n5syt8peld3-JTfU5Fw9qqDUUxKjdck3Nl24rTX-nGhIlXZf29skekQIsYWjl7iaaHlhcVZb6d8p2v8Y-Er4CeYsxK92ZG0NdnDUqFj5AcAIM0306_SzhhemKTI-00XLLT3neSWPkLCHSAG1OtNRE4z3Zo1oio/s1920/아형.jpg | TV | 레이,리즈,이서 | 아는형님 414회",
     "2025-02-08 | https://www.tving.com/contents/E004315144 | https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgLat1qhNzJHqSIg_vuO78i_GVpO7QMxp6FEr6h-Au_I2gC4GWMfoIZchoyU_H5oVAYERUheQdsngxCWRWZgPYW86CfUaEtveSOfmW9HD4Z_w54YK7byF47oZF1FZcQlrlAhn_yiwl6wBX4a-DJvNVwjX4IYhfSTf_3r1Huopvc46FWwSxlLSbIsoPALE8/s1920/놀토.jpg | TV | 안유진,레이,리즈 | 놀라운 토요일 352회",
+    "2023-04-08 | https://www.tving.com/contents/E003890883 | https://image.tving.com/ntgs/contents/CTC/caie/CAIE0400/com/20230401/E003890883.jpg/dims/resize/F_webp | TV | 아이브 | 놀라운 토요일 258회",
     "2024-05-12~2024-05-19 | https://youtu.be/y8lgUiIdkpY | https://i.ytimg.com/vi/y8lgUiIdkpY/maxresdefault.jpg | TV | 리즈 | 복면가왕 450~451회",
     "2022-04-13 | https://deep.wavve.com/content/M_T70662S?contentType=vod&audiomode=n | https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjq9KCYCQbhhs1_YMZbU1zEtkqHW-6G0aXiVX_TeC7olHAn1Qw8KhY5BhTAkZp2vg2QcrSihi4NSZ0KqAEhvP98UZTRgT2NKxEYm7bUh5rkgVwYIrXGovi1QZ9eAs2SgWIyxuyy9Esw0AqNGY917tSekmEPzSja75S83bn-BnLuI5zBdLjorWyOkio6jYc/s584/서프라이즈.jpg | TV | 리즈 | 서프라이즈 : 비밀의 방 10회",
     "2021-12-15 | https://youtu.be/TVgI1I8PNfg | https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgiGGHaK9kkJOD_A4YmfE7JWGl8HoIQT5C2MjF5L1dZsS4V7-wqN2kcSMwShqaCRq770WVHfkK8-DGk0uotr_lQR205v5SnAuJgsniOrK9jITmr3XHgnj_SCCwaBOvsOHriME1JgXSXFma9ABBEmQGkH5wJ_wXMUtZXlvWXeE0CGCMh0M7Lev3EYK590WM/s1280/골목식당.jpg | TV | 안유진,장원영,리즈 | 백종원의 골목식당 198회",
@@ -4842,6 +4891,7 @@ const MANUAL_ITEMS = [
         "2026-11-12 |  |  | Instagram | 리즈 | | board=story | cols=2 | captions=히히;뽀둥 | photos=https://drive.google.com/file/d/1rfIUFqBrzueddeZsODUb88z4NmtoZ7i7/view;https://drive.google.com/file/d/1lmqkMvA8sM212vs_ecjuVnWAwO6MREGr/view",
         "2026-11-12 | https://www.instagram.com/p/DfogvaCARlx |  | Instagram | 리즈 | 올 겨울 따뜻하게 🫶🏻 @studiotomboy 와 함께❄️🤍 | board=liz.yeyo | cols=2 | photos=https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhI_fU-IQZ9nJzoJo_JaL3M6vyzAsz6Sx_4_m-6ldLs_L8eOY54GEtI_xc9KR8XQJOTOYFIrSe5GNBKFjfiAJFG33BThcyoGosyxCq0FYbOGxyYdtDbP9wcuvYv2h9I9YCm8uJ_KjN5ToQyKOMNgBsTQL0sOQQ61Iyw3gFak62Gn_rk8Nu6Eozba8zid0g/s2653/liz.yeyo_20261112_p_4028613861937584497_1_4028610553714124817.jpg;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiMIGBmkmbCeamZs60Km8PTVkMtqb9TAUrOvajUHSTKSBomXjblc_F0GqG6D2P5mTt8TxCq0bWKMnbz-TLuKXgxyBESKBqD7Ng9A5C6c6_atkNCa53FWAdu6Qtj9uXYbac0G6KJZlyKS7-l8eAIUk0COVEzYGMqrNLouSn7G1y93A75MfUwm7ih2vgEY9Q/s4096/liz.yeyo_20261112_p_4028613861937584497_2_4028610556549533960.jpg;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgbYN7D_yEMzUO80DDwzbYVjWNm9Nsj6mzyS1tLtYmtvSWnN7lT5L_Cyaf-_K0zAfudEQsGmkj6xp5UqiaFPCds8vVGyl4Te_DNxaHwipe_8CVkPpJr7kfUCKcxXExjOYJ_Dj4pQAZF2udRJEE1eXcNhooWCDIvF3hIrKW4HJaKoWLUeKhP1QSO_rTr9h0/s4096/liz.yeyo_20261112_p_4028613861937584497_3_4028610559082954958.jpg;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhiB8S2U4I6Uc8G8zygpgwCUIf9UScUNbyVI5yylGfF3hCQqmdHAkD7KfyqaxxpLZVi6ruDL0nU5YkKJwPVPvFW7BxqtzItDeGajTL1Gv7Ra-W-Wr65cVWdKRccPLhcl6B4e1ctiWCsDi1T3JShU0A9a-aoajmvOiU3FFGgPM1kpjEOsZBdt7EGOO8Ml2k/s4096/liz.yeyo_20261112_p_4028613861937584497_4_4028610562329192618.jpg;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjipQ0JOspgqyNbVMCwDLEQp2GMrCKBbTzqNr_i_71gJM2cvAdJJAXbuOFDRFQPVmEjzSYAi0mrgrw1ob7A2fESlllyH8qV4FNtcZVW52r8MFmZtRwNKVkXlYbK9fc006De9QOMTnTLs7tzHYsVmKz8_RPnSefxW4CG27faY4kmtdYNmX4kxZmb3nlbq5I/s4096/liz.yeyo_20261112_p_4028613861937584497_5_4028610565072461557.jpg;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjTi2XPvTimhxi4MEGABQ2I0a0FDe6SHcGP9Pxx1raMP28YgOG1D9CouWyUu92YEXr8Et7H3ZuE-PMNSkJar98PS_S0Fr54U07ptLDEeMtjio7dIWYkKG8BE0ULnPmUSnx2rZ0wqrrPkEG1miDnhHPWJGfpnRfWnbfkmuo-E6CKKpHFa6MyzPRz5MOCtzo/s4096/liz.yeyo_20261112_p_4028613861937584497_6_4028610568075530011.jpg;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh3de7n7QaiMduR5h1j_y3TKZ9wuHjK95DqKvUdi7FGMXnbzsfSp47gR1iLETbAeFObqOO6c-veXAkjPT4b32AnLYI1u0iTwV7uIyQN9Vj7OjReeolYiK_c6Pc6GUQHlm44XEByVK-xW70HnZ9LSxK3nWBCnpGoEtc6Yb3JbnD30HkHgfAvkOQdKQrmWuc/s4096/liz.yeyo_20261112_p_4028613861937584497_7_4028610571858661351.jpg;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEho82zB2LNwWMEy17IZvW15FiWnLWA0eFowy-oIKH3YiFfzkCcUqKrUZ69cWvkI0T-HWI2BJ3E2pYnvZG36id0IjfaMUUSAERiC8bVBZto6rpEcEahJoS1X5ogruM4-seDLAvkOgfsu8uE_r1XZRgjSBxsloHsWTi-VGDp3dZqkK2Hsx6DjBBXDPqzPNrE/s4096/liz.yeyo_20261112_p_4028613861937584497_8_4028610572638958550.jpg;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgHf5KBL0DW6RJ3FBQ5PuDFzchRFO50M_I6DeJWPiL1LlhCG6J91gXk6rl6gk7vcPXAD7WyZ8ZNvV3B8aKng6yqE2UACk8J96Vu7vBmq6DmoyRIVPusqTM9KFl2liW8-Kz6rZMshuEltA9Un2rHXLr0pUQ1jSByOlBYkpyPNRde8m_f9Ei2tE119FogjfA/s4096/liz.yeyo_20261112_p_4028613861937584497_9_4028610576648582793.jpg;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiKIHZw8LumsgwyBBQyLHbmWB0yOf9rAaHet0YAY62tLji3OvDg0nSdZb4O_rmlndYuw4sDkO7vR_jU96ap4DkOr33N78BMdYsYFnk7r5oFysQxUZXBcsS8vtBen0UqLAi6SMRP5ZivbqPmSSkDF0ixhQLewWs4RT2NO4KAyqGmfZdg3l5xzvPGZ4k0vk0/s2880/liz.yeyo_20261112_p_4028613861937584497_10_4028610577990823069.jpg;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj1MVDMBJTPArIct4Z3NuUM8nTWoSv6Xmrdakt-tXDN2IKUge29WTVAHSBCJuKPd3vW1040WEJa6aXVuBtJL3fNkvtAlfcj1WBrxIh29IV7Hqnj0DVw_aTFmbM8KabwwfS15jYcrFw5LgNuYXfN-63bYVXso9Gucx2lFjGOFq_g56R7x3qfAJ_XltXtbA8/s4096/liz.yeyo_20261112_p_4028613861937584497_11_4028610586538764747.jpg;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgB1drakMne_9RhtW_SvGRc5hw_etp4dScbOXH2At24Rv77cAClX57Ub2HMKH1Auc-f4UJEEXhEAhybS9XKhYL2YnnJwNz6oNls9bWFVPU21jAmdLvYjXBBjC5lqtg_HCutmqMWphjPlxOY2GHCJphsonMNsG9CDWDInCcE4OmIYaxg8uNYOWuRfNNDcPI/s4096/liz.yeyo_20261112_p_4028613861937584497_12_4028610589130965530.jpg;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjZ9vvDgdCSf7TjtQpYQj04vnVxvoltE6NeUPhmYpuuM-BMbXLeq7JvsZH4cAoXy3mFercUY8RHQq4Sa6pc_KzrD91N3NOs6u80jEF5CxPnrM4LlFC5R-uBzBloIWGwxZf9hNA6xd8uaOCDBXv4EuiTsAAxVTxg98AoGc8PiT0biz8lZPElrKNR_TcXNyg/s2880/liz.yeyo_20261112_p_4028613861937584497_13_4028610591236366860.jpg",
         "2026-11-17 |  |  | Instagram | 리즈 | 아직도 기억에 남는 하루♥️♥️ | board=story | cols=2 | photos=https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiFOcLRJ-5swkcv27_eeE9JWqJ9_-BwLSwrvTviz9miBCd6cMVx2DCuR_rkmQuYfdO-PkK0qzAS8-AmWfZHuCGnpGdLSp4G_cu6GzsSP3hoT6OM1HaTb6tav7_blg69m9iUwd9wr2PhYrFD1jMSJ6lBKxN4uAPQiYb-lDzpAVWmBpMI0cJVPK7LuOrFsZQ/s0/image.png", 
+        "2026-11-18 | https://www.instagram.com/p/Df4oD50k79v |  | Instagram | 리즈 | 🖤 | board=liz.yeyo | cols=2 | photos=https://lh3.googleusercontent.com/d/19n7QWq3SOvY1wQh1cl_-_e1JShPBtVLO=d;https://lh3.googleusercontent.com/d/1Jpri1zEdWOBBrE-b3y5K1sNwoBVZ2zrC=d;https://lh3.googleusercontent.com/d/1T6VA7cFzas9NuxhQTbfRHSpHLugSGxJA=d;https://lh3.googleusercontent.com/d/1puflt_rqt4gxlc35FJyA6Lvd7RAw9ITk=d;https://lh3.googleusercontent.com/d/1lcvEuHIcx-3TmzXCutk6pQPWOm38xKrd=d;https://lh3.googleusercontent.com/d/1KXlfy9bvFly9cRxPU0HXWF6bdmo_vzzr=d;https://lh3.googleusercontent.com/d/1CVwgBUqNyP1PUXkIkat0WT6h8-q_ZE0-=d;https://lh3.googleusercontent.com/d/1thq947kG25DKSYYNCbpVRraWhR-s17Lf=d;https://lh3.googleusercontent.com/d/1wWuZh2UJfhlaSXGuGcYPF0sKgXQGgqFA=d;https://lh3.googleusercontent.com/d/1GiV2zTdIwe-nAFq9BpHk2WoIS4trQa_V=d;https://lh3.googleusercontent.com/d/1LgTJ-NjwUaEIx5gTo5bssmx7vNntWCBG=d;https://lh3.googleusercontent.com/d/1J9RpKwhYCiChsrHO03ppSWrk1QwkgDBR=d;https://lh3.googleusercontent.com/d/10uUVwxabD180iv9YTsHr3GFs8ia5yao0=d;https://lh3.googleusercontent.com/d/1MJUuQvZ3nmd1O7MKaZqB-sYwd8gvdo-t=d",
    
    
    
@@ -5340,7 +5390,7 @@ function card(v, free, normal) {
     const h = cardBase(v, free, normal);
     if (!v.subs || !v.subs.length)
         return h;
-    return `<div class="subwrap">${h}<details class="subs"><summary>클립 ${v.subs.length}개</summary><div class="sublist">${v.subs
+    return `<div class="subwrap">${h}<details class="subs"><summary>클립 ${v.subs.length}개<span class="subof">${esc(v.title || "")}</span></summary><div class="sublist">${v.subs
         .map((x) => cardBase(x, free, normal))
         .join("")}</div></details></div>`;
 }
