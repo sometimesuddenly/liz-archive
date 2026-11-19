@@ -7340,6 +7340,7 @@ async function load() {
                         c._sub = true;
                     });
             });
+            videos.forEach((v) => v.subs && v.subs.sort((a, b) => (b.sec || 0) - (a.sec || 0))); // 토글 안 클립: 긴 영상 먼저
             for (let i = videos.length - 1; i >= 0; i--)
                 if (videos[i]._sub)
                     videos.splice(i, 1);
