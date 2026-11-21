@@ -2024,13 +2024,6 @@ background: #fff;
 
 /* 점검 중에는 상태/오류 문구 숨김 */
 #status{display:none !important}
-/* 점검 안내 팝업 */
-#maintenance-modal{position:fixed;inset:0;z-index:2147483647;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.65);padding:20px;font-family:inherit}
-#maintenance-modal .mm-box{background:#fff;color:#222;max-width:360px;width:100%;border-radius:16px;padding:32px 24px 24px;text-align:center;box-shadow:0 10px 40px rgba(0,0,0,.35)}
-#maintenance-modal .mm-icon{font-size:32px;margin-bottom:8px}
-#maintenance-modal h2{margin:0 0 10px;font-size:16px}
-#maintenance-modal p{margin:0 0 18px;font-size:12.5px;line-height:1.6;color:#555}
-#maintenance-modal button{border:0;background:#ff8a1f;color:#fff;font-size:13px;padding:8px 24px;border-radius:999px;cursor:pointer}
 </style>
     <link rel="preconnect" href="https://www.instagram.com" />
     <link rel="preconnect" href="https://static.cdninstagram.com" crossorigin />
@@ -2038,14 +2031,6 @@ background: #fff;
     <link rel="preconnect" href="https://platform.twitter.com" />
   </head>
   <body>
-    <div id="maintenance-modal" role="dialog" aria-modal="true" aria-labelledby="mm-title">
-      <div class="mm-box">
-        <div class="mm-icon">🛠️</div>
-        <h2 id="mm-title">현재 점검 중입니다</h2>
-        <p>이용에 불편을 드려 죄송합니다.<br />오후 5시(17:00)에 다시 열릴 예정입니다.</p>
-        <button type="button" onclick="document.getElementById('maintenance-modal').style.display='none'">확인</button>
-      </div>
-    </div>
     <div class="wrap">
       <div class="logo" id="logo"></div>
       <button
