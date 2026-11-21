@@ -2016,6 +2016,16 @@ background: #fff;
 .card .info,.folder-card .info{font-size:10.5px}
 .grid.bz-list{max-width:none}
 .card .info.pinrow{padding-right:0}
+
+/* 점검 중에는 상태/오류 문구 숨김 */
+#status{display:none !important}
+/* 점검 안내 팝업 */
+#maintenance-modal{position:fixed;inset:0;z-index:2147483647;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.65);padding:20px;font-family:inherit}
+#maintenance-modal .mm-box{background:#fff;color:#222;max-width:360px;width:100%;border-radius:16px;padding:32px 24px 24px;text-align:center;box-shadow:0 10px 40px rgba(0,0,0,.35)}
+#maintenance-modal .mm-icon{font-size:40px;margin-bottom:8px}
+#maintenance-modal h2{margin:0 0 12px;font-size:20px}
+#maintenance-modal p{margin:0 0 20px;font-size:15px;line-height:1.6;color:#555}
+#maintenance-modal button{border:0;background:#ff8a1f;color:#fff;font-size:15px;padding:10px 28px;border-radius:999px;cursor:pointer}
 </style>
     <link rel="preconnect" href="https://www.instagram.com" />
     <link rel="preconnect" href="https://static.cdninstagram.com" crossorigin />
@@ -2023,6 +2033,14 @@ background: #fff;
     <link rel="preconnect" href="https://platform.twitter.com" />
   </head>
   <body>
+    <div id="maintenance-modal" role="dialog" aria-modal="true" aria-labelledby="mm-title">
+      <div class="mm-box">
+        <div class="mm-icon">🛠️</div>
+        <h2 id="mm-title">현재 점검 중입니다</h2>
+        <p>더 나은 서비스를 위해 점검을 진행하고 있어요.<br />이용에 불편을 드려 죄송합니다.<br />잠시 후 다시 방문해 주세요.</p>
+        <button type="button" onclick="document.getElementById('maintenance-modal').style.display='none'">확인</button>
+      </div>
+    </div>
     <div class="wrap">
       <div class="logo" id="logo"></div>
       <button
@@ -7174,7 +7192,7 @@ async function load() {
         const results = await Promise.all(chunks.map((ids) => fetch(`https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics,contentDetails&id=${ids}&key=${API_KEY}`).then((r) => r.json())));
         for (const data of results) {
             if (data.error) {
-                $("status").textContent = "오류: " + data.error.message;
+                $("status").textContent = "";
                 return;
             }
             data.items.forEach((v) => {
@@ -7416,7 +7434,7 @@ async function load() {
         route();
     }
     catch (err) {
-        $("status").textContent = "네트워크 오류: " + err.message;
+        $("status").textContent = "";
     }
 }
 const GB_KEY = "guestbookLocal", GB_OWN = "guestbookOwn";
