@@ -2120,7 +2120,6 @@ background: #fff;
     </div>
     <script>"use strict";
 const SITE_TITLE = "TANGERINE BOX";
-const API_KEY = "AIzaSyCKVVU_-Cl2AQAhawDr4nRVEcQCHvxoek4";
 const GUESTBOOK_URL = "https://script.google.com/macros/s/AKfycbykRvJCfdm_lugFJwp7qlxRmGwVNI1g9pM_xPxH7zvBjpbpjQdB37YiSLSI73LDS8xwgw/exec";
 const CATEGORIES = {
     "세로 직캠": {
@@ -7180,56 +7179,16 @@ document.addEventListener("click", (e) => {
     e.preventDefault();
     openCafe(c.dataset.ck);
 });
-/* YouTube API 응답 캐시 (브라우저 localStorage, 3시간마다 조회수 갱신) */
-const YT_TTL = 3 * 60 * 60 * 1000;
-function ytSlim(d) {
-    if (!d || !d.items)
-        return d;
-    const pick = (t) => (t ? { url: t.url } : undefined);
-    return {
-        items: d.items.map((v) => ({
-            id: v.id,
-            contentDetails: v.contentDetails && { duration: v.contentDetails.duration },
-            statistics: v.statistics && { viewCount: v.statistics.viewCount },
-            snippet: v.snippet && {
-                title: v.snippet.title,
-                publishedAt: v.snippet.publishedAt,
-                thumbnails: v.snippet.thumbnails && {
-                    maxres: pick(v.snippet.thumbnails.maxres),
-                    standard: pick(v.snippet.thumbnails.standard),
-                    high: pick(v.snippet.thumbnails.high),
-                    medium: pick(v.snippet.thumbnails.medium),
-                },
-            },
-        })),
-    };
-}
-async function ytCached(url) {
-    const key = "ytc:" + url.replace(/&key=[^&]*/, "");
-    let cached = null;
-    try {
-        cached = JSON.parse(localStorage.getItem(key) || "null");
-    }
-    catch (e) { }
-    if (cached && Date.now() - cached.t < YT_TTL)
-        return cached.d;
-    try {
-        const d = await fetch(url).then((r) => r.json());
-        if (!d.error) {
-            const slim = ytSlim(d);
-            try {
-                localStorage.setItem(key, JSON.stringify({ t: Date.now(), d: slim }));
-            }
-            catch (e) { }
-            return slim;
-        }
-        return cached ? cached.d : d;
-    }
-    catch (e) {
-        if (cached)
-            return cached.d;
-        throw e;
-    }
+/* 영상 정보는 GitHub Actions 가 만든 videos.json 에서 읽습니다 (API 키/호출 없음) */
+let YT_DATA = null;
+async function ytData() {
+    if (!YT_DATA)
+        YT_DATA = await fetch("videos.json", { cache: "no-cache" }).then((r) => {
+            if (!r.ok)
+                throw new Error("videos.json " + r.status);
+            return r.json();
+        });
+    return YT_DATA;
 }
 async function load() {
     const ALL_IDS = [
@@ -7243,10 +7202,21 @@ async function load() {
         return;
     }
     try {
-        const chunks = [];
-        for (let i = 0; i < ALL_IDS.length; i += 50)
-            chunks.push(ALL_IDS.slice(i, i + 50).join(","));
-        const results = await Promise.all(chunks.map((ids) => ytCached(`https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics,contentDetails&id=${ids}&key=${API_KEY}`)));
+        const yt = await ytData();
+        const results = [
+            {
+                items: ALL_IDS.filter((id) => yt[id]).map((id) => ({
+                    id,
+                    contentDetails: { duration: yt[id].duration },
+                    statistics: { viewCount: yt[id].viewCount },
+                    snippet: {
+                        title: yt[id].title,
+                        publishedAt: yt[id].publishedAt,
+                        thumbnails: { maxres: { url: yt[id].thumb } },
+                    },
+                })),
+            },
+        ];
         for (const data of results) {
             if (data.error) {
                 $("status").textContent = "";
@@ -7289,10 +7259,8 @@ async function load() {
         const MANUAL_YT_VIEWS = {};
         try {
             const mids = [...new Set(MANUAL_PARSED.filter((m) => m.views == null).map(manualYtId).filter(Boolean))];
-            const mchunks = [];
-            for (let i = 0; i < mids.length; i += 50)
-                mchunks.push(mids.slice(i, i + 50).join(","));
-            const mres = await Promise.all(mchunks.map((ids) => ytCached(`https://www.googleapis.com/youtube/v3/videos?part=statistics&id=${ids}&key=${API_KEY}`)));
+            const ytm = await ytData();
+            const mres = [{ items: mids.filter((id) => ytm[id]).map((id) => ({ id, statistics: { viewCount: ytm[id].viewCount } })) }];
             mres.forEach((d) => (d.items || []).forEach((v) => {
                 MANUAL_YT_VIEWS[v.id] = +v.statistics.viewCount || 0;
             }));
