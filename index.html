@@ -1459,6 +1459,11 @@ transition: opacity 0.2s;
 .toast.show {
 opacity: 1;
 }
+.toast.sm {
+font-size: 11.5px;
+padding: 8px 14px;
+border-radius: 12px;
+}
 .dur {
 position: absolute;
 right: 6px;
@@ -2022,10 +2027,10 @@ background: #fff;
 /* 점검 안내 팝업 */
 #maintenance-modal{position:fixed;inset:0;z-index:2147483647;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.65);padding:20px;font-family:inherit}
 #maintenance-modal .mm-box{background:#fff;color:#222;max-width:360px;width:100%;border-radius:16px;padding:32px 24px 24px;text-align:center;box-shadow:0 10px 40px rgba(0,0,0,.35)}
-#maintenance-modal .mm-icon{font-size:40px;margin-bottom:8px}
-#maintenance-modal h2{margin:0 0 12px;font-size:20px}
-#maintenance-modal p{margin:0 0 20px;font-size:15px;line-height:1.6;color:#555}
-#maintenance-modal button{border:0;background:#ff8a1f;color:#fff;font-size:15px;padding:10px 28px;border-radius:999px;cursor:pointer}
+#maintenance-modal .mm-icon{font-size:32px;margin-bottom:8px}
+#maintenance-modal h2{margin:0 0 10px;font-size:16px}
+#maintenance-modal p{margin:0 0 18px;font-size:12.5px;line-height:1.6;color:#555}
+#maintenance-modal button{border:0;background:#ff8a1f;color:#fff;font-size:13px;padding:8px 24px;border-radius:999px;cursor:pointer}
 </style>
     <link rel="preconnect" href="https://www.instagram.com" />
     <link rel="preconnect" href="https://static.cdninstagram.com" crossorigin />
@@ -5527,7 +5532,7 @@ const pinnedFirst = (arr) => [
 ];
 const TANGERINE_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="14" r="7.6"/><path d="M12 6.4c.2-1.3.9-2.1 1.8-2.5" /><path d="M12.2 6.2c1.2-1.9 3.4-2.4 5-1.7-.6 1.9-2.6 3.1-5 1.7z" fill="currentColor" stroke="none"/><path d="M8.6 12.2c.5-1 1.2-1.6 2.1-1.9" opacity=".7"/></svg>';
 let toastTimer;
-function showToast(msg) {
+function showToast(msg, small) {
     let t = document.getElementById("toast");
     if (!t) {
         t = document.createElement("div");
@@ -5536,6 +5541,7 @@ function showToast(msg) {
         document.body.appendChild(t);
     }
     t.textContent = msg;
+    t.classList.toggle("sm", !!small);
     t.classList.add("show");
     clearTimeout(toastTimer);
     toastTimer = setTimeout(() => t.classList.remove("show"), 1600);
@@ -6464,11 +6470,11 @@ document.addEventListener("click", (e) => {
     const k = pb.dataset.pin;
     if (pinnedSet.has(k)) {
         pinnedSet.delete(k);
-        showToast("고정을 풀었어요");
+        showToast("고정을 풀었어요", true);
     }
     else {
         pinnedSet.add(k);
-        showToast("🍊 목록 맨 위에 고정했어요");
+        showToast("🍊 목록 맨 위에 고정했어요", true);
     }
     savePins();
     const y = window.scrollY;
@@ -7174,6 +7180,57 @@ document.addEventListener("click", (e) => {
     e.preventDefault();
     openCafe(c.dataset.ck);
 });
+/* YouTube API 응답 캐시 (브라우저 localStorage, 3시간마다 조회수 갱신) */
+const YT_TTL = 3 * 60 * 60 * 1000;
+function ytSlim(d) {
+    if (!d || !d.items)
+        return d;
+    const pick = (t) => (t ? { url: t.url } : undefined);
+    return {
+        items: d.items.map((v) => ({
+            id: v.id,
+            contentDetails: v.contentDetails && { duration: v.contentDetails.duration },
+            statistics: v.statistics && { viewCount: v.statistics.viewCount },
+            snippet: v.snippet && {
+                title: v.snippet.title,
+                publishedAt: v.snippet.publishedAt,
+                thumbnails: v.snippet.thumbnails && {
+                    maxres: pick(v.snippet.thumbnails.maxres),
+                    standard: pick(v.snippet.thumbnails.standard),
+                    high: pick(v.snippet.thumbnails.high),
+                    medium: pick(v.snippet.thumbnails.medium),
+                },
+            },
+        })),
+    };
+}
+async function ytCached(url) {
+    const key = "ytc:" + url.replace(/&key=[^&]*/, "");
+    let cached = null;
+    try {
+        cached = JSON.parse(localStorage.getItem(key) || "null");
+    }
+    catch (e) { }
+    if (cached && Date.now() - cached.t < YT_TTL)
+        return cached.d;
+    try {
+        const d = await fetch(url).then((r) => r.json());
+        if (!d.error) {
+            const slim = ytSlim(d);
+            try {
+                localStorage.setItem(key, JSON.stringify({ t: Date.now(), d: slim }));
+            }
+            catch (e) { }
+            return slim;
+        }
+        return cached ? cached.d : d;
+    }
+    catch (e) {
+        if (cached)
+            return cached.d;
+        throw e;
+    }
+}
 async function load() {
     const ALL_IDS = [
         ...new Set([
@@ -7189,7 +7246,7 @@ async function load() {
         const chunks = [];
         for (let i = 0; i < ALL_IDS.length; i += 50)
             chunks.push(ALL_IDS.slice(i, i + 50).join(","));
-        const results = await Promise.all(chunks.map((ids) => fetch(`https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics,contentDetails&id=${ids}&key=${API_KEY}`).then((r) => r.json())));
+        const results = await Promise.all(chunks.map((ids) => ytCached(`https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics,contentDetails&id=${ids}&key=${API_KEY}`)));
         for (const data of results) {
             if (data.error) {
                 $("status").textContent = "";
@@ -7235,7 +7292,7 @@ async function load() {
             const mchunks = [];
             for (let i = 0; i < mids.length; i += 50)
                 mchunks.push(mids.slice(i, i + 50).join(","));
-            const mres = await Promise.all(mchunks.map((ids) => fetch(`https://www.googleapis.com/youtube/v3/videos?part=statistics&id=${ids}&key=${API_KEY}`).then((r) => r.json())));
+            const mres = await Promise.all(mchunks.map((ids) => ytCached(`https://www.googleapis.com/youtube/v3/videos?part=statistics&id=${ids}&key=${API_KEY}`)));
             mres.forEach((d) => (d.items || []).forEach((v) => {
                 MANUAL_YT_VIEWS[v.id] = +v.statistics.viewCount || 0;
             }));
