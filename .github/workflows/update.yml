@@ -2,7 +2,7 @@ name: update-videos
 
 on:
   schedule:
-    - cron: "0 * * * *"      # 1시간마다 (UTC 기준)
+    - cron: "23 * * * *"     # 1시간마다, 매시 23분 (UTC 기준) - 정각은 몰려서 피함
   workflow_dispatch:         # Actions 탭에서 수동 실행 가능
 
 permissions:
