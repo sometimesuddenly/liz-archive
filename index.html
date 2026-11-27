@@ -5821,6 +5821,7 @@ const SCHEDULE_CATS = ["MAGAZINE", "POP-UP", "AD", "MC", "etc.(일정)", "Record
 const VIEW_CATS = ["COVER", "Shorts", "Challenge", "IVE"];
 let viewCtxHide = false;
 const hideViews = (v) => viewCtxHide ||
+    v.platform === "bubble" ||
     (v.cats.some((c) => SCHEDULE_CATS.includes(c)) &&
         !v.cats.some((c) => VIEW_CATS.includes(c)));
 const hideTags = () => location.hash === "#list" &&
